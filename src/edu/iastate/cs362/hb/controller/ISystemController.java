@@ -66,4 +66,16 @@ public interface ISystemController {
 	 * 			true if the operation was successful, false otherwise
 	 */
 	public boolean addInstanceMethod(String className, String methodName, String... modifiers);
+	
+	public boolean addStaticMethod(String className, String methodName, String... modifiers);
+	
+	public boolean removeMethod(String className, String methodName);
+	
+	public boolean removePackage(String className);
+	
+	public boolean removeRelationship(String fromString, String toString);
+	
+	public boolean removeClass(String toRemove);
+	
+	public boolean createClass(String name);
 }
