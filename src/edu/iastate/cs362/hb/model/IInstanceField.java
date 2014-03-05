@@ -7,5 +7,4 @@ package edu.iastate.cs362.hb.model;
  */
 public interface IInstanceField {
 
-	public IInstanceField create(String name, String...modifiers);
 }
