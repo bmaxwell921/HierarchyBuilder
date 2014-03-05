@@ -1,5 +1,6 @@
 package edu.iastate.cs362.hb.commands;
 
-public class ICommandParser {
+public interface ICommandParser {
 
+	public ICommand parseCommand(String command);
 }
