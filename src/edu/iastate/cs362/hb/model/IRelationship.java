@@ -6,6 +6,4 @@ package edu.iastate.cs362.hb.model;
  *
  */
 public interface IRelationship {
-
-	public IRelationship create();
 }
