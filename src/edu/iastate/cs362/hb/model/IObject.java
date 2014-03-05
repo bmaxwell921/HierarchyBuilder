@@ -15,5 +15,7 @@ public interface IObject {
 	 * 		true if the operation was successful, false otherwise
 	 */
 	public boolean addPackage(String packageName);
+	
+	public boolean removePackage();
 
 }
