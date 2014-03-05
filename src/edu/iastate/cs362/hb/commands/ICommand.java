@@ -1,5 +1,6 @@
 package edu.iastate.cs362.hb.commands;
 
+
 public interface ICommand {
 
 	/**
@@ -7,4 +8,6 @@ public interface ICommand {
 	 * @return
 	 */
 	public String getName();
+	
+	public void setCommand(String line);
 }
