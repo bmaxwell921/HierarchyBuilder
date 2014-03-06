@@ -2,6 +2,7 @@ package edu.iastate.cs362.hb.controller.impl;
 
 import edu.iastate.cs362.hb.controller.ISystemController;
 import edu.iastate.cs362.hb.exceptions.HBClassNotFoundException;
+import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.model.ISystem;
 
 public class SystemController implements ISystemController{
@@ -23,10 +24,11 @@ public class SystemController implements ISystemController{
 	 *  @param modifiers Strings to tell what modifiers the Instance Field should have
 	 *  @return a boolean returning the success (true) or failure of the instance field addition
 	 * @throws HBClassNotFoundException 
+	 * @throws HBObjectNotFoundException 
 	 */
 	@Override
 	public boolean addInstanceField(String className, String iFieldName,
-			String... modifiers) throws HBClassNotFoundException {
+			String... modifiers) throws HBClassNotFoundException, HBObjectNotFoundException {
 		return system.addInstanceField(className, iFieldName, modifiers);
 	}
 
