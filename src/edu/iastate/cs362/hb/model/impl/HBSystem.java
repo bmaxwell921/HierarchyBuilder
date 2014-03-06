@@ -1,22 +1,22 @@
-package edu.iastate.cs362.hb.controller.impl;
+package edu.iastate.cs362.hb.model.impl;
 
-import edu.iastate.cs362.hb.controller.ISystemController;
 import edu.iastate.cs362.hb.exceptions.HBClassNotFoundException;
+import edu.iastate.cs362.hb.model.IDesignDoc;
 import edu.iastate.cs362.hb.model.ISystem;
 
-public class SystemController implements ISystemController{
-
-	private ISystem system;
+public class HBSystem implements ISystem{
 	
+	private IDesignDoc doc;
+
 	@Override
 	public boolean createDesign(String name) {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
+
 	/**
 	 *  addInstanceField(String className, String iFieldName, String... modifiers)
-	 *  calls addInstanceField in System
+	 *  calls addInstanceField in DesignDoc
 	 *  
 	 *  @param className a String for the class name instance field is a part of
 	 *  @param iFieldName a String for the instance field's name
@@ -25,9 +25,9 @@ public class SystemController implements ISystemController{
 	 * @throws HBClassNotFoundException 
 	 */
 	@Override
-	public boolean addInstanceField(String className, String iFieldName,
+	public boolean addInstanceField(String className, String instanceFieldName,
 			String... modifiers) throws HBClassNotFoundException {
-		return system.addInstanceField(className, iFieldName, modifiers);
+		return doc.addInstanceField(className, instanceFieldName, modifiers);
 	}
 
 	@Override
@@ -70,13 +70,13 @@ public class SystemController implements ISystemController{
 	}
 
 	@Override
-	public boolean removeRelationship(String fromString, String toString) {
+	public boolean removeRelationship(String fromClass, String toClass) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean removeClass(String toRemove) {
+	public boolean removeClass(String className) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -86,5 +86,5 @@ public class SystemController implements ISystemController{
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
+
 }

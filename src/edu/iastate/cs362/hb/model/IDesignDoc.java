@@ -1,5 +1,7 @@
 package edu.iastate.cs362.hb.model;
 
+import edu.iastate.cs362.hb.exceptions.HBClassNotFoundException;
+
 /**
  * Interface used to define behavior for the DesignDoc object
  * @author Brandon
@@ -7,11 +9,9 @@ package edu.iastate.cs362.hb.model;
  */
 public interface IDesignDoc {
 	
-	public boolean addInstanceField(String className, String instanceFieldName, String...modifiers);
+	public boolean addInstanceField(String className, String instanceFieldName, String...modifiers) throws HBClassNotFoundException;
 	
 	public IInstanceField createInstanceField(String name, String...modifiers);
-	
-	public IInstanceField addInstanceField(IClass iClass, IInstanceField instanceField);
 	
 	public boolean addRelationship(String fromClass, String toClass, String relationship);
 	
@@ -29,5 +29,5 @@ public interface IDesignDoc {
 	
 	public boolean removeClass(String toRemove);
 	
-	public boolean createClass(String name);
+	public IClass createClass(String name);
 }

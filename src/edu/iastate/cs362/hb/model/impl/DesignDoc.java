@@ -1,33 +1,39 @@
-package edu.iastate.cs362.hb.controller.impl;
+package edu.iastate.cs362.hb.model.impl;
 
-import edu.iastate.cs362.hb.controller.ISystemController;
 import edu.iastate.cs362.hb.exceptions.HBClassNotFoundException;
-import edu.iastate.cs362.hb.model.ISystem;
+import edu.iastate.cs362.hb.model.IClass;
+import edu.iastate.cs362.hb.model.IDesignDoc;
+import edu.iastate.cs362.hb.model.IInstanceField;
+import edu.iastate.cs362.hb.model.IObject;
+import edu.iastate.cs362.hb.model.tree.IHBTree;
 
-public class SystemController implements ISystemController{
-
-	private ISystem system;
+public class DesignDoc implements IDesignDoc{
 	
+	private IHBTree tree;
+
 	@Override
-	public boolean createDesign(String name) {
+	public IDesignDoc create() {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
-	
-	/**
-	 *  addInstanceField(String className, String iFieldName, String... modifiers)
-	 *  calls addInstanceField in System
-	 *  
-	 *  @param className a String for the class name instance field is a part of
-	 *  @param iFieldName a String for the instance field's name
-	 *  @param modifiers Strings to tell what modifiers the Instance Field should have
-	 *  @return a boolean returning the success (true) or failure of the instance field addition
-	 * @throws HBClassNotFoundException 
-	 */
+
 	@Override
-	public boolean addInstanceField(String className, String iFieldName,
+	public boolean addInstanceField(String className, String instanceFieldName,
 			String... modifiers) throws HBClassNotFoundException {
-		return system.addInstanceField(className, iFieldName, modifiers);
+		IObject obj = tree.getObject(className);
+		//if obj is not a Class (its an interface) then we can't add an instance field
+		if(!(obj instanceof HBClass))
+			throw new HBClassNotFoundException("Name entered was not a name of a Class.");
+		//now we know obj is an HBClass.
+		IInstanceField i = createInstanceField(instanceFieldName, modifiers);
+		HBClass cl = (HBClass) obj;
+		cl.addInstanceField(i);
+		return true;
+	}
+
+	@Override
+	public IInstanceField createInstanceField(String name, String... modifiers) {
+		return new InstanceField(name, modifiers);
 	}
 
 	@Override
@@ -70,7 +76,7 @@ public class SystemController implements ISystemController{
 	}
 
 	@Override
-	public boolean removeRelationship(String fromString, String toString) {
+	public boolean removeRelationship(String fromClass, String toClass) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -82,9 +88,7 @@ public class SystemController implements ISystemController{
 	}
 
 	@Override
-	public boolean createClass(String name) {
-		// TODO Auto-generated method stub
-		return false;
+	public IClass createClass(String name) {
+		return new HBClass(name);
 	}
-	
 }
