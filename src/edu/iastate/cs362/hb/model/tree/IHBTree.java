@@ -1,5 +1,6 @@
 package edu.iastate.cs362.hb.model.tree;
 
+import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.model.IObject;
 import edu.iastate.cs362.hb.model.IRelationship;
 
@@ -11,7 +12,7 @@ import edu.iastate.cs362.hb.model.IRelationship;
  */
 public interface IHBTree {
 
-	public IObject getObject(String className);
+	public IObject getObject(String className) throws HBObjectNotFoundException;
 
 	public boolean addObject(IObject newClass);
 

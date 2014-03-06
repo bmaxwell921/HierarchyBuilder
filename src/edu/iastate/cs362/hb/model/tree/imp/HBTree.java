@@ -1,10 +1,11 @@
 package edu.iastate.cs362.hb.model.tree.imp;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import edu.iastate.cs362.hb.constants.ErrorMessages;
+import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.model.IObject;
 import edu.iastate.cs362.hb.model.IRelationship;
 import edu.iastate.cs362.hb.model.tree.IHBTree;
@@ -40,30 +41,35 @@ public class HBTree implements IHBTree {
 	 * Since a class hierarchy can have several smaller hierarchys built into it
 	 * we don't just have one root, but many
 	 */
-	private Map<String, HBTree> roots;
+	private Map<String, HBNode> roots;
 	
 	/*
-	 *  A storage location for Objects that haven't been placed in the hierarchy
+	 *  Rather than actually work the nodes as a tree, we'll have a map from
+	 *  names to HBNode. This way we can have a fast lookups for the nodes themselves.
+	 *  Nodes will be a super-set of roots
 	 */
-	private List<IObject> unplacedObjects;
+	private Map<String, HBNode> nodes;
 	
 	/**
 	 * Creates a new, empty class Hierarchy
 	 */
 	public HBTree() {
 		roots = new HashMap<>();
-		unplacedObjects = new LinkedList<>();
+		nodes = new HashMap<>();
 	}
 
 	@Override
-	public IObject getObject(String className) {
-		// TODO Auto-generated method stub
-		return null;
+	public IObject getObject(String className) throws HBObjectNotFoundException {
+		IObject ret  = findNode(className).data;
+		if (ret == null) {
+			throw new HBObjectNotFoundException(ErrorMessages.OBJECT_NOT_FOUND);
+		}
+		return ret;
 	}
 
 	@Override
 	public boolean addObject(IObject newClass) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
@@ -71,20 +77,32 @@ public class HBTree implements IHBTree {
 	public boolean addRelationship(IObject fromClass, IObject toClass,
 			IRelationship relationship) {
 		// TODO Auto-generated method stub
+		// Make sure to remove toClass from roots
 		return false;
 	}
 
 	@Override
 	public boolean removeRelationship(IObject fromClass, IObject toClass) {
 		// TODO Auto-generated method stub
+		// Re-add toClass to roots
 		return false;
 	}
 
 	@Override
 	public boolean removeObject(IObject toRemove) {
 		// TODO Auto-generated method stub
+		// Can be in either roots or nodes
 		return false;
 	}
 
-
+	/*
+	 *  Searches the unplaced Objects for an object with the requested name.
+	 *  Returns null if no object is found with the given name
+	 */
+	private HBNode findNode(String name) {
+		if (!roots.containsKey(name)) {
+			return nodes.get(name);
+		}
+		return roots.get(name);
+	}
 }
