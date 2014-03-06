@@ -6,8 +6,6 @@ package edu.iastate.cs362.hb.model;
  *
  */
 public interface IClass extends IObject {
-
-	public IClass create();
 	
 	public boolean addInstanceMethod(String methodName, String...modifiers);
 	

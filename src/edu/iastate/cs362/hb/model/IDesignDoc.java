@@ -6,8 +6,6 @@ package edu.iastate.cs362.hb.model;
  *
  */
 public interface IDesignDoc {
-
-	public IDesignDoc create();
 	
 	public boolean addInstanceField(String className, String instanceFieldName, String...modifiers);
 	
