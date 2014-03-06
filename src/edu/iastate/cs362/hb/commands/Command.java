@@ -1,6 +1,10 @@
 package edu.iastate.cs362.hb.commands;
 
-
+/**
+ * Created command with name and value
+ * @author rclabough
+ *
+ */
 public class Command implements ICommand {
 
 	private String name;
