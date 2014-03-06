@@ -1,6 +1,7 @@
 package edu.iastate.cs362.hb.model.impl;
 
 import edu.iastate.cs362.hb.exceptions.HBClassNotFoundException;
+import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.model.IClass;
 import edu.iastate.cs362.hb.model.IDesignDoc;
 import edu.iastate.cs362.hb.model.IInstanceField;
@@ -12,14 +13,8 @@ public class DesignDoc implements IDesignDoc{
 	private IHBTree tree;
 
 	@Override
-	public IDesignDoc create() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public boolean addInstanceField(String className, String instanceFieldName,
-			String... modifiers) throws HBClassNotFoundException {
+			String... modifiers) throws HBClassNotFoundException, HBObjectNotFoundException {
 		IObject obj = tree.getObject(className);
 		//if obj is not a Class (its an interface) then we can't add an instance field
 		if(!(obj instanceof HBClass))

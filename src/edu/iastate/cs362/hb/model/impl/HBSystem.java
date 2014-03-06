@@ -1,6 +1,7 @@
 package edu.iastate.cs362.hb.model.impl;
 
 import edu.iastate.cs362.hb.exceptions.HBClassNotFoundException;
+import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.model.IDesignDoc;
 import edu.iastate.cs362.hb.model.ISystem;
 
@@ -23,10 +24,11 @@ public class HBSystem implements ISystem{
 	 *  @param modifiers Strings to tell what modifiers the Instance Field should have
 	 *  @return a boolean returning the success (true) or failure of the instance field addition
 	 * @throws HBClassNotFoundException 
+	 * @throws HBObjectNotFoundException 
 	 */
 	@Override
 	public boolean addInstanceField(String className, String instanceFieldName,
-			String... modifiers) throws HBClassNotFoundException {
+			String... modifiers) throws HBClassNotFoundException, HBObjectNotFoundException {
 		return doc.addInstanceField(className, instanceFieldName, modifiers);
 	}
 
