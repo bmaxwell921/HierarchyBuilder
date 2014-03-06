@@ -1,5 +1,7 @@
 package edu.iastate.cs362.hb.model;
 
+import edu.iastate.cs362.hb.exceptions.HBClassNotFoundException;
+
 /**
  * Interface which defines the behavior for System objects
  * @author Brandon
@@ -9,7 +11,7 @@ public interface ISystem {
 	
 	public boolean createDesign(String name);
 	
-	public boolean addInstanceField(String className, String instanceFieldName, String...modifiers);
+	public boolean addInstanceField(String className, String instanceFieldName, String...modifiers) throws HBClassNotFoundException;
 	
 	public boolean addRelationship(String fromClass, String toClass, String relationship);
 	

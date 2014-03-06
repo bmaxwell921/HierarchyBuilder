@@ -1,5 +1,7 @@
 package edu.iastate.cs362.hb.controller;
 
+import edu.iastate.cs362.hb.exceptions.HBClassNotFoundException;
+
 /**
  *
  * Controller for the System
@@ -10,7 +12,7 @@ public interface ISystemController {
 
 	public boolean createDesign(String name);
 	
-	public boolean addInstanceField(String className, String iFieldName, String... modifiers);
+	public boolean addInstanceField(String className, String iFieldName, String... modifiers) throws HBClassNotFoundException;
 	
 	public boolean addRelationship(String fromClass, String toClass, String relationship);
 	
