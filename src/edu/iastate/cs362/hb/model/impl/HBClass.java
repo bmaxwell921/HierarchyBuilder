@@ -24,12 +24,6 @@ public class HBClass implements IClass{
 	}
 
 	@Override
-	public IClass create() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public boolean addInstanceField(IInstanceField i) {
 		// TODO Auto-generated method stub
 		return false;
@@ -49,6 +43,30 @@ public class HBClass implements IClass{
 
 	@Override
 	public boolean removeMethod(String methodName) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean hasName(String name) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public long getId() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public boolean hasId(long id) {
 		// TODO Auto-generated method stub
 		return false;
 	}
