@@ -1,6 +1,6 @@
 package edu.iastate.cs362.hb.model.tree;
 
-import edu.iastate.cs362.hb.model.IClass;
+import edu.iastate.cs362.hb.model.IObject;
 import edu.iastate.cs362.hb.model.IRelationship;
 
 /**
@@ -11,14 +11,14 @@ import edu.iastate.cs362.hb.model.IRelationship;
  */
 public interface IHBTree {
 
-	public IClass getClass(String className);
+	public IObject getObject(String className);
 
-	public boolean addClass(IClass newClass);
+	public boolean addObject(IObject newClass);
 
-	public boolean addRelationship(IClass fromClass, IClass toClass,
+	public boolean addRelationship(IObject fromClass, IObject toClass,
 			IRelationship relationship);
 
-	public boolean removeRelationship(IClass fromClass, IClass toClass);
+	public boolean removeRelationship(IObject fromClass, IObject toClass);
 
-	public boolean removeClass(IClass toRemove);
+	public boolean removeObject(IObject toRemove);
 }
