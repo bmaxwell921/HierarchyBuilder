@@ -34,9 +34,8 @@ public class HBSystem implements ISystem{
 
 	@Override
 	public boolean addRelationship(String fromClass, String toClass,
-			String relationship) {
-		// TODO Auto-generated method stub
-		return false;
+			String relationship) throws HBObjectNotFoundException {
+		return doc.addRelationship(fromClass, toClass, relationship);
 	}
 
 	@Override

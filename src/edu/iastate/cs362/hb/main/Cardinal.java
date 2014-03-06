@@ -41,5 +41,6 @@ public class Cardinal {
 			}
 			/*Then we do what the command says to do!*/
 		}
+		in.close();
 	}
 }

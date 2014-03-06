@@ -33,9 +33,18 @@ public class DesignDoc implements IDesignDoc{
 
 	@Override
 	public boolean addRelationship(String fromClass, String toClass,
-			String relationship) {
-		// TODO Auto-generated method stub
-		return false;
+			String relationship) throws HBObjectNotFoundException {
+		IObject from = tree.getObject(fromClass);
+		IObject to = tree.getObject(toClass);
+		//TODO fix this.
+		Relationship r = createRelationship(relationship);
+		return tree.addRelationship(from, to, r);
+	}
+	
+	
+
+	private Relationship createRelationship(String relationship) {
+		return new Relationship(relationship);
 	}
 
 	@Override

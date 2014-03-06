@@ -49,8 +49,7 @@ public class HBClass implements IClass{
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return name;
 	}
 
 	@Override

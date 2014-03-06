@@ -14,7 +14,7 @@ public interface ISystem {
 	
 	public boolean addInstanceField(String className, String instanceFieldName, String...modifiers) throws HBClassNotFoundException, HBObjectNotFoundException;
 	
-	public boolean addRelationship(String fromClass, String toClass, String relationship);
+	public boolean addRelationship(String fromClass, String toClass, String relationship) throws HBObjectNotFoundException;
 	
 	public boolean addPackage(String packageName, String className);
 	
