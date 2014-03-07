@@ -1,5 +1,9 @@
 package edu.iastate.cs362.hb.model.impl;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 import edu.iastate.cs362.hb.constants.ObjectConstants;
 import edu.iastate.cs362.hb.model.IObject;
 
@@ -21,6 +25,9 @@ public abstract class AHBObject implements IObject {
 	// This object's name
 	private String name;
 	
+	// All the modifiers. TODO this should probably have some notion of order
+	private Set<String> modifiers;
+	
 	/**
 	 * Creates a new AHBObject with the given name that
 	 * goes in the default package
@@ -29,6 +36,7 @@ public abstract class AHBObject implements IObject {
 	public AHBObject(String name) {
 		this.name = name;
 		this.pkg = ObjectConstants.DEFAULT_PKG;
+		this.modifiers = new HashSet<>();
 	}
 
 	@Override
@@ -97,6 +105,21 @@ public abstract class AHBObject implements IObject {
 		} else if (!pkg.equals(other.pkg))
 			return false;
 		return true;
+	}
+
+	@Override
+	public void addModifiers(String... modifier) {
+		modifiers.addAll(Arrays.asList(modifier));
+	}
+
+	@Override
+	public boolean removeModifier(String modifier) {
+		return modifiers.remove(modifier);
+	}
+
+	@Override
+	public Set<String> getModifiers() {
+		return this.modifiers;
 	}
 
 }
