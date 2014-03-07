@@ -13,8 +13,8 @@ public class HBObjectNotFoundException extends Exception {
 	 * Creates a HBObjectNotFoundException with the given message
 	 * @param message
 	 */
-	public HBObjectNotFoundException(String message) {
-		super(message);
+	public HBObjectNotFoundException(String message, Object... args) {
+		super(String.format(message, args));
 	}
 
 }

@@ -12,8 +12,8 @@ public class MalformattedCommandException extends Exception {
 	 * Creates a new MalformattedCommandException with the given message
 	 * @param message
 	 */
-	public MalformattedCommandException(String message) {
-		super(message);
+	public MalformattedCommandException(String message, Object... args) {
+		super(String.format(message, args));
 	}
 
 }
