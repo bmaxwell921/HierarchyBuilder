@@ -86,11 +86,11 @@ public class HBTree implements IHBTree {
 
 	@Override
 	public IObject getObject(String className) throws HBObjectNotFoundException {
-		IObject ret  = findNode(className).data;
+		HBNode ret = findNode(className);
 		if (ret == null) {
-			throw new HBObjectNotFoundException(ErrorMessages.OBJECT_NOT_FOUND);
+			throw new HBObjectNotFoundException(ErrorMessages.OBJECT_NOT_FOUND, className);
 		}
-		return ret;
+		return ret.data;
 	}
 
 	@Override

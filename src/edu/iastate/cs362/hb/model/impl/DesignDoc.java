@@ -59,9 +59,10 @@ public class DesignDoc implements IDesignDoc{
 	}
 
 	@Override
-	public boolean addPackage(String packageName, String className) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean addPackage(String packageName, String className) throws HBObjectNotFoundException {
+		IObject clazz = tree.getObject(className);
+		clazz.addPackage(packageName);
+		return true;
 	}
 
 	@Override

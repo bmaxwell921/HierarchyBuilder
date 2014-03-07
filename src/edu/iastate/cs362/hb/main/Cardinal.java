@@ -9,6 +9,7 @@ import edu.iastate.cs362.hb.constants.CmdConstants;
 import edu.iastate.cs362.hb.controller.ISystemController;
 import edu.iastate.cs362.hb.controller.impl.SystemController;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
+import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
 import edu.iastate.cs362.hb.model.impl.HBSystem;
 /**
@@ -57,7 +58,7 @@ public class Cardinal {
 				} else if (command.getName().equals(CmdConstants.CmdNames.EXIT)) {
 					break;
 				}
-			} catch (MalformattedCommandException | HBDuplicateObjectFoundException me) {
+			} catch (MalformattedCommandException | HBDuplicateObjectFoundException | HBObjectNotFoundException me) {
 				System.out.println(me.getMessage());
 				break;
 			} 
@@ -74,7 +75,9 @@ public class Cardinal {
 			return isc.createDesign(command.getFlagValue(CmdConstants.Flags.NAME));
 		}
 	}
-	private void doAdd(ICommand command) {
-
+	private void doAdd(ICommand command) throws HBObjectNotFoundException {
+		if (command.getSubCommand().matches(CmdConstants.SubCmdNames.PACKAGE_REGEX)) {
+			isc.addPackage(command.getFlagValue(CmdConstants.Flags.NAME), command.getFlagValue(CmdConstants.Flags.CONTAINER_NAME));
+		}
 	}
 }

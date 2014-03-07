@@ -18,7 +18,7 @@ public interface IDesignDoc extends Nameable {
 	
 	public boolean addRelationship(String fromClass, String toClass, String relationship) throws HBObjectNotFoundException;
 	
-	public boolean addPackage(String packageName, String className);
+	public boolean addPackage(String packageName, String className) throws HBObjectNotFoundException;
 	
 	public boolean addInstanceMethod(String className, String methodName, String...modifiers);
 	

@@ -28,10 +28,16 @@ public class CmdConstants {
 		private static final String INTERFACE = "interface";
 		private static final String INTERFACE_SHORT = "i";
 		public static final String INTERFACE_REGEX = INTERFACE + RegexOp.OR + INTERFACE_SHORT;
+		
+		private static final String PACKAGE = "package";
+		private static final String PACKAGE_SHORT = "p";
+		public static final String PACKAGE_REGEX = PACKAGE + RegexOp.OR + PACKAGE_SHORT;
 	}
 	
 	public class Flags {
+		// TODO we need to handle the short versions of the names as well
 		public static final String NAME = "name";
+		public static final String CONTAINER_NAME = "containerName";
 		public static final String HELP = "help";
 	}
 	

@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
+import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.model.IDesignDoc;
 import edu.iastate.cs362.hb.model.ISystem;
 import edu.iastate.cs362.hb.model.impl.DesignDoc;
@@ -58,6 +59,19 @@ public class DesignDocTest {
 		test.createInterface(OBJECT_NAME);
 		test.createInterface(OBJECT_NAME);
 		Assert.fail("Adding two classes with the name name (and default package) should fail");
+	}
+	
+	@Test
+	public void testAddPackage() throws HBDuplicateObjectFoundException, HBObjectNotFoundException {
+		String pkgName = "package";
+		test.createClass(OBJECT_NAME);
+		Assert.assertTrue("Adding a package to an object should work", test.addPackage(pkgName, OBJECT_NAME));
+	}
+	
+	@Test (expected = HBObjectNotFoundException.class)
+	public void testAddPackageNotFound() throws HBObjectNotFoundException {
+		String pkgName = "package";
+		test.addPackage(pkgName, OBJECT_NAME);
 	}
 	
 	@After

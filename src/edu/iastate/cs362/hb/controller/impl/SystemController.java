@@ -53,9 +53,8 @@ public class SystemController implements ISystemController{
 	}
 
 	@Override
-	public boolean addPackage(String packageName, String className) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean addPackage(String packageName, String className) throws HBObjectNotFoundException {
+		return system.addPackage(packageName, className);
 	}
 
 	@Override
