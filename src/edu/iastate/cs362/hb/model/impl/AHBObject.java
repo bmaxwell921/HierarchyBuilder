@@ -3,7 +3,14 @@ package edu.iastate.cs362.hb.model.impl;
 import edu.iastate.cs362.hb.constants.ObjectConstants;
 import edu.iastate.cs362.hb.model.IObject;
 
-public class AHBObject implements IObject {
+/**
+ * Class holding some common implementation between interfaces and classes.
+ * This probably doesn't need to be abstract unless something actually
+ * needs to go into HBInterface
+ * @author Brandon
+ *
+ */
+public abstract class AHBObject implements IObject {
 
 	// Id of this object
 	private int id;
