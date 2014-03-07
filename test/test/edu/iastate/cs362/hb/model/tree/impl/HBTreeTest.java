@@ -5,7 +5,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.iastate.cs362.hb.exceptions.HBDuplicateClassFoundException;
+import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.model.IObject;
 import edu.iastate.cs362.hb.model.impl.HBClass;
@@ -27,14 +27,14 @@ public class HBTreeTest {
 	}
 	
 	@Test
-	public void testAddClass() throws HBObjectNotFoundException, HBDuplicateClassFoundException {
+	public void testAddClass() throws HBObjectNotFoundException, HBDuplicateObjectFoundException {
 		IObject clazz = new HBClass("Test");
 		test.addObject(clazz);
 		Assert.assertEquals(clazz, test.getObject("Test"));
 	}
 	
-	@Test (expected = HBDuplicateClassFoundException.class)
-	public void testDuplicateClass() throws HBDuplicateClassFoundException {
+	@Test (expected = HBDuplicateObjectFoundException.class)
+	public void testDuplicateClass() throws HBDuplicateObjectFoundException {
 		IObject clazz = new HBClass("Test");
 		test.addObject(clazz);
 		test.addObject(clazz);
