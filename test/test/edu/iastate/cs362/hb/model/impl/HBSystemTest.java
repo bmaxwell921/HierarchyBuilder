@@ -1,4 +1,4 @@
-package test.edu.iastate.cs362.hb.controller.impl;
+package test.edu.iastate.cs362.hb.model.impl;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -8,6 +8,7 @@ import org.junit.Test;
 import edu.iastate.cs362.hb.controller.ISystemController;
 import edu.iastate.cs362.hb.controller.impl.SystemController;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
+import edu.iastate.cs362.hb.model.ISystem;
 import edu.iastate.cs362.hb.model.impl.HBSystem;
 
 /**
@@ -15,23 +16,23 @@ import edu.iastate.cs362.hb.model.impl.HBSystem;
  * @author Brandon
  *
  */
-public class SystemControllerTest {
+public class HBSystemTest {
 
 	private static final String TEST_NAME = "Name";
 	
 	// Object to test
-	private ISystemController test;
+	private ISystem test;
 	
 	@Before
 	public void setUp() {
-		test = new SystemController(new HBSystem());
+		test = new HBSystem();
 		test.createDesign(TEST_NAME);
 	}
 	
 	@Test
 	public void testCreateDesign() {
 		// Using local test here because test has already called the method
-		ISystemController localTest = new SystemController(new HBSystem());
+		ISystem localTest = new HBSystem();
 		Assert.assertTrue("Creating a design should return true.", localTest.createDesign(TEST_NAME));
 	}
 	
@@ -44,6 +45,18 @@ public class SystemControllerTest {
 	public void testCreateClassDup() throws HBDuplicateObjectFoundException {
 		test.createClass(TEST_NAME);
 		test.createClass(TEST_NAME);
+		Assert.fail("Adding two classes with the name name (and default package) should fail");
+	}
+	
+	@Test
+	public void testCreateInterface() throws HBDuplicateObjectFoundException {
+		Assert.assertTrue("Creating an interface normally should work", test.createInterface(TEST_NAME));
+	}
+	
+	@Test (expected = HBDuplicateObjectFoundException.class)
+	public void testCreateInterfaceDup() throws HBDuplicateObjectFoundException {
+		test.createInterface(TEST_NAME);
+		test.createInterface(TEST_NAME);
 		Assert.fail("Adding two classes with the name name (and default package) should fail");
 	}
 	
