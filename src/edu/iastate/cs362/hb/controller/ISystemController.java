@@ -1,6 +1,7 @@
 package edu.iastate.cs362.hb.controller;
 
 import edu.iastate.cs362.hb.exceptions.HBClassNotFoundException;
+import edu.iastate.cs362.hb.exceptions.HBDuplicateClassFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 
 /**
@@ -31,5 +32,5 @@ public interface ISystemController {
 	
 	public boolean removeClass(String toRemove);
 	
-	public boolean createClass(String name);
+	public boolean createClass(String name) throws HBDuplicateClassFoundException;
 }
