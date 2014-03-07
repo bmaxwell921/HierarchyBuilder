@@ -12,7 +12,7 @@ import edu.iastate.cs362.hb.model.impl.DesignDoc;
 import edu.iastate.cs362.hb.model.impl.HBSystem;
 
 /**
- * Junit tests for the SystemController. Pretty much just do black box testing
+ * Junit tests for the DesignDocTest. Pretty much just do black box testing
  * @author Brandon
  *
  */

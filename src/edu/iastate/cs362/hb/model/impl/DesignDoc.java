@@ -110,9 +110,8 @@ public class DesignDoc implements IDesignDoc{
 	
 	@Override
 	public boolean createInterface(String name) throws HBDuplicateObjectFoundException {
-//		IInterface interf = new HBInterface(name);
-//		return tree.addInterface(interf);
-		return false;
+		IObject interf = new HBInterface(name);
+		return tree.addObject(interf);
 	}
 
 	@Override
