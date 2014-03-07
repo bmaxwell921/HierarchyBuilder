@@ -2,45 +2,79 @@ package edu.iastate.cs362.hb.main;
 
 import java.util.Scanner;
 
+import edu.iastate.cs362.hb.commands.CommandParser;
 import edu.iastate.cs362.hb.commands.ICommand;
 import edu.iastate.cs362.hb.commands.ICommandParser;
 import edu.iastate.cs362.hb.constants.CmdConstants;
+import edu.iastate.cs362.hb.controller.ISystemController;
+import edu.iastate.cs362.hb.controller.impl.SystemController;
+import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
 import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
+import edu.iastate.cs362.hb.model.impl.HBSystem;
 /**
  * 
- * @author Alex
- *
+ * @author Alex, Brandon
+ * 
  */
 public class Cardinal {
 
+	// Object responsible for parsing commands
 	private ICommandParser commander;
-	
-	public static void main(String[] args){
+
+	// The system controller!
+	private ISystemController isc;
+
+	/*
+	 * Constructor for the cardinal class. It's responsible for instantiating
+	 * the parser and controller. Left private since no one else needs it
+	 */
+	private Cardinal() {
+		this.commander = new CommandParser();
+		this.isc = new SystemController(new HBSystem());
+	}
+
+	public static void main(String[] args) {
 		new Cardinal().run();
 		System.out.println("Thanks for using our software!");
 	}
-	
+
 	/**
-	 * This method takes no arguments.
-	 * The method continuously runs and gets String commands.
+	 * This method takes no arguments. The method continuously runs and gets
+	 * String commands.
 	 */
-	private void run(){
+	private void run() {
 		Scanner in = new Scanner(System.in);
 		String commandLine = null;
-		while(true){
+		while (true) {
 			commandLine = in.nextLine();
 			ICommand command = null;
-			try{
+			try {
 				command = commander.parseCommand(commandLine);
-			}catch(MalformattedCommandException me){
+				if (command.getName().equals(CmdConstants.CmdNames.CREATE)) {
+					this.doCreate(command);
+				} else if (command.getName().equals(CmdConstants.CmdNames.ADD)) {
+					doAdd(command);
+				} else if (command.getName().equals(CmdConstants.CmdNames.EXIT)) {
+					break;
+				}
+			} catch (MalformattedCommandException | HBDuplicateObjectFoundException me) {
 				System.out.println(me.getMessage());
 				break;
-			}
-			if(command.getName().equals(CmdConstants.EXIT_NAME)){
-				break;
-			}
-			/*Then we do what the command says to do!*/
+			} 
 		}
 		in.close();
+	}
+
+	private boolean doCreate(ICommand command) throws HBDuplicateObjectFoundException {
+		if (command.getSubCommand().matches(CmdConstants.SubCmdNames.CLASS_REGEX)) {
+			return isc.createClass(command.getFlagValue(CmdConstants.Flags.NAME));
+		} else if (command.getSubCommand().matches(CmdConstants.SubCmdNames.INTERFACE_REGEX)) {
+			return isc.createInterface(command.getFlagValue(CmdConstants.Flags.NAME));
+		} else {
+			return isc.createDesign(command.getFlagValue(CmdConstants.Flags.NAME));
+		}
+	}
+	private void doAdd(ICommand command) {
+
 	}
 }
