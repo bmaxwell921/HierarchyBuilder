@@ -8,41 +8,39 @@ public class CommandParser implements ICommandParser{
 
 	@Override
 	public ICommand parseCommand(String command) {
-		CmdConstants constant = new CmdConstants();
 		
-		String[] args = command.split(" ");
-		ArrayList<String> argList= new ArrayList<String>();
-		
-		ArrayList<Argument> usedArgs = new ArrayList<Argument>();
-		for(String s : args)
+		String[] commandList = command.split(" ");
+		Boolean[] flagType = new Boolean[commandList.length];
+		for(int i = 0; i < commandList.length; i++)
 		{
-			argList.add(s);
-		}
-		int index = 0;
-		switch(argList.get(index).charAt(0))
-		{
-		case '-':
-			default:
-			//Switches
-			//Find the argument that matches this
-			for(Argument a : constant.getArgs())
+			if(commandList[i].charAt(0) == '-')
 			{
-				boolean use = a.handle(argList.subList(0, argList.size() - 1));
-				if(use)
-				{
-					usedArgs.add(a);
-				}
+				flagType[i] = true;
 			}
-			break;
+			else
+			{
+				flagType[i] = false;
+			}
 		}
+		Command c = new Command(commandList[0]);
 		
 		
-		//Recursively get all used arguments
-		ArrayList<Command> commands = new ArrayList<Command>();
-		for(Argument a : usedArgs)
+		for(int x = 0; x < commandList.length; x++)
 		{
-			commands.addAll(a.getCommands());
+			//Check to see if there is a next argument
+			//If the next string is not null, and it's flagtype is false, then it is a value
+			if((commandList[x + 1] != null)&&((flagType[x + 1] != null)&&(flagType[x+1] == false)))
+			{
+				c.AddArgument(commandList[x], commandList[x+1]);
+				x++;
+			}
+			else
+			{
+				c.AddArgument(commandList[x], null);
+			}
+			
 		}
+		
 		
 		return null;
 	}

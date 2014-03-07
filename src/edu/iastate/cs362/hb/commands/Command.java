@@ -1,5 +1,8 @@
 package edu.iastate.cs362.hb.commands;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created command with name and value
  * @author rclabough
@@ -8,12 +11,17 @@ package edu.iastate.cs362.hb.commands;
 public class Command implements ICommand {
 
 	private String name;
-	private String value;
+	private Map<String, String> value;
 	
-	public Command(String name, String value)
+	public Command(String name)
 	{
 		this.name = name;
-		this.value = value;
+		this.value = new HashMap<String, String>();
+	}
+	
+	public void AddArgument(String name, String value)
+	{
+		this.value.put(name, value);
 	}
 	
 	@Override
