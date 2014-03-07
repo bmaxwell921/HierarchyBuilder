@@ -51,6 +51,7 @@ public class Cardinal {
 			ICommand command = null;
 			try {
 				command = commander.parseCommand(commandLine);
+				// First we check what the command name was
 				if (command.getName().equals(CmdConstants.CmdNames.CREATE)) {
 					this.doCreate(command);
 				} else if (command.getName().equals(CmdConstants.CmdNames.ADD)) {
@@ -66,6 +67,7 @@ public class Cardinal {
 		in.close();
 	}
 
+	// Calling of create methods
 	private boolean doCreate(ICommand command) throws HBDuplicateObjectFoundException {
 		if (command.getSubCommand().matches(CmdConstants.SubCmdNames.CLASS_REGEX)) {
 			return isc.createClass(command.getFlagValue(CmdConstants.Flags.NAME));
@@ -75,6 +77,8 @@ public class Cardinal {
 			return isc.createDesign(command.getFlagValue(CmdConstants.Flags.NAME));
 		}
 	}
+	
+	// Calling of add methods
 	private void doAdd(ICommand command) throws HBObjectNotFoundException {
 		if (command.getSubCommand().matches(CmdConstants.SubCmdNames.PACKAGE_REGEX)) {
 			isc.addPackage(command.getFlagValue(CmdConstants.Flags.NAME), command.getFlagValue(CmdConstants.Flags.CONTAINER_NAME));
