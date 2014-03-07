@@ -6,8 +6,14 @@ import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.model.ISystem;
 
+/**
+ * A concrete implementation of the ISystemController interface
+ * @author Alex, Brandon
+ *
+ */
 public class SystemController implements ISystemController{
 
+	// The system to interact with
 	private ISystem system;
 	
 	/**
@@ -20,8 +26,7 @@ public class SystemController implements ISystemController{
 	
 	@Override
 	public boolean createDesign(String name) {
-		// TODO Auto-generated method stub
-		return false;
+		return system.createDesign(name);
 	}
 	
 	/**

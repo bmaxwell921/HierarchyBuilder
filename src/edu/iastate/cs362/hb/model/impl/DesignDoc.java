@@ -8,10 +8,20 @@ import edu.iastate.cs362.hb.model.IDesignDoc;
 import edu.iastate.cs362.hb.model.IInstanceField;
 import edu.iastate.cs362.hb.model.IObject;
 import edu.iastate.cs362.hb.model.tree.IHBTree;
+import edu.iastate.cs362.hb.model.tree.impl.HBTree;
 
 public class DesignDoc implements IDesignDoc{
 	
+	// The name of the design doc. Name of the file to save
+	private String name;
+	
+	// Tree representing the class hierarchy
 	private IHBTree tree;
+	
+	public DesignDoc(String name) {
+		this.name = name;
+		this.tree = new HBTree();
+	}
 
 	@Override
 	public boolean addInstanceField(String className, String instanceFieldName,
@@ -102,5 +112,15 @@ public class DesignDoc implements IDesignDoc{
 	public boolean createInterface(String name) throws HBDuplicateObjectFoundException {
 		// TODO
 		return false;
+	}
+
+	@Override
+	public String getName() {
+		return this.name;
+	}
+
+	@Override
+	public boolean hasName(String name) {
+		return this.name != null && this.name.equals(name);
 	}
 }

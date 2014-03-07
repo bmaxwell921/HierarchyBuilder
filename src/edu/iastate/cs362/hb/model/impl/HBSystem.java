@@ -12,8 +12,9 @@ public class HBSystem implements ISystem{
 
 	@Override
 	public boolean createDesign(String name) {
-		// TODO Auto-generated method stub
-		return false;
+		// TODO save the old one?
+		doc = new DesignDoc(name);
+		return true;
 	}
 
 	/**

@@ -3,13 +3,14 @@ package edu.iastate.cs362.hb.model;
 import edu.iastate.cs362.hb.exceptions.HBClassNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
+import edu.iastate.cs362.hb.model.attributes.Nameable;
 
 /**
  * Interface used to define behavior for the DesignDoc object
  * @author Brandon
  *
  */
-public interface IDesignDoc {
+public interface IDesignDoc extends Nameable {
 	
 	public boolean addInstanceField(String className, String instanceFieldName, String...modifiers) throws HBClassNotFoundException, HBObjectNotFoundException;
 	
