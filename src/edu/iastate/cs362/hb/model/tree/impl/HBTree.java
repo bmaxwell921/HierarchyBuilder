@@ -18,8 +18,8 @@ import edu.iastate.cs362.hb.model.tree.IHBTree;
  */
 public class HBTree implements IHBTree {
 
-	// A single node in the tree
-	private class HBNode {
+	// A single node in the tree. Protected 
+	private static class HBNode {
 		// The parent node
 		public HBNode parent;
 		
@@ -34,6 +34,31 @@ public class HBTree implements IHBTree {
 			this.data = data;
 			
 			subTypes = new HashMap<>();
+		}
+
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + ((data == null) ? 0 : data.hashCode());
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			HBNode other = (HBNode) obj;
+			if (data == null) {
+				if (other.data != null)
+					return false;
+			} else if (!data.equals(other.data))
+				return false;
+			return true;
 		}
 	}
 	
@@ -70,10 +95,11 @@ public class HBTree implements IHBTree {
 
 	@Override
 	public boolean addObject(IObject newClass) throws HBDuplicateClassFoundException {
-		if (nodes.containsValue(newClass) || roots.containsValue(newClass)) {
-			throw new HBDuplicateClassFoundException(ErrorMessages.DUPLICATE_OBJECT_FOUND);
+		HBNode add = new HBNode(newClass);
+		if (nodes.containsValue(add) || roots.containsValue(add)) {
+			throw new HBDuplicateClassFoundException(ErrorMessages.DUPLICATE_OBJECT_FOUND, newClass.getName(), newClass.getPackage());
 		}
-		nodes.put(newClass.getName(), new HBNode(newClass));
+		nodes.put(newClass.getName(), add);
 		return true;
 	}
 
