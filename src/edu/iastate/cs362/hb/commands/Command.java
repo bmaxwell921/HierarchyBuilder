@@ -25,10 +25,6 @@ public class Command implements ICommand {
 		this.value = new HashMap<String, String>();
 	}
 
-	public void AddArgument(String name, String value) {
-		this.value.put(name, value);
-	}
-
 	@Override
 	public String getName() {
 		return name;

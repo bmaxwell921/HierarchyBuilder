@@ -1,9 +1,10 @@
 package edu.iastate.cs362.hb.commands;
 
-import java.util.ArrayList;
-
-import edu.iastate.cs362.hb.constants.*;
-
+/**
+ * Class used to parse a given string into a command
+ * @author Brandon
+ *
+ */
 public class CommandParser implements ICommandParser{
 
 	@Override
@@ -31,12 +32,17 @@ public class CommandParser implements ICommandParser{
 			//If the next string is not null, and it's flagtype is false, then it is a value
 			if((commandList[x + 1] != null)&&((flagType[x + 1] != null)&&(flagType[x+1] == false)))
 			{
-				c.AddArgument(commandList[x], commandList[x+1]);
+				/*
+				 *  TODO this returns a boolean as to whether it was added or not. If 
+				 *  it returns false then the string was invalid
+				 */
+				c.addFlagValue(commandList[x], commandList[x+1]);
 				x++;
 			}
 			else
 			{
-				c.AddArgument(commandList[x], null);
+				// TODO same as above
+				c.addFlagValue(commandList[x], null);
 			}
 			
 		}
