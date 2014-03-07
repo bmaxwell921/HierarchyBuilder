@@ -1,7 +1,7 @@
 package edu.iastate.cs362.hb.model;
 
 import edu.iastate.cs362.hb.exceptions.HBClassNotFoundException;
-import edu.iastate.cs362.hb.exceptions.HBDuplicateClassFoundException;
+import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 
 /**
@@ -31,5 +31,7 @@ public interface IDesignDoc {
 	
 	public boolean removeClass(String toRemove);
 	
-	public boolean createClass(String name) throws HBDuplicateClassFoundException;
+	public boolean createClass(String name) throws HBDuplicateObjectFoundException;
+	
+	public boolean createInterface(String name) throws HBDuplicateObjectFoundException;
 }

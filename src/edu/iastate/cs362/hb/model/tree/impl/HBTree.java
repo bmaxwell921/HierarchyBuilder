@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import edu.iastate.cs362.hb.constants.ErrorMessages;
-import edu.iastate.cs362.hb.exceptions.HBDuplicateClassFoundException;
+import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.model.IObject;
 import edu.iastate.cs362.hb.model.IRelationship;
@@ -94,10 +94,10 @@ public class HBTree implements IHBTree {
 	}
 
 	@Override
-	public boolean addObject(IObject newClass) throws HBDuplicateClassFoundException {
+	public boolean addObject(IObject newClass) throws HBDuplicateObjectFoundException {
 		HBNode add = new HBNode(newClass);
 		if (nodes.containsValue(add) || roots.containsValue(add)) {
-			throw new HBDuplicateClassFoundException(ErrorMessages.DUPLICATE_OBJECT_FOUND, newClass.getName(), newClass.getPackage());
+			throw new HBDuplicateObjectFoundException(ErrorMessages.DUPLICATE_OBJECT_FOUND, newClass.getName(), newClass.getPackage());
 		}
 		nodes.put(newClass.getName(), add);
 		return true;

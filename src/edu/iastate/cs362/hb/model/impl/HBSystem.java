@@ -1,7 +1,7 @@
 package edu.iastate.cs362.hb.model.impl;
 
 import edu.iastate.cs362.hb.exceptions.HBClassNotFoundException;
-import edu.iastate.cs362.hb.exceptions.HBDuplicateClassFoundException;
+import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.model.IDesignDoc;
 import edu.iastate.cs362.hb.model.ISystem;
@@ -84,8 +84,13 @@ public class HBSystem implements ISystem{
 	}
 
 	@Override
-	public boolean createClass(String name) throws HBDuplicateClassFoundException {
+	public boolean createClass(String name) throws HBDuplicateObjectFoundException {
 		return doc.createClass(name);
+	}
+	
+	@Override
+	public boolean createInterface(String name) throws HBDuplicateObjectFoundException {
+		return doc.createInterface(name);
 	}
 
 }

@@ -2,7 +2,7 @@ package edu.iastate.cs362.hb.controller.impl;
 
 import edu.iastate.cs362.hb.controller.ISystemController;
 import edu.iastate.cs362.hb.exceptions.HBClassNotFoundException;
-import edu.iastate.cs362.hb.exceptions.HBDuplicateClassFoundException;
+import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.model.ISystem;
 
@@ -92,8 +92,13 @@ public class SystemController implements ISystemController{
 	}
 
 	@Override
-	public boolean createClass(String name) throws HBDuplicateClassFoundException {
+	public boolean createClass(String name) throws HBDuplicateObjectFoundException {
 		return system.createClass(name);
+	}
+
+	@Override
+	public boolean createInterface(String name) throws HBDuplicateObjectFoundException {
+		return system.createInterface(name);
 	}
 	
 }
