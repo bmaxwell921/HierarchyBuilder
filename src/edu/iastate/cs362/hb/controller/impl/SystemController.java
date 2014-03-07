@@ -2,12 +2,21 @@ package edu.iastate.cs362.hb.controller.impl;
 
 import edu.iastate.cs362.hb.controller.ISystemController;
 import edu.iastate.cs362.hb.exceptions.HBClassNotFoundException;
+import edu.iastate.cs362.hb.exceptions.HBDuplicateClassFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.model.ISystem;
 
 public class SystemController implements ISystemController{
 
 	private ISystem system;
+	
+	/**
+	 * Constructus the SystemController for the given System
+	 * @param system
+	 */
+	public SystemController(ISystem system) {
+		this.system = system;
+	}
 	
 	@Override
 	public boolean createDesign(String name) {
@@ -83,9 +92,8 @@ public class SystemController implements ISystemController{
 	}
 
 	@Override
-	public boolean createClass(String name) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean createClass(String name) throws HBDuplicateClassFoundException {
+		return system.createClass(name);
 	}
 	
 }

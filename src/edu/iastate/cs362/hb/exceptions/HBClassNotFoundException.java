@@ -13,7 +13,7 @@ public class HBClassNotFoundException extends Exception {
 	 * Creates a HBClassNotFoundException with the given message
 	 * @param message
 	 */
-	public HBClassNotFoundException(String message) {
-		super(message);
+	public HBClassNotFoundException(String message, Object... args) {
+		super(String.format(message, args));
 	}
 }

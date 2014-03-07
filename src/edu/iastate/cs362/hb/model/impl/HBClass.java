@@ -7,20 +7,27 @@ public class HBClass implements IClass{
 
 	private String name;
 	
+	private String hbPackage;
+	
 	public HBClass(String name){
 		this.name = name;
 	}
 	
 	@Override
 	public boolean addPackage(String packageName) {
-		// TODO Auto-generated method stub
-		return false;
+		this.hbPackage = packageName;
+		return true;
 	}
 
 	@Override
 	public boolean removePackage() {
-		// TODO Auto-generated method stub
-		return false;
+		this.hbPackage = null;
+		return true;
+	}
+	
+	@Override
+	public String getPackage() {
+		return this.hbPackage;
 	}
 
 	@Override
@@ -69,5 +76,4 @@ public class HBClass implements IClass{
 		// TODO Auto-generated method stub
 		return false;
 	}
-
 }

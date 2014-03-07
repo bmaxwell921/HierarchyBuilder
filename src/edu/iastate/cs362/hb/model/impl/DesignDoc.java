@@ -1,6 +1,7 @@
 package edu.iastate.cs362.hb.model.impl;
 
 import edu.iastate.cs362.hb.exceptions.HBClassNotFoundException;
+import edu.iastate.cs362.hb.exceptions.HBDuplicateClassFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.model.IClass;
 import edu.iastate.cs362.hb.model.IDesignDoc;
@@ -92,7 +93,8 @@ public class DesignDoc implements IDesignDoc{
 	}
 
 	@Override
-	public IClass createClass(String name) {
-		return new HBClass(name);
+	public boolean createClass(String name) throws HBDuplicateClassFoundException {
+		IClass clazz = new HBClass(name);
+		return tree.addObject(clazz);
 	}
 }

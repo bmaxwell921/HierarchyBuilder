@@ -20,5 +20,7 @@ public interface IObject extends Nameable, Identifiable {
 	public boolean addPackage(String packageName);
 	
 	public boolean removePackage();
+	
+	public String getPackage();
 
 }
