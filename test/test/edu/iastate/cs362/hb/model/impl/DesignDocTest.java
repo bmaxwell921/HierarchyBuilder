@@ -5,13 +5,12 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.iastate.cs362.hb.exceptions.HBClassNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
 import edu.iastate.cs362.hb.model.IDesignDoc;
-import edu.iastate.cs362.hb.model.ISystem;
 import edu.iastate.cs362.hb.model.impl.DesignDoc;
-import edu.iastate.cs362.hb.model.impl.HBSystem;
 
 /**
  * Junit tests for the DesignDocTest. Pretty much just do black box testing
@@ -80,6 +79,73 @@ public class DesignDocTest {
 	public void testAddPackageNotFound() throws HBObjectNotFoundException {
 		String pkgName = "package";
 		test.addPackage(pkgName, OBJECT_NAME);
+	}
+
+	@Test
+	public void testAddInstanceField() throws Exception {
+		final String instanceFieldName = "aField";
+		final String modifier = "itsaModifier";
+		test.createClass(OBJECT_NAME);
+		Assert.assertTrue("Adding an instance field, MSS.", 
+				test.addInstanceField(OBJECT_NAME, instanceFieldName, modifier));
+	}
+	
+	@Test
+	public void testAddInstanceField2ElectricBoogaloo() throws Exception {
+		final String instanceFieldName = "iMadeThisTestForFun";
+		final String modifier = "awesome";
+		final String className = "bestTestEver";
+		test.createClass(className);
+		Assert.assertTrue("Adding an instance field, MSS.", 
+				test.addInstanceField(className, instanceFieldName, modifier));
+	}
+	
+	@Test(expected = HBObjectNotFoundException.class)
+	public void testAddInstanceFieldToNonexistentClass() throws Exception {
+		final String instanceFieldName = "themagic";
+		final String modifier = "oftelevision";
+		test.createClass(OBJECT_NAME);
+		test.addInstanceField("APPLESAUCE!", instanceFieldName, modifier);
+	}
+	
+	@Test(expected = HBClassNotFoundException.class)
+	public void testAddInstaceFieldToInterface() throws Exception {
+		final String instanceFieldName = "AREYOUSTILLTHERE?";
+		final String modifier = "turretVoice";
+		test.createInterface(OBJECT_NAME);
+		test.addInstanceField(OBJECT_NAME, instanceFieldName, modifier);
+	}
+	
+	@Test
+	public void addRelationshipTest() throws Exception{
+		final String fromClass = "thistestName";
+		final String toClass = "soundsLikeIm";
+		final String relationshipName = "aPsychologist";
+		test.createClass(fromClass);
+		test.createClass(toClass);
+		Assert.assertTrue("Adding a relationship to existing Objects should work", 
+				test.addRelationship(fromClass, toClass, relationshipName));
+	}
+	
+	@Test
+	public void addRelationshipTest2() throws Exception{
+		final String fromInterface = "genericName";
+		final String toClass = "unassumingName";
+		final String relationshipName = "theyfittogether";
+		test.createInterface(fromInterface);
+		test.createClass(toClass);
+		Assert.assertTrue("Adding a relationship to existing Objects should work", 
+				test.addRelationship(fromInterface, toClass, relationshipName));
+	}
+	
+	@Test(expected = HBObjectNotFoundException.class)
+	public void addRelationshipTestNonExistentClass() throws Exception{
+		final String fromClass = "thistestName";
+		final String toClass = "soundsLikeIm";
+		final String relationshipName = "aPsychologist";
+		test.createClass(fromClass);
+		Assert.assertTrue("Adding a relationship to existing Objects should work", 
+				test.addRelationship(fromClass, toClass, relationshipName));
 	}
 
 	@Test

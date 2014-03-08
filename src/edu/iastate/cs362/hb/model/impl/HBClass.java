@@ -1,5 +1,8 @@
 package edu.iastate.cs362.hb.model.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.iastate.cs362.hb.model.IClass;
 import edu.iastate.cs362.hb.model.IInstanceField;
 
@@ -10,14 +13,15 @@ import edu.iastate.cs362.hb.model.IInstanceField;
  */
 public class HBClass extends AHBObject implements IClass{
 	
+	private List<IInstanceField> fields;
 	public HBClass(String name){
 		super(name);
+		fields = new ArrayList<IInstanceField>();
 	}
 
 	@Override
 	public boolean addInstanceField(IInstanceField i) {
-		// TODO Auto-generated method stub
-		return false;
+		return fields.add(i);
 	}
 
 	@Override

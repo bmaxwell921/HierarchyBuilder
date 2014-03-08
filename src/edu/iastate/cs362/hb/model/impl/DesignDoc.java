@@ -42,8 +42,7 @@ public class DesignDoc implements IDesignDoc {
 		IInstanceField i = new InstanceField(instanceFieldName);
 		i.addModifiers(modifiers);
 		
-		cl.addInstanceField(i);
-		return true;
+		return cl.addInstanceField(i);
 	}
 
 
@@ -52,7 +51,6 @@ public class DesignDoc implements IDesignDoc {
 			String relationship) throws HBObjectNotFoundException {
 		IObject from = tree.getObject(fromClass);
 		IObject to = tree.getObject(toClass);
-		// TODO fix this.
 		Relationship r = new Relationship(relationship);
 		return tree.addRelationship(from, to, r);
 	}

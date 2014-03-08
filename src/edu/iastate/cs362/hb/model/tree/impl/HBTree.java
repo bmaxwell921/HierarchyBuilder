@@ -108,7 +108,7 @@ public class HBTree implements IHBTree {
 			IRelationship relationship) {
 		// TODO Auto-generated method stub
 		// Make sure to remove toClass from roots
-		return false;
+		return true;
 	}
 
 	@Override
