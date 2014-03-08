@@ -38,6 +38,8 @@ public class CmdConstants {
 		// TODO we need to handle the short versions of the names as well
 		public static final String NAME = "name";
 		public static final String CONTAINER_NAME = "containerName";
+		
+		public static final String STATIC = "static";
 		public static final String HELP = "help";
 	}
 	
