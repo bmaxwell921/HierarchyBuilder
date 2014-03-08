@@ -32,18 +32,24 @@ public class CmdConstants {
 		private static final String PACKAGE = "package";
 		private static final String PACKAGE_SHORT = "p";
 		public static final String PACKAGE_REGEX = PACKAGE + RegexOp.OR + PACKAGE_SHORT;
+		
+		private static final String METHOD = "method";
+		private static final String METHOD_SHORT = "m";
+		public static final String METHOD_REGEX = METHOD + RegexOp.OR + METHOD_SHORT;
 	}
 	
 	public class Flags {
 		// TODO we need to handle the short versions of the names as well
-		public static final String NAME = "name";
-		public static final String CONTAINER_NAME = "containerName";
+		public static final String NAME = "n";
+		public static final String CONTAINER_NAME = "cN";
 		
-		public static final String STATIC = "static";
-		public static final String HELP = "help";
+		public static final String STATIC = "s";
+		public static final String INSTANCE = "i";
+		public static final String HELP = "h";
+		public static final String PARAMETERS = "p";
 	}
 	
-	private class RegexOp {
+	public class RegexOp {
 		public static final String OR = "|";
 	}
 }

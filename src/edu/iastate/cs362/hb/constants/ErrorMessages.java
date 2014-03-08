@@ -12,5 +12,7 @@ public class ErrorMessages {
 	public static final String DUPLICATE_OBJECT_FOUND = "The class %s in the package %s already exists.";
 	
 	public static final String DUPLICATE_METHOD = "The class %s already has a method that is the same as %s";
+	
+	public static final String MALFORMATTED_PARAM_LIST = "The given parameter list was formatted incorrectly: %s";
 
 }
