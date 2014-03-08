@@ -1,8 +1,10 @@
 package edu.iastate.cs362.hb.model.impl;
 
 import edu.iastate.cs362.hb.exceptions.HBClassNotFoundException;
+import edu.iastate.cs362.hb.exceptions.HBDuplicateMethodException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
+import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
 import edu.iastate.cs362.hb.model.IDesignDoc;
 import edu.iastate.cs362.hb.model.ISystem;
 
@@ -46,10 +48,9 @@ public class HBSystem implements ISystem{
 	}
 
 	@Override
-	public boolean addInstanceMethod(String className, String methodName,
-			String... modifiers) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean addInstanceMethod(String className, String methodName, String params, 
+			String... modifiers) throws HBObjectNotFoundException, MalformattedCommandException, HBDuplicateMethodException {
+		return doc.addInstanceMethod(className, methodName, params, modifiers);
 	}
 
 	@Override

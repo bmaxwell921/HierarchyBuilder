@@ -8,6 +8,7 @@ import edu.iastate.cs362.hb.commands.ICommandParser;
 import edu.iastate.cs362.hb.constants.CmdConstants;
 import edu.iastate.cs362.hb.controller.ISystemController;
 import edu.iastate.cs362.hb.controller.impl.SystemController;
+import edu.iastate.cs362.hb.exceptions.HBDuplicateMethodException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
@@ -59,29 +60,48 @@ public class Cardinal {
 				} else if (command.getName().equals(CmdConstants.CmdNames.EXIT)) {
 					break;
 				}
-			} catch (MalformattedCommandException | HBDuplicateObjectFoundException | HBObjectNotFoundException me) {
+			} catch (MalformattedCommandException
+					| HBDuplicateObjectFoundException
+					| HBObjectNotFoundException | HBDuplicateMethodException me) {
 				System.out.println(me.getMessage());
 				break;
-			} 
+			}
 		}
 		in.close();
 	}
 
 	// Calling of create methods
-	private boolean doCreate(ICommand command) throws HBDuplicateObjectFoundException {
-		if (command.getSubCommand().matches(CmdConstants.SubCmdNames.CLASS_REGEX)) {
-			return isc.createClass(command.getFlagValue(CmdConstants.Flags.NAME));
-		} else if (command.getSubCommand().matches(CmdConstants.SubCmdNames.INTERFACE_REGEX)) {
-			return isc.createInterface(command.getFlagValue(CmdConstants.Flags.NAME));
+	private boolean doCreate(ICommand command)
+			throws HBDuplicateObjectFoundException {
+		if (command.getSubCommand().matches(
+				CmdConstants.SubCmdNames.CLASS_REGEX)) {
+			return isc.createClass(command
+					.getFlagValue(CmdConstants.Flags.NAME));
+		} else if (command.getSubCommand().matches(
+				CmdConstants.SubCmdNames.INTERFACE_REGEX)) {
+			return isc.createInterface(command
+					.getFlagValue(CmdConstants.Flags.NAME));
 		} else {
-			return isc.createDesign(command.getFlagValue(CmdConstants.Flags.NAME));
+			return isc.createDesign(command
+					.getFlagValue(CmdConstants.Flags.NAME));
 		}
 	}
-	
+
 	// Calling of add methods
-	private void doAdd(ICommand command) throws HBObjectNotFoundException {
-		if (command.getSubCommand().matches(CmdConstants.SubCmdNames.PACKAGE_REGEX)) {
-			isc.addPackage(command.getFlagValue(CmdConstants.Flags.NAME), command.getFlagValue(CmdConstants.Flags.CONTAINER_NAME));
+	private void doAdd(ICommand command) throws HBObjectNotFoundException,
+			MalformattedCommandException, HBDuplicateMethodException {
+		if (command.getSubCommand().matches(
+				CmdConstants.SubCmdNames.PACKAGE_REGEX)) {
+			isc.addPackage(command.getFlagValue(CmdConstants.Flags.NAME),
+					command.getFlagValue(CmdConstants.Flags.CONTAINER_NAME));
+		} else if (command.getSubCommand().matches(
+				CmdConstants.SubCmdNames.METHOD_REGEX)
+				&& command.hasFlag(CmdConstants.Flags.INSTANCE)) {
+			isc.addInstanceMethod(
+					command.getFlagValue(CmdConstants.Flags.CONTAINER_NAME),
+					command.getFlagValue(CmdConstants.Flags.NAME),
+					command.getFlagValue(CmdConstants.Flags.PARAMETERS),
+					CmdConstants.Flags.INSTANCE);
 		}
 	}
 }

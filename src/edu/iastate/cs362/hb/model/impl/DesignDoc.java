@@ -1,11 +1,14 @@
 package edu.iastate.cs362.hb.model.impl;
 
 import edu.iastate.cs362.hb.exceptions.HBClassNotFoundException;
+import edu.iastate.cs362.hb.exceptions.HBDuplicateMethodException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
+import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
 import edu.iastate.cs362.hb.model.IClass;
 import edu.iastate.cs362.hb.model.IDesignDoc;
 import edu.iastate.cs362.hb.model.IInstanceField;
+import edu.iastate.cs362.hb.model.IMethod;
 import edu.iastate.cs362.hb.model.IObject;
 import edu.iastate.cs362.hb.model.tree.IHBTree;
 import edu.iastate.cs362.hb.model.tree.impl.HBTree;
@@ -66,10 +69,14 @@ public class DesignDoc implements IDesignDoc{
 	}
 
 	@Override
-	public boolean addInstanceMethod(String className, String methodName,
-			String... modifiers) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean addInstanceMethod(String className, String methodName, String params, 
+			String... modifiers) throws HBObjectNotFoundException, MalformattedCommandException, HBDuplicateMethodException {
+		IMethod method = new HBMethod(methodName);
+		method.addModifiers(modifiers);
+		method.addArguments(params);
+		
+		IObject clazz = tree.getObject(className);
+		return clazz.addMethod(method);
 	}
 
 	@Override

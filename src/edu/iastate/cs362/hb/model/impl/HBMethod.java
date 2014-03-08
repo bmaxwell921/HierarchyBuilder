@@ -5,8 +5,11 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.StringTokenizer;
 
 import edu.iastate.cs362.hb.constants.CmdConstants;
+import edu.iastate.cs362.hb.constants.ErrorMessages;
+import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
 import edu.iastate.cs362.hb.model.IArgument;
 import edu.iastate.cs362.hb.model.IMethod;
 
@@ -18,6 +21,9 @@ import edu.iastate.cs362.hb.model.IMethod;
  *
  */
 public class HBMethod implements IMethod {
+	
+	private static final String A_MAJ_DEL = ",";
+	private static final String A_MIN_DEL = ":";
 	
 	// This guy's id
 	private int id;
@@ -112,6 +118,19 @@ public class HBMethod implements IMethod {
 		} else if (!name.equals(other.name))
 			return false;
 		return true;
+	}
+
+	@Override
+	public void addArguments(String args) throws MalformattedCommandException {
+		StringTokenizer st = new StringTokenizer(args, A_MAJ_DEL + CmdConstants.RegexOp.OR + A_MIN_DEL);
+		while (st.hasMoreTokens()) {
+			String type = st.nextToken();
+			if (!st.hasMoreTokens()) {
+				throw new MalformattedCommandException(ErrorMessages.MALFORMATTED_PARAM_LIST, args);
+			}
+			String value = st.nextToken();
+			this.args.add(new Argument(type, value));
+		}
 	}
 
 	
