@@ -1,5 +1,6 @@
 package edu.iastate.cs362.hb.model;
 
+import edu.iastate.cs362.hb.exceptions.HBDuplicateMethodException;
 import edu.iastate.cs362.hb.model.attributes.Identifiable;
 import edu.iastate.cs362.hb.model.attributes.Modifiable;
 import edu.iastate.cs362.hb.model.attributes.Nameable;
@@ -23,5 +24,8 @@ public interface IObject extends Nameable, Identifiable, Modifiable {
 	public boolean removePackage();
 	
 	public String getPackage();
-
+	
+	public boolean addMethod(IMethod method) throws HBDuplicateMethodException;
+	
+	public boolean removeMethod(IMethod method);
 }

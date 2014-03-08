@@ -1,10 +1,15 @@
 package edu.iastate.cs362.hb.model.impl;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import edu.iastate.cs362.hb.constants.ErrorMessages;
 import edu.iastate.cs362.hb.constants.ObjectConstants;
+import edu.iastate.cs362.hb.exceptions.HBDuplicateMethodException;
+import edu.iastate.cs362.hb.model.IMethod;
 import edu.iastate.cs362.hb.model.IObject;
 
 /**
@@ -28,6 +33,8 @@ public abstract class AHBObject implements IObject {
 	// All the modifiers. TODO this should probably have some notion of order
 	private Set<String> modifiers;
 	
+	private List<IMethod> methods;
+	
 	/**
 	 * Creates a new AHBObject with the given name that
 	 * goes in the default package
@@ -37,6 +44,7 @@ public abstract class AHBObject implements IObject {
 		this.name = name;
 		this.pkg = ObjectConstants.DEFAULT_PKG;
 		this.modifiers = new HashSet<>();
+		this.methods = new ArrayList<IMethod>();
 	}
 
 	@Override
@@ -120,6 +128,21 @@ public abstract class AHBObject implements IObject {
 	@Override
 	public Set<String> getModifiers() {
 		return this.modifiers;
+	}
+
+	@Override
+	public boolean addMethod(IMethod method) throws HBDuplicateMethodException {
+		if (methods.contains(method)) {
+			throw new HBDuplicateMethodException(ErrorMessages.DUPLICATE_METHOD, this.name, method.getName());
+		}
+		methods.add(method);
+		return true;
+	}
+
+	@Override
+	public boolean removeMethod(IMethod method) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
