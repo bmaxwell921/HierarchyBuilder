@@ -118,6 +118,43 @@ public class DesignDocTest {
 		test.createInterface(OBJECT_NAME);
 		test.addInstanceMethod(OBJECT_NAME, METHOD_NAME, params, modifier);
 	}
+	
+	@Test
+	public void testAddStaticMethodToClass() throws Exception {
+		final String METHOD_NAME = "method";
+		final String params = "String:name,int:id";
+		final String modifier = "i";
+		test.createClass(OBJECT_NAME);
+		Assert.assertTrue("Adding an instance method normally should work",
+				test.addStaticMethod(OBJECT_NAME, METHOD_NAME, params, modifier));
+	}
+	
+	@Test
+	public void testAddStaticMethodToInterface() throws Exception {
+		final String METHOD_NAME = "method";
+		final String params = "String:name,int:id";
+		final String modifier = "i";
+		test.createInterface(OBJECT_NAME);
+		Assert.assertTrue("Adding an instance method normally should work",
+				test.addStaticMethod(OBJECT_NAME, METHOD_NAME, params, modifier));
+	}
+	
+	@Test (expected = HBObjectNotFoundException.class)
+	public void testAddStaticMethodWithoutClass() throws Exception {
+		final String METHOD_NAME = "method";
+		final String params = "String:name,int:id";
+		final String modifier = "i";
+		test.addStaticMethod(OBJECT_NAME, METHOD_NAME, params, modifier);
+	}
+	
+	@Test (expected = MalformattedCommandException.class)
+	public void testAddStaticMethodInvalidParamsMissing() throws Exception {
+		final String METHOD_NAME = "method";
+		final String params = "String:name,int:";
+		final String modifier = "i";
+		test.createInterface(OBJECT_NAME);
+		test.addStaticMethod(OBJECT_NAME, METHOD_NAME, params, modifier);
+	}
 
 	@After
 	public void tearDown() {
