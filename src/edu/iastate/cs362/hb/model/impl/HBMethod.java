@@ -132,6 +132,4 @@ public class HBMethod implements IMethod {
 			this.args.add(new Argument(type, value));
 		}
 	}
-
-	
 }
