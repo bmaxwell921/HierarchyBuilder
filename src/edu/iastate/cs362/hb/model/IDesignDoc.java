@@ -16,8 +16,6 @@ public interface IDesignDoc extends Nameable {
 	
 	public boolean addInstanceField(String className, String instanceFieldName, String...modifiers) throws HBClassNotFoundException, HBObjectNotFoundException;
 	
-	public IInstanceField createInstanceField(String name, String...modifiers);
-	
 	public boolean addRelationship(String fromClass, String toClass, String relationship) throws HBObjectNotFoundException;
 	
 	public boolean addPackage(String packageName, String className) throws HBObjectNotFoundException;

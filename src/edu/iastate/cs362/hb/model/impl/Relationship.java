@@ -9,5 +9,10 @@ public class Relationship implements IRelationship{
 	public Relationship(String relationship) {
 		name = relationship;
 	}
+	
+	@Override
+	public String getName(){
+		return name;
+	}
 
 }

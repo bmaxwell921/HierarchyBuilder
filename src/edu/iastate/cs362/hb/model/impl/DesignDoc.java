@@ -37,16 +37,15 @@ public class DesignDoc implements IDesignDoc {
 			throw new HBClassNotFoundException(
 					"Name entered was not a name of a Class.");
 		// now we know obj is an HBClass.
-		IInstanceField i = createInstanceField(instanceFieldName, modifiers);
 		HBClass cl = (HBClass) obj;
+		
+		IInstanceField i = new InstanceField(instanceFieldName);
+		i.addModifiers(modifiers);
+		
 		cl.addInstanceField(i);
 		return true;
 	}
 
-	@Override
-	public IInstanceField createInstanceField(String name, String... modifiers) {
-		return new InstanceField(name, modifiers);
-	}
 
 	@Override
 	public boolean addRelationship(String fromClass, String toClass,
@@ -54,12 +53,8 @@ public class DesignDoc implements IDesignDoc {
 		IObject from = tree.getObject(fromClass);
 		IObject to = tree.getObject(toClass);
 		// TODO fix this.
-		Relationship r = createRelationship(relationship);
+		Relationship r = new Relationship(relationship);
 		return tree.addRelationship(from, to, r);
-	}
-
-	private Relationship createRelationship(String relationship) {
-		return new Relationship(relationship);
 	}
 
 	@Override
