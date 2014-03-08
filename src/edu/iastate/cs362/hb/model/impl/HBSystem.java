@@ -8,8 +8,8 @@ import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
 import edu.iastate.cs362.hb.model.IDesignDoc;
 import edu.iastate.cs362.hb.model.ISystem;
 
-public class HBSystem implements ISystem{
-	
+public class HBSystem implements ISystem {
+
 	private IDesignDoc doc;
 
 	@Override
@@ -20,19 +20,24 @@ public class HBSystem implements ISystem{
 	}
 
 	/**
-	 *  addInstanceField(String className, String iFieldName, String... modifiers)
-	 *  calls addInstanceField in DesignDoc
-	 *  
-	 *  @param className a String for the class name instance field is a part of
-	 *  @param iFieldName a String for the instance field's name
-	 *  @param modifiers Strings to tell what modifiers the Instance Field should have
-	 *  @return a boolean returning the success (true) or failure of the instance field addition
-	 * @throws HBClassNotFoundException 
-	 * @throws HBObjectNotFoundException 
+	 * addInstanceField(String className, String iFieldName, String...
+	 * modifiers) calls addInstanceField in DesignDoc
+	 * 
+	 * @param className
+	 *            a String for the class name instance field is a part of
+	 * @param iFieldName
+	 *            a String for the instance field's name
+	 * @param modifiers
+	 *            Strings to tell what modifiers the Instance Field should have
+	 * @return a boolean returning the success (true) or failure of the instance
+	 *         field addition
+	 * @throws HBClassNotFoundException
+	 * @throws HBObjectNotFoundException
 	 */
 	@Override
 	public boolean addInstanceField(String className, String instanceFieldName,
-			String... modifiers) throws HBClassNotFoundException, HBObjectNotFoundException {
+			String... modifiers) throws HBClassNotFoundException,
+			HBObjectNotFoundException {
 		return doc.addInstanceField(className, instanceFieldName, modifiers);
 	}
 
@@ -43,21 +48,25 @@ public class HBSystem implements ISystem{
 	}
 
 	@Override
-	public boolean addPackage(String packageName, String className) throws HBObjectNotFoundException {
+	public boolean addPackage(String packageName, String className)
+			throws HBObjectNotFoundException {
 		return doc.addPackage(packageName, className);
 	}
 
 	@Override
-	public boolean addInstanceMethod(String className, String methodName, String params, 
-			String... modifiers) throws HBObjectNotFoundException, MalformattedCommandException, HBDuplicateMethodException {
+	public boolean addInstanceMethod(String className, String methodName,
+			String params, String... modifiers)
+			throws HBObjectNotFoundException, MalformattedCommandException,
+			HBDuplicateMethodException {
 		return doc.addInstanceMethod(className, methodName, params, modifiers);
 	}
 
 	@Override
 	public boolean addStaticMethod(String className, String methodName,
-			String... modifiers) {
-		// TODO Auto-generated method stub
-		return false;
+			String params, String... modifiers)
+			throws MalformattedCommandException, HBObjectNotFoundException,
+			HBDuplicateMethodException {
+		return doc.addStaticMethod(className, methodName, params, modifiers);
 	}
 
 	@Override
@@ -85,12 +94,14 @@ public class HBSystem implements ISystem{
 	}
 
 	@Override
-	public boolean createClass(String name) throws HBDuplicateObjectFoundException {
+	public boolean createClass(String name)
+			throws HBDuplicateObjectFoundException {
 		return doc.createClass(name);
 	}
-	
+
 	@Override
-	public boolean createInterface(String name) throws HBDuplicateObjectFoundException {
+	public boolean createInterface(String name)
+			throws HBDuplicateObjectFoundException {
 		return doc.createInterface(name);
 	}
 

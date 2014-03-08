@@ -95,13 +95,20 @@ public class Cardinal {
 			isc.addPackage(command.getFlagValue(CmdConstants.Flags.NAME),
 					command.getFlagValue(CmdConstants.Flags.CONTAINER_NAME));
 		} else if (command.getSubCommand().matches(
-				CmdConstants.SubCmdNames.METHOD_REGEX)
-				&& command.hasFlag(CmdConstants.Flags.INSTANCE)) {
-			isc.addInstanceMethod(
-					command.getFlagValue(CmdConstants.Flags.CONTAINER_NAME),
-					command.getFlagValue(CmdConstants.Flags.NAME),
-					command.getFlagValue(CmdConstants.Flags.PARAMETERS),
-					CmdConstants.Flags.INSTANCE);
+				CmdConstants.SubCmdNames.METHOD_REGEX)) {
+			if (command.hasFlag(CmdConstants.Flags.INSTANCE)) {
+				isc.addInstanceMethod(
+						command.getFlagValue(CmdConstants.Flags.CONTAINER_NAME),
+						command.getFlagValue(CmdConstants.Flags.NAME),
+						command.getFlagValue(CmdConstants.Flags.PARAMETERS),
+						CmdConstants.Flags.INSTANCE);
+			} else {
+				isc.addStaticMethod(
+						command.getFlagValue(CmdConstants.Flags.CONTAINER_NAME),
+						command.getFlagValue(CmdConstants.Flags.NAME),
+						command.getFlagValue(CmdConstants.Flags.PARAMETERS),
+						CmdConstants.Flags.STATIC);
+			}
 		}
 	}
 }

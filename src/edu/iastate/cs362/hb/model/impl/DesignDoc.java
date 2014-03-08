@@ -13,14 +13,14 @@ import edu.iastate.cs362.hb.model.IObject;
 import edu.iastate.cs362.hb.model.tree.IHBTree;
 import edu.iastate.cs362.hb.model.tree.impl.HBTree;
 
-public class DesignDoc implements IDesignDoc{
-	
+public class DesignDoc implements IDesignDoc {
+
 	// The name of the design doc. Name of the file to save
 	private String name;
-	
+
 	// Tree representing the class hierarchy
 	private IHBTree tree;
-	
+
 	public DesignDoc(String name) {
 		this.name = name;
 		this.tree = new HBTree();
@@ -28,12 +28,15 @@ public class DesignDoc implements IDesignDoc{
 
 	@Override
 	public boolean addInstanceField(String className, String instanceFieldName,
-			String... modifiers) throws HBClassNotFoundException, HBObjectNotFoundException {
+			String... modifiers) throws HBClassNotFoundException,
+			HBObjectNotFoundException {
 		IObject obj = tree.getObject(className);
-		//if obj is not a Class (its an interface) then we can't add an instance field
-		if(!(obj instanceof HBClass))
-			throw new HBClassNotFoundException("Name entered was not a name of a Class.");
-		//now we know obj is an HBClass.
+		// if obj is not a Class (its an interface) then we can't add an
+		// instance field
+		if (!(obj instanceof HBClass))
+			throw new HBClassNotFoundException(
+					"Name entered was not a name of a Class.");
+		// now we know obj is an HBClass.
 		IInstanceField i = createInstanceField(instanceFieldName, modifiers);
 		HBClass cl = (HBClass) obj;
 		cl.addInstanceField(i);
@@ -50,40 +53,49 @@ public class DesignDoc implements IDesignDoc{
 			String relationship) throws HBObjectNotFoundException {
 		IObject from = tree.getObject(fromClass);
 		IObject to = tree.getObject(toClass);
-		//TODO fix this.
+		// TODO fix this.
 		Relationship r = createRelationship(relationship);
 		return tree.addRelationship(from, to, r);
 	}
-	
-	
 
 	private Relationship createRelationship(String relationship) {
 		return new Relationship(relationship);
 	}
 
 	@Override
-	public boolean addPackage(String packageName, String className) throws HBObjectNotFoundException {
+	public boolean addPackage(String packageName, String className)
+			throws HBObjectNotFoundException {
 		IObject clazz = tree.getObject(className);
 		clazz.addPackage(packageName);
 		return true;
 	}
 
 	@Override
-	public boolean addInstanceMethod(String className, String methodName, String params, 
-			String... modifiers) throws HBObjectNotFoundException, MalformattedCommandException, HBDuplicateMethodException {
-		IMethod method = new HBMethod(methodName);
-		method.addModifiers(modifiers);
-		method.addArguments(params);
-		
-		IObject clazz = tree.getObject(className);
-		return clazz.addMethod(method);
+	public boolean addInstanceMethod(String className, String methodName,
+			String params, String... modifiers)
+			throws HBObjectNotFoundException, MalformattedCommandException,
+			HBDuplicateMethodException {
+		return addMethod(className, methodName, params, modifiers);
 	}
 
 	@Override
 	public boolean addStaticMethod(String className, String methodName,
-			String... modifiers) {
-		// TODO Auto-generated method stub
-		return false;
+			String params, String... modifiers)
+			throws MalformattedCommandException, HBObjectNotFoundException,
+			HBDuplicateMethodException {
+		return addMethod(className, methodName, params, modifiers);
+	}
+
+	private boolean addMethod(String className, String methodName,
+			String params, String... modifiers)
+			throws MalformattedCommandException, HBObjectNotFoundException,
+			HBDuplicateMethodException {
+		IMethod method = new HBMethod(methodName);
+		method.addModifiers(modifiers);
+		method.addArguments(params);
+
+		IObject clazz = tree.getObject(className);
+		return clazz.addMethod(method);
 	}
 
 	@Override
@@ -111,13 +123,15 @@ public class DesignDoc implements IDesignDoc{
 	}
 
 	@Override
-	public boolean createClass(String name) throws HBDuplicateObjectFoundException {
+	public boolean createClass(String name)
+			throws HBDuplicateObjectFoundException {
 		IClass clazz = new HBClass(name);
 		return tree.addObject(clazz);
 	}
-	
+
 	@Override
-	public boolean createInterface(String name) throws HBDuplicateObjectFoundException {
+	public boolean createInterface(String name)
+			throws HBDuplicateObjectFoundException {
 		IObject interf = new HBInterface(name);
 		return tree.addObject(interf);
 	}

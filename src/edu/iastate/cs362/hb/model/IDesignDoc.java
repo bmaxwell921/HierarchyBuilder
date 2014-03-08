@@ -24,7 +24,9 @@ public interface IDesignDoc extends Nameable {
 	
 	public boolean addInstanceMethod(String className, String methodName, String params, String...modifiers) throws HBObjectNotFoundException, MalformattedCommandException, HBDuplicateMethodException;
 	
-	public boolean addStaticMethod(String className, String methodName, String...modifiers);
+	public boolean addStaticMethod(String className, String methodName,
+			String params, String... modifiers)
+			throws MalformattedCommandException, HBObjectNotFoundException, HBDuplicateMethodException;
 	
 	public boolean removeMethod(String className, String methodName);
 	
