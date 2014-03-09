@@ -99,7 +99,8 @@ public abstract class AHBObject implements IObject {
 			return true;
 		if (obj == null)
 			return false;
-		if (getClass() != obj.getClass())
+		// Apparently this is bad style, but we need interfaces and classes with the same name and package to be equal
+		if (getClass().getSuperclass() != obj.getClass().getSuperclass())
 			return false;
 		AHBObject other = (AHBObject) obj;
 		if (name == null) {
