@@ -39,17 +39,17 @@ public class DesignDoc implements IDesignDoc {
 					"Name entered was not a name of a Class.");
 		// now we know obj is an HBClass.
 		HBClass cl = (HBClass) obj;
-		
+
 		IInstanceField i = new InstanceField(instanceFieldName);
 		i.addModifiers(modifiers);
-		
+
 		return cl.addInstanceField(i);
 	}
 
-
 	@Override
 	public boolean addRelationship(String fromClass, String toClass,
-			String relationship) throws HBObjectNotFoundException, HBDuplicateRelationshipException {
+			String relationship) throws HBObjectNotFoundException,
+			HBDuplicateRelationshipException {
 		IObject from = tree.getObject(fromClass);
 		IObject to = tree.getObject(toClass);
 		Relationship r = new Relationship(relationship);
