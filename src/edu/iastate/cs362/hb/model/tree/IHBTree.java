@@ -22,5 +22,12 @@ public interface IHBTree {
 
 	public boolean removeRelationship(IObject fromClass, IObject toClass);
 
+	/**
+	 * Method used to remove an object from the tree. 
+	 * 
+	 * Side effect: Any relationships to or from this object are removed
+	 * @param toRemove
+	 * @return
+	 */
 	public boolean removeObject(IObject toRemove);
 }
