@@ -5,8 +5,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import edu.iastate.cs362.hb.model.IInstanceField;
+import edu.iastate.cs362.hb.model.attributes.Nameable;
 
-public class InstanceField implements IInstanceField {
+public class InstanceField implements IInstanceField, Nameable {
 	
 	private String name;
 	
@@ -25,5 +26,13 @@ public class InstanceField implements IInstanceField {
 	@Override
 	public String getName() {
 		return name;
+	}
+
+	@Override
+	public boolean hasName(String name) {
+		if(this.name == null){
+			return false;
+		}
+		return this.name.equals(name);
 	}
 }
