@@ -4,6 +4,7 @@ import edu.iastate.cs362.hb.exceptions.HBClassNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateMethodException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateRelationshipException;
+import edu.iastate.cs362.hb.exceptions.HBMultipleObjectsFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
 
@@ -19,24 +20,24 @@ public interface ISystem {
 
 	public boolean addInstanceField(String className, String instanceFieldName,
 			String... modifiers) throws HBClassNotFoundException,
-			HBObjectNotFoundException;
+			HBObjectNotFoundException, HBMultipleObjectsFoundException;
 
 	public boolean addRelationship(String fromClass, String toClass,
 			String relationship) throws HBObjectNotFoundException,
-			HBDuplicateRelationshipException;
+			HBDuplicateRelationshipException, HBMultipleObjectsFoundException;
 
 	public boolean addPackage(String packageName, String className)
-			throws HBObjectNotFoundException;
+			throws HBObjectNotFoundException, HBMultipleObjectsFoundException;
 
 	public boolean addInstanceMethod(String className, String methodName,
 			String params, String... modifiers)
 			throws HBObjectNotFoundException, MalformattedCommandException,
-			HBDuplicateMethodException;
+			HBDuplicateMethodException, HBMultipleObjectsFoundException;
 
 	public boolean addStaticMethod(String className, String methodName,
 			String params, String... modifiers)
 			throws MalformattedCommandException, HBObjectNotFoundException,
-			HBDuplicateMethodException;
+			HBDuplicateMethodException, HBMultipleObjectsFoundException;
 
 	public boolean removeMethod(String className, String methodName);
 

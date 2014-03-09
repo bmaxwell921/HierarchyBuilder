@@ -67,7 +67,7 @@ public class DesignDocTest {
 	}
 
 	@Test
-	public void testAddPackage() throws HBDuplicateObjectFoundException,
+	public void testAddPackage() throws Exception,
 			HBObjectNotFoundException {
 		String pkgName = "package";
 		test.createClass(OBJECT_NAME);
@@ -76,7 +76,7 @@ public class DesignDocTest {
 	}
 
 	@Test(expected = HBObjectNotFoundException.class)
-	public void testAddPackageNotFound() throws HBObjectNotFoundException {
+	public void testAddPackageNotFound() throws Exception {
 		String pkgName = "package";
 		test.addPackage(pkgName, OBJECT_NAME);
 	}

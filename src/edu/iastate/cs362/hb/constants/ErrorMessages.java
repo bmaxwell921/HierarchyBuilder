@@ -15,4 +15,7 @@ public class ErrorMessages {
 	
 	public static final String MALFORMATTED_PARAM_LIST = "The given parameter list was formatted incorrectly: %s";
 
+	public static final String NULL_OBJ_NAME = "The given object name was null";
+	
+	public static final String MULT_OBJECT_WITH_NAME = "Multiple objects exist with the name: %s";
 }

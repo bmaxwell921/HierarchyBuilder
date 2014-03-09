@@ -10,6 +10,7 @@ import edu.iastate.cs362.hb.controller.ISystemController;
 import edu.iastate.cs362.hb.controller.impl.SystemController;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateMethodException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
+import edu.iastate.cs362.hb.exceptions.HBMultipleObjectsFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
 import edu.iastate.cs362.hb.model.impl.HBSystem;
@@ -65,6 +66,9 @@ public class Cardinal {
 					| HBObjectNotFoundException | HBDuplicateMethodException me) {
 				System.out.println(me.getMessage());
 				break;
+			} catch (HBMultipleObjectsFoundException e) {
+				// TODO need to get things that match the name and show the user
+				e.printStackTrace();
 			}
 		}
 		in.close();
@@ -89,7 +93,7 @@ public class Cardinal {
 
 	// Calling of add methods
 	private void doAdd(ICommand command) throws HBObjectNotFoundException,
-			MalformattedCommandException, HBDuplicateMethodException {
+			MalformattedCommandException, HBDuplicateMethodException, HBMultipleObjectsFoundException {
 		if (command.getSubCommand().matches(
 				CmdConstants.SubCmdNames.PACKAGE_REGEX)) {
 			isc.addPackage(command.getFlagValue(CmdConstants.Flags.NAME),

@@ -4,6 +4,7 @@ import edu.iastate.cs362.hb.exceptions.HBClassNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateMethodException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateRelationshipException;
+import edu.iastate.cs362.hb.exceptions.HBMultipleObjectsFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
 import edu.iastate.cs362.hb.model.IClass;
@@ -30,7 +31,7 @@ public class DesignDoc implements IDesignDoc {
 	@Override
 	public boolean addInstanceField(String className, String instanceFieldName,
 			String... modifiers) throws HBClassNotFoundException,
-			HBObjectNotFoundException {
+			HBObjectNotFoundException, HBMultipleObjectsFoundException {
 		IObject obj = tree.getObject(className);
 		// if obj is not a Class (its an interface) then we can't add an
 		// instance field
@@ -49,7 +50,7 @@ public class DesignDoc implements IDesignDoc {
 	@Override
 	public boolean addRelationship(String fromClass, String toClass,
 			String relationship) throws HBObjectNotFoundException,
-			HBDuplicateRelationshipException {
+			HBDuplicateRelationshipException, HBMultipleObjectsFoundException {
 		IObject from = tree.getObject(fromClass);
 		IObject to = tree.getObject(toClass);
 		Relationship r = new Relationship(relationship);
@@ -58,7 +59,7 @@ public class DesignDoc implements IDesignDoc {
 
 	@Override
 	public boolean addPackage(String packageName, String className)
-			throws HBObjectNotFoundException {
+			throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
 		IObject clazz = tree.getObject(className);
 		clazz.addPackage(packageName);
 		return true;
@@ -68,7 +69,7 @@ public class DesignDoc implements IDesignDoc {
 	public boolean addInstanceMethod(String className, String methodName,
 			String params, String... modifiers)
 			throws HBObjectNotFoundException, MalformattedCommandException,
-			HBDuplicateMethodException {
+			HBDuplicateMethodException, HBMultipleObjectsFoundException {
 		return addMethod(className, methodName, params, modifiers);
 	}
 
@@ -76,14 +77,14 @@ public class DesignDoc implements IDesignDoc {
 	public boolean addStaticMethod(String className, String methodName,
 			String params, String... modifiers)
 			throws MalformattedCommandException, HBObjectNotFoundException,
-			HBDuplicateMethodException {
+			HBDuplicateMethodException, HBMultipleObjectsFoundException {
 		return addMethod(className, methodName, params, modifiers);
 	}
 
 	private boolean addMethod(String className, String methodName,
 			String params, String... modifiers)
 			throws MalformattedCommandException, HBObjectNotFoundException,
-			HBDuplicateMethodException {
+			HBDuplicateMethodException, HBMultipleObjectsFoundException {
 		IMethod method = new HBMethod(methodName);
 		method.addModifiers(modifiers);
 		method.addArguments(params);
