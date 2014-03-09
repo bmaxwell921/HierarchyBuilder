@@ -196,6 +196,15 @@ public class HBTreeTest {
 		test.addRelationship(clazz, interf, ext);
 		Assert.fail("Shouldn't be able to add a relationship to a class that doesn't exist");
 	}
+	
+	@Test
+	public void testAddDuplicateRelationship() throws Exception {
+		test.addObject(clazz);
+		test.addObject(clazz2);
+		
+		test.addRelationship(clazz, clazz2, ext);
+		test.addRelationship(clazz, clazz2, impl);
+	}
 	// End non-Java versions
 	
 	/*
