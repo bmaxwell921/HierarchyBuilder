@@ -4,6 +4,7 @@ import edu.iastate.cs362.hb.controller.ISystemController;
 import edu.iastate.cs362.hb.exceptions.HBClassNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateMethodException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
+import edu.iastate.cs362.hb.exceptions.HBDuplicateRelationshipException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
 import edu.iastate.cs362.hb.model.ISystem;
@@ -57,7 +58,8 @@ public class SystemController implements ISystemController {
 
 	@Override
 	public boolean addRelationship(String fromClass, String toClass,
-			String relationship) throws HBObjectNotFoundException {
+			String relationship) throws HBObjectNotFoundException,
+			HBDuplicateRelationshipException {
 		return system.addRelationship(fromClass, toClass, relationship);
 	}
 

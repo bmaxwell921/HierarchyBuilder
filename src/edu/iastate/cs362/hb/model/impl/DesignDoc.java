@@ -3,6 +3,7 @@ package edu.iastate.cs362.hb.model.impl;
 import edu.iastate.cs362.hb.exceptions.HBClassNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateMethodException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
+import edu.iastate.cs362.hb.exceptions.HBDuplicateRelationshipException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
 import edu.iastate.cs362.hb.model.IClass;
@@ -48,7 +49,7 @@ public class DesignDoc implements IDesignDoc {
 
 	@Override
 	public boolean addRelationship(String fromClass, String toClass,
-			String relationship) throws HBObjectNotFoundException {
+			String relationship) throws HBObjectNotFoundException, HBDuplicateRelationshipException {
 		IObject from = tree.getObject(fromClass);
 		IObject to = tree.getObject(toClass);
 		Relationship r = new Relationship(relationship);

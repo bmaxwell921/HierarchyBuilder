@@ -3,6 +3,7 @@ package edu.iastate.cs362.hb.model;
 import edu.iastate.cs362.hb.exceptions.HBClassNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateMethodException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
+import edu.iastate.cs362.hb.exceptions.HBDuplicateRelationshipException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
 import edu.iastate.cs362.hb.model.attributes.Nameable;
@@ -16,7 +17,9 @@ public interface IDesignDoc extends Nameable {
 	
 	public boolean addInstanceField(String className, String instanceFieldName, String...modifiers) throws HBClassNotFoundException, HBObjectNotFoundException;
 	
-	public boolean addRelationship(String fromClass, String toClass, String relationship) throws HBObjectNotFoundException;
+	public boolean addRelationship(String fromClass, String toClass,
+			String relationship) throws HBObjectNotFoundException,
+			HBDuplicateRelationshipException;
 	
 	public boolean addPackage(String packageName, String className) throws HBObjectNotFoundException;
 	
