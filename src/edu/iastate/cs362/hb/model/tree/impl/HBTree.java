@@ -99,7 +99,8 @@ public class HBTree implements IHBTree {
 		if (nodes.containsValue(add) || roots.containsValue(add)) {
 			throw new HBDuplicateObjectFoundException(ErrorMessages.DUPLICATE_OBJECT_FOUND, newClass.getName(), newClass.getPackage());
 		}
-		nodes.put(newClass.getName(), add);
+		// First time adding, so it should be a root because it has nothing above it
+		roots.put(newClass.getName(), add);
 		return true;
 	}
 
