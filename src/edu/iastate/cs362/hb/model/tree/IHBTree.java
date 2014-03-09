@@ -2,6 +2,7 @@ package edu.iastate.cs362.hb.model.tree;
 
 import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateRelationshipException;
+import edu.iastate.cs362.hb.exceptions.HBMultipleObjectsFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBRelationshipNotFoundException;
 import edu.iastate.cs362.hb.model.IObject;
@@ -21,8 +22,9 @@ public interface IHBTree {
 	 * @param className
 	 * @return
 	 * @throws HBObjectNotFoundException
+	 * @throws HBMultipleObjectsFoundException 
 	 */
-	public IObject getObject(String className) throws HBObjectNotFoundException;
+	public IObject getObject(String className) throws HBObjectNotFoundException, HBMultipleObjectsFoundException;
 
 	/**
 	 * Method used to add an object to the tree
