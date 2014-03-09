@@ -6,7 +6,7 @@ package edu.iastate.cs362.hb.exceptions;
  *
  */
 public class HBDuplicateObjectFoundException extends Exception {
-	private static final long serialVersionUID = 0;
+	private static final long serialVersionUID = 1L;
 
 	public HBDuplicateObjectFoundException(String message, Object... args) {
 		super(String.format(message, args));

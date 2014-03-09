@@ -7,7 +7,7 @@ package edu.iastate.cs362.hb.exceptions;
  *
  */
 public class HBObjectNotFoundException extends Exception {
-	private static final long serialVersionUID = 0;
+	private static final long serialVersionUID = 1L;
 	
 	/**
 	 * Creates a HBObjectNotFoundException with the given message

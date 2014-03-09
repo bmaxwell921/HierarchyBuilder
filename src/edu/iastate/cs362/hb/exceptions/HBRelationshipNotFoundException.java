@@ -8,7 +8,7 @@ package edu.iastate.cs362.hb.exceptions;
  */
 public class HBRelationshipNotFoundException extends Exception {
 
-	private static final long serialVersionUID = 0;
+	private static final long serialVersionUID = 1L;
 	
 	public HBRelationshipNotFoundException(String message, Object... args) {
 		super(String.format(message, args));
