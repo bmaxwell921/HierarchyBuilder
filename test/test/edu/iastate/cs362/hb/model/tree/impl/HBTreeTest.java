@@ -5,7 +5,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.iastate.cs362.hb.exceptions.HBClassNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
+import edu.iastate.cs362.hb.exceptions.HBDuplicateRelationshipException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBRelationshipNotFoundException;
 import edu.iastate.cs362.hb.model.IObject;
@@ -119,14 +121,14 @@ public class HBTreeTest {
 		Assert.assertTrue("Adding a relationship normally should work", test.addRelationship(interf, clazz, impl));
 	}
 	
-	@Test
+	@Test (expected = HBObjectNotFoundException.class)
 	public void testAddRelationshipNoFrom_InterToClass() throws Exception {
 		test.addObject(clazz);	
 		test.addRelationship(interf, clazz, impl);
 		Assert.fail("Shouldn't be able to add a relationship from an interface that doesn't exist");
 	}
 	
-	@Test
+	@Test(expected = HBObjectNotFoundException.class)
 	public void testAddRelationshipNoTo_InterToClass() throws Exception{
 		test.addObject(interf);
 		test.addRelationship(interf, clazz, impl);
@@ -140,14 +142,14 @@ public class HBTreeTest {
 		Assert.assertTrue("Adding a relationship normally should work", test.addRelationship(clazz, clazz2, ext));
 	}
 	
-	@Test
+	@Test (expected = HBObjectNotFoundException.class)
 	public void testAddRelationshipNoFrom_ClassToClass() throws Exception {
 		test.addObject(clazz2);	
 		test.addRelationship(clazz, clazz2, ext);
 		Assert.fail("Shouldn't be able to add a relationship from an interface that doesn't exist");
 	}
 	
-	@Test
+	@Test (expected = HBObjectNotFoundException.class)
 	public void testAddRelationshipNoTo_ClassToClass() throws Exception {
 		test.addObject(clazz);
 		test.addRelationship(clazz, clazz2, ext);
@@ -161,14 +163,14 @@ public class HBTreeTest {
 		Assert.assertTrue("Adding a relationship normally should work", test.addRelationship(interf, interf2, ext));
 	}
 	
-	@Test
+	@Test (expected = HBObjectNotFoundException.class)
 	public void testAddRelationshipNoFrom_InterToInter() throws Exception {
 		test.addObject(interf2);	
 		test.addRelationship(interf, interf2, ext);
 		Assert.fail("Shouldn't be able to add a relationship from an interface that doesn't exist");
 	}
 	
-	@Test
+	@Test (expected = HBObjectNotFoundException.class)
 	public void testAddRelationshipNoTo_InterToInter() throws Exception {
 		test.addObject(interf);
 		test.addRelationship(interf, interf2, ext);
@@ -183,21 +185,21 @@ public class HBTreeTest {
 		Assert.assertTrue("Adding a relationship normally should work", test.addRelationship(clazz, interf, ext));
 	}
 	
-	@Test
+	@Test (expected = HBObjectNotFoundException.class)
 	public void testAddRelationshipNoFrom_ClassToInter() throws Exception {
 		test.addObject(interf);	
 		test.addRelationship(clazz, interf, ext);
 		Assert.fail("Shouldn't be able to add a relationship from an interface that doesn't exist");
 	}
 	
-	@Test
+	@Test (expected = HBObjectNotFoundException.class)
 	public void testAddRelationshipNoTo_ClassToInter() throws Exception {
 		test.addObject(clazz);
 		test.addRelationship(clazz, interf, ext);
 		Assert.fail("Shouldn't be able to add a relationship to a class that doesn't exist");
 	}
 	
-	@Test
+	@Test (expected = HBDuplicateRelationshipException.class)
 	public void testAddDuplicateRelationship() throws Exception {
 		test.addObject(clazz);
 		test.addObject(clazz2);
@@ -292,7 +294,7 @@ public class HBTreeTest {
 		test.removeRelationship(clazz, clazz2);
 	}
 	
-	@Test (expected = HBRelationshipNotFoundException.class)
+	@Test (expected = HBObjectNotFoundException.class)
 	public void testRemoveRelationshipAfterRemoveFrom() throws Exception {
 		test.addObject(interf);
 		test.addObject(clazz);
@@ -302,7 +304,7 @@ public class HBTreeTest {
 		test.removeRelationship(interf, clazz);
 	}
 	
-	@Test (expected = HBRelationshipNotFoundException.class)
+	@Test (expected = HBObjectNotFoundException.class)
 	public void testRemoveRelationshipAfterRemoveTo() throws Exception {
 		test.addObject(interf);
 		test.addObject(clazz);
