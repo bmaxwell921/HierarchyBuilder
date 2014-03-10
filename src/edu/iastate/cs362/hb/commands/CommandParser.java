@@ -125,7 +125,7 @@ public class CommandParser implements ICommandParser{
 		return valueUsed;
 	}
 	
-	public void addSubCommand(Command c, String input)
+	public void addSubCommand(Command c, String input) throws MalformattedCommandException
 	{
 
 			switch(input)
@@ -146,7 +146,7 @@ public class CommandParser implements ICommandParser{
 				c.setSubCommand(CmdConstants.SubCmdNames.PACKAGE_REGEX);
 				break;
 			default:
-				break;
+				throw new MalformattedCommandException("Malformatted sub-command name!", input);
 			}
 			
 		
