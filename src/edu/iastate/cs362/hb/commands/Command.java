@@ -26,8 +26,7 @@ public class Command implements ICommand {
 	
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return name;
 	}
 
 	@Override

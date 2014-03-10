@@ -11,13 +11,5 @@ public class CmdConstants {
 
 	public static final String EXIT_NAME = "exit";
 
-	public CmdConstants() {
-		initializeArguments();
-	}
-
-
-
-	public void initializeArguments() {
-	}
 
 }
