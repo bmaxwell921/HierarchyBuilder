@@ -49,6 +49,8 @@ public class CommandParser implements ICommandParser{
 		case CmdConstants.CmdNames.EXIT:
 			c = new Command(CmdConstants.CmdNames.EXIT);
 			break;
+		case CmdConstants.CmdNames.REMOVE:
+			c = new Command(CmdConstants.CmdNames.REMOVE);
 		default:
 			throw new MalformattedCommandException("Malformatted command name!", commandList[0]);	
 		}
@@ -80,6 +82,7 @@ public class CommandParser implements ICommandParser{
 		cmdNames.add(CmdConstants.CmdNames.ADD);
 		cmdNames.add(CmdConstants.CmdNames.CREATE);
 		cmdNames.add(CmdConstants.CmdNames.EXIT);
+		cmdNames.add(CmdConstants.CmdNames.REMOVE);
 		
 		subNames.add(CmdConstants.SubCmdNames.CLASS_REGEX);
 		subNames.add(CmdConstants.SubCmdNames.DESIGN_REGEX);

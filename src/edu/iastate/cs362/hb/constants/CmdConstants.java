@@ -15,6 +15,7 @@ public class CmdConstants {
 		public static final String CREATE = "create";
 		public static final String ADD = "add";
 		public static final String EXIT = "exit";
+		public static final String REMOVE = "remove";
 	}
 	
 	public class SubCmdNames {
@@ -37,6 +38,7 @@ public class CmdConstants {
 		public static final String METHOD = "method";
 		private static final String METHOD_SHORT = "m";
 		public static final String METHOD_REGEX = METHOD + RegexOp.OR + METHOD_SHORT;
+		
 	}
 	
 	public class Flags {
