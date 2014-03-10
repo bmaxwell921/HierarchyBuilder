@@ -89,37 +89,39 @@ public class CommandParser implements ICommandParser{
 		
 	}
 
-	public boolean addFlag(Command c, String input, String value)
+	public boolean addFlag(Command c, String input, String value) throws MalformattedCommandException
 	{
 		boolean valueUsed = false;
-		switch(input)
+		if(input.matches(CmdConstants.Flags.CONTAINER_NAME))
 		{
-		case CmdConstants.Flags.CONTAINER_NAME:
 			c.addFlagValue(CmdConstants.Flags.CONTAINER_NAME, value);
 			valueUsed = true;
-			break;
-		case CmdConstants.Flags.HELP:
-
+		}
+		else if(input.matches(CmdConstants.Flags.HELP))
+		{		
 			c.addFlagValue(CmdConstants.Flags.HELP, null);
-			break;
-		case CmdConstants.Flags.INSTANCE:
-
+		}
+		else if(input.matches(CmdConstants.Flags.INSTANCE))
+		{
 			c.addFlagValue(CmdConstants.Flags.INSTANCE, null);
-			break;
-		case CmdConstants.Flags.NAME:
-
+		}
+		else if(input.matches(CmdConstants.Flags.NAME))
+		{
 			c.addFlagValue(CmdConstants.Flags.NAME, value);
 			valueUsed = true;
-			break;
-		case CmdConstants.Flags.PARAMETERS:
-
+		}
+		else if(input.matches(CmdConstants.Flags.PARAMETERS))
+		{
 			c.addFlagValue(CmdConstants.Flags.PARAMETERS, value);
 			valueUsed = true;
-			break;
-		case CmdConstants.Flags.STATIC:
-
+		}
+		else if(input.matches(CmdConstants.Flags.STATIC))
+		{
 			c.addFlagValue(CmdConstants.Flags.STATIC, null);
-			break;
+		}
+		else
+		{
+			throw new MalformattedCommandException("Malformatted flag values!", input, value);
 		}
 		
 		return valueUsed;
@@ -127,27 +129,31 @@ public class CommandParser implements ICommandParser{
 	
 	public void addSubCommand(Command c, String input) throws MalformattedCommandException
 	{
-
-			switch(input)
+			if(input.matches(CmdConstants.SubCmdNames.CLASS_REGEX))
 			{
-			case CmdConstants.SubCmdNames.CLASS_REGEX:
-				c.setSubCommand(CmdConstants.SubCmdNames.CLASS_REGEX);
-				break;
-			case CmdConstants.SubCmdNames.DESIGN_REGEX:
-				c.setSubCommand(CmdConstants.SubCmdNames.DESIGN_REGEX);
-				break;
-			case CmdConstants.SubCmdNames.INTERFACE_REGEX:
-				c.setSubCommand(CmdConstants.SubCmdNames.INTERFACE_REGEX);
-				break;
-			case CmdConstants.SubCmdNames.METHOD_REGEX:
-				c.setSubCommand(CmdConstants.SubCmdNames.METHOD_REGEX);
-				break;
-			case CmdConstants.SubCmdNames.PACKAGE_REGEX:
-				c.setSubCommand(CmdConstants.SubCmdNames.PACKAGE_REGEX);
-				break;
-			default:
+				c.setSubCommand(CmdConstants.SubCmdNames.CLASS);
+			}
+			else if(input.matches(CmdConstants.SubCmdNames.DESIGN_REGEX))
+			{
+				c.setSubCommand(CmdConstants.SubCmdNames.DESIGN);
+			}
+			else if(input.matches(CmdConstants.SubCmdNames.INTERFACE_REGEX))
+			{
+				c.setSubCommand(CmdConstants.SubCmdNames.INTERFACE);
+			}
+			else if(input.matches(CmdConstants.SubCmdNames.METHOD_REGEX))
+			{
+				c.setSubCommand(CmdConstants.SubCmdNames.METHOD);
+			}
+			else if(input.matches(CmdConstants.SubCmdNames.PACKAGE_REGEX))
+			{
+				c.setSubCommand(CmdConstants.SubCmdNames.PACKAGE);
+			}
+			else
+			{
 				throw new MalformattedCommandException("Malformatted sub-command name!", input);
 			}
+			
 			
 		
 	}
