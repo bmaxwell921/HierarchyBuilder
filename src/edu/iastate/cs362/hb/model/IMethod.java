@@ -22,7 +22,7 @@ public interface IMethod extends Nameable, Identifiable, Modifiable {
 	public List<IArgument> getArguments();
 	
 	/**
-	 * Converts the given string to Argument objects, then 
+	 * Converts the given string to HBArgument objects, then 
 	 * adds them to this method. 
 	 * 
 	 * Args should be formatted as such:

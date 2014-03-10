@@ -10,7 +10,7 @@ import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
 import edu.iastate.cs362.hb.model.IDesignDoc;
-import edu.iastate.cs362.hb.model.impl.DesignDoc;
+import edu.iastate.cs362.hb.model.impl.HBDesignDoc;
 
 /**
  * Junit tests for the DesignDocTest. Pretty much just do black box testing
@@ -28,13 +28,13 @@ public class DesignDocTest {
 
 	@Before
 	public void setUp() {
-		test = new DesignDoc(TEST_NAME);
+		test = new HBDesignDoc(TEST_NAME);
 	}
 
 	@Test
 	public void testCreateDesign() {
 		// Should just execute without fail
-		IDesignDoc doc = new DesignDoc(TEST_NAME);
+		IDesignDoc doc = new HBDesignDoc(TEST_NAME);
 		Assert.assertEquals(
 				"Newly created design doc should have the correct name",
 				TEST_NAME, doc.getName());

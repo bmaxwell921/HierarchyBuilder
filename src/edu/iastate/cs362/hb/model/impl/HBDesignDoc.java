@@ -15,7 +15,7 @@ import edu.iastate.cs362.hb.model.IObject;
 import edu.iastate.cs362.hb.model.tree.IHBTree;
 import edu.iastate.cs362.hb.model.tree.impl.HBTree;
 
-public class DesignDoc implements IDesignDoc {
+public class HBDesignDoc implements IDesignDoc {
 
 	// The name of the design doc. Name of the file to save
 	private String name;
@@ -23,7 +23,7 @@ public class DesignDoc implements IDesignDoc {
 	// Tree representing the class hierarchy
 	private IHBTree tree;
 
-	public DesignDoc(String name) {
+	public HBDesignDoc(String name) {
 		this.name = name;
 		this.tree = new HBTree();
 	}
@@ -41,7 +41,7 @@ public class DesignDoc implements IDesignDoc {
 		// now we know obj is an HBClass.
 		HBClass cl = (HBClass) obj;
 
-		IInstanceField i = new InstanceField(instanceFieldName);
+		IInstanceField i = new HBInstanceField(instanceFieldName);
 		i.addModifiers(modifiers);
 
 		return cl.addInstanceField(i);
@@ -53,7 +53,7 @@ public class DesignDoc implements IDesignDoc {
 			HBDuplicateRelationshipException, HBMultipleObjectsFoundException {
 		IObject from = tree.getObject(fromClass);
 		IObject to = tree.getObject(toClass);
-		Relationship r = new Relationship(relationship);
+		HBRelationship r = new HBRelationship(relationship);
 		return tree.addRelationship(from, to, r);
 	}
 

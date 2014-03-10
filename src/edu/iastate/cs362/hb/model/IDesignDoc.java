@@ -10,7 +10,7 @@ import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
 import edu.iastate.cs362.hb.model.attributes.Nameable;
 
 /**
- * Interface used to define behavior for the DesignDoc object
+ * Interface used to define behavior for the HBDesignDoc object
  * 
  * @author Brandon
  * 

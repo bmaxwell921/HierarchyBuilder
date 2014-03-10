@@ -14,7 +14,7 @@ import edu.iastate.cs362.hb.model.IObject;
 import edu.iastate.cs362.hb.model.IRelationship;
 import edu.iastate.cs362.hb.model.impl.HBClass;
 import edu.iastate.cs362.hb.model.impl.HBInterface;
-import edu.iastate.cs362.hb.model.impl.Relationship;
+import edu.iastate.cs362.hb.model.impl.HBRelationship;
 import edu.iastate.cs362.hb.model.tree.impl.HBTree;
 
 /**
@@ -33,8 +33,8 @@ public class HBTreeTest {
 	private IObject interf = new HBInterface("TestInterface");
 	private IObject interf2 = new HBInterface("TestInterface2");
 	
-	private IRelationship impl = new Relationship("implements");
-	private IRelationship ext = new Relationship("extends");
+	private IRelationship impl = new HBRelationship("implements");
+	private IRelationship ext = new HBRelationship("extends");
 	
 	@Before
 	public void setUp() {

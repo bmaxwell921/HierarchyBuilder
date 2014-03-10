@@ -7,13 +7,13 @@ import java.util.Set;
 import edu.iastate.cs362.hb.model.IInstanceField;
 import edu.iastate.cs362.hb.model.attributes.Nameable;
 
-public class InstanceField implements IInstanceField, Nameable {
+public class HBInstanceField implements IInstanceField {
 	
 	private String name;
 	
 	private Set<String> modifiers;
 	
-	public InstanceField(String name){
+	public HBInstanceField(String name){
 		this.name = name;
 		this.modifiers = new HashSet<String>();
 	}
@@ -34,5 +34,15 @@ public class InstanceField implements IInstanceField, Nameable {
 			return false;
 		}
 		return this.name.equals(name);
+	}
+
+	@Override
+	public boolean removeModifier(String modifier) {
+		return modifiers.remove(modifier);
+	}
+
+	@Override
+	public Set<String> getModifiers() {
+		return modifiers;
 	}
 }

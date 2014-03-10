@@ -17,13 +17,13 @@ public class HBSystem implements ISystem {
 	@Override
 	public boolean createDesign(String name) {
 		// TODO save the old one?
-		doc = new DesignDoc(name);
+		doc = new HBDesignDoc(name);
 		return true;
 	}
 
 	/**
 	 * addInstanceField(String className, String iFieldName, String...
-	 * modifiers) calls addInstanceField in DesignDoc
+	 * modifiers) calls addInstanceField in HBDesignDoc
 	 * 
 	 * @param className
 	 *            a String for the class name instance field is a part of

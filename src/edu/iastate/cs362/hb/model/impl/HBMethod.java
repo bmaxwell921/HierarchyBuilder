@@ -129,7 +129,7 @@ public class HBMethod implements IMethod {
 				throw new MalformattedCommandException(ErrorMessages.MALFORMATTED_PARAM_LIST, args);
 			}
 			String value = st.nextToken();
-			this.args.add(new Argument(type, value));
+			this.args.add(new HBArgument(type, value));
 		}
 	}
 }

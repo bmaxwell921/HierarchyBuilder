@@ -3,11 +3,11 @@ package edu.iastate.cs362.hb.model.impl;
 import edu.iastate.cs362.hb.model.IArgument;
 
 /**
- * Concrete type of Argument
+ * Concrete type of HBArgument
  * @author Brandon
  *
  */
-public class Argument implements IArgument {
+public class HBArgument implements IArgument {
 
 	// The type of the argument
 	private String type;
@@ -15,7 +15,7 @@ public class Argument implements IArgument {
 	// The name of the argument
 	private String name;
 	
-	public Argument(String type, String name) {
+	public HBArgument(String type, String name) {
 		this.type = type;
 		this.name = name;
 	}
@@ -47,7 +47,7 @@ public class Argument implements IArgument {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Argument other = (Argument) obj;
+		HBArgument other = (HBArgument) obj;
 		if (name == null) {
 			if (other.name != null)
 				return false;
