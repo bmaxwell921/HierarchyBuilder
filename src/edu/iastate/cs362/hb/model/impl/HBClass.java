@@ -1,39 +1,27 @@
 package edu.iastate.cs362.hb.model.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.iastate.cs362.hb.model.IClass;
 import edu.iastate.cs362.hb.model.IInstanceField;
 
-public class HBClass implements IClass{
-
-	private String name;
+/**
+ * Class representing a Class in the Hierarchy
+ * @author Brandon
+ *
+ */
+public class HBClass extends AHBObject implements IClass{
 	
-	private String hbPackage;
-	
+	private List<IInstanceField> fields;
 	public HBClass(String name){
-		this.name = name;
-	}
-	
-	@Override
-	public boolean addPackage(String packageName) {
-		this.hbPackage = packageName;
-		return true;
-	}
-
-	@Override
-	public boolean removePackage() {
-		this.hbPackage = null;
-		return true;
-	}
-	
-	@Override
-	public String getPackage() {
-		return this.hbPackage;
+		super(name);
+		fields = new ArrayList<IInstanceField>();
 	}
 
 	@Override
 	public boolean addInstanceField(IInstanceField i) {
-		// TODO Auto-generated method stub
-		return false;
+		return fields.add(i);
 	}
 
 	@Override
@@ -52,28 +40,5 @@ public class HBClass implements IClass{
 	public boolean removeMethod(String methodName) {
 		// TODO Auto-generated method stub
 		return false;
-	}
-
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	@Override
-	public boolean hasName(String name) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public long getId() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public boolean hasId(long id) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	}	
 }

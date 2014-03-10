@@ -1,12 +1,12 @@
 package edu.iastate.cs362.hb.exceptions;
 
+/**
+ * Exception thrown when the user tries to use an HBClass that 
+ * doesn't exist in the design.
+ * @author Alex
+ */
 public class HBClassNotFoundException extends Exception {
-
-	/**
-	 * Exception thrown when the user tries to use an HBClass that 
-	 * doesn't exist in the design.
-	 * @author Alex
-	 */
+	
 	private static final long serialVersionUID = 1L;
 
 	/**
