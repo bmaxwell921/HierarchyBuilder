@@ -83,6 +83,7 @@ public class CommandParser implements ICommandParser{
 		cmdNames.add(CmdConstants.CmdNames.ADD);
 		cmdNames.add(CmdConstants.CmdNames.CREATE);
 		cmdNames.add(CmdConstants.CmdNames.EXIT);
+		cmdNames.add(CmdConstants.CmdNames.REMOVE);
 		
 		subNames.add(CmdConstants.SubCmdNames.CLASS_REGEX);
 		subNames.add(CmdConstants.SubCmdNames.DESIGN_REGEX);

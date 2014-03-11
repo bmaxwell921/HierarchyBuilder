@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import edu.iastate.cs362.hb.model.IInstanceField;
-import edu.iastate.cs362.hb.model.attributes.Nameable;
 
 public class HBInstanceField implements IInstanceField {
 	

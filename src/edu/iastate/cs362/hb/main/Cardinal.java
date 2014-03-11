@@ -58,7 +58,9 @@ public class Cardinal {
 					this.doCreate(command);
 				} else if (command.getName().equals(CmdConstants.CmdNames.ADD)) {
 					doAdd(command);
-				} else if (command.getName().equals(CmdConstants.CmdNames.EXIT)) {
+				}else if (command.getName().equals(CmdConstants.CmdNames.REMOVE)) { 
+					doRemove(command);
+				}else if (command.getName().equals(CmdConstants.CmdNames.EXIT)) {
 					break;
 				}
 			} catch (MalformattedCommandException
@@ -114,5 +116,23 @@ public class Cardinal {
 						CmdConstants.Flags.STATIC);
 			}
 		}
+	}
+	
+	//Calling of Remove methods
+	private boolean doRemove(ICommand command) {
+		if(command.getSubCommand().matches(CmdConstants.SubCmdNames.CLASS_REGEX) 
+				|| command.getSubCommand().matches(CmdConstants.SubCmdNames.INTERFACE_REGEX)){
+			return isc.removeClass(command.getFlagValue(CmdConstants.Flags.NAME));
+		}
+		else if(command.getSubCommand().matches(CmdConstants.SubCmdNames.PACKAGE_REGEX)){
+			return isc.removePackage(command.getFlagValue(CmdConstants.Flags.CONTAINER_NAME));
+		}
+		else if(command.getSubCommand().matches(CmdConstants.SubCmdNames.METHOD_REGEX)){
+			return isc.removeMethod(command.getFlagValue(CmdConstants.Flags.CONTAINER_NAME),
+					command.getFlagValue(CmdConstants.Flags.NAME));
+		}
+		//TODO remove relationship
+		else 
+			return false;
 	}
 }
