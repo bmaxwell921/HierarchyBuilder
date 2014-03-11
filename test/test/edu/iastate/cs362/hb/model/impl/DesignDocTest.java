@@ -8,6 +8,7 @@ import org.junit.Test;
 import edu.iastate.cs362.hb.exceptions.HBClassNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
+import edu.iastate.cs362.hb.exceptions.HBRelationshipNotFoundException;
 import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
 import edu.iastate.cs362.hb.model.IDesignDoc;
 import edu.iastate.cs362.hb.model.impl.HBDesignDoc;
@@ -221,7 +222,56 @@ public class DesignDocTest {
 		test.createInterface(OBJECT_NAME);
 		test.addStaticMethod(OBJECT_NAME, METHOD_NAME, params, modifier);
 	}
-
+	
+	@Test
+	public void testRemoveRelationship() throws Exception{
+		final String fromClass = "genericName";
+		final String toClass = "unassumingName";
+		final String relationshipName = "theyfittogether";
+		test.createClass(fromClass);
+		test.createClass(toClass);
+		test.addRelationship(fromClass, toClass, relationshipName);
+		Assert.assertTrue("Test normal Remove", test.removeRelationship(fromClass, toClass));
+	}
+	
+	@Test(expected = HBRelationshipNotFoundException.class)
+	public void testRemoveRelationshipThatDoesntExist() throws Exception{
+		final String fromClass = "imaClass";
+		final String toClass = "imaClass2";
+		final String relationshipName = "theyfittogether";
+		test.createClass(fromClass);
+		test.createClass(toClass);
+		test.addRelationship(fromClass, toClass, relationshipName);
+		test.removeRelationship(fromClass, toClass);
+		test.removeRelationship(fromClass, toClass);
+	}
+	
+	@Test(expected = HBRelationshipNotFoundException.class)
+	public void testRemoveRelationshipThatDoesntExist1() throws Exception{
+		String fromClass = "imaClass";
+		String toClass = "imaClass2";
+		test.createClass(fromClass);
+		test.createClass(toClass);
+		test.removeRelationship(fromClass, toClass);
+	}
+	
+	@Test(expected = HBObjectNotFoundException.class) 
+	public void testRemoveRelationshipClassesNotReal() throws Exception{
+		test.removeRelationship("IMNOTREAL", "NEITHERAMI");
+	}
+	
+	@Test(expected = HBObjectNotFoundException.class) 
+	public void testRemoveRelationshipClassesNotReal1() throws Exception{
+		test.createClass("IMNOTREAL");
+		test.removeRelationship("IMNOTREAL", "NEITHERAMI");
+	}
+	
+	@Test(expected = HBObjectNotFoundException.class) 
+	public void testRemoveRelationshipClassesNotReal2() throws Exception{
+		test.createClass("BUTIAM");
+		test.removeRelationship("IMNOTREAL", "BUTIAM");
+	}
+	
 	@After
 	public void tearDown() {
 		test = null;

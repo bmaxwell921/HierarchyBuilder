@@ -102,6 +102,9 @@ public class HBTree implements IHBTree {
 			throw new HBObjectNotFoundException(ErrorMessages.OBJECT_NOT_FOUND, toClass.getName());
 		}
 		Set<Pair<IRelationship, IObject>> rels = objs.get(toClass);
+		if(rels == null){
+			throw new HBRelationshipNotFoundException(ErrorMessages.RELATION_NOT_FOUND, fromClass.getName(), toClass.getName());
+		}
 		boolean remed = removeRelationFrom(rels, fromClass);
 		if (!remed) {
 			throw new HBRelationshipNotFoundException(ErrorMessages.RELATION_NOT_FOUND, fromClass.getName(), toClass.getName());

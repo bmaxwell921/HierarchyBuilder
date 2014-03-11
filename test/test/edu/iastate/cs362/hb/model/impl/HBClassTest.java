@@ -26,14 +26,7 @@ public class HBClassTest {
 		test.removePackage();
 		Assert.assertTrue("Normal remove Package.", !(packageName.equals(test.getPackage())));
 	}
-	
 
-	
-	
-	
-	
-	
-	
 	@After
 	public void tearDown(){
 		test = null;
