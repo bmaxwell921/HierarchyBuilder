@@ -1,7 +1,6 @@
 package edu.iastate.cs362.hb.commands;
 
 
-import java.util.ArrayList;
 
 import edu.iastate.cs362.hb.constants.CmdConstants;
 import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
@@ -13,16 +12,10 @@ import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
  */
 public class CommandParser implements ICommandParser{
 
-	ArrayList<String> cmdNames;
-	ArrayList<String> subNames;
-	
-	public CommandParser()
-	{
-		cmdNames = new ArrayList<String>();
-		subNames = new ArrayList<String>();
-		loadConstants();
-	}
-	
+
+	/**
+	 * Parses a string command into a command object
+	 */
 	@Override
 	public ICommand parseCommand(String command) throws MalformattedCommandException {
 		
@@ -78,21 +71,20 @@ public class CommandParser implements ICommandParser{
 		return c;
 	}
 	
-	public void loadConstants()
-	{
-		cmdNames.add(CmdConstants.CmdNames.ADD);
-		cmdNames.add(CmdConstants.CmdNames.CREATE);
-		cmdNames.add(CmdConstants.CmdNames.EXIT);
-		cmdNames.add(CmdConstants.CmdNames.REMOVE);
-		
-		subNames.add(CmdConstants.SubCmdNames.CLASS_REGEX);
-		subNames.add(CmdConstants.SubCmdNames.DESIGN_REGEX);
-		subNames.add(CmdConstants.SubCmdNames.INTERFACE_REGEX);
-		subNames.add(CmdConstants.SubCmdNames.METHOD_REGEX);
-		subNames.add(CmdConstants.SubCmdNames.PACKAGE_REGEX);
-		
-	}
 
+	/**
+	 * Adds a flag to the existing command
+	 * @param c
+	 * 	The Command to add the flag to
+	 * @param input
+	 * 	The input, e.g. name
+	 * @param value
+	 * 	The value for the input (where applicable), like the name of a class
+	 * @return
+	 * 	True if we needed the value, false if not
+	 * @throws MalformattedCommandException
+	 * 	If the input is not a known flag, this exception is thrown
+	 */
 	public boolean addFlag(Command c, String input, String value) throws MalformattedCommandException
 	{
 		boolean valueUsed = false;
@@ -131,6 +123,15 @@ public class CommandParser implements ICommandParser{
 		return valueUsed;
 	}
 	
+	/**
+	 * Adds the sub command from the input into c
+	 * @param c
+	 * 	The command to modify
+	 * @param input
+	 * 	The sub command, e.g. design
+	 * @throws MalformattedCommandException
+	 * 	If sub-command is not known, this is thrown
+	 */
 	public void addSubCommand(Command c, String input) throws MalformattedCommandException
 	{
 			if(input.matches(CmdConstants.SubCmdNames.CLASS_REGEX))
