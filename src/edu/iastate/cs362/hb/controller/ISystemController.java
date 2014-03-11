@@ -6,6 +6,7 @@ import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateRelationshipException;
 import edu.iastate.cs362.hb.exceptions.HBMultipleObjectsFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
+import edu.iastate.cs362.hb.exceptions.HBRelationshipNotFoundException;
 import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
 
 /**
@@ -42,11 +43,11 @@ public interface ISystemController {
 
 	public boolean removeMethod(String className, String methodName);
 
-	public boolean removePackage(String className);
+	public boolean removePackage(String className) throws HBObjectNotFoundException, HBMultipleObjectsFoundException;
 
-	public boolean removeRelationship(String fromString, String toString);
+	public boolean removeRelationship(String fromString, String toString) throws HBMultipleObjectsFoundException, HBObjectNotFoundException, HBRelationshipNotFoundException;
 
-	public boolean removeClass(String toRemove);
+	public boolean removeClass(String toRemove) throws HBObjectNotFoundException, HBMultipleObjectsFoundException;
 
 	public boolean createClass(String name)
 			throws HBDuplicateObjectFoundException;

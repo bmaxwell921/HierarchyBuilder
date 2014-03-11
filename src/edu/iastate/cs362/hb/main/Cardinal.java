@@ -119,7 +119,7 @@ public class Cardinal {
 	}
 	
 	//Calling of Remove methods
-	private boolean doRemove(ICommand command) {
+	private boolean doRemove(ICommand command) throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
 		if(command.getSubCommand().matches(CmdConstants.SubCmdNames.CLASS_REGEX) 
 				|| command.getSubCommand().matches(CmdConstants.SubCmdNames.INTERFACE_REGEX)){
 			return isc.removeClass(command.getFlagValue(CmdConstants.Flags.NAME));

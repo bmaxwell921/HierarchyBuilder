@@ -6,6 +6,7 @@ import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateRelationshipException;
 import edu.iastate.cs362.hb.exceptions.HBMultipleObjectsFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
+import edu.iastate.cs362.hb.exceptions.HBRelationshipNotFoundException;
 import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
 import edu.iastate.cs362.hb.model.IClass;
 import edu.iastate.cs362.hb.model.IDesignDoc;
@@ -100,21 +101,23 @@ public class HBDesignDoc implements IDesignDoc {
 	}
 
 	@Override
-	public boolean removePackage(String className) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean removePackage(String className) throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
+		IObject toRem = tree.getObject(className);
+		return toRem.removePackage();
 	}
 
 	@Override
-	public boolean removeRelationship(String fromClass, String toClass) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean removeRelationship(String fromClass, String toClass) throws 
+			HBMultipleObjectsFoundException, HBObjectNotFoundException, HBRelationshipNotFoundException {
+		IObject from = tree.getObject(fromClass);
+		IObject to = tree.getObject(toClass);
+		return tree.removeRelationship(from, to);
 	}
 
 	@Override
-	public boolean removeClass(String toRemove) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean removeClass(String toRemove) throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
+		IObject toRem = tree.getObject(toRemove);
+		return tree.removeObject(toRem);
 	}
 
 	@Override

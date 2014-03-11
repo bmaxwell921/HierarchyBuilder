@@ -7,6 +7,7 @@ import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateRelationshipException;
 import edu.iastate.cs362.hb.exceptions.HBMultipleObjectsFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
+import edu.iastate.cs362.hb.exceptions.HBRelationshipNotFoundException;
 import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
 import edu.iastate.cs362.hb.model.ISystem;
 
@@ -90,26 +91,22 @@ public class SystemController implements ISystemController {
 
 	@Override
 	public boolean removeMethod(String className, String methodName) {
-		// TODO Auto-generated method stub
-		return false;
+		return system.removeMethod(className, methodName);
 	}
 
 	@Override
-	public boolean removePackage(String className) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean removePackage(String className) throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
+		return system.removePackage(className);
 	}
 
 	@Override
-	public boolean removeRelationship(String fromString, String toString) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean removeRelationship(String fromString, String toString) throws HBMultipleObjectsFoundException, HBObjectNotFoundException, HBRelationshipNotFoundException {
+		return system.removeRelationship(fromString, toString);
 	}
 
 	@Override
-	public boolean removeClass(String toRemove) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean removeClass(String toRemove) throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
+		return system.removeClass(toRemove);
 	}
 
 	@Override
