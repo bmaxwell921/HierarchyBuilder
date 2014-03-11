@@ -75,10 +75,12 @@ public class HBSystem implements ISystem {
 	}
 
 	/**
+	 * @throws HBMultipleObjectsFoundException 
+	 * @throws HBObjectNotFoundException 
 	 * 
 	 */
 	@Override
-	public boolean removeMethod(String className, String methodName) {
+	public boolean removeMethod(String className, String methodName) throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
 		return doc.removeMethod(className, methodName);
 	}
 

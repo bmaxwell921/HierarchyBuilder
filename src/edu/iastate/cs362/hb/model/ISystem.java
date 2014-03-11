@@ -40,7 +40,7 @@ public interface ISystem {
 			throws MalformattedCommandException, HBObjectNotFoundException,
 			HBDuplicateMethodException, HBMultipleObjectsFoundException;
 
-	public boolean removeMethod(String className, String methodName);
+	public boolean removeMethod(String className, String methodName) throws HBObjectNotFoundException, HBMultipleObjectsFoundException;
 
 	public boolean removePackage(String className) throws HBObjectNotFoundException, HBMultipleObjectsFoundException;
 

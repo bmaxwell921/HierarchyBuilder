@@ -91,9 +91,11 @@ public class SystemController implements ISystemController {
 
 	/**
 	 * Calls system to remove a method
+	 * @throws HBMultipleObjectsFoundException 
+	 * @throws HBObjectNotFoundException 
 	 */
 	@Override
-	public boolean removeMethod(String className, String methodName) {
+	public boolean removeMethod(String className, String methodName) throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
 		return system.removeMethod(className, methodName);
 		
 	}
