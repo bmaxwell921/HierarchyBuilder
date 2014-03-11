@@ -6,6 +6,7 @@ import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateRelationshipException;
 import edu.iastate.cs362.hb.exceptions.HBMultipleObjectsFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
+import edu.iastate.cs362.hb.exceptions.HBRelationshipNotFoundException;
 import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
 import edu.iastate.cs362.hb.model.IDesignDoc;
 import edu.iastate.cs362.hb.model.ISystem;
@@ -82,21 +83,18 @@ public class HBSystem implements ISystem {
 	}
 
 	@Override
-	public boolean removePackage(String className) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean removePackage(String className) throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
+		return doc.removePackage(className);
 	}
 
 	@Override
-	public boolean removeRelationship(String fromClass, String toClass) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean removeRelationship(String fromClass, String toClass) throws HBMultipleObjectsFoundException, HBObjectNotFoundException, HBRelationshipNotFoundException {
+		return doc.removeRelationship(fromClass, toClass);
 	}
 
 	@Override
-	public boolean removeClass(String className) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean removeClass(String className) throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
+		return doc.removeClass(className);
 	}
 
 	@Override
