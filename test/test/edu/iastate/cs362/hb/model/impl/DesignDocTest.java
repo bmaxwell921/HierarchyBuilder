@@ -80,7 +80,7 @@ public class DesignDocTest {
 		String pkgName = "package";
 		test.addPackage(pkgName, OBJECT_NAME);
 	}
-
+	
 	@Test
 	public void testAddInstanceField() throws Exception {
 		final String instanceFieldName = "aField";
