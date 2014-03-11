@@ -49,6 +49,9 @@ public class CommandParser implements ICommandParser{
 		case CmdConstants.CmdNames.EXIT:
 			c = new Command(CmdConstants.CmdNames.EXIT);
 			break;
+		case CmdConstants.CmdNames.REMOVE:
+			c = new Command(CmdConstants.CmdNames.REMOVE);
+			break;
 		default:
 			throw new MalformattedCommandException("Malformatted command name!", commandList[0]);	
 		}

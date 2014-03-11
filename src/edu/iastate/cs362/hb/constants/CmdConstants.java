@@ -14,6 +14,7 @@ public class CmdConstants {
 	public class CmdNames {
 		public static final String CREATE = "create";
 		public static final String ADD = "add";
+		public static final String REMOVE = "remove";
 		public static final String EXIT = "exit";
 	}
 	
