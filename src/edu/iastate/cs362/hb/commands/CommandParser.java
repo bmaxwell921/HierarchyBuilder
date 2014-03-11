@@ -97,25 +97,25 @@ public class CommandParser implements ICommandParser{
 			c.addFlagValue(CmdConstants.Flags.CONTAINER_NAME, value);
 			valueUsed = true;
 		}
-		else if(input.matches(CmdConstants.Flags.HELP))
+		else if(input.matches(CmdConstants.Flags.HELP_REGEX))
 		{		
 			c.addFlagValue(CmdConstants.Flags.HELP, null);
 		}
-		else if(input.matches(CmdConstants.Flags.INSTANCE))
+		else if(input.matches(CmdConstants.Flags.INSTANCE_REGEX))
 		{
 			c.addFlagValue(CmdConstants.Flags.INSTANCE, null);
 		}
-		else if(input.matches(CmdConstants.Flags.NAME))
+		else if(input.matches(CmdConstants.Flags.NAME_REGEX))
 		{
 			c.addFlagValue(CmdConstants.Flags.NAME, value);
 			valueUsed = true;
 		}
-		else if(input.matches(CmdConstants.Flags.PARAMETERS))
+		else if(input.matches(CmdConstants.Flags.PARAMETERS_REGEX))
 		{
 			c.addFlagValue(CmdConstants.Flags.PARAMETERS, value);
 			valueUsed = true;
 		}
-		else if(input.matches(CmdConstants.Flags.STATIC))
+		else if(input.matches(CmdConstants.Flags.STATIC_REGEX))
 		{
 			c.addFlagValue(CmdConstants.Flags.STATIC, null);
 		}
