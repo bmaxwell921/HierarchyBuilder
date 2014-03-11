@@ -95,9 +95,10 @@ public class HBDesignDoc implements IDesignDoc {
 	}
 
 	@Override
-	public boolean removeMethod(String className, String methodName) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean removeMethod(String className, String methodName) throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
+		HBClass clazz = (HBClass) tree.getObject(className);
+		clazz.removeMethod(methodName);
+		return true;
 	}
 
 	@Override

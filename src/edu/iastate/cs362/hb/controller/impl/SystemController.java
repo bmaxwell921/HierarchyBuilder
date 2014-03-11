@@ -89,9 +89,13 @@ public class SystemController implements ISystemController {
 		return system.addStaticMethod(className, methodName, params, modifiers);
 	}
 
+	/**
+	 * Calls system to remove a method
+	 */
 	@Override
 	public boolean removeMethod(String className, String methodName) {
 		return system.removeMethod(className, methodName);
+		
 	}
 
 	@Override
