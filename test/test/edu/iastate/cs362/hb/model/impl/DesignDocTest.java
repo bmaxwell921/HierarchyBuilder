@@ -272,6 +272,18 @@ public class DesignDocTest {
 		test.removeRelationship("IMNOTREAL", "BUTIAM");
 	}
 	
+	@Test
+	public void testRemoveClass() throws Exception {
+		final String name = "CLASS";
+		test.createClass(name);
+		Assert.assertTrue("Test Normal Remove Class.", test.removeClass(name));
+	}
+	
+	@Test(expected = HBObjectNotFoundException.class)
+	public void testRemoveClassNotFound() throws Exception {
+		test.removeClass("NotReal");
+	}
+	
 	@After
 	public void tearDown() {
 		test = null;
