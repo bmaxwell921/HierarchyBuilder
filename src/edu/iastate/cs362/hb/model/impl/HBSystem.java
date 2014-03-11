@@ -73,10 +73,12 @@ public class HBSystem implements ISystem {
 		return doc.addStaticMethod(className, methodName, params, modifiers);
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public boolean removeMethod(String className, String methodName) {
-		// TODO Auto-generated method stub
-		return false;
+		return doc.removeMethod(className, methodName);
 	}
 
 	@Override
