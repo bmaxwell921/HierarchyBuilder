@@ -39,6 +39,10 @@ public class CmdConstants {
 		private static final String METHOD_SHORT = "m";
 		public static final String METHOD_REGEX = METHOD + RegexOp.OR + METHOD_SHORT;
 		
+		public static final String RELATIONSHIP="relationship";
+		private static final String RELATIONSHIP_SHORT = "r";
+		public static final String RELATIONSHIP_REGEX = RELATIONSHIP + RegexOp.OR + RELATIONSHIP_SHORT;
+		
 	}
 	
 	public class Flags {

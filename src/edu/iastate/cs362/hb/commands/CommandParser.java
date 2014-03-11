@@ -153,6 +153,10 @@ public class CommandParser implements ICommandParser{
 			{
 				c.setSubCommand(CmdConstants.SubCmdNames.PACKAGE);
 			}
+			else if(input.matches(CmdConstants.SubCmdNames.RELATIONSHIP_REGEX))
+			{
+				c.setSubCommand(CmdConstants.SubCmdNames.RELATIONSHIP);
+			}
 			else
 			{
 				throw new MalformattedCommandException("Malformatted sub-command name!", input);
