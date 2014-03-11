@@ -51,6 +51,28 @@ public class CmdConstants {
 		private static final String NAME_SHORT = "n";
 		public static final String NAME_REGEX = NAME + RegexOp.OR + NAME_SHORT;
 		
+		public static final String ID = "id";
+		public static final String ID_REGEX = ID;
+		
+		public static final String TO_CLASS_NAME = "toClassName";
+		private static final String TO_CLASS_NAME_SHORT = "tcn";
+		public static final String TO_CLASS_NAME_REGEX = TO_CLASS_NAME + RegexOp.OR + TO_CLASS_NAME_SHORT;
+		
+		public static final String TO_CLASS_ID = "toClassId";
+		private static final String TO_CLASS_ID_SHORT = "tcid";
+		public static final String TO_CLASS_ID_REGEX = TO_CLASS_ID + RegexOp.OR + TO_CLASS_ID_SHORT;
+		
+		public static final String FROM_CLASS_NAME = "fromClassName";
+		private static final String FROM_CLASS_NAME_SHORT = "fcn";
+		public static final String FROM_CLASS_NAME_REGEX = FROM_CLASS_NAME + RegexOp.OR + FROM_CLASS_NAME_SHORT;
+		
+		public static final String FROM_CLASS_ID = "fromClassId";
+		private static final String FROM_CLASS_ID_SHORT = "fcid";
+		public static final String FROM_CLASS_ID_REGEX = FROM_CLASS_ID + RegexOp.OR + FROM_CLASS_ID_SHORT;
+		
+		public static final String TYPE = "type";
+		public static final String TYPE_REGEX = TYPE;
+		
 		public static final String CONTAINER_NAME = "containername";
 		private static final String CONTAINER_ABBREV = "cname"; //May not use
 		private static final String CONTAINER_NAME_SHORT = "cN";

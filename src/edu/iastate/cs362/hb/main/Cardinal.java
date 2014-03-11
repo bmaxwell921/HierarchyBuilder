@@ -10,8 +10,10 @@ import edu.iastate.cs362.hb.controller.ISystemController;
 import edu.iastate.cs362.hb.controller.impl.SystemController;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateMethodException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
+import edu.iastate.cs362.hb.exceptions.HBDuplicateRelationshipException;
 import edu.iastate.cs362.hb.exceptions.HBMultipleObjectsFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
+import edu.iastate.cs362.hb.exceptions.HBRelationshipNotFoundException;
 import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
 import edu.iastate.cs362.hb.model.impl.HBSystem;
 /**
@@ -20,6 +22,7 @@ import edu.iastate.cs362.hb.model.impl.HBSystem;
  * 
  */
 public class Cardinal {
+	//TODO! check for id AND name instead of just taking a name
 
 	// Object responsible for parsing commands
 	private ICommandParser commander;
@@ -65,7 +68,8 @@ public class Cardinal {
 				}
 			} catch (MalformattedCommandException
 					| HBDuplicateObjectFoundException
-					| HBObjectNotFoundException | HBDuplicateMethodException me) {
+					| HBObjectNotFoundException | HBDuplicateMethodException
+					| HBRelationshipNotFoundException | HBDuplicateRelationshipException me) {
 				System.out.println(me.getMessage());
 				break;
 			} catch (HBMultipleObjectsFoundException e) {
@@ -95,7 +99,8 @@ public class Cardinal {
 
 	// Calling of add methods
 	private void doAdd(ICommand command) throws HBObjectNotFoundException,
-			MalformattedCommandException, HBDuplicateMethodException, HBMultipleObjectsFoundException {
+			MalformattedCommandException, HBDuplicateMethodException, 
+			HBMultipleObjectsFoundException, HBDuplicateRelationshipException {
 		if (command.getSubCommand().matches(
 				CmdConstants.SubCmdNames.PACKAGE_REGEX)) {
 			isc.addPackage(command.getFlagValue(CmdConstants.Flags.NAME),
@@ -115,11 +120,15 @@ public class Cardinal {
 						command.getFlagValue(CmdConstants.Flags.PARAMETERS),
 						CmdConstants.Flags.STATIC);
 			}
-		}
+		} else if(command.getSubCommand().matches(
+				CmdConstants.SubCmdNames.RELATIONSHIP_REGEX)){
+			isc.addRelationship(command.getFlagValue(CmdConstants.Flags.FROM_CLASS_NAME), 
+				command.getFlagValue(CmdConstants.Flags.TO_CLASS_NAME), command.getFlagValue(CmdConstants.Flags.TYPE));
+			}
 	}
 	
 	//Calling of Remove methods
-	private boolean doRemove(ICommand command) throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
+	private boolean doRemove(ICommand command) throws HBObjectNotFoundException, HBMultipleObjectsFoundException, HBRelationshipNotFoundException {
 		if(command.getSubCommand().matches(CmdConstants.SubCmdNames.CLASS_REGEX) 
 				|| command.getSubCommand().matches(CmdConstants.SubCmdNames.INTERFACE_REGEX)){
 			return isc.removeClass(command.getFlagValue(CmdConstants.Flags.NAME));
@@ -131,7 +140,10 @@ public class Cardinal {
 			return isc.removeMethod(command.getFlagValue(CmdConstants.Flags.CONTAINER_NAME),
 					command.getFlagValue(CmdConstants.Flags.NAME));
 		}
-		//TODO remove relationship
+		else if(command.getSubCommand().matches(CmdConstants.SubCmdNames.RELATIONSHIP_REGEX)){
+			return isc.removeRelationship(command.getFlagValue(CmdConstants.Flags.FROM_CLASS_NAME), 
+					command.getFlagValue(CmdConstants.Flags.TO_CLASS_NAME));
+		}
 		else 
 			return false;
 	}
