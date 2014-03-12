@@ -20,10 +20,12 @@ public class CommandParser implements ICommandParser{
 	public ICommand parseCommand(String command) throws MalformattedCommandException {
 		
 		String[] commandList = command.split(" ");
+		String[] nonChangedList = new String[commandList.length];
 		for(int i = 0; i < commandList.length; i++)
 		{
 
-			//Force all toupper.
+			//Force all to lower.
+			nonChangedList[i] = commandList[i]; //Only needs to be used for flag values
 			commandList[i] = commandList[i].toLowerCase();
 			
 		}
@@ -49,12 +51,15 @@ public class CommandParser implements ICommandParser{
 			throw new MalformattedCommandException("Malformatted command name!", commandList[0]);	
 		}
 		
-		for(int i = 1; i < commandList.length; i++)
+		//Subcommand expects a dash
+		addSubCommand(c, commandList[1].substring(1));
+		
+		for(int i = 2; i < commandList.length; i++)
 		{
 			if(commandList[i].charAt(0) == '-')
 			{
 				//Flag
-				boolean valueUsed = addFlag(c, commandList[i].substring(1), commandList[i+1]);
+				boolean valueUsed = addFlag(c, commandList[i].substring(1), nonChangedList[i+1]);
 				if(valueUsed)
 				{
 					i++;
@@ -63,7 +68,7 @@ public class CommandParser implements ICommandParser{
 			else
 			{
 				//SubCommand
-				addSubCommand(c, commandList[i]);
+				//addSubCommand(c, commandList[i]);
 			}
 		}
 		
