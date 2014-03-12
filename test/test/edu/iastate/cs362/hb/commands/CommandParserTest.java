@@ -63,5 +63,51 @@ public class CommandParserTest {
 		ICommand c = parser.parseCommand(command);
 		assertEquals(c.getFlagValue("name"), "NAME");
 	}
+	
+	@Test
+	public void createDesign() throws MalformattedCommandException
+	{
+		CommandParser parser = new CommandParser();
+		String command = "CREATE -DESIGN";
+		ICommand c = parser.parseCommand(command);
+		assertEquals(c.getName(), "create");
+	}
+	
+	@Test
+	public void createDesignSubCommand() throws MalformattedCommandException
+	{
+		CommandParser parser = new CommandParser();
+		String command = "CREATE -DESIGN";
+		ICommand c = parser.parseCommand(command);
+		assertEquals(c.getSubCommand(), "design");
+	}
+	
+	@Test
+	public void createDesignNamed() throws MalformattedCommandException
+	{
+		CommandParser parser = new CommandParser();
+		String command = "CREATE -DESIGN -NaMe brandonsaloser";
+		ICommand c = parser.parseCommand(command);
+		assertEquals(c.getFlagValue("name"), "brandonsaloser");
+	}
+	
+	@Test
+	public void removeDesignNamed() throws MalformattedCommandException
+	{
+		CommandParser parser = new CommandParser();
+		String command = "Remove -DESIGN -NaMe brandonsaloser";
+		ICommand c = parser.parseCommand(command);
+		assertEquals(c.getFlagValue("name"), "brandonsaloser");
+	
+	}
+	
+	@Test
+	public void removeDesign() throws MalformattedCommandException
+	{
+		CommandParser parser = new CommandParser();
+		String command = "Remove -DESIGN -NaMe brandonsaloser";
+		ICommand c = parser.parseCommand(command);
+		assertEquals(c.getName(), "remove");
+	}
 
 }
