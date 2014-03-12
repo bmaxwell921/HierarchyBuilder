@@ -1,11 +1,14 @@
 package edu.iastate.cs362.hb.model.tree;
 
+import java.util.List;
+
 import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateRelationshipException;
 import edu.iastate.cs362.hb.exceptions.HBMultipleObjectsFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBRelationshipNotFoundException;
 import edu.iastate.cs362.hb.model.IObject;
+import edu.iastate.cs362.hb.model.IObjectBox;
 import edu.iastate.cs362.hb.model.IRelationship;
 
 /**
@@ -70,4 +73,12 @@ public interface IHBTree {
 	 */
 	public boolean removeObject(IObject toRemove)
 			throws HBObjectNotFoundException;
+	
+	/**
+	 * Method used to get a list of all the objects that match
+	 * the given name
+	 * @param name
+	 * @return
+	 */
+	public List<IObjectBox> getMatchingObjects(String name);
 }

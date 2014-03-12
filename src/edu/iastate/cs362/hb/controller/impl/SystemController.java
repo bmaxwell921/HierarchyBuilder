@@ -1,5 +1,7 @@
 package edu.iastate.cs362.hb.controller.impl;
 
+import java.util.List;
+
 import edu.iastate.cs362.hb.controller.ISystemController;
 import edu.iastate.cs362.hb.exceptions.HBClassNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateMethodException;
@@ -9,6 +11,7 @@ import edu.iastate.cs362.hb.exceptions.HBMultipleObjectsFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBRelationshipNotFoundException;
 import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
+import edu.iastate.cs362.hb.model.IObjectBox;
 import edu.iastate.cs362.hb.model.ISystem;
 
 /**
@@ -126,5 +129,11 @@ public class SystemController implements ISystemController {
 			throws HBDuplicateObjectFoundException {
 		return system.createInterface(name);
 	}
+
+	@Override
+	public List<IObjectBox> getMatchingObjects(String name) {
+		return system.getMatchingObjects(name);
+	}
+	
 
 }

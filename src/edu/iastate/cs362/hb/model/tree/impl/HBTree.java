@@ -1,8 +1,10 @@
 package edu.iastate.cs362.hb.model.tree.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -13,7 +15,9 @@ import edu.iastate.cs362.hb.exceptions.HBMultipleObjectsFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBRelationshipNotFoundException;
 import edu.iastate.cs362.hb.model.IObject;
+import edu.iastate.cs362.hb.model.IObjectBox;
 import edu.iastate.cs362.hb.model.IRelationship;
+import edu.iastate.cs362.hb.model.impl.HBObjectBox;
 import edu.iastate.cs362.hb.model.tree.IHBTree;
 
 /**
@@ -122,6 +126,16 @@ public class HBTree implements IHBTree {
 		objs.remove(toRemove);
 		removeRelations(toRemove);
 		return true;
+	}
+	
+	@Override
+	public List<IObjectBox> getMatchingObjects(String name) {
+		List<IObjectBox> objs = new ArrayList<>();
+		for (IObject obj : findAll(name, null)) {
+			objs.add(new HBObjectBox(obj.getId(), obj.getName(), obj.getPackage()));
+		}
+		
+		return objs;
 	}
 	
 	// Removes any relationships containing the object rem. Returns whether something was returned or not

@@ -1,5 +1,7 @@
 package edu.iastate.cs362.hb.controller;
 
+import java.util.List;
+
 import edu.iastate.cs362.hb.exceptions.HBClassNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateMethodException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
@@ -8,6 +10,7 @@ import edu.iastate.cs362.hb.exceptions.HBMultipleObjectsFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBRelationshipNotFoundException;
 import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
+import edu.iastate.cs362.hb.model.IObjectBox;
 
 /**
  * 
@@ -41,17 +44,24 @@ public interface ISystemController {
 			throws MalformattedCommandException, HBObjectNotFoundException,
 			HBDuplicateMethodException, HBMultipleObjectsFoundException;
 
-	public boolean removeMethod(String className, String methodName) throws HBObjectNotFoundException, HBMultipleObjectsFoundException;
+	public boolean removeMethod(String className, String methodName)
+			throws HBObjectNotFoundException, HBMultipleObjectsFoundException;
 
-	public boolean removePackage(String className) throws HBObjectNotFoundException, HBMultipleObjectsFoundException;
+	public boolean removePackage(String className)
+			throws HBObjectNotFoundException, HBMultipleObjectsFoundException;
 
-	public boolean removeRelationship(String fromString, String toString) throws HBMultipleObjectsFoundException, HBObjectNotFoundException, HBRelationshipNotFoundException;
+	public boolean removeRelationship(String fromString, String toString)
+			throws HBMultipleObjectsFoundException, HBObjectNotFoundException,
+			HBRelationshipNotFoundException;
 
-	public boolean removeClass(String toRemove) throws HBObjectNotFoundException, HBMultipleObjectsFoundException;
+	public boolean removeClass(String toRemove)
+			throws HBObjectNotFoundException, HBMultipleObjectsFoundException;
 
 	public boolean createClass(String name)
 			throws HBDuplicateObjectFoundException;
 
 	public boolean createInterface(String name)
 			throws HBDuplicateObjectFoundException;
+	
+	public List<IObjectBox> getMatchingObjects(String name);
 }

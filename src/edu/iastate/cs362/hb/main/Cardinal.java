@@ -1,5 +1,6 @@
 package edu.iastate.cs362.hb.main;
 
+import java.util.List;
 import java.util.Scanner;
 
 import edu.iastate.cs362.hb.commands.CommandParser;
@@ -15,14 +16,16 @@ import edu.iastate.cs362.hb.exceptions.HBMultipleObjectsFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBRelationshipNotFoundException;
 import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
+import edu.iastate.cs362.hb.model.IObjectBox;
 import edu.iastate.cs362.hb.model.impl.HBSystem;
+
 /**
  * 
  * @author Alex, Brandon
  * 
  */
 public class Cardinal {
-	//TODO! check for id AND name instead of just taking a name
+	// TODO! check for id AND name instead of just taking a name
 
 	// Object responsible for parsing commands
 	private ICommandParser commander;
@@ -61,23 +64,35 @@ public class Cardinal {
 					this.doCreate(command);
 				} else if (command.getName().equals(CmdConstants.CmdNames.ADD)) {
 					doAdd(command);
-				}else if (command.getName().equals(CmdConstants.CmdNames.REMOVE)) { 
+				} else if (command.getName().equals(
+						CmdConstants.CmdNames.REMOVE)) {
 					doRemove(command);
-				}else if (command.getName().equals(CmdConstants.CmdNames.EXIT)) {
+				} else if (command.getName().equals(CmdConstants.CmdNames.EXIT)) {
 					break;
 				}
 			} catch (MalformattedCommandException
 					| HBDuplicateObjectFoundException
 					| HBObjectNotFoundException | HBDuplicateMethodException
-					| HBRelationshipNotFoundException | HBDuplicateRelationshipException me) {
+					| HBRelationshipNotFoundException
+					| HBDuplicateRelationshipException me) {
 				System.out.println(me.getMessage());
 				break;
 			} catch (HBMultipleObjectsFoundException e) {
-				// TODO need to get things that match the name and show the user
-				e.printStackTrace();
+				System.out.println(e.getMessage());
+				printMatchingObjects(command
+						.getFlagValue(CmdConstants.Flags.NAME));
 			}
 		}
 		in.close();
+	}
+
+	// Method used to get all the objects that match the given name
+	private void printMatchingObjects(String name) {
+		List<IObjectBox> matches = isc.getMatchingObjects(name);
+		for (IObjectBox box : matches) {
+			System.out.println(box.toString());
+		}
+
 	}
 
 	// Calling of create methods
@@ -99,7 +114,7 @@ public class Cardinal {
 
 	// Calling of add methods
 	private void doAdd(ICommand command) throws HBObjectNotFoundException,
-			MalformattedCommandException, HBDuplicateMethodException, 
+			MalformattedCommandException, HBDuplicateMethodException,
 			HBMultipleObjectsFoundException, HBDuplicateRelationshipException {
 		if (command.getSubCommand().matches(
 				CmdConstants.SubCmdNames.PACKAGE_REGEX)) {
@@ -120,31 +135,40 @@ public class Cardinal {
 						command.getFlagValue(CmdConstants.Flags.PARAMETERS),
 						CmdConstants.Flags.STATIC);
 			}
-		} else if(command.getSubCommand().matches(
-				CmdConstants.SubCmdNames.RELATIONSHIP_REGEX)){
-			isc.addRelationship(command.getFlagValue(CmdConstants.Flags.FROM_CLASS_NAME), 
-				command.getFlagValue(CmdConstants.Flags.TO_CLASS_NAME), command.getFlagValue(CmdConstants.Flags.TYPE));
-			}
+		} else if (command.getSubCommand().matches(
+				CmdConstants.SubCmdNames.RELATIONSHIP_REGEX)) {
+			isc.addRelationship(
+					command.getFlagValue(CmdConstants.Flags.FROM_CLASS_NAME),
+					command.getFlagValue(CmdConstants.Flags.TO_CLASS_NAME),
+					command.getFlagValue(CmdConstants.Flags.TYPE));
+		}
 	}
-	
-	//Calling of Remove methods
-	private boolean doRemove(ICommand command) throws HBObjectNotFoundException, HBMultipleObjectsFoundException, HBRelationshipNotFoundException {
-		if(command.getSubCommand().matches(CmdConstants.SubCmdNames.CLASS_REGEX) 
-				|| command.getSubCommand().matches(CmdConstants.SubCmdNames.INTERFACE_REGEX)){
-			return isc.removeClass(command.getFlagValue(CmdConstants.Flags.NAME));
-		}
-		else if(command.getSubCommand().matches(CmdConstants.SubCmdNames.PACKAGE_REGEX)){
-			return isc.removePackage(command.getFlagValue(CmdConstants.Flags.CONTAINER_NAME));
-		}
-		else if(command.getSubCommand().matches(CmdConstants.SubCmdNames.METHOD_REGEX)){
-			return isc.removeMethod(command.getFlagValue(CmdConstants.Flags.CONTAINER_NAME),
+
+	// Calling of Remove methods
+	private boolean doRemove(ICommand command)
+			throws HBObjectNotFoundException, HBMultipleObjectsFoundException,
+			HBRelationshipNotFoundException {
+		if (command.getSubCommand().matches(
+				CmdConstants.SubCmdNames.CLASS_REGEX)
+				|| command.getSubCommand().matches(
+						CmdConstants.SubCmdNames.INTERFACE_REGEX)) {
+			return isc.removeClass(command
+					.getFlagValue(CmdConstants.Flags.NAME));
+		} else if (command.getSubCommand().matches(
+				CmdConstants.SubCmdNames.PACKAGE_REGEX)) {
+			return isc.removePackage(command
+					.getFlagValue(CmdConstants.Flags.CONTAINER_NAME));
+		} else if (command.getSubCommand().matches(
+				CmdConstants.SubCmdNames.METHOD_REGEX)) {
+			return isc.removeMethod(
+					command.getFlagValue(CmdConstants.Flags.CONTAINER_NAME),
 					command.getFlagValue(CmdConstants.Flags.NAME));
-		}
-		else if(command.getSubCommand().matches(CmdConstants.SubCmdNames.RELATIONSHIP_REGEX)){
-			return isc.removeRelationship(command.getFlagValue(CmdConstants.Flags.FROM_CLASS_NAME), 
+		} else if (command.getSubCommand().matches(
+				CmdConstants.SubCmdNames.RELATIONSHIP_REGEX)) {
+			return isc.removeRelationship(
+					command.getFlagValue(CmdConstants.Flags.FROM_CLASS_NAME),
 					command.getFlagValue(CmdConstants.Flags.TO_CLASS_NAME));
-		}
-		else 
+		} else
 			return false;
 	}
 }

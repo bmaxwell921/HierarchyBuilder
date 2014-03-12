@@ -1,5 +1,7 @@
 package edu.iastate.cs362.hb.model.impl;
 
+import java.util.List;
+
 import edu.iastate.cs362.hb.exceptions.HBClassNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateMethodException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
@@ -9,6 +11,7 @@ import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBRelationshipNotFoundException;
 import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
 import edu.iastate.cs362.hb.model.IDesignDoc;
+import edu.iastate.cs362.hb.model.IObjectBox;
 import edu.iastate.cs362.hb.model.ISystem;
 
 public class HBSystem implements ISystem {
@@ -109,6 +112,11 @@ public class HBSystem implements ISystem {
 	public boolean createInterface(String name)
 			throws HBDuplicateObjectFoundException {
 		return doc.createInterface(name);
+	}
+
+	@Override
+	public List<IObjectBox> getMatchingObjects(String name) {
+		return doc.getMatchingObjects(name);
 	}
 
 }

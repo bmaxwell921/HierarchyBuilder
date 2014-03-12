@@ -1,5 +1,7 @@
 package edu.iastate.cs362.hb.model.impl;
 
+import java.util.List;
+
 import edu.iastate.cs362.hb.exceptions.HBClassNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateMethodException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
@@ -13,6 +15,7 @@ import edu.iastate.cs362.hb.model.IDesignDoc;
 import edu.iastate.cs362.hb.model.IInstanceField;
 import edu.iastate.cs362.hb.model.IMethod;
 import edu.iastate.cs362.hb.model.IObject;
+import edu.iastate.cs362.hb.model.IObjectBox;
 import edu.iastate.cs362.hb.model.tree.IHBTree;
 import edu.iastate.cs362.hb.model.tree.impl.HBTree;
 
@@ -143,5 +146,10 @@ public class HBDesignDoc implements IDesignDoc {
 	@Override
 	public boolean hasName(String name) {
 		return this.name != null && this.name.equals(name);
+	}
+
+	@Override
+	public List<IObjectBox> getMatchingObjects(String name) {
+		return tree.getMatchingObjects(name);
 	}
 }

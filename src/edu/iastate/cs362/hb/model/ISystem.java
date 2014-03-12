@@ -1,5 +1,7 @@
 package edu.iastate.cs362.hb.model;
 
+import java.util.List;
+
 import edu.iastate.cs362.hb.exceptions.HBClassNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateMethodException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
@@ -54,4 +56,5 @@ public interface ISystem {
 	public boolean createInterface(String name)
 			throws HBDuplicateObjectFoundException;
 
+	public List<IObjectBox> getMatchingObjects(String name);
 }
