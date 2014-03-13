@@ -43,6 +43,7 @@ public class Cardinal {
 	}
 
 	public static void main(String[] args) {
+		System.out.println("Hello and welcome to the Yogscast");
 		new Cardinal().run();
 		System.out.println("Thanks for using our software!");
 	}
@@ -70,6 +71,7 @@ public class Cardinal {
 				} else if (command.getName().equals(CmdConstants.CmdNames.EXIT)) {
 					break;
 				}
+				System.out.println(String.format("System - Completed command \"%s\"", command.toString()));
 			} catch (MalformattedCommandException
 					| HBDuplicateObjectFoundException
 					| HBObjectNotFoundException | HBDuplicateMethodException

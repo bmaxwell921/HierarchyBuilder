@@ -63,5 +63,14 @@ public class Command implements ICommand {
 		value.put(flagName, flagValue);
 		return true;
 	}
-
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(name).append(" ").append("-").append(subCmd);
+		for (String flag : value.keySet()) {
+			sb.append(" ").append("-").append(flag).append(" ").append(value.get(flag));
+		}
+		return sb.toString();
+	}
 }
