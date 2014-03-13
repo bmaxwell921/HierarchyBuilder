@@ -76,7 +76,7 @@ public class Cardinal {
 					| HBRelationshipNotFoundException
 					| HBDuplicateRelationshipException me) {
 				System.out.println(me.getMessage());
-				break;
+				//break;
 			} catch (HBMultipleObjectsFoundException e) {
 				System.out.println(e.getMessage());
 				printMatchingObjects(command
