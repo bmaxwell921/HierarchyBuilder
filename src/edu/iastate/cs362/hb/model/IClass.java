@@ -8,10 +8,4 @@ package edu.iastate.cs362.hb.model;
 public interface IClass extends IObject {
 	
 	public boolean addInstanceField(IInstanceField i);
-	
-	public boolean addInstanceMethod(String methodName, String...modifiers);
-	
-	public boolean addStaticMethod(String methodName, String...modifiers);
-	
-	public boolean removeMethod(String methodName);
 }

@@ -100,7 +100,8 @@ public class HBDesignDoc implements IDesignDoc {
 	@Override
 	public boolean removeMethod(String className, String methodName) throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
 		HBClass clazz = (HBClass) tree.getObject(className);
-		clazz.removeMethod(methodName);
+		IMethod method = clazz.getMethod(methodName);
+		clazz.removeMethod(method);
 		return true;
 	}
 

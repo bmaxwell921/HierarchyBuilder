@@ -28,4 +28,12 @@ public interface IObject extends Nameable, Identifiable, Modifiable {
 	public boolean addMethod(IMethod method) throws HBDuplicateMethodException;
 	
 	public boolean removeMethod(IMethod method);
+	
+	/**
+	 * Returns the concrete method with the given name, or SOMETHING 
+	 * if it doesn't exist
+	 * @param name
+	 * @return
+	 */
+	public IMethod getMethod(String name);
 }

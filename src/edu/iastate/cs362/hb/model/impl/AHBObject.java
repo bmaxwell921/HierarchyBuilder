@@ -145,5 +145,11 @@ public abstract class AHBObject implements IObject {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	@Override
+	public IMethod getMethod(String name) {
+		// TODO
+		return null;
+	}
 
 }

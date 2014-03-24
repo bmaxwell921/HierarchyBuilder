@@ -10,4 +10,6 @@ public class HBInterface extends AHBObject{
 	public HBInterface(String name) {
 		super(name);
 	}
+	
+	// TODO add method should check that it's not an instance method
 }
