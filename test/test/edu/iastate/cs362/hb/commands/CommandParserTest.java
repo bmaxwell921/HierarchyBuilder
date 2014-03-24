@@ -109,5 +109,14 @@ public class CommandParserTest {
 		ICommand c = parser.parseCommand(command);
 		assertEquals(c.getName(), "remove");
 	}
+	
+	@Test
+	public void removeDesignSubtype() throws MalformattedCommandException
+	{
+		CommandParser parser = new CommandParser();
+		String command = "Remove -DESIGN -NaMe brandonsaloser";
+		ICommand c = parser.parseCommand(command);
+		assertEquals(c.getName(), "remove");
+	}
 
 }

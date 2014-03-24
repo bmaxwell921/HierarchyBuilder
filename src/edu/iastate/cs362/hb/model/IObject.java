@@ -1,6 +1,7 @@
 package edu.iastate.cs362.hb.model;
 
 import edu.iastate.cs362.hb.exceptions.HBDuplicateMethodException;
+import edu.iastate.cs362.hb.exceptions.HBMethodNotFoundException;
 import edu.iastate.cs362.hb.model.attributes.Identifiable;
 import edu.iastate.cs362.hb.model.attributes.Modifiable;
 import edu.iastate.cs362.hb.model.attributes.Nameable;
@@ -30,10 +31,11 @@ public interface IObject extends Nameable, Identifiable, Modifiable {
 	public boolean removeMethod(IMethod method);
 	
 	/**
-	 * Returns the concrete method with the given name, or SOMETHING 
+	 * Returns the concrete method with the given name, or null 
 	 * if it doesn't exist
 	 * @param name
-	 * @return
+	 * @return null if not found
+	 * @throws HBMethodNotFoundException 
 	 */
-	public IMethod getMethod(String name);
+	public IMethod getMethod(String name) throws HBMethodNotFoundException;
 }

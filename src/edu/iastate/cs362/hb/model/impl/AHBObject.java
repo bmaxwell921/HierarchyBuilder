@@ -9,35 +9,39 @@ import java.util.Set;
 import edu.iastate.cs362.hb.constants.ErrorMessages;
 import edu.iastate.cs362.hb.constants.ObjectConstants;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateMethodException;
+import edu.iastate.cs362.hb.exceptions.HBMethodNotFoundException;
+import edu.iastate.cs362.hb.constants.*;
 import edu.iastate.cs362.hb.model.IMethod;
 import edu.iastate.cs362.hb.model.IObject;
 
 /**
- * Class holding some common implementation between interfaces and classes.
- * This probably doesn't need to be abstract unless something actually
- * needs to go into HBInterface
+ * Class holding some common implementation between interfaces and classes. This
+ * probably doesn't need to be abstract unless something actually needs to go
+ * into HBInterface
+ * 
  * @author Brandon
- *
+ * 
  */
 public abstract class AHBObject implements IObject {
 
 	// Id of this object
 	private int id;
-	
+
 	// This object's pacakge
 	private String pkg;
-	
+
 	// This object's name
 	private String name;
-	
+
 	// All the modifiers. TODO this should probably have some notion of order
 	private Set<String> modifiers;
-	
+
 	private List<IMethod> methods;
-	
+
 	/**
-	 * Creates a new AHBObject with the given name that
-	 * goes in the default package
+	 * Creates a new AHBObject with the given name that goes in the default
+	 * package
+	 * 
 	 * @param name
 	 */
 	public AHBObject(String name) {
@@ -99,7 +103,8 @@ public abstract class AHBObject implements IObject {
 			return true;
 		if (obj == null)
 			return false;
-		// Apparently this is bad style, but we need interfaces and classes with the same name and package to be equal
+		// Apparently this is bad style, but we need interfaces and classes with
+		// the same name and package to be equal
 		if (getClass().getSuperclass() != obj.getClass().getSuperclass())
 			return false;
 		AHBObject other = (AHBObject) obj;
@@ -134,7 +139,8 @@ public abstract class AHBObject implements IObject {
 	@Override
 	public boolean addMethod(IMethod method) throws HBDuplicateMethodException {
 		if (methods.contains(method)) {
-			throw new HBDuplicateMethodException(ErrorMessages.DUPLICATE_METHOD, this.name, method.getName());
+			throw new HBDuplicateMethodException(
+					ErrorMessages.DUPLICATE_METHOD, this.name, method.getName());
 		}
 		methods.add(method);
 		return true;
@@ -142,14 +148,17 @@ public abstract class AHBObject implements IObject {
 
 	@Override
 	public boolean removeMethod(IMethod method) {
-		// TODO Auto-generated method stub
-		return false;
+		return methods.remove(method);
 	}
-	
+
 	@Override
-	public IMethod getMethod(String name) {
-		// TODO
-		return null;
+	public IMethod getMethod(String name) throws HBMethodNotFoundException {
+		for (IMethod meth : methods) {
+			if (meth.hasName(name)) {
+				return meth;
+			}
+		}
+		throw new HBMethodNotFoundException(ErrorMessages.METHOD_NOT_FOUND, name);
 	}
 
 }

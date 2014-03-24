@@ -7,6 +7,7 @@ import edu.iastate.cs362.hb.exceptions.HBClassNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateMethodException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateRelationshipException;
+import edu.iastate.cs362.hb.exceptions.HBMethodNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBMultipleObjectsFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBRelationshipNotFoundException;
@@ -96,9 +97,10 @@ public class SystemController implements ISystemController {
 	 * Calls system to remove a method
 	 * @throws HBMultipleObjectsFoundException 
 	 * @throws HBObjectNotFoundException 
+	 * @throws HBMethodNotFoundException 
 	 */
 	@Override
-	public boolean removeMethod(String className, String methodName) throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
+	public boolean removeMethod(String className, String methodName) throws HBObjectNotFoundException, HBMultipleObjectsFoundException, HBMethodNotFoundException {
 		return system.removeMethod(className, methodName);
 		
 	}

@@ -12,6 +12,7 @@ import edu.iastate.cs362.hb.controller.impl.SystemController;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateMethodException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateRelationshipException;
+import edu.iastate.cs362.hb.exceptions.HBMethodNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBMultipleObjectsFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBRelationshipNotFoundException;
@@ -71,12 +72,16 @@ public class Cardinal {
 				} else if (command.getName().equals(CmdConstants.CmdNames.EXIT)) {
 					break;
 				}
-				System.out.println(String.format("System - Completed command \"%s\"", command.toString()));
+				System.out
+						.println(String.format(
+								"System - Completed command \"%s\"",
+								command.toString()));
 			} catch (MalformattedCommandException
 					| HBDuplicateObjectFoundException
 					| HBObjectNotFoundException | HBDuplicateMethodException
 					| HBRelationshipNotFoundException
-					| HBDuplicateRelationshipException me) {
+					| HBDuplicateRelationshipException
+					| HBMethodNotFoundException me) {
 				System.out.println(me.getMessage());
 			} catch (HBMultipleObjectsFoundException e) {
 				System.out.println(e.getMessage());
@@ -148,7 +153,7 @@ public class Cardinal {
 	// Calling of Remove methods
 	private boolean doRemove(ICommand command)
 			throws HBObjectNotFoundException, HBMultipleObjectsFoundException,
-			HBRelationshipNotFoundException {
+			HBRelationshipNotFoundException, HBMethodNotFoundException {
 		if (command.getSubCommand().matches(
 				CmdConstants.SubCmdNames.CLASS_REGEX)
 				|| command.getSubCommand().matches(
