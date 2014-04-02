@@ -18,14 +18,14 @@ import edu.iastate.cs362.hb.model.IObject;
 import edu.iastate.cs362.hb.model.IObjectBox;
 import edu.iastate.cs362.hb.model.IRelationship;
 import edu.iastate.cs362.hb.model.impl.HBObjectBox;
-import edu.iastate.cs362.hb.model.tree.IHBTree;
+import edu.iastate.cs362.hb.model.tree.ITree;
 
 /**
  * The tree structure for the Hierarchy Builder class
  * @author Brandon
  *
  */
-public class HBTree implements IHBTree {
+public class HBTree implements ITree {
 	
 	/*
 	 * Map of all the objects in the tree.

@@ -17,7 +17,7 @@ import edu.iastate.cs362.hb.model.IInstanceField;
 import edu.iastate.cs362.hb.model.IMethod;
 import edu.iastate.cs362.hb.model.IObject;
 import edu.iastate.cs362.hb.model.IObjectBox;
-import edu.iastate.cs362.hb.model.tree.IHBTree;
+import edu.iastate.cs362.hb.model.tree.ITree;
 import edu.iastate.cs362.hb.model.tree.impl.HBTree;
 
 public class HBDesignDoc implements IDesignDoc {
@@ -26,7 +26,7 @@ public class HBDesignDoc implements IDesignDoc {
 	private String name;
 
 	// Tree representing the class hierarchy
-	private IHBTree tree;
+	private ITree tree;
 
 	public HBDesignDoc(String name) {
 		this.name = name;

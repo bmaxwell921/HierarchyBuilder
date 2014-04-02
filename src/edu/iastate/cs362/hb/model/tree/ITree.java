@@ -17,7 +17,7 @@ import edu.iastate.cs362.hb.model.IRelationship;
  * @author Brandon
  * 
  */
-public interface IHBTree {
+public interface ITree {
 
 	/**
 	 * Method used to get an object from the tree
