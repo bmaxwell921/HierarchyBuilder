@@ -137,5 +137,23 @@ public class SystemController implements ISystemController {
 		return system.getMatchingObjects(name);
 	}
 	
-
+	@Override
+	public String listDesign(){
+		return system.listDesign();
+	}
+	
+	@Override
+	public String listObject(String name) throws HBObjectNotFoundException, HBMultipleObjectsFoundException{
+		return system.listObject(name);
+	}
+	
+	@Override
+	public boolean changeName(String name, String newName) throws HBObjectNotFoundException, HBMultipleObjectsFoundException{
+		return system.changeName(name, newName);
+	}
+	
+	@Override
+	public boolean changePackage(String name, String packageName) throws HBObjectNotFoundException, HBMultipleObjectsFoundException{
+		return system.changePackage(name, packageName);
+	}
 }

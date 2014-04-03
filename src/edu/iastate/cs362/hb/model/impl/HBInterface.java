@@ -12,4 +12,10 @@ public class HBInterface extends AHBObject{
 	}
 	
 	// TODO add method should check that it's not an instance method
+	
+	@Override
+	public String list(){
+		//TODO implement this here.
+		return null;
+	}
 }

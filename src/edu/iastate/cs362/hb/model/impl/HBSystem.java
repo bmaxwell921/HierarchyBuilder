@@ -121,4 +121,24 @@ public class HBSystem implements ISystem {
 		return doc.getMatchingObjects(name);
 	}
 
+	@Override
+	public String listDesign() {
+		return doc.list();
+	}
+
+	@Override
+	public String listObject(String name) throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
+		return doc.listObject(name);
+	}
+
+	@Override
+	public boolean changeName(String name, String newName) throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
+		return doc.changeName(name, newName);
+	}
+
+	@Override
+	public boolean changePackage(String name, String packageName) throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
+		return doc.changePackage(name, packageName);
+	}
+
 }

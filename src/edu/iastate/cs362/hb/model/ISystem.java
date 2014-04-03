@@ -58,4 +58,12 @@ public interface ISystem {
 			throws HBDuplicateObjectFoundException;
 
 	public List<IObjectBox> getMatchingObjects(String name);
+	
+	public String listDesign();
+	
+	public String listObject(String name) throws HBObjectNotFoundException, HBMultipleObjectsFoundException;
+	
+	public boolean changeName(String name, String newName) throws HBObjectNotFoundException, HBMultipleObjectsFoundException;
+	
+	public boolean changePackage(String name, String packageName) throws HBObjectNotFoundException, HBMultipleObjectsFoundException;
 }

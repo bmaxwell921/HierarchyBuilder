@@ -10,7 +10,6 @@ import edu.iastate.cs362.hb.constants.ErrorMessages;
 import edu.iastate.cs362.hb.constants.ObjectConstants;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateMethodException;
 import edu.iastate.cs362.hb.exceptions.HBMethodNotFoundException;
-import edu.iastate.cs362.hb.constants.*;
 import edu.iastate.cs362.hb.model.IMethod;
 import edu.iastate.cs362.hb.model.IObject;
 
@@ -59,6 +58,18 @@ public abstract class AHBObject implements IObject {
 	@Override
 	public boolean hasName(String name) {
 		return this.name != null && this.name.equals(name);
+	}
+	
+	@Override
+	public boolean changeName(String newName){
+		this.name = newName;
+		return true;
+	}
+	
+	@Override
+	public boolean changePackage(String packageName){
+		this.pkg = packageName;
+		return true;
 	}
 
 	@Override
@@ -160,5 +171,4 @@ public abstract class AHBObject implements IObject {
 		}
 		throw new HBMethodNotFoundException(ErrorMessages.METHOD_NOT_FOUND, name);
 	}
-
 }

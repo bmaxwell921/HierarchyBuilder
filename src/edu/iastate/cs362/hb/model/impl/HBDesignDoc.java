@@ -154,4 +154,25 @@ public class HBDesignDoc implements IDesignDoc {
 	public List<IObjectBox> getMatchingObjects(String name) {
 		return tree.getMatchingObjects(name);
 	}
+
+	@Override
+	public String list() {
+		//TODO implement this here.
+		return null;
+	}
+
+	@Override
+	public String listObject(String name) throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
+		return tree.getObject(name).list();
+	}
+
+	@Override
+	public boolean changeName(String name, String newName) throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
+		return tree.getObject(name).changeName(newName);
+	}
+
+	@Override
+	public boolean changePackage(String name, String packageName) throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
+		return tree.getObject(name).changePackage(packageName);
+	}
 }

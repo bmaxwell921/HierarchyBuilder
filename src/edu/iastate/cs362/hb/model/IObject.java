@@ -38,4 +38,10 @@ public interface IObject extends Nameable, Identifiable, Modifiable {
 	 * @throws HBMethodNotFoundException 
 	 */
 	public IMethod getMethod(String name) throws HBMethodNotFoundException;
+	
+	public String list();
+	
+	public boolean changeName(String newName);
+	
+	public boolean changePackage(String packageName);
 }

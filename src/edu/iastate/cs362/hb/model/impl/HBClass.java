@@ -23,4 +23,10 @@ public class HBClass extends AHBObject implements IClass{
 	public boolean addInstanceField(IInstanceField i) {
 		return fields.add(i);
 	}	
+	
+	@Override
+	public String list(){
+		//TODO implement this here.
+		return null;
+	}
 }
