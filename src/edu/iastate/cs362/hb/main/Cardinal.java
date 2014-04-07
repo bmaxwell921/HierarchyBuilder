@@ -44,7 +44,7 @@ public class Cardinal {
 	}
 
 	public static void main(String[] args) {
-		System.out.println("Hello and welcome to the Yogscast");
+		System.out.println("Hello and welcome to the ExtremeBuildMachine2 - Electric Boogaloo.");
 		new Cardinal().run();
 		System.out.println("Thanks for using our software!");
 	}
