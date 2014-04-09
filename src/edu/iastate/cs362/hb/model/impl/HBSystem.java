@@ -11,6 +11,10 @@ import edu.iastate.cs362.hb.exceptions.HBMultipleObjectsFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBRelationshipNotFoundException;
 import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
+import edu.iastate.cs362.hb.export.IExport;
+import edu.iastate.cs362.hb.export.impl.JSONExport;
+import edu.iastate.cs362.hb.export.impl.SourceExport;
+import edu.iastate.cs362.hb.export.impl.XMLExport;
 import edu.iastate.cs362.hb.model.IDesignDoc;
 import edu.iastate.cs362.hb.model.IObjectBox;
 import edu.iastate.cs362.hb.model.ISystem;
@@ -18,7 +22,8 @@ import edu.iastate.cs362.hb.model.ISystem;
 public class HBSystem implements ISystem {
 
 	private IDesignDoc doc;
-
+	private IExport exporter;
+	
 	@Override
 	public boolean createDesign(String name) {
 		// TODO save the old one?
@@ -143,20 +148,20 @@ public class HBSystem implements ISystem {
 
 	@Override
 	public boolean exportDesignXML(String path) {
-		// TODO Auto-generated method stub
-		return false;
+		exporter = new XMLExport();
+		return exporter.export(path, doc);
 	}
 
 	@Override
 	public boolean exportDesignJSON(String path) {
-		// TODO Auto-generated method stub
-		return false;
+		exporter = new JSONExport();
+		return exporter.export(path, doc);
 	}
 
 	@Override
 	public boolean exportDesignSource(String path) {
-		// TODO Auto-generated method stub
-		return false;
+		exporter = new SourceExport();
+		return exporter.export(path, doc);
 	}
 
 }
