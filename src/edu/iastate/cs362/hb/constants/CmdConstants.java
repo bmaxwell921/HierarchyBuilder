@@ -16,6 +16,9 @@ public class CmdConstants {
 		public static final String ADD = "add";
 		public static final String REMOVE = "remove";
 		public static final String EXIT = "exit";
+		//Added for iteration 2
+		public static final String EXPORT = "export";
+		public static final String IMPORT = "import";
 	}
 	
 	public class SubCmdNames {
@@ -42,6 +45,19 @@ public class CmdConstants {
 		public static final String RELATIONSHIP="relationship";
 		private static final String RELATIONSHIP_SHORT = "r";
 		public static final String RELATIONSHIP_REGEX = RELATIONSHIP + RegexOp.OR + RELATIONSHIP_SHORT;
+		
+		//EXPORT / IMPORT COMMANDS
+		public static final String XML = "xml";
+		private static final String XML_SHORT = "x";
+		public static final String XML_REGEX = XML + RegexOp.OR + XML_SHORT;
+		
+		public static final String JSON = "json";
+		private static final String JSON_SHORT = "j";
+		public static final String JSON_REGEX = JSON + RegexOp.OR + JSON_SHORT;
+		
+		public static final String SOURCE = "source";
+		private static final String SOURCE_SHORT = "s";
+		public static final String SOURCE_REGEX = SOURCE + RegexOp.OR + SOURCE_SHORT;
 		
 	}
 	
@@ -93,6 +109,11 @@ public class CmdConstants {
 		public static final String PARAMETERS = "parameters";
 		private static final String PARAMETERS_SHORT = "p";
 		public static final String PARAMETERS_REGEX = PARAMETERS + RegexOp.OR + PARAMETERS_SHORT;
+		
+		//Path for importers/exporters
+		public static final String PATH = "path";
+		private static final String PATH_SHORT = "p";
+		public static final String PATH_REGEX = PATH + RegexOp.OR + PATH_SHORT; //Might have some confliction with p from Parameters
 	}
 	
 	public class RegexOp {

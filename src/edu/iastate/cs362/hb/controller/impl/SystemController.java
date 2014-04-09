@@ -156,4 +156,19 @@ public class SystemController implements ISystemController {
 	public boolean changePackage(String name, String packageName) throws HBObjectNotFoundException, HBMultipleObjectsFoundException{
 		return system.changePackage(name, packageName);
 	}
+
+	@Override
+	public boolean exportDesignXML(String path) {
+		return system.exportDesignXML(path);
+	}
+
+	@Override
+	public boolean exportDesignJSON(String path) {
+		return system.exportDesignJSON(path);
+	}
+
+	@Override
+	public boolean exportDesignSource(String path) {
+		return system.exportDesignSource(path);
+	}
 }

@@ -141,4 +141,22 @@ public class HBSystem implements ISystem {
 		return doc.changePackage(name, packageName);
 	}
 
+	@Override
+	public boolean exportDesignXML(String path) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean exportDesignJSON(String path) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean exportDesignSource(String path) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

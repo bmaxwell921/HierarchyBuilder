@@ -69,6 +69,9 @@ public class Cardinal {
 				} else if (command.getName().equals(
 						CmdConstants.CmdNames.REMOVE)) {
 					doRemove(command);
+				} else if (command.getName().equals(
+						CmdConstants.CmdNames.EXPORT)) {
+					doExport(command);
 				} else if (command.getName().equals(CmdConstants.CmdNames.EXIT)) {
 					break;
 				}
@@ -174,6 +177,22 @@ public class Cardinal {
 			return isc.removeRelationship(
 					command.getFlagValue(CmdConstants.Flags.FROM_CLASS_NAME),
 					command.getFlagValue(CmdConstants.Flags.TO_CLASS_NAME));
+		} else
+			return false;
+	}
+	
+	/**
+	 * Calling of Export methods
+	 * @param command
+	 * @return
+	 */
+	private boolean doExport(ICommand command){
+		if(command.getSubCommand().matches(CmdConstants.SubCmdNames.XML_REGEX)){
+			return isc.exportDesignXML(command.getFlagValue(CmdConstants.Flags.PATH));
+		} else if (command.getSubCommand().matches(CmdConstants.SubCmdNames.JSON_REGEX)){
+			return isc.exportDesignJSON(command.getFlagValue(CmdConstants.Flags.PATH));
+		} else if (command.getSubCommand().matches(CmdConstants.SubCmdNames.SOURCE_REGEX)){
+			return isc.exportDesignSource(command.getFlagValue(CmdConstants.Flags.PATH));
 		} else
 			return false;
 	}

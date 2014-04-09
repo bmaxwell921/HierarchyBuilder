@@ -73,4 +73,11 @@ public interface ISystemController {
 	public boolean changeName(String name, String newName) throws HBObjectNotFoundException, HBMultipleObjectsFoundException;
 	
 	public boolean changePackage(String name, String packageName) throws HBObjectNotFoundException, HBMultipleObjectsFoundException;
+	
+	//Added for iteration 2
+	public boolean exportDesignXML(String path);
+	
+	public boolean exportDesignJSON(String path);
+	
+	public boolean exportDesignSource(String path);
 }
