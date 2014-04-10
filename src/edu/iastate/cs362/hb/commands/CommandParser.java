@@ -43,6 +43,12 @@ public class CommandParser implements ICommandParser {
 		case CmdConstants.CmdNames.REMOVE:
 			c = new Command(CmdConstants.CmdNames.REMOVE);
 			break;
+		case CmdConstants.CmdNames.IMPORT:
+			c = new Command(CmdConstants.CmdNames.IMPORT);
+			break;
+		case CmdConstants.CmdNames.EXPORT:
+			c = new Command(CmdConstants.CmdNames.EXPORT);
+			break;
 		default:
 			throw new MalformattedCommandException(
 					"Malformatted command name!", commandList[0]);
@@ -50,7 +56,7 @@ public class CommandParser implements ICommandParser {
 
 		// Subcommand expects a dash
 		// Fixed exception happening when commands like exit are called
-		if (commandList[1] != null) {
+		if (commandList.length > 1) {
 			addSubCommand(c, commandList[1].substring(1));
 		}
 
