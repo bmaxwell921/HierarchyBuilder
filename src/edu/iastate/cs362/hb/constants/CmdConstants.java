@@ -19,6 +19,8 @@ public class CmdConstants {
 		//Added for iteration 2
 		public static final String EXPORT = "export";
 		public static final String IMPORT = "import";
+		public static final String CHANGE = "change";
+		public static final String LIST = "list";
 	}
 	
 	public class SubCmdNames {
