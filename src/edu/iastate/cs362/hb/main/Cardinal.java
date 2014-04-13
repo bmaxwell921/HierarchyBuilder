@@ -69,6 +69,10 @@ public class Cardinal {
 				} else if (command.getName().equals(
 						CmdConstants.CmdNames.REMOVE)) {
 					doRemove(command);
+				} else if(command.getName().equals(CmdConstants.CmdNames.CHANGE)) {
+					doChange(command);
+				} else if(command.getName().equals(CmdConstants.CmdNames.LIST)) {
+					doList(command);
 				} else if (command.getName().equals(
 						CmdConstants.CmdNames.EXPORT)) {
 					doExport(command);
@@ -194,6 +198,42 @@ public class Cardinal {
 		} else if (command.getSubCommand().matches(CmdConstants.SubCmdNames.SOURCE_REGEX)){
 			return isc.exportDesignSource(command.getFlagValue(CmdConstants.Flags.PATH));
 		} else
+			return false;
+	}
+	
+	/**
+	 * Calling of change methods.
+	 * @param command the command holding the requisite information
+	 * @return boolean indicating success/failure
+	 * @throws HBMultipleObjectsFoundException 
+	 * @throws HBObjectNotFoundException 
+	 */
+	private boolean doChange(ICommand command) throws HBObjectNotFoundException, HBMultipleObjectsFoundException{
+		if(command.getSubCommand().matches(CmdConstants.SubCmdNames.CLASS_REGEX))
+			return isc.changeName(command.getFlagValue(CmdConstants.Flags.CONTAINER_NAME),
+				command.getFlagValue(CmdConstants.Flags.TO_CLASS_NAME));
+		else if(command.getSubCommand().matches(CmdConstants.SubCmdNames.PACKAGE_REGEX))
+			return isc.changePackage(command.getFlagValue(CmdConstants.Flags.CONTAINER_NAME),
+					command.getFlagValue(CmdConstants.Flags.TO_CLASS_NAME));
+		else
+			return false;
+	}
+	
+	/**
+	 * Calling of change methods.
+	 * @param command the command holding the requisite information
+	 * @return boolean indicating success/failure
+	 * @throws HBMultipleObjectsFoundException 
+	 * @throws HBObjectNotFoundException 
+	 */
+	private boolean doList(ICommand command) throws HBObjectNotFoundException, HBMultipleObjectsFoundException{
+		if(command.getSubCommand().matches(CmdConstants.SubCmdNames.CLASS_REGEX)){
+			System.out.println(isc.listObject(command.getFlagValue(CmdConstants.Flags.NAME)));
+			return true;
+		}else if(command.getSubCommand().matches(CmdConstants.SubCmdNames.DESIGN_REGEX)) {
+			System.out.println(isc.listDesign());
+			return true;
+		}else
 			return false;
 	}
 }

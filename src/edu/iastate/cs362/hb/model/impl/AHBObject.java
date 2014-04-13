@@ -35,7 +35,7 @@ public abstract class AHBObject implements IObject {
 	// All the modifiers. TODO this should probably have some notion of order
 	private Set<String> modifiers;
 
-	private List<IMethod> methods;
+	protected List<IMethod> methods;
 
 	/**
 	 * Creates a new AHBObject with the given name that goes in the default
@@ -170,5 +170,16 @@ public abstract class AHBObject implements IObject {
 			}
 		}
 		throw new HBMethodNotFoundException(ErrorMessages.METHOD_NOT_FOUND, name);
+	}
+	
+	public int getNumMethods()
+	{
+		return methods.size();
+	}
+	
+	@Override
+	public String list()
+	{
+		return null;
 	}
 }

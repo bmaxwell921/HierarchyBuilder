@@ -14,6 +14,7 @@ import edu.iastate.cs362.hb.exceptions.HBDuplicateRelationshipException;
 import edu.iastate.cs362.hb.exceptions.HBMultipleObjectsFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBRelationshipNotFoundException;
+import edu.iastate.cs362.hb.model.IManager;
 import edu.iastate.cs362.hb.model.IObject;
 import edu.iastate.cs362.hb.model.IObjectBox;
 import edu.iastate.cs362.hb.model.IRelationship;
@@ -249,8 +250,11 @@ public class HBTree implements ITree {
 		private HBTree getOuterType() {
 			return HBTree.this;
 		}
-		
-		
 	}
-	
+
+	@Override
+	public void DFS(IManager man) {
+		// TODO Auto-generated method stub
+		//for each node do man.manage();
+	}
 }

@@ -15,7 +15,13 @@ public class HBInterface extends AHBObject{
 	
 	@Override
 	public String list(){
-		//TODO implement this here.
-		return null;
+		String toRet = "";
+		toRet += this.getName() + "\n" + "Methods: \n";
+		for(int i = 0; i < this.getNumMethods(); i++)
+		{
+			toRet += methods.get(i);
+			toRet += "\n";
+		}
+		return toRet;
 	}
 }

@@ -7,6 +7,7 @@ import edu.iastate.cs362.hb.exceptions.HBDuplicateRelationshipException;
 import edu.iastate.cs362.hb.exceptions.HBMultipleObjectsFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBRelationshipNotFoundException;
+import edu.iastate.cs362.hb.model.IManager;
 import edu.iastate.cs362.hb.model.IObject;
 import edu.iastate.cs362.hb.model.IObjectBox;
 import edu.iastate.cs362.hb.model.IRelationship;
@@ -81,4 +82,12 @@ public interface ITree {
 	 * @return
 	 */
 	public List<IObjectBox> getMatchingObjects(String name);
+	
+	/**
+	 * 
+	 * Method used to traverse the tree.
+	 * @param man the specific manager to be used to tell the method what to do at each node.
+	 * 
+	 */
+	 public void DFS(IManager man);
 }
