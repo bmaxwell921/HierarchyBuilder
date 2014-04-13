@@ -159,7 +159,7 @@ public class HBDesignDoc implements IDesignDoc {
 	public String list() {
 		ListManager lm = new ListManager();
 		tree.DFS(lm);
-		return lm.getString();
+		return "Design " + name + ":\n" + lm.getString();
 	}
 
 	@Override

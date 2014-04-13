@@ -128,6 +128,8 @@ public class HBSystem implements ISystem {
 
 	@Override
 	public String listDesign() {
+		if(doc == null)
+			return "";
 		return doc.list();
 	}
 
