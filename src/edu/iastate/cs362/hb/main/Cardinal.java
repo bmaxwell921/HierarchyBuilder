@@ -210,10 +210,10 @@ public class Cardinal {
 	 */
 	private boolean doChange(ICommand command) throws HBObjectNotFoundException, HBMultipleObjectsFoundException{
 		if(command.getSubCommand().matches(CmdConstants.SubCmdNames.CLASS_REGEX))
-			return isc.changeName(command.getFlagValue(CmdConstants.Flags.CONTAINER_NAME),
+			return isc.changeName(command.getFlagValue(CmdConstants.Flags.NAME),
 				command.getFlagValue(CmdConstants.Flags.TO_CLASS_NAME));
 		else if(command.getSubCommand().matches(CmdConstants.SubCmdNames.PACKAGE_REGEX))
-			return isc.changePackage(command.getFlagValue(CmdConstants.Flags.CONTAINER_NAME),
+			return isc.changePackage(command.getFlagValue(CmdConstants.Flags.NAME),
 					command.getFlagValue(CmdConstants.Flags.TO_CLASS_NAME));
 		else
 			return false;
