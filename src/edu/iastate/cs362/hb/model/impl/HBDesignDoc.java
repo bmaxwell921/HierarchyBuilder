@@ -1,6 +1,7 @@
 package edu.iastate.cs362.hb.model.impl;
 
 import java.util.List;
+import java.util.Set;
 
 import edu.iastate.cs362.hb.exceptions.HBClassNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateMethodException;
@@ -17,7 +18,10 @@ import edu.iastate.cs362.hb.model.IInstanceField;
 import edu.iastate.cs362.hb.model.IMethod;
 import edu.iastate.cs362.hb.model.IObject;
 import edu.iastate.cs362.hb.model.IObjectBox;
+import edu.iastate.cs362.hb.model.IRelationship;
+import edu.iastate.cs362.hb.model.tree.IHBTreeVisitor;
 import edu.iastate.cs362.hb.model.tree.ITree;
+import edu.iastate.cs362.hb.model.tree.Pair;
 import edu.iastate.cs362.hb.model.tree.impl.HBTree;
 
 public class HBDesignDoc implements IDesignDoc {
@@ -157,8 +161,21 @@ public class HBDesignDoc implements IDesignDoc {
 
 	@Override
 	public String list() {
-		// TODO
-		return null;
+		final StringBuilder sb = new StringBuilder("");
+		tree.traverse(new IHBTreeVisitor(){
+			@Override
+			public void visit(IObject o, Set<Pair<IRelationship, IObject>> superTypes) {
+				int i = 0;
+				String spaces = "";
+				for(; i < superTypes.size(); i++){
+					spaces += " ";
+				}
+				sb.append(spaces);
+				sb.append(o.getName());
+				sb.append("\n");
+			}
+		});
+		return sb.toString();
 	}
 
 	@Override

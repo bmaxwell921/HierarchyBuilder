@@ -283,6 +283,15 @@ public class DesignDocTest {
 	public void testRemoveClassNotFound() throws Exception {
 		test.removeClass("NotReal");
 	}
+
+	@Test
+	public void testThisStuff() throws Exception{
+		test.createClass(TEST_NAME);
+		test.createClass("CAATS");
+		test.addRelationship(TEST_NAME, "CAATS", "extends");
+		System.out.println(test.list());
+		Assert.assertEquals(true, true);
+	}
 	
 	@After
 	public void tearDown() {
