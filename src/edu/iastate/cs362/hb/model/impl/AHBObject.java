@@ -172,6 +172,11 @@ public abstract class AHBObject implements IObject {
 		throw new HBMethodNotFoundException(ErrorMessages.METHOD_NOT_FOUND, name);
 	}
 	
+	@Override
+	public String toString() {
+		return pkg + "." + name;
+	}
+	
 	public int getNumMethods()
 	{
 		return methods.size();
