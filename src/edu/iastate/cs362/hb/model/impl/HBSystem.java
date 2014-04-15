@@ -11,10 +11,10 @@ import edu.iastate.cs362.hb.exceptions.HBMultipleObjectsFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBRelationshipNotFoundException;
 import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
-import edu.iastate.cs362.hb.export.IExport;
-import edu.iastate.cs362.hb.export.impl.JSONExport;
-import edu.iastate.cs362.hb.export.impl.SourceExport;
-import edu.iastate.cs362.hb.export.impl.XMLExport;
+import edu.iastate.cs362.hb.export.IExporter;
+import edu.iastate.cs362.hb.export.impl.JsonExporter;
+import edu.iastate.cs362.hb.export.impl.SourceExporter;
+import edu.iastate.cs362.hb.export.impl.XmlExporter;
 import edu.iastate.cs362.hb.model.IDesignDoc;
 import edu.iastate.cs362.hb.model.IObjectBox;
 import edu.iastate.cs362.hb.model.ISystem;
@@ -22,7 +22,7 @@ import edu.iastate.cs362.hb.model.ISystem;
 public class HBSystem implements ISystem {
 
 	private IDesignDoc doc;
-	private IExport exporter;
+	private IExporter exporter;
 	
 	@Override
 	public boolean createDesign(String name) {
@@ -150,20 +150,20 @@ public class HBSystem implements ISystem {
 
 	@Override
 	public boolean exportDesignXML(String path) {
-		exporter = new XMLExport();
-		return exporter.export(path, doc);
+		exporter = new XmlExporter();
+		return exporter.doExport(path, doc);
 	}
 
 	@Override
 	public boolean exportDesignJSON(String path) {
-		exporter = new JSONExport();
-		return exporter.export(path, doc);
+		exporter = new JsonExporter();
+		return exporter.doExport(path, doc);
 	}
 
 	@Override
 	public boolean exportDesignSource(String path) {
-		exporter = new SourceExport();
-		return exporter.export(path, doc);
+		exporter = new SourceExporter();
+		return exporter.doExport(path, doc);
 	}
 
 }

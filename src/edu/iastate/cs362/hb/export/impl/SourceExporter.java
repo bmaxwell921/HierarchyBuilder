@@ -1,12 +1,12 @@
 package edu.iastate.cs362.hb.export.impl;
 
-import edu.iastate.cs362.hb.export.IExport;
+import edu.iastate.cs362.hb.export.IExporter;
 import edu.iastate.cs362.hb.model.IDesignDoc;
 
-public class SourceExport implements IExport {
+public class SourceExporter implements IExporter {
 
 	@Override
-	public boolean export(String path, IDesignDoc doc) {
+	public boolean doExport(String path, IDesignDoc doc) {
 		// TODO Auto-generated method stub
 		return false;
 	}
