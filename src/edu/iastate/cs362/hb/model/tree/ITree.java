@@ -90,4 +90,13 @@ public interface ITree {
 	 * 
 	 */
 	 public void DFS(IManager man);
+	 
+	 /**
+	  * Returns whether the given object is a root of the hierarchy or not.
+	  * 
+	  * <Testing method>
+	  * @param o
+	  * @return
+	  */
+	 public boolean isRoot(IObject o);
 }

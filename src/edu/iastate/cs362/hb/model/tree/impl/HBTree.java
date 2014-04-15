@@ -151,6 +151,11 @@ public class HBTree implements ITree {
 		return objs;
 	}
 	
+	@Override
+	public boolean isRoot(IObject o) {
+		return roots.contains(o);
+	}
+	
 	// Removes any relationships containing the object rem. Returns whether something was returned or not
 	private boolean removeRelations(IObject rem) {
 		boolean remed = false;
