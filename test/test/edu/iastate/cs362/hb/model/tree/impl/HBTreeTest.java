@@ -2,10 +2,12 @@ package test.edu.iastate.cs362.hb.model.tree.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
@@ -18,6 +20,8 @@ import edu.iastate.cs362.hb.model.impl.HBClass;
 import edu.iastate.cs362.hb.model.impl.HBInterface;
 import edu.iastate.cs362.hb.model.impl.HBObjectBox;
 import edu.iastate.cs362.hb.model.impl.HBRelationship;
+import edu.iastate.cs362.hb.model.tree.IHBTreeVisitor;
+import edu.iastate.cs362.hb.model.tree.Pair;
 import edu.iastate.cs362.hb.model.tree.impl.HBTree;
 
 /**
@@ -452,10 +456,107 @@ public class HBTreeTest {
 		Assert.assertTrue("After removing a relationship, fromClass should be a root", test.isRoot(interf));
 		Assert.assertTrue("After removing a relationship, toClass should be be a root", test.isRoot(interf2));
 	}
+	
+	@Test
+	public void testTraverseSingle_Class() throws Exception {
+		test.addObject(clazz);
+		HBTreeAccum accumulator = new HBTreeAccum();
+		test.traverse(accumulator);
+		
+		List<IObject> correct = new ArrayList<IObject>() {{
+			add(clazz);
+		}};
+		Assert.assertEquals(correct, accumulator.objs);
+	}
+	
+	@Test
+	public void testTraverseTwoAlphabetical_Class() throws Exception {
+		final IObject a = new HBClass("a");
+		final IObject b = new HBClass("b");
+		
+		test.addObject(a);
+		test.addObject(b);
+		
+		HBTreeAccum accumulator = new HBTreeAccum();
+		test.traverse(accumulator);
+		
+		List<IObject> correct = new ArrayList<IObject>() {{
+			add(a);
+			add(b);
+		}};
+		Assert.assertEquals(correct, accumulator.objs);
+	}
+	
+	@Test
+	public void testTraverseSingle_Inter() throws Exception {
+		test.addObject(interf);
+		HBTreeAccum accumulator = new HBTreeAccum();
+		test.traverse(accumulator);
+		
+		List<IObject> correct = new ArrayList<IObject>() {{
+			add(interf);
+		}};
+		Assert.assertEquals(correct, accumulator.objs);
+	}
+	
+	@Test
+	public void testTraverseTwoAlphabetical_Inter() throws Exception {
+		final IObject a = new HBInterface("a");
+		final IObject b = new HBInterface("b");
+		
+		test.addObject(a);
+		test.addObject(b);
+		
+		HBTreeAccum accumulator = new HBTreeAccum();
+		test.traverse(accumulator);
+		
+		List<IObject> correct = new ArrayList<IObject>() {{
+			add(a);
+			add(b);
+		}};
+		Assert.assertEquals(correct, accumulator.objs);
+	}
+	
+	@Test
+	public void testTraverseMulti_Mixed() throws Exception {
+		List<IObject> correct = new ArrayList<>();
+		
+		// Set them up
+		for (int i = 0; i < 26; ++i) {
+			IObject add;
+			if (i % 2 == 0) {
+				add = new HBClass("" + (char) ('a' + i));
+			} else {
+				add = new HBInterface("" + (char) ('a' + i));
+			}
+			test.addObject(add);
+			correct.add(add);
+		}
+		
+		HBTreeAccum accumulator = new HBTreeAccum();
+		test.traverse(accumulator);
+		Assert.assertEquals(correct, accumulator.objs);
+	}
 
 	@After
 	public void tearDown() {
 		test = null;
+	}
+	
+	// Visitor that just stores the objects that were visited, in the order they were visited
+	private class HBTreeAccum implements IHBTreeVisitor {
+		
+		// The visited objs
+		public final List<IObject> objs;
+		
+		public HBTreeAccum() {
+			objs = new ArrayList<>();
+		}
+
+		@Override
+		public void visit(IObject o, Set<Pair<IRelationship, IObject>> superTypes) {
+			objs.add(o);
+		}
 	}
 
 }
