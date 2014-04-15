@@ -157,9 +157,8 @@ public class HBDesignDoc implements IDesignDoc {
 
 	@Override
 	public String list() {
-		ListManager lm = new ListManager();
-		tree.DFS(lm);
-		return "Design " + name + ":\n" + lm.getString();
+		// TODO
+		return null;
 	}
 
 	@Override
