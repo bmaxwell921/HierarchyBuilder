@@ -1,6 +1,8 @@
 package edu.iastate.cs362.hb.model.tree.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -14,7 +16,6 @@ import edu.iastate.cs362.hb.exceptions.HBDuplicateRelationshipException;
 import edu.iastate.cs362.hb.exceptions.HBMultipleObjectsFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBRelationshipNotFoundException;
-import edu.iastate.cs362.hb.model.IManager;
 import edu.iastate.cs362.hb.model.IObject;
 import edu.iastate.cs362.hb.model.IObjectBox;
 import edu.iastate.cs362.hb.model.IRelationship;
@@ -155,8 +156,46 @@ public class HBTree implements ITree {
 	
 	@Override
 	public void traverse(IHBTreeVisitor visitor) {
-		// TODO Auto-generated method stub
+		List<IObject> sortedRoots = new ArrayList<>(roots);
+		// Sort roots by name
+//		Collections.sort(sortedRoots, new Comparator<IObject>() {
+//			@Override
+//			public int compare(IObject lhs, IObject rhs) {
+//				return lhs.getName().compareTo(rhs.getName());
+//			}
+//		});
 		
+		// Objects we've visited already
+		Set<IObject> visited = new HashSet<>();
+		traverseAll(sortedRoots, visited, visitor);
+	}
+	
+	// Method to actually visit all the objects
+	private void traverseAll(List<IObject> sortedRoots, Set<IObject> visited, IHBTreeVisitor visitor) {
+		// First, go through all the roots
+		// TODO this doesn't go down the tree - should we just have it alphabetical then?
+//		for (IObject root : sortedRoots) {
+//			visitor.visit(root, objs.get(root));
+//			visited.add(root);
+//		}
+		
+		// Then go through the rest, alphabetically - Just go through it alphabetically
+		List<IObject> keys = new ArrayList<>(objs.keySet());
+		Collections.sort(keys, new Comparator<IObject>() {
+			@Override
+			public int compare(IObject lhs, IObject rhs) {
+				String lhsFull = lhs.getPackage() + lhs.getName();
+				String rhsFull = rhs.getPackage() + rhs.getName();
+				return lhsFull.compareTo(rhsFull);
+			}
+		});
+		
+		for (IObject obj : keys) {
+			if (!visited.contains(obj)) {
+				visitor.visit(obj, objs.get(obj));
+				visited.add(obj);
+			}
+		}
 	}
 	
 	@Override
