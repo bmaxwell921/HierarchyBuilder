@@ -84,7 +84,9 @@ public interface ITree {
 	public List<IObjectBox> getMatchingObjects(String name);
 	
 	/**
-	 * Traverses the tree hierarchy with the given visitor
+	 * Traverses the tree hierarchy with the given visitor. Starts 
+	 * by going through the roots in alphabetical order and following
+	 * their classes all the way down
 	 * @param visitor
 	 */
 	public void traverse(IHBTreeVisitor visitor);
