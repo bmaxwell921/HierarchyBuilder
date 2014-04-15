@@ -19,6 +19,7 @@ import edu.iastate.cs362.hb.model.IObject;
 import edu.iastate.cs362.hb.model.IObjectBox;
 import edu.iastate.cs362.hb.model.IRelationship;
 import edu.iastate.cs362.hb.model.impl.HBObjectBox;
+import edu.iastate.cs362.hb.model.tree.IHBTreeVisitor;
 import edu.iastate.cs362.hb.model.tree.ITree;
 import edu.iastate.cs362.hb.model.tree.Pair;
 
@@ -153,6 +154,12 @@ public class HBTree implements ITree {
 	}
 	
 	@Override
+	public void traverse(IHBTreeVisitor visitor) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
 	public boolean isRoot(IObject o) {
 		return roots.contains(o);
 	}
@@ -213,13 +220,5 @@ public class HBTree implements ITree {
 			}
 		}	
 		return ret;
-	}
-	
-
-
-	@Override
-	public void DFS(IManager man) {
-		// TODO Auto-generated method stub
-		//for each node do man.manage();
 	}
 }

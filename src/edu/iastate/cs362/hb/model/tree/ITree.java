@@ -84,12 +84,10 @@ public interface ITree {
 	public List<IObjectBox> getMatchingObjects(String name);
 	
 	/**
-	 * 
-	 * Method used to traverse the tree.
-	 * @param man the specific manager to be used to tell the method what to do at each node.
-	 * 
+	 * Traverses the tree hierarchy with the given visitor
+	 * @param visitor
 	 */
-	 public void DFS(IManager man);
+	public void traverse(IHBTreeVisitor visitor);
 	 
 	 /**
 	  * Returns whether the given object is a root of the hierarchy or not.
