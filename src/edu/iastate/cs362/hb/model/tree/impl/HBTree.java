@@ -36,13 +36,17 @@ public class HBTree implements ITree {
 	 * I decided to sacrifice speed for clarity because it was getting
 	 * out of hand trying to balance everything
 	 */
-	private Map<IObject, Set<Pair<IRelationship, IObject>>> objs;	
+	private Map<IObject, Set<Pair<IRelationship, IObject>>> objs;
+	
+	// All the objects that don't extend from or implement anything, used for exporting and listing
+	private Set<IObject> roots;
 	
 	/**
 	 * Constructs a new, empty HBTree
 	 */
 	public HBTree() {
 		this.objs = new HashMap<>();
+		roots = new HashSet<>();
 	}
 	
 	@Override
@@ -67,6 +71,7 @@ public class HBTree implements ITree {
 		
 		// No relationships to start with 
 		objs.put(newClass, null);
+		roots.add(newClass);
 		return true;
 	}
 
@@ -74,7 +79,6 @@ public class HBTree implements ITree {
 	public boolean addRelationship(IObject fromClass, IObject toClass,
 			IRelationship relationship) throws HBObjectNotFoundException,
 			HBDuplicateRelationshipException {
-
 		if (!containsObject(fromClass.getName(), fromClass.getPackage())) {
 			throw new HBObjectNotFoundException(ErrorMessages.OBJECT_NOT_FOUND, fromClass.getName());
 		}	
@@ -94,6 +98,8 @@ public class HBTree implements ITree {
 		// Put it back in case it was null before
 		objs.put(toClass, rel);
 		
+		// Remove the toClass from roots since it's no longer a root
+		roots.remove(toClass);
 		return true;
 	}
 
@@ -114,6 +120,11 @@ public class HBTree implements ITree {
 		if (!remed) {
 			throw new HBRelationshipNotFoundException(ErrorMessages.RELATION_NOT_FOUND, fromClass.getName(), toClass.getName());
 		}
+		
+		// If we've removed all the relationships re-add toClass to roots
+		if (rels.isEmpty()) {
+			roots.add(toClass);
+		}
 		return true;
 	}
 
@@ -125,6 +136,7 @@ public class HBTree implements ITree {
 		}
 		
 		objs.remove(toRemove);
+		roots.remove(toRemove);
 		removeRelations(toRemove);
 		return true;
 	}
