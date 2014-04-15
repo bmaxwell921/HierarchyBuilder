@@ -380,6 +380,78 @@ public class HBTreeTest {
 		Assert.assertEquals("Getting the matching names normally should work.",
 				boxes, test.getMatchingObjects("name"));
 	}
+	
+	@Test
+	public void testAddOnceIsRoot_Class() throws Exception {
+		test.addObject(clazz);
+		Assert.assertTrue("After initially adding a class it should be a root", test.isRoot(clazz));
+	}
+	
+	@Test
+	public void testAddMultiAreRoots_Class() throws Exception {
+		test.addObject(clazz);
+		test.addObject(clazz2);
+		
+		Assert.assertTrue("After initially adding a class it should be a root", test.isRoot(clazz));
+		Assert.assertTrue("After initially adding a class it should be a root", test.isRoot(clazz2));
+	}
+	
+	@Test
+	public void testAddOnceIsRoot_Inter() throws Exception {
+		test.addObject(interf);
+		Assert.assertTrue("After initially adding a class it should be a root", test.isRoot(interf));
+	}
+	
+	@Test
+	public void testAddMultiAreRoots_Inter() throws Exception {
+		test.addObject(interf);
+		test.addObject(interf2);
+		
+		Assert.assertTrue("After initially adding a class it should be a root", test.isRoot(interf));
+		Assert.assertTrue("After initially adding a class it should be a root", test.isRoot(interf2));
+	}
+	
+	@Test
+	public void testAddRelationNotRoot_Class() throws Exception {
+		test.addObject(clazz);
+		test.addObject(clazz2);
+		test.addRelationship(clazz, clazz2, ext);
+		
+		Assert.assertTrue("After initially adding a relationship, fromClass should be a root still", test.isRoot(clazz));
+		Assert.assertFalse("After initially adding a relationship, toClass shouldn't be a root", test.isRoot(clazz2));
+	}
+	
+	@Test
+	public void testAddRelationNotRoot_Inter() throws Exception {
+		test.addObject(interf);
+		test.addObject(interf2);
+		test.addRelationship(interf, interf2, ext);
+		
+		Assert.assertTrue("After initially adding a relationship, fromClass should be a root still", test.isRoot(interf));
+		Assert.assertFalse("After initially adding a relationship, toClass shouldn't be a root", test.isRoot(interf2));
+	}
+	
+	@Test
+	public void testRemoveRelationIsRoot_Class() throws Exception {
+		test.addObject(clazz);
+		test.addObject(clazz2);
+		test.addRelationship(clazz, clazz2, ext);
+		test.removeRelationship(clazz, clazz2);
+		
+		Assert.assertTrue("After removing a relationship, fromClass should be a root", test.isRoot(clazz));
+		Assert.assertTrue("After removing a relationship, toClass should be be a root", test.isRoot(clazz2));
+	}
+	
+	@Test
+	public void testRemoveRelationIsRoot_Inter() throws Exception {
+		test.addObject(interf);
+		test.addObject(interf2);
+		test.addRelationship(interf, interf2, ext);
+		test.removeRelationship(interf, interf2);
+		
+		Assert.assertTrue("After removing a relationship, fromClass should be a root", test.isRoot(interf));
+		Assert.assertTrue("After removing a relationship, toClass should be be a root", test.isRoot(interf2));
+	}
 
 	@After
 	public void tearDown() {
