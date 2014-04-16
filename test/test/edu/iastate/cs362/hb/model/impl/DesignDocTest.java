@@ -290,6 +290,7 @@ public class DesignDocTest {
 		test.createClass("CAATS");
 		test.addRelationship(TEST_NAME, "CAATS", "extends");
 		System.out.println(test.list());
+		//String.replace("\\s+", "");
 		Assert.assertEquals(true, true);
 	}
 	
