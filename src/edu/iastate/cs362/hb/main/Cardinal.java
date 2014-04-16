@@ -211,7 +211,7 @@ public class Cardinal {
 	 * @throws HBObjectNotFoundException 
 	 */
 	private boolean doChange(ICommand command) throws HBObjectNotFoundException, HBMultipleObjectsFoundException{
-		if(command.getSubCommand().matches(CmdConstants.SubCmdNames.CLASS_REGEX))
+		if(command.getSubCommand().matches(CmdConstants.SubCmdNames.CLASS_REGEX) || command.getSubCommand().matches(CmdConstants.SubCmdNames.INTERFACE_REGEX))
 			return isc.changeName(command.getFlagValue(CmdConstants.Flags.CONTAINER_NAME),
 				command.getFlagValue(CmdConstants.Flags.NAME));
 		else if(command.getSubCommand().matches(CmdConstants.SubCmdNames.PACKAGE_REGEX))
@@ -229,7 +229,7 @@ public class Cardinal {
 	 * @throws HBObjectNotFoundException 
 	 */
 	private boolean doList(ICommand command) throws HBObjectNotFoundException, HBMultipleObjectsFoundException{
-		if(command.getSubCommand().matches(CmdConstants.SubCmdNames.CLASS_REGEX)){
+		if(command.getSubCommand().matches(CmdConstants.SubCmdNames.CLASS_REGEX) || command.getSubCommand().matches(CmdConstants.SubCmdNames.INTERFACE_REGEX)){
 			System.out.println(isc.listObject(command.getFlagValue(CmdConstants.Flags.NAME)));
 			return true;
 		}else if(command.getSubCommand().matches(CmdConstants.SubCmdNames.DESIGN_REGEX)) {
