@@ -41,15 +41,11 @@ public class HBTree implements ITree {
 	 */
 	private Map<IObject, Set<Pair<IRelationship, IObject>>> objs;
 	
-	// All the objects that don't extend from or implement anything, used for exporting and listing
-	private Set<IObject> roots;
-	
 	/**
 	 * Constructs a new, empty HBTree
 	 */
 	public HBTree() {
 		this.objs = new HashMap<>();
-		roots = new HashSet<>();
 	}
 	
 	@Override
@@ -74,7 +70,7 @@ public class HBTree implements ITree {
 		
 		// No relationships to start with 
 		objs.put(newClass, null);
-		roots.add(newClass);
+//		roots.add(newClass);
 		return true;
 	}
 
@@ -100,9 +96,6 @@ public class HBTree implements ITree {
 		rel.add(new Pair<>(relationship, fromClass));
 		// Put it back in case it was null before
 		objs.put(toClass, rel);
-		
-		// Remove the toClass from roots since it's no longer a root
-		roots.remove(toClass);
 		return true;
 	}
 
@@ -123,11 +116,6 @@ public class HBTree implements ITree {
 		if (!remed) {
 			throw new HBRelationshipNotFoundException(ErrorMessages.RELATION_NOT_FOUND, fromClass.getName(), toClass.getName());
 		}
-		
-		// If we've removed all the relationships re-add toClass to roots
-		if (rels.isEmpty()) {
-			roots.add(toClass);
-		}
 		return true;
 	}
 
@@ -139,7 +127,6 @@ public class HBTree implements ITree {
 		}
 		
 		objs.remove(toRemove);
-		roots.remove(toRemove);
 		removeRelations(toRemove);
 		return true;
 	}
@@ -156,29 +143,13 @@ public class HBTree implements ITree {
 	
 	@Override
 	public void traverse(IHBTreeVisitor visitor) {
-		List<IObject> sortedRoots = new ArrayList<>(roots);
-		// Sort roots by name
-//		Collections.sort(sortedRoots, new Comparator<IObject>() {
-//			@Override
-//			public int compare(IObject lhs, IObject rhs) {
-//				return lhs.getName().compareTo(rhs.getName());
-//			}
-//		});
-		
 		// Objects we've visited already
 		Set<IObject> visited = new HashSet<>();
-		traverseAll(sortedRoots, visited, visitor);
+		traverseAll(visited, visitor);
 	}
 	
 	// Method to actually visit all the objects
-	private void traverseAll(List<IObject> sortedRoots, Set<IObject> visited, IHBTreeVisitor visitor) {
-		// First, go through all the roots
-		// TODO this doesn't go down the tree - should we just have it alphabetical then?
-//		for (IObject root : sortedRoots) {
-//			visitor.visit(root, objs.get(root));
-//			visited.add(root);
-//		}
-		
+	private void traverseAll(Set<IObject> visited, IHBTreeVisitor visitor) {
 		// Then go through the rest, alphabetically - Just go through it alphabetically
 		List<IObject> keys = new ArrayList<>(objs.keySet());
 		Collections.sort(keys, new Comparator<IObject>() {
@@ -196,11 +167,6 @@ public class HBTree implements ITree {
 				visited.add(obj);
 			}
 		}
-	}
-	
-	@Override
-	public boolean isRoot(IObject o) {
-		return roots.contains(o);
 	}
 	
 	// Removes any relationships containing the object rem. Returns whether something was returned or not

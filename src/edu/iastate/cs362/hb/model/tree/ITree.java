@@ -90,13 +90,4 @@ public interface ITree {
 	 * @param visitor
 	 */
 	public void traverse(IHBTreeVisitor visitor);
-	 
-	 /**
-	  * Returns whether the given object is a root of the hierarchy or not.
-	  * 
-	  * <Testing method>
-	  * @param o
-	  * @return
-	  */
-	 public boolean isRoot(IObject o);
 }
