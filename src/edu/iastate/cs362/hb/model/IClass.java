@@ -1,5 +1,7 @@
 package edu.iastate.cs362.hb.model;
 
+import java.util.List;
+
 /**
  * Interface representing a Class in a Class Hierarchy
  * @author Brandon
@@ -8,4 +10,6 @@ package edu.iastate.cs362.hb.model;
 public interface IClass extends IObject {
 	
 	public boolean addInstanceField(IInstanceField i);
+	
+	public List<IMethod> getMethods();
 }

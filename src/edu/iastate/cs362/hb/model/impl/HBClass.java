@@ -5,6 +5,7 @@ import java.util.List;
 
 import edu.iastate.cs362.hb.model.IClass;
 import edu.iastate.cs362.hb.model.IInstanceField;
+import edu.iastate.cs362.hb.model.IMethod;
 
 /**
  * Class representing a Class in the Hierarchy
@@ -40,5 +41,10 @@ public class HBClass extends AHBObject implements IClass{
 			toRet += "\n";
 		}
 		return toRet;
+	}
+
+	@Override
+	public List<IMethod> getMethods() {
+		return methods;
 	}
 }
