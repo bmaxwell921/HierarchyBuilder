@@ -56,7 +56,8 @@ public class Cardinal {
 	private void run() {
 		Scanner in = new Scanner(System.in);
 		String commandLine = null;
-		while (true) {
+		boolean exit = false;
+		while (!exit) {
 			commandLine = in.nextLine();
 			ICommand command = null;
 			try {
@@ -77,6 +78,7 @@ public class Cardinal {
 						CmdConstants.CmdNames.EXPORT)) {
 					doExport(command);
 				} else if (command.getName().equals(CmdConstants.CmdNames.EXIT)) {
+					exit = true;
 					break;
 				}
 				System.out

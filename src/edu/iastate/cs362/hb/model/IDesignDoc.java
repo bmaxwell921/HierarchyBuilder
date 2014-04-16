@@ -12,6 +12,7 @@ import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBRelationshipNotFoundException;
 import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
 import edu.iastate.cs362.hb.model.attributes.Nameable;
+import edu.iastate.cs362.hb.model.tree.IHBTreeVisitor;
 
 /**
  * Interface used to define behavior for the HBDesignDoc object
@@ -52,9 +53,12 @@ public interface IDesignDoc extends Nameable {
 
 	public boolean createClass(String name)
 			throws HBDuplicateObjectFoundException;
+	
 
 	public boolean createInterface(String name)
 			throws HBDuplicateObjectFoundException;
+	
+	public void traverse(IHBTreeVisitor visitor);
 
 	public List<IObjectBox> getMatchingObjects(String name);
 	

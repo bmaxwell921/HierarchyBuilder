@@ -186,4 +186,10 @@ public class HBDesignDoc implements IDesignDoc {
 	public boolean changePackage(String name, String packageName) throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
 		return tree.getObject(name).changePackage(packageName);
 	}
+
+	@Override
+	public void traverse(IHBTreeVisitor visitor) {
+		tree.traverse(visitor);
+		
+	}
 }
