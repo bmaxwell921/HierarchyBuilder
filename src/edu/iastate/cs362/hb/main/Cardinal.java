@@ -96,6 +96,8 @@ public class Cardinal {
 				System.out.println(e.getMessage());
 				printMatchingObjects(command
 						.getFlagValue(CmdConstants.Flags.NAME));
+			} catch (Exception e){
+				System.out.println(e.getMessage());
 			}
 		}
 		in.close();
