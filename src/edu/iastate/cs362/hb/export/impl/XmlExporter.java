@@ -21,6 +21,7 @@ public class XmlExporter implements IExporter {
 			@Override
 			public void visit(IObject o, Set<Pair<IRelationship, IObject>> superTypes) {
 				if(o.getClass() == IClass.class){
+					IClass cl = (IClass) o;
 					sb.append("<class id=" + o.getId() + " name=" + o.getName() + " package=" + o.getPackage() + ">");
 					for(String mod : o.getModifiers()){
 						sb.append("<modifier name=\"" + mod + "\" />");
