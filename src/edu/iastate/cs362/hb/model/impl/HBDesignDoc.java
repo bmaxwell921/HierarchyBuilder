@@ -161,18 +161,22 @@ public class HBDesignDoc implements IDesignDoc {
 
 	@Override
 	public String list() {
-		final StringBuilder sb = new StringBuilder("");
+		final StringBuilder sb = new StringBuilder();
 		tree.traverse(new IHBTreeVisitor(){
 			@Override
 			public void visit(IObject o, Set<Pair<IRelationship, IObject>> superTypes) {
-				int i = 0;
+				if(superTypes == null){
+					return;
+				}
+				/*int i = 0;
 				String spaces = "";
 				for(; i < superTypes.size(); i++){
 					spaces += " ";
 				}
 				sb.append(spaces);
 				sb.append(o.getName());
-				sb.append("\n");
+				sb.append("\n");*/
+				sb.append(o.list());
 			}
 		});
 		return sb.toString();
