@@ -16,16 +16,13 @@ public class JsonExporter implements IExporter {
 	@Override
 	public boolean doExport(String path, IDesignDoc doc) {
 		
-		final Gson gson = new Gson();
 		final StringBuilder sb = new StringBuilder("");
 		doc.traverse(new IHBTreeVisitor(){
 			@Override
 			public void visit(IObject o, Set<Pair<IRelationship, IObject>> superTypes) {
-				sb.append(gson.toJson(o.getName()));
 
 			}
 		});
-		System.out.println(sb.toString());
 		
 		
 		return false;
