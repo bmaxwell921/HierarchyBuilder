@@ -3,8 +3,10 @@ package edu.iastate.cs362.hb.export.impl;
 import java.util.Set;
 
 import edu.iastate.cs362.hb.export.IExporter;
+import edu.iastate.cs362.hb.model.IArgument;
 import edu.iastate.cs362.hb.model.IClass;
 import edu.iastate.cs362.hb.model.IDesignDoc;
+import edu.iastate.cs362.hb.model.IMethod;
 import edu.iastate.cs362.hb.model.IObject;
 import edu.iastate.cs362.hb.model.IRelationship;
 import edu.iastate.cs362.hb.model.tree.IHBTreeVisitor;
@@ -25,6 +27,13 @@ public class XmlExporter implements IExporter {
 					sb.append("<class id=" + o.getId() + " name=" + o.getName() + " package=" + o.getPackage() + ">");
 					for(String mod : o.getModifiers()){
 						sb.append("<modifier name=\"" + mod + "\" />");
+					}
+					for(IMethod meth : cl.getMethods()){
+						sb.append("<method id=\"" + meth.getId() + "\" name=\"" + meth.getName() + "\">");
+						for(IArgument arg : meth.getArguments()){
+							sb.append("<argument -name=\"" + arg.getName() + "\" -type=\"" + arg.getType() + "\"/>");
+						}
+						sb.append("</method>");
 					}
 					sb.append("</class>");
 				}
