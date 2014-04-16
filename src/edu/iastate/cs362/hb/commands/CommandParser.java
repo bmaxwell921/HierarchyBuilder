@@ -70,7 +70,7 @@ public class CommandParser implements ICommandParser {
 			if (commandList[i].charAt(0) == '-') {
 				// Flag
 				boolean valueUsed = addFlag(c, commandList[i].substring(1),
-						nonChangedList[i + 1]);
+					 	 (i+1) >= nonChangedList.length ? null : nonChangedList[i + 1]);
 				if (valueUsed) {
 					i++;
 				}
@@ -115,22 +115,30 @@ public class CommandParser implements ICommandParser {
 			c.addFlagValue(CmdConstants.Flags.STATIC, null);
 		} else if(input.matches(CmdConstants.Flags.PATH_REGEX)){
 			c.addFlagValue(CmdConstants.Flags.PATH, value);
+			valueUsed = true;
 		}else if(input.matches(CmdConstants.Flags.CONTAINER_NAME_REGEX)){
 			c.addFlagValue(CmdConstants.Flags.CONTAINER_NAME, value);
+			valueUsed = true;
 		} else if(input.matches(CmdConstants.Flags.FROM_CLASS_ID_REGEX)){
 			c.addFlagValue(CmdConstants.Flags.FROM_CLASS_ID, value);
+			valueUsed = true;
 		} else if(input.matches(CmdConstants.Flags.FROM_CLASS_NAME_REGEX)) {
 			c.addFlagValue(CmdConstants.Flags.FROM_CLASS_NAME_REGEX, value);
+			valueUsed = true;
 		} else if(input.matches(CmdConstants.Flags.ID_REGEX)) {
 			c.addFlagValue(CmdConstants.Flags.ID, value);
+			valueUsed = true;
 		} else if(input.matches(CmdConstants.Flags.INSTANCE_REGEX)){
 			c.addFlagValue(CmdConstants.Flags.INSTANCE, null);
 		} else if(input.matches(CmdConstants.Flags.TO_CLASS_ID_REGEX)){
 			c.addFlagValue(CmdConstants.Flags.TO_CLASS_ID, value);
+			valueUsed = true;
 		} else if(input.matches(CmdConstants.Flags.TO_CLASS_NAME_REGEX)){
 			c.addFlagValue(CmdConstants.Flags.TO_CLASS_NAME, value);
+			valueUsed = true;
 		} else if(input.matches(CmdConstants.Flags.TYPE_REGEX)){
 			c.addFlagValue(CmdConstants.Flags.TYPE, value);
+			valueUsed = true;
 		} else {
 			throw new MalformattedCommandException("Malformatted flag values!",
 					input, value);

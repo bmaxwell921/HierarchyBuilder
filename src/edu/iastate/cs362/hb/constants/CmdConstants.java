@@ -93,7 +93,7 @@ public class CmdConstants {
 		
 		public static final String CONTAINER_NAME = "containername";
 		private static final String CONTAINER_ABBREV = "cname"; //May not use
-		private static final String CONTAINER_NAME_SHORT = "cN";
+		private static final String CONTAINER_NAME_SHORT = "cn";
 		public static final String CONTAINER_NAME_REGEX = CONTAINER_NAME + RegexOp.OR + CONTAINER_ABBREV + RegexOp.OR + CONTAINER_NAME_SHORT;
 		
 		public static final String STATIC = "static";
