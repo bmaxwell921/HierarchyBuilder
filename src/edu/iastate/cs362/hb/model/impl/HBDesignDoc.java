@@ -161,17 +161,11 @@ public class HBDesignDoc implements IDesignDoc {
 
 	@Override
 	public String list() {
-		final StringBuilder sb = new StringBuilder("");
+		final StringBuilder sb = new StringBuilder();
 		tree.traverse(new IHBTreeVisitor(){
 			@Override
 			public void visit(IObject o, Set<Pair<IRelationship, IObject>> superTypes) {
-				int i = 0;
-				String spaces = "";
-				for(; i < superTypes.size(); i++){
-					spaces += " ";
-				}
-				sb.append(spaces);
-				sb.append(o.getName());
+				sb.append(o.list());
 				sb.append("\n");
 			}
 		});
@@ -191,5 +185,11 @@ public class HBDesignDoc implements IDesignDoc {
 	@Override
 	public boolean changePackage(String name, String packageName) throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
 		return tree.getObject(name).changePackage(packageName);
+	}
+
+	@Override
+	public void traverse(IHBTreeVisitor visitor) {
+		tree.traverse(visitor);
+		
 	}
 }

@@ -56,7 +56,8 @@ public class Cardinal {
 	private void run() {
 		Scanner in = new Scanner(System.in);
 		String commandLine = null;
-		while (true) {
+		boolean exit = false;
+		while (!exit) {
 			commandLine = in.nextLine();
 			ICommand command = null;
 			try {
@@ -77,6 +78,7 @@ public class Cardinal {
 						CmdConstants.CmdNames.EXPORT)) {
 					doExport(command);
 				} else if (command.getName().equals(CmdConstants.CmdNames.EXIT)) {
+					exit = true;
 					break;
 				}
 				System.out
@@ -210,11 +212,11 @@ public class Cardinal {
 	 */
 	private boolean doChange(ICommand command) throws HBObjectNotFoundException, HBMultipleObjectsFoundException{
 		if(command.getSubCommand().matches(CmdConstants.SubCmdNames.CLASS_REGEX))
-			return isc.changeName(command.getFlagValue(CmdConstants.Flags.NAME),
-				command.getFlagValue(CmdConstants.Flags.TO_CLASS_NAME));
+			return isc.changeName(command.getFlagValue(CmdConstants.Flags.CONTAINER_NAME),
+				command.getFlagValue(CmdConstants.Flags.NAME));
 		else if(command.getSubCommand().matches(CmdConstants.SubCmdNames.PACKAGE_REGEX))
-			return isc.changePackage(command.getFlagValue(CmdConstants.Flags.NAME),
-					command.getFlagValue(CmdConstants.Flags.TO_CLASS_NAME));
+			return isc.changePackage(command.getFlagValue(CmdConstants.Flags.CONTAINER_NAME),
+					command.getFlagValue(CmdConstants.Flags.NAME));
 		else
 			return false;
 	}
