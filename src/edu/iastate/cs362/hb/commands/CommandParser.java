@@ -139,6 +139,9 @@ public class CommandParser implements ICommandParser {
 		} else if(input.matches(CmdConstants.Flags.TYPE_REGEX)){
 			c.addFlagValue(CmdConstants.Flags.TYPE, value);
 			valueUsed = true;
+		} else if (input.matches(CmdConstants.Flags.ARGUMENTS_REGEX)){
+			c.addFlagValue(CmdConstants.Flags.ARGUMENTS, value);
+			valueUsed = true;
 		} else {
 			throw new MalformattedCommandException("Malformatted flag values!",
 					input, value);
