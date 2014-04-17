@@ -12,6 +12,7 @@ import edu.iastate.cs362.hb.io.DesignDocBox;
 import edu.iastate.cs362.hb.model.IDesignDoc;
 import edu.iastate.cs362.hb.model.IObject;
 import edu.iastate.cs362.hb.model.IRelationship;
+import edu.iastate.cs362.hb.model.impl.HBDesignDoc;
 import edu.iastate.cs362.hb.model.tree.IHBTreeVisitor;
 import edu.iastate.cs362.hb.model.tree.Pair;
 
@@ -32,7 +33,7 @@ public class JsonExporter implements IExporter {
 		File out = new File(path);
 		// Create things as needed
 		if (!out.exists()) {
-			System.out.println(out.getParentFile().mkdirs());
+			out.getParentFile().mkdirs();
 		}
 		try (FileWriter fw = new FileWriter(out)) {
 			fw.write(gson.toJson(ddBox));
