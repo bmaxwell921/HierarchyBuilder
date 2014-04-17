@@ -122,6 +122,10 @@ public class HBMethod implements IMethod {
 
 	@Override
 	public void addArguments(String args) throws MalformattedCommandException {
+		// No arguments
+		if (args == null) {
+			return;
+		}
 		StringTokenizer st = new StringTokenizer(args, A_MAJ_DEL + CmdConstants.RegexOp.OR + A_MIN_DEL);
 		while (st.hasMoreTokens()) {
 			String type = st.nextToken();
