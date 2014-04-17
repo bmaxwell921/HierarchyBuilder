@@ -15,20 +15,20 @@ import edu.iastate.cs362.hb.model.impl.HBInterface;
  */
 public class DesignDocBox {
 
-	private String designDocName;
+	private String name;
 	// The interfaces in the design doc
 	private Set<HBInterface> interfaces;
 	
 	private Set<HBClass> classes;
 	
 	public DesignDocBox() {
-		designDocName = "";
+		name = "";
 		interfaces = new HashSet<>();
 		classes = new HashSet<>();
 	}
 	
 	public void addName(String dName) {
-		this.designDocName = dName;
+		this.name = dName;
 	}
 	
 	public void add(IObject obj) {
