@@ -21,10 +21,6 @@ import edu.iastate.cs362.hb.model.IDesignDoc;
  */
 public class SourceImporter implements IImporter {
 
-	public SourceImporter() {
-		// TODO Auto-generated constructor stub
-	}
-
 	@Override
 	public IDesignDoc doImport(String path) {
 		// Compiler instance
