@@ -207,6 +207,28 @@ public class HBDesignDoc implements IDesignDoc {
 	@Override
 	public void addAllInner(Set<? extends IObject> interfaces,
 			Set<? extends IObject> classes) {
-		// TODO
+		try {
+			// Add the objects
+			if (interfaces != null) {
+				for (IObject interf : interfaces) {
+					tree.addObject(interf);
+				}
+			}
+			if (classes != null) {
+				for (IObject clazz : classes) {
+					tree.addObject(clazz);
+				}
+			}
+			
+			/* 
+			 * Then add the relationships
+			 * TODO how to do this?? I think I'll need to rework the
+			 * IObject class to have relationships in it, otherwise
+			 * Gson won't export that information
+			 */ 
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }
