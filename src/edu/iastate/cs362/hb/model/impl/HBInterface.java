@@ -19,7 +19,7 @@ public class HBInterface extends AHBObject{
 		toRet += this.getName() + "\n" + "Methods: \n";
 		for(int i = 0; i < this.getNumMethods(); i++)
 		{
-			toRet += " " + methods.get(i);
+			toRet += " " + methods.get(i).getName();
 			toRet += "\n";
 		}
 		return toRet;

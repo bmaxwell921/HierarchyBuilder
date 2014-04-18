@@ -162,6 +162,9 @@ public class HBDesignDoc implements IDesignDoc {
 	@Override
 	public String list() {
 		final StringBuilder sb = new StringBuilder();
+		sb.append("Design: ");
+		sb.append(this.name);
+		sb.append("\n");
 		tree.traverse(new IHBTreeVisitor(){
 			@Override
 			public void visit(IObject o, Set<Pair<IRelationship, IObject>> superTypes) {
