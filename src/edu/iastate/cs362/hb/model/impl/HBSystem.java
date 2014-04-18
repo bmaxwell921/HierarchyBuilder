@@ -176,19 +176,22 @@ public class HBSystem implements ISystem {
 	@Override
 	public boolean importDesignXML(String path) throws FileNotFoundException, IOException {
 		importer = new XmlImporter();
-		return importer.doImport(path);
+		doc =  importer.doImport(path);
+		return true;
 	}
 
 	@Override
 	public boolean importDesignJSON(String path) throws FileNotFoundException, IOException {
 		importer = new JsonImporter();
-		return importer.doImport(path);
+		doc = importer.doImport(path);
+		return true;
 	}
 
 	@Override
 	public boolean importDesignSource(String path) throws FileNotFoundException, IOException {
 		importer = new SourceImporter();
-		return importer.doImport(path);
+		doc = importer.doImport(path);
+		return true;
 	}
 
 }

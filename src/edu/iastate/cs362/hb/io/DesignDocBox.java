@@ -31,6 +31,10 @@ public class DesignDocBox {
 		this.name = dName;
 	}
 	
+	public String getName() {
+		return this.name;
+	}
+	
 	public void add(IObject obj) {
 		if (obj.getClass() == HBClass.class) {
 			addClass(obj);
@@ -45,6 +49,14 @@ public class DesignDocBox {
 	
 	private void addInterface(IObject inter) {
 		interfaces.add((HBInterface)inter);
+	}
+	
+	public Set<HBInterface> getInterfaces() {
+		return interfaces;
+	}
+	
+	public Set<HBClass> getClasses() {
+		return classes;
 	}
 
 }

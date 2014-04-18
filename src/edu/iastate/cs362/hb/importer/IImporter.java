@@ -14,5 +14,5 @@ public interface IImporter {
 	 * @throws FileNotFoundException 
 	 * @throws IOException 
 	 */
-	public boolean doImport(String path) throws FileNotFoundException, IOException;
+	public IDesignDoc doImport(String path) throws FileNotFoundException, IOException;
 }

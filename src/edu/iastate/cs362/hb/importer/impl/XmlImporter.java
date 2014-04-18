@@ -1,10 +1,7 @@
 package edu.iastate.cs362.hb.importer.impl;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -19,7 +16,7 @@ public class XmlImporter implements IImporter {
 	}
 
 	@Override
-	public boolean doImport(String path) throws IOException {
+	public IDesignDoc doImport(String path) throws IOException {
 
 		//
 		InputStream fileStream = new FileInputStream(path);
@@ -31,7 +28,7 @@ public class XmlImporter implements IImporter {
 		
 		reader.close();
 		
-		return false;
+		return null;
 	}
 
 }

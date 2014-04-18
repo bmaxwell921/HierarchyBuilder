@@ -12,7 +12,6 @@ import edu.iastate.cs362.hb.io.DesignDocBox;
 import edu.iastate.cs362.hb.model.IDesignDoc;
 import edu.iastate.cs362.hb.model.IObject;
 import edu.iastate.cs362.hb.model.IRelationship;
-import edu.iastate.cs362.hb.model.impl.HBDesignDoc;
 import edu.iastate.cs362.hb.model.tree.IHBTreeVisitor;
 import edu.iastate.cs362.hb.model.tree.Pair;
 

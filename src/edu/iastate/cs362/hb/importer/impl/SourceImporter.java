@@ -22,7 +22,7 @@ import edu.iastate.cs362.hb.model.IDesignDoc;
 public class SourceImporter implements IImporter {
 
 	@Override
-	public boolean doImport(String path) {
+	public IDesignDoc doImport(String path) {
 		// Compiler instance
 		JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
 
@@ -35,7 +35,7 @@ public class SourceImporter implements IImporter {
 		CompilationTask task = compiler.getTask(null, fileManager, null, null, null, compilationUnits);
 		task.call();
 		
-		return false;
+		return null;
 	}
 	
 	public static void main(String[] args) {
