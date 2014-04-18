@@ -86,9 +86,9 @@ public class XmlExporter implements IExporter {
 		sb.append("<id>");
 		sb.append(cl.getId());
 		sb.append("</id>\n");
-		sb.append("<class>");
+		sb.append("<name>");
 		sb.append(cl.getName());
-		sb.append("</class>\n");
+		sb.append("</name>\n");
 		sb.append("<package>");
 		sb.append(cl.getPackage());
 		sb.append("</package>\n");

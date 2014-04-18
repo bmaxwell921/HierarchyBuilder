@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 import edu.iastate.cs362.hb.exceptions.MalformattedInputException;
 import edu.iastate.cs362.hb.importer.IImporter;
@@ -34,20 +35,22 @@ public class XmlImporter implements IImporter {
 			sb.append(line);
 		}
 		reader.close();
+		
+		ArrayList<IClass> classList = new ArrayList<IClass>();
 		String file = sb.toString();
 		for (int i = 0; i < file.length(); i++) {
 			if (file.charAt(i) == '<') {
 				// Bracket
 				System.out.println(file.charAt(i));
-				String arg = file.substring(i + 1, file.indexOf('>') - 1);
+				String arg = file.substring(i + 1, file.indexOf('>', i + 1));
 				if (arg.charAt(0) == '?') { // encoding line
 					System.out.println(arg);
-					i = file.indexOf('>') + 1;
+					i = file.indexOf('>', i + 1) + 1;
 				} else {
 
 					switch (arg.toUpperCase()) {
 					case "CLASS":
-
+						classList.add(buildClassFromString(file.substring(file.indexOf('>', i + 1) + 1, file.indexOf("</class>"))));
 						break;
 					case "INTERFACE":
 
@@ -71,10 +74,17 @@ public class XmlImporter implements IImporter {
 
 	}
 
-	private IClass buildFromString(String str) {
+	private IClass buildClassFromString(String str) {
 
 		return null;
 
+	}
+	
+	private String getTag(String tag, String str){
+		String startTag = '<'+tag+'>';
+		String endTag = "</" + tag + '>';
+		int startIndex = str.indexOf(startTag);
+		int endIndex = str.indexOf(endTag);
 	}
 
 }
