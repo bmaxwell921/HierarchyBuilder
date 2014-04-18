@@ -19,6 +19,7 @@ import edu.iastate.cs362.hb.exceptions.HBMultipleObjectsFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBRelationshipNotFoundException;
 import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
+import edu.iastate.cs362.hb.exceptions.MalformattedInputException;
 import edu.iastate.cs362.hb.model.IObjectBox;
 import edu.iastate.cs362.hb.model.impl.HBSystem;
 
@@ -91,6 +92,7 @@ public class Cardinal {
 								"System - Completed command \"%s\"",
 								command.toString()));
 			} catch (MalformattedCommandException
+					| MalformattedInputException
 					| HBDuplicateObjectFoundException
 					| HBObjectNotFoundException | HBDuplicateMethodException
 					| HBRelationshipNotFoundException
@@ -210,7 +212,7 @@ public class Cardinal {
 			return false;
 	}
 	
-	private boolean doImport(ICommand command) throws FileNotFoundException, IOException{
+	private boolean doImport(ICommand command) throws FileNotFoundException, IOException, MalformattedInputException{
 		if(command.getSubCommand().matches(CmdConstants.SubCmdNames.XML_REGEX)){
 			return isc.importDesignXML(command.getFlagValue(CmdConstants.Flags.PATH));
 		} else if(command.getSubCommand().matches(CmdConstants.SubCmdNames.JSON_REGEX)){

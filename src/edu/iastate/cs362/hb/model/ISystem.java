@@ -13,6 +13,7 @@ import edu.iastate.cs362.hb.exceptions.HBMultipleObjectsFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBRelationshipNotFoundException;
 import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
+import edu.iastate.cs362.hb.exceptions.MalformattedInputException;
 
 /**
  * Interface which defines the behavior for System objects
@@ -76,9 +77,9 @@ public interface ISystem {
 		
 		public boolean exportDesignSource(String path);
 
-		public boolean importDesignXML(String path) throws FileNotFoundException, IOException;
+		public boolean importDesignXML(String path) throws FileNotFoundException, IOException, MalformattedInputException;
 
-		public boolean importDesignJSON(String path) throws FileNotFoundException, IOException;
+		public boolean importDesignJSON(String path) throws FileNotFoundException, IOException, MalformattedInputException;
 
-		public boolean importDesignSource(String path) throws FileNotFoundException, IOException;
+		public boolean importDesignSource(String path) throws FileNotFoundException, IOException, MalformattedInputException;
 }
