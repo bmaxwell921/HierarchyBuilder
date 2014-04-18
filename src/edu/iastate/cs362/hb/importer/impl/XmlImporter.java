@@ -21,52 +21,60 @@ public class XmlImporter implements IImporter {
 	}
 
 	@Override
-	public IDesignDoc doImport(String path) throws IOException, MalformattedInputException {
+	public IDesignDoc doImport(String path) throws IOException,
+			MalformattedInputException {
 
 		//
 		InputStream fileStream = new FileInputStream(path);
-		BufferedReader reader = new BufferedReader(new InputStreamReader(fileStream));
+		BufferedReader reader = new BufferedReader(new InputStreamReader(
+				fileStream));
 		String line;
 		StringBuilder sb = new StringBuilder();
-		while((line = reader.readLine()) != null){
+		while ((line = reader.readLine()) != null) {
 			sb.append(line);
 		}
 		reader.close();
 		String file = sb.toString();
-		for(int i = 0; i < file.length(); i++){
-			if(file.charAt(i) == '<'){
-				//Bracket
-				String arg = file.substring(i+1, file.indexOf('>') - 1);
-				switch(arg.toUpperCase()){
-				case "CLASS":
-					
-					break;
-				case "INTERFACE":
-					
-					break;
-				default:
-					throw new MalformattedInputException("Unknown argument: " + arg);
+		for (int i = 0; i < file.length(); i++) {
+			if (file.charAt(i) == '<') {
+				// Bracket
+				System.out.println(file.charAt(i));
+				String arg = file.substring(i + 1, file.indexOf('>') - 1);
+				if (arg.charAt(0) == '?') { // encoding line
+					System.out.println(arg);
+					i = file.indexOf('>') + 1;
+				} else {
+
+					switch (arg.toUpperCase()) {
+					case "CLASS":
+
+						break;
+					case "INTERFACE":
+
+						break;
+					default:
+						throw new MalformattedInputException(
+								"Unknown argument: " + arg);
+					}
+					file = file.substring(file.indexOf('>') + 1);
 				}
 			}
 		}
-		
-		
-		
-		
+
 		return null;
 	}
-	
+
 	private IDesignDoc fillInDesign(DesignDocBox box) {
 		IDesignDoc d = new HBDesignDoc(box.getName());
 		d.addAllInner(box.getInterfaces(), box.getClasses());
 		return d;
 
 	}
-	
-	private IClass buildFromString(String str){
-		
+
+	private IClass buildFromString(String str) {
+
 		return null;
-		
+
 	}
 
 }
