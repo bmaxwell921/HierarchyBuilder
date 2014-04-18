@@ -14,6 +14,7 @@ import edu.iastate.cs362.hb.exceptions.HBMultipleObjectsFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBRelationshipNotFoundException;
 import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
+import edu.iastate.cs362.hb.exceptions.MalformattedInputException;
 import edu.iastate.cs362.hb.model.IDesignDoc;
 import edu.iastate.cs362.hb.model.IObjectBox;
 import edu.iastate.cs362.hb.model.ISystem;
@@ -176,17 +177,17 @@ public class SystemController implements ISystemController {
 	}
 
 	@Override
-	public boolean importDesignXML(String path) throws FileNotFoundException, IOException {
+	public boolean importDesignXML(String path) throws FileNotFoundException, IOException, MalformattedInputException {
 		return system.importDesignXML(path);
 	}
 
 	@Override
-	public boolean importDesignJSON(String path) throws FileNotFoundException, IOException {
+	public boolean importDesignJSON(String path) throws FileNotFoundException, IOException, MalformattedInputException {
 		return system.importDesignJSON(path);
 	}
 
 	@Override
-	public boolean importDesignSource(String path) throws FileNotFoundException, IOException {
+	public boolean importDesignSource(String path) throws FileNotFoundException, IOException, MalformattedInputException {
 		return system.importDesignSource(path);
 	}
 }
