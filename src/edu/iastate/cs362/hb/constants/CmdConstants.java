@@ -118,7 +118,7 @@ public class CmdConstants {
 		
 		//Path for importers/exporters
 		public static final String PATH = "path";
-		private static final String PATH_SHORT = "p";
+		private static final String PATH_SHORT = "pA";
 		public static final String PATH_REGEX = PATH + RegexOp.OR + PATH_SHORT; //Might have some confliction with p from Parameters
 	}
 	

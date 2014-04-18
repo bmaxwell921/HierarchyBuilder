@@ -1,5 +1,7 @@
 package edu.iastate.cs362.hb.main;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -77,6 +79,9 @@ public class Cardinal {
 				} else if (command.getName().equals(
 						CmdConstants.CmdNames.EXPORT)) {
 					doExport(command);
+				} else if (command.getName().equals(
+						CmdConstants.CmdNames.IMPORT)){
+					doImport(command);
 				} else if (command.getName().equals(CmdConstants.CmdNames.EXIT)) {
 					exit = true;
 					break;
@@ -203,6 +208,17 @@ public class Cardinal {
 			return isc.exportDesignSource(command.getFlagValue(CmdConstants.Flags.PATH));
 		} else
 			return false;
+	}
+	
+	private boolean doImport(ICommand command) throws FileNotFoundException, IOException{
+		if(command.getSubCommand().matches(CmdConstants.SubCmdNames.XML_REGEX)){
+			return isc.importDesignXML(command.getFlagValue(CmdConstants.Flags.PATH));
+		} else if(command.getSubCommand().matches(CmdConstants.SubCmdNames.JSON_REGEX)){
+			return isc.importDesignJSON(command.getFlagValue(CmdConstants.Flags.PATH));
+		} else if(command.getSubCommand().matches(CmdConstants.SubCmdNames.SOURCE_REGEX)){
+			return isc.importDesignSource(command.getFlagValue(CmdConstants.Flags.PATH));
+		} else
+		return false;
 	}
 	
 	/**

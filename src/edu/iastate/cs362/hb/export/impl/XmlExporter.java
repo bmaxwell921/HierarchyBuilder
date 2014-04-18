@@ -61,9 +61,7 @@ public class XmlExporter implements IExporter {
 		
 		File out = new File(path);
 		// Create things as needed
-		if (!out.exists()) {
-			System.out.println(out.getParentFile().mkdirs());
-		}
+
 		try (FileWriter fw = new FileWriter(out)) {
 			fw.write(sb.toString());
 		} catch (Exception e) {

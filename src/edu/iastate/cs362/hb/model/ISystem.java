@@ -1,5 +1,7 @@
 package edu.iastate.cs362.hb.model;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 import edu.iastate.cs362.hb.exceptions.HBClassNotFoundException;
@@ -73,4 +75,10 @@ public interface ISystem {
 		public boolean exportDesignJSON(String path);
 		
 		public boolean exportDesignSource(String path);
+
+		public boolean importDesignXML(String path) throws FileNotFoundException, IOException;
+
+		public boolean importDesignJSON(String path) throws FileNotFoundException, IOException;
+
+		public boolean importDesignSource(String path) throws FileNotFoundException, IOException;
 }

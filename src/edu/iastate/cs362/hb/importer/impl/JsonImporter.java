@@ -8,10 +8,10 @@ import edu.iastate.cs362.hb.model.IDesignDoc;
 public class JsonImporter implements IImporter {
 
 	@Override
-	public IDesignDoc doImport(String path) {
+	public boolean doImport(String path) {
 		Gson gson = new Gson();
 		
-		return null;
+		return false;
 	}
 
 }

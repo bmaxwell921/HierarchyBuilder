@@ -1,5 +1,7 @@
 package edu.iastate.cs362.hb.model.impl;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 import edu.iastate.cs362.hb.exceptions.HBClassNotFoundException;
@@ -15,6 +17,10 @@ import edu.iastate.cs362.hb.export.IExporter;
 import edu.iastate.cs362.hb.export.impl.JsonExporter;
 import edu.iastate.cs362.hb.export.impl.SourceExporter;
 import edu.iastate.cs362.hb.export.impl.XmlExporter;
+import edu.iastate.cs362.hb.importer.IImporter;
+import edu.iastate.cs362.hb.importer.impl.JsonImporter;
+import edu.iastate.cs362.hb.importer.impl.SourceImporter;
+import edu.iastate.cs362.hb.importer.impl.XmlImporter;
 import edu.iastate.cs362.hb.model.IDesignDoc;
 import edu.iastate.cs362.hb.model.IObjectBox;
 import edu.iastate.cs362.hb.model.ISystem;
@@ -23,6 +29,7 @@ public class HBSystem implements ISystem {
 
 	private IDesignDoc doc;
 	private IExporter exporter;
+	private IImporter importer;
 	
 	@Override
 	public boolean createDesign(String name) {
@@ -164,6 +171,24 @@ public class HBSystem implements ISystem {
 	public boolean exportDesignSource(String path) {
 		exporter = new SourceExporter();
 		return exporter.doExport(path, doc);
+	}
+
+	@Override
+	public boolean importDesignXML(String path) throws FileNotFoundException, IOException {
+		importer = new XmlImporter();
+		return importer.doImport(path);
+	}
+
+	@Override
+	public boolean importDesignJSON(String path) throws FileNotFoundException, IOException {
+		importer = new JsonImporter();
+		return importer.doImport(path);
+	}
+
+	@Override
+	public boolean importDesignSource(String path) throws FileNotFoundException, IOException {
+		importer = new SourceImporter();
+		return importer.doImport(path);
 	}
 
 }

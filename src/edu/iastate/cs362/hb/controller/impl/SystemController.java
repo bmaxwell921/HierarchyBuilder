@@ -1,5 +1,7 @@
 package edu.iastate.cs362.hb.controller.impl;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 import edu.iastate.cs362.hb.controller.ISystemController;
@@ -170,5 +172,20 @@ public class SystemController implements ISystemController {
 	@Override
 	public boolean exportDesignSource(String path) {
 		return system.exportDesignSource(path);
+	}
+
+	@Override
+	public boolean importDesignXML(String path) throws FileNotFoundException, IOException {
+		return system.importDesignXML(path);
+	}
+
+	@Override
+	public boolean importDesignJSON(String path) throws FileNotFoundException, IOException {
+		return system.importDesignJSON(path);
+	}
+
+	@Override
+	public boolean importDesignSource(String path) throws FileNotFoundException, IOException {
+		return system.importDesignSource(path);
 	}
 }
