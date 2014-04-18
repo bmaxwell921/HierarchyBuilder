@@ -35,23 +35,11 @@ public class XmlExporter implements IExporter {
 		sb.append("<design>\n");
 		for(IObject o : list){
 			if(o.getClass() == HBClass.class){
-				IClass cl = (IClass) o;
-				sb.append("<class id=" + o.getId() + " name=" + o.getName() + " package=" + o.getPackage() + ">");
-				for(String mod : o.getModifiers()){
-					sb.append("<modifier name=\"" + mod + "\" />");
-				}
-				for(IMethod meth : cl.getMethods()){
-					sb.append("<method id=\"" + meth.getId() + "\" name=\"" + meth.getName() + "\">");
-					for(IArgument arg : meth.getArguments()){
-						sb.append("<argument -name=\"" + arg.getName() + "\" -type=\"" + arg.getType() + "\"/>");
-					}
-					sb.append("</method>");
-				}
-				sb.append("</class>");
+				addClass(sb, (IClass) o);
 			}
 			else{
-				sb.append("<interface id=\"" + o.getId() + "\" name=\"" + o.getName() + "\" package=\"" + o.getPackage() + "\" />");
-			}
+				addInterface(sb, o);
+				}
 			sb.append("\n");
 		}
 		
@@ -72,4 +60,60 @@ public class XmlExporter implements IExporter {
 		return false;
 	}
 
+	private void addMethod(StringBuilder sb, IMethod meth){
+		sb.append("<method>");
+		sb.append("<id>");
+		sb.append(meth.getId());
+		sb.append("</id>\n");
+		sb.append("<name>");
+		sb.append(meth.getName());
+		sb.append("</name>\n");
+		for(IArgument arg : meth.getArguments()){
+			sb.append("<argument>");
+			sb.append("<type>");
+			sb.append(arg.getType());
+			sb.append("</type>\n");
+			sb.append("<name>");
+			sb.append(arg.getName());
+			sb.append("</name>\n");
+			sb.append("</argument>\n");
+		}
+		sb.append("</method>\n");
+	}
+	
+	private void addClass(StringBuilder sb, IClass cl){
+		sb.append("<class>");
+		sb.append("<id>");
+		sb.append(cl.getId());
+		sb.append("</id>\n");
+		sb.append("<class>");
+		sb.append(cl.getName());
+		sb.append("</class>\n");
+		sb.append("<package>");
+		sb.append(cl.getPackage());
+		sb.append("</package>\n");
+		for(String mod : cl.getModifiers()){
+			sb.append("<modifier>");
+			sb.append(mod);
+			sb.append("</modifier>\n");
+		}
+		for(IMethod meth : cl.getMethods()){
+			addMethod(sb, meth);
+		}
+		sb.append("</class>\n");
+	}
+	
+	private void addInterface(StringBuilder sb, IObject inter){
+		sb.append("<interface>");
+		sb.append("<id>");
+		sb.append(inter.getId());
+		sb.append("</id>\n");
+		sb.append("<name>");
+		sb.append(inter.getName());
+		sb.append("</name>\n");
+		sb.append("<package>");
+		sb.append(inter.getPackage());
+		sb.append("</package>\n");
+		sb.append("</interface>\n");
+	}
 }

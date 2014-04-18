@@ -25,7 +25,6 @@ public class XmlImporter implements IImporter {
 		while((line = reader.readLine()) != null){
 			System.out.println(line);
 		}
-		
 		reader.close();
 		
 		return null;
