@@ -103,7 +103,9 @@ public class HBDesignDoc implements IDesignDoc {
 	}
 
 	@Override
-	public boolean removeMethod(String className, String methodName) throws HBObjectNotFoundException, HBMultipleObjectsFoundException, HBMethodNotFoundException {
+	public boolean removeMethod(String className, String methodName)
+			throws HBObjectNotFoundException, HBMultipleObjectsFoundException,
+			HBMethodNotFoundException {
 		HBClass clazz = (HBClass) tree.getObject(className);
 		IMethod method = clazz.getMethod(methodName);
 		clazz.removeMethod(method);
@@ -111,21 +113,24 @@ public class HBDesignDoc implements IDesignDoc {
 	}
 
 	@Override
-	public boolean removePackage(String className) throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
+	public boolean removePackage(String className)
+			throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
 		IObject toRem = tree.getObject(className);
 		return toRem.removePackage();
 	}
 
 	@Override
-	public boolean removeRelationship(String fromClass, String toClass) throws 
-			HBMultipleObjectsFoundException, HBObjectNotFoundException, HBRelationshipNotFoundException {
+	public boolean removeRelationship(String fromClass, String toClass)
+			throws HBMultipleObjectsFoundException, HBObjectNotFoundException,
+			HBRelationshipNotFoundException {
 		IObject from = tree.getObject(fromClass);
 		IObject to = tree.getObject(toClass);
 		return tree.removeRelationship(from, to);
 	}
 
 	@Override
-	public boolean removeClass(String toRemove) throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
+	public boolean removeClass(String toRemove)
+			throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
 		IObject toRem = tree.getObject(toRemove);
 		return tree.removeObject(toRem);
 	}
@@ -165,9 +170,10 @@ public class HBDesignDoc implements IDesignDoc {
 		sb.append("Design: ");
 		sb.append(this.name);
 		sb.append("\n");
-		tree.traverse(new IHBTreeVisitor(){
+		tree.traverse(new IHBTreeVisitor() {
 			@Override
-			public void visit(IObject o, Set<Pair<IRelationship, IObject>> superTypes) {
+			public void visit(IObject o,
+					Set<Pair<IRelationship, IObject>> superTypes) {
 				sb.append(o.list());
 				sb.append("\n");
 			}
@@ -176,23 +182,31 @@ public class HBDesignDoc implements IDesignDoc {
 	}
 
 	@Override
-	public String listObject(String name) throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
+	public String listObject(String name) throws HBObjectNotFoundException,
+			HBMultipleObjectsFoundException {
 		return tree.getObject(name).list();
 	}
 
 	@Override
-	public boolean changeName(String name, String newName) throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
+	public boolean changeName(String name, String newName)
+			throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
 		return tree.getObject(name).changeName(newName);
 	}
 
 	@Override
-	public boolean changePackage(String name, String packageName) throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
+	public boolean changePackage(String name, String packageName)
+			throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
 		return tree.getObject(name).changePackage(packageName);
 	}
 
 	@Override
 	public void traverse(IHBTreeVisitor visitor) {
 		tree.traverse(visitor);
-		
+	}
+	
+	@Override
+	public void addAllInner(Set<? extends IObject> interfaces,
+			Set<? extends IObject> classes) {
+		// TODO
 	}
 }
