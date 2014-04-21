@@ -7,7 +7,6 @@ import java.util.List;
 import edu.iastate.cs362.hb.exceptions.HBClassNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateMethodException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
-import edu.iastate.cs362.hb.exceptions.HBDuplicateRelationshipException;
 import edu.iastate.cs362.hb.exceptions.HBMethodNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBMultipleObjectsFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
@@ -31,7 +30,7 @@ public class HBSystem implements ISystem {
 	private IDesignDoc doc;
 	private IExporter exporter;
 	private IImporter importer;
-	
+
 	@Override
 	public boolean createDesign(String name) {
 		// TODO save the old one?
@@ -53,79 +52,72 @@ public class HBSystem implements ISystem {
 	 *         field addition
 	 * @throws HBClassNotFoundException
 	 * @throws HBObjectNotFoundException
-	 * @throws HBMultipleObjectsFoundException 
+	 * @throws HBMultipleObjectsFoundException
 	 */
 	@Override
-	public boolean addInstanceField(String className, String instanceFieldName,
-			String... modifiers) throws HBClassNotFoundException,
-			HBObjectNotFoundException, HBMultipleObjectsFoundException {
-		return doc.addInstanceField(className, instanceFieldName, modifiers);
+	public boolean addInstanceField(String className, String fieldName,
+			String... modifiers) throws Exception {
+		return doc.addInstanceField(className, fieldName, modifiers);
 	}
 
 	@Override
-	public boolean addRelationship(String fromClass, String toClass,
-			String relationship) throws HBObjectNotFoundException,
-			HBDuplicateRelationshipException, HBMultipleObjectsFoundException {
-		return doc.addRelationship(fromClass, toClass, relationship);
+	public boolean addRelationship(String superType, String subType, String rel)
+			throws Exception {
+		return doc.addRelationship(superType, subType, rel);
 	}
 
 	@Override
-	public boolean addPackage(String packageName, String className)
-			throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
-		return doc.addPackage(packageName, className);
+	public boolean addPackage(String pkgName, String objName) throws Exception {
+		return doc.addPackage(pkgName, objName);
 	}
 
 	@Override
-	public boolean addInstanceMethod(String className, String methodName,
-			String params, String... modifiers)
-			throws HBObjectNotFoundException, MalformattedCommandException,
-			HBDuplicateMethodException, HBMultipleObjectsFoundException {
-		return doc.addInstanceMethod(className, methodName, params, modifiers);
+	public boolean addInstanceMethod(String objName, String methodName,
+			String params, String... modifiers) throws Exception {
+		return doc.addInstanceMethod(objName, methodName, params, modifiers);
 	}
 
 	@Override
-	public boolean addStaticMethod(String className, String methodName,
-			String params, String... modifiers)
-			throws MalformattedCommandException, HBObjectNotFoundException,
-			HBDuplicateMethodException, HBMultipleObjectsFoundException {
-		return doc.addStaticMethod(className, methodName, params, modifiers);
+	public boolean addStaticMethod(String objName, String methodName,
+			String params, String... modifiers) throws Exception {
+		return doc.addStaticMethod(objName, methodName, params, modifiers);
 	}
 
 	/**
-	 * @throws HBMultipleObjectsFoundException 
-	 * @throws HBObjectNotFoundException 
-	 * @throws HBMethodNotFoundException 
+	 * @throws HBMultipleObjectsFoundException
+	 * @throws HBObjectNotFoundException
+	 * @throws HBMethodNotFoundException
 	 * 
 	 */
 	@Override
-	public boolean removeMethod(String className, String methodName) throws HBObjectNotFoundException, HBMultipleObjectsFoundException, HBMethodNotFoundException {
-		return doc.removeMethod(className, methodName);
+	public boolean removeMethod(String objName, String methodName)
+			throws Exception {
+		return doc.removeMethod(objName, methodName);
 	}
 
 	@Override
-	public boolean removePackage(String className) throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
-		return doc.removePackage(className);
+	public boolean removePackage(String objName) throws Exception {
+		return doc.removePackage(objName);
 	}
 
 	@Override
-	public boolean removeRelationship(String fromClass, String toClass) throws HBMultipleObjectsFoundException, HBObjectNotFoundException, HBRelationshipNotFoundException {
-		return doc.removeRelationship(fromClass, toClass);
+	public boolean removeRelationship(String superType, String subType)
+			throws Exception {
+		return doc.removeRelationship(superType, subType);
 	}
 
 	@Override
-	public boolean removeClass(String className) throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
-		return doc.removeObj(className);
+	public boolean removeObj(String objName) throws Exception {
+		return doc.removeObj(objName);
 	}
 
 	@Override
-	public boolean createClass(String name)
-			throws HBDuplicateObjectFoundException {
+	public boolean createClass(String name) throws Exception {
 		return doc.createClass(name);
 	}
 
 	@Override
-	public boolean createInterface(String name)
-			throws HBDuplicateObjectFoundException {
+	public boolean createInterface(String name) throws Exception {
 		return doc.createInterface(name);
 	}
 
@@ -136,23 +128,24 @@ public class HBSystem implements ISystem {
 
 	@Override
 	public String listDesign() {
-		if(doc == null)
+		if (doc == null)
 			return "";
 		return doc.list();
 	}
 
 	@Override
-	public String listObject(String name) throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
+	public String listObject(String name) throws Exception {
 		return doc.listObject(name);
 	}
 
 	@Override
-	public boolean changeName(String name, String newName) throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
+	public boolean changeName(String name, String newName) throws Exception {
 		return doc.changeName(name, newName);
 	}
 
 	@Override
-	public boolean changePackage(String name, String packageName) throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
+	public boolean changePackage(String name, String packageName)
+			throws Exception {
 		return doc.changePackage(name, packageName);
 	}
 
@@ -175,21 +168,25 @@ public class HBSystem implements ISystem {
 	}
 
 	@Override
-	public boolean importDesignXML(String path) throws FileNotFoundException, IOException, MalformattedInputException {
+	public boolean importDesignXML(String path) throws FileNotFoundException,
+			IOException, MalformattedInputException {
 		importer = new XmlImporter();
-		doc =  importer.doImport(path);
+		doc = importer.doImport(path);
 		return true;
 	}
 
 	@Override
-	public boolean importDesignJSON(String path) throws FileNotFoundException, IOException, MalformattedInputException {
+	public boolean importDesignJSON(String path) throws FileNotFoundException,
+			IOException, MalformattedInputException {
 		importer = new JsonImporter();
 		doc = importer.doImport(path);
 		return true;
 	}
 
 	@Override
-	public boolean importDesignSource(String path) throws FileNotFoundException, IOException, MalformattedInputException {
+	public boolean importDesignSource(String path)
+			throws FileNotFoundException, IOException,
+			MalformattedInputException {
 		importer = new SourceImporter();
 		doc = importer.doImport(path);
 		return true;
