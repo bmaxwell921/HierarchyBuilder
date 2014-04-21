@@ -1,6 +1,5 @@
 package edu.iastate.cs362.hb.model.tree;
 
-import edu.iastate.cs362.hb.model.tree.impl.HBTree;
 
 /*
  * Class holding a pair of two object
