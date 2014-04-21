@@ -121,7 +121,7 @@ public class SystemController implements ISystemController {
 
 	@Override
 	public boolean removeClass(String toRemove) throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
-		return system.removeClass(toRemove);
+		return system.removeObj(toRemove);
 	}
 
 	@Override
