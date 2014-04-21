@@ -27,8 +27,7 @@ public interface IMethod extends Nameable, Identifiable, Modifiable {
 	 * 
 	 * Args should be formatted as such:
 	 * 	type1:name1,type2:name2,etc
-	 * @param args
-	 * @throws MalformattedCommandException 
+	 * @param args 
 	 */
-	public void addArguments(String args) throws MalformattedCommandException;
+	public void addArguments(String args);
 }

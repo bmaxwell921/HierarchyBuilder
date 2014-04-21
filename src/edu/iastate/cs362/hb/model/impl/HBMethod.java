@@ -121,7 +121,7 @@ public class HBMethod implements IMethod {
 	}
 
 	@Override
-	public void addArguments(String args) throws MalformattedCommandException {
+	public void addArguments(String args) {
 		// No arguments
 		if (args == null) {
 			return;
