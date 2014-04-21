@@ -44,7 +44,7 @@ public abstract class AHBObject implements IObject {
 
 	protected List<IMethod> methods;
 	
-	protected List<Pair<IRelationship, IObject>> relationships;
+	protected Set<Pair<IRelationship, IObject>> relationships;
 
 	/**
 	 * Creates a new AHBObject with the given name that goes in the default
@@ -57,7 +57,7 @@ public abstract class AHBObject implements IObject {
 		this.pkg = ObjectConstants.DEFAULT_PKG;
 		this.modifiers = new HashSet<>();
 		this.methods = new ArrayList<>();
-		this.relationships = new ArrayList<>();
+		this.relationships = new HashSet<>();
 	}
 
 	@Override
@@ -207,6 +207,21 @@ public abstract class AHBObject implements IObject {
 		}
 		
 		throw new HBRelationshipNotFoundException(ErrorMessages.RELATION_NOT_FOUND, fromObj.getName(), this.getName());
+	}
+	
+	@Override
+	public boolean hasRelationship(IObject from) {
+		for (Pair<IRelationship, IObject> pair : relationships) {
+			if (pair.sec.equals(from)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	@Override
+	public Set<Pair<IRelationship, IObject>> getRelationships()	{
+		return relationships;
 	}
 	
 	@Override

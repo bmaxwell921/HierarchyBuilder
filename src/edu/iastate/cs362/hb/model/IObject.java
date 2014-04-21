@@ -1,10 +1,13 @@
 package edu.iastate.cs362.hb.model;
 
+import java.util.Set;
+
 import edu.iastate.cs362.hb.exceptions.HBDuplicateMethodException;
 import edu.iastate.cs362.hb.exceptions.HBMethodNotFoundException;
 import edu.iastate.cs362.hb.model.attributes.Identifiable;
 import edu.iastate.cs362.hb.model.attributes.Modifiable;
 import edu.iastate.cs362.hb.model.attributes.Nameable;
+import edu.iastate.cs362.hb.model.tree.Pair;
 
 /**
  * Super interface to IClass and IInterface
@@ -50,7 +53,28 @@ public interface IObject extends Nameable, Identifiable, Modifiable {
 	 */
 	public boolean addRelationship(IRelationship rel, IObject fromObj) throws Exception;
 	
+	/**
+	 * Removes the relationship from fromObj to this object.
+	 * @param fromObj
+	 * @return
+	 * @throws RelationshipNotFoundException
+	 * 		If there is not relationship from fromObj to this
+	 */
 	public boolean removeRelationship(IObject fromObj) throws Exception;
+	
+	/**
+	 * Returns whether this object has from as a superType
+	 * @param from
+	 * @return
+	 */
+	public boolean hasRelationship(IObject from);
+	
+	/**
+	 * Gets all of the pairs in this object.
+	 * 	The returned instance should not be modified
+	 * @return
+	 */
+	public Set<Pair<IRelationship, IObject>> getRelationships();
 	
 	public String list();
 	
