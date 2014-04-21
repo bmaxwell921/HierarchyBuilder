@@ -13,8 +13,6 @@ import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBRelationshipNotFoundException;
 import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
 import edu.iastate.cs362.hb.model.attributes.Nameable;
-import edu.iastate.cs362.hb.model.impl.HBClass;
-import edu.iastate.cs362.hb.model.impl.HBInterface;
 import edu.iastate.cs362.hb.model.tree.IHBTreeVisitor;
 
 /**
@@ -25,61 +23,213 @@ import edu.iastate.cs362.hb.model.tree.IHBTreeVisitor;
  */
 public interface IDesignDoc extends Nameable {
 
+	/**
+	 * Creates a new instance field with the given name and modifiers in the
+	 * given class
+	 * 
+	 * @param className
+	 * @param instanceFieldName
+	 * @param modifiers
+	 * @return
+	 * @throws HBClassNotFoundException
+	 *             If there is no class in the design doc with the given name
+	 * @throws HBObjectNotFoundException
+	 *             If there is no class in the design doc with the given name
+	 * @throws HBMultipleObjectsFoundException
+	 *             If there are multiple classes in the design doc with the
+	 *             given name
+	 */
 	public boolean addInstanceField(String className, String instanceFieldName,
-			String... modifiers) throws HBClassNotFoundException,
-			HBObjectNotFoundException, HBMultipleObjectsFoundException;
+			String... modifiers) throws Exception;
 
-	public boolean addRelationship(String fromClass, String toClass,
-			String relationship) throws HBObjectNotFoundException,
-			HBDuplicateRelationshipException, HBMultipleObjectsFoundException;
+	/**
+	 * Creates a new relationship from super to sub
+	 * 
+	 * @param superType
+	 * @param subType
+	 * @param rel
+	 * @return
+	 * @throws HBObjectNotFoundException
+	 *             If either superType or subType aren't in the design doc
+	 * @throws HBDuplicateRelationshipException
+	 *             If a relationship already exists between superType and
+	 *             subType
+	 * @throws HBMultipleObjectsFoundException
+	 *             If there are multiple objects with the name superType or
+	 *             subType
+	 */
+	public boolean addRelationship(String superType, String subType, String rel)
+			throws Exception;
 
-	public boolean addPackage(String packageName, String className)
-			throws HBObjectNotFoundException, HBMultipleObjectsFoundException;
+	/**
+	 * Adds the given packageName to the given object
+	 * 
+	 * @param pkg
+	 * @param objName
+	 * @return
+	 * @throws HBObjectNotFoundException
+	 *             If obj doesn't exist in the design doc
+	 * @throws HBMultipleObjectsFoundException
+	 *             If multiple objects with the given name exist in the design
+	 *             doc
+	 */
+	public boolean addPackage(String pkg, String objName) throws Exception;
 
-	public boolean addInstanceMethod(String className, String methodName,
-			String params, String... modifiers)
-			throws HBObjectNotFoundException, MalformattedCommandException,
-			HBDuplicateMethodException, HBMultipleObjectsFoundException;
+	/**
+	 * Creates a new instance method in the given class with the given
+	 * information
+	 * 
+	 * @param objName
+	 * @param methodName
+	 * @param params
+	 * @param modifiers
+	 * @return
+	 * @throws HBObjectNotFoundException
+	 *             If there isn't an object with the given name in the design
+	 * @throws HBDuplicateMethodException
+	 *             If a duplicate copy of the given method exists in the given
+	 *             object
+	 * @throws HBMultipleObjectsFoundException
+	 *             If multiple objects with the given name exist in the design
+	 *             doc
+	 */
+	public boolean addInstanceMethod(String objName, String methodName,
+			String params, String... modifiers) throws Exception;
 
-	public boolean addStaticMethod(String className, String methodName,
-			String params, String... modifiers)
-			throws MalformattedCommandException, HBObjectNotFoundException,
-			HBDuplicateMethodException, HBMultipleObjectsFoundException;
+	/**
+	 * Creates a new static method in the given class with the given information
+	 * 
+	 * @param objName
+	 * @param methodName
+	 * @param params
+	 * @param modifiers
+	 * @return
+	 * @throws HBObjectNotFoundException
+	 * @throws HBDuplicateMethodException
+	 * @throws HBMultipleObjectsFoundException
+	 */
+	public boolean addStaticMethod(String objName, String methodName,
+			String params, String... modifiers) throws Exception;
 
-	public boolean removeMethod(String className, String methodName)
-			throws HBObjectNotFoundException, HBMultipleObjectsFoundException,
-			HBMethodNotFoundException;
+	/**
+	 * Removes the method with the given name from the given class
+	 * 
+	 * @param objName
+	 * @param methodName
+	 * @return
+	 * @throws HBObjectNotFoundException
+	 * @throws HBMultipleObjectsFoundException
+	 * @throws HBMethodNotFoundException
+	 */
+	public boolean removeMethod(String objName, String methodName)
+			throws Exception;
 
-	public boolean removePackage(String className)
-			throws HBObjectNotFoundException, HBMultipleObjectsFoundException;
+	/**
+	 * Removes the current package name from the given object
+	 * 
+	 * @param objName
+	 * @return
+	 * @throws HBObjectNotFoundException
+	 * @throws HBMultipleObjectsFoundException
+	 */
+	public boolean removePackage(String objName) throws Exception;
 
-	public boolean removeRelationship(String fromClass, String toClass)
-			throws HBMultipleObjectsFoundException, HBObjectNotFoundException,
-			HBRelationshipNotFoundException;
+	/**
+	 * Removes the relationship between the two given objects
+	 * 
+	 * @param fromName
+	 * @param toName
+	 * @return
+	 * @throws HBMultipleObjectsFoundException
+	 * @throws HBObjectNotFoundException
+	 * @throws HBRelationshipNotFoundException
+	 */
+	public boolean removeRelationship(String fromName, String toName)
+			throws Exception;
 
-	public boolean removeClass(String toRemove)
-			throws HBObjectNotFoundException, HBMultipleObjectsFoundException;
+	/**
+	 * Removes the object with the given name from this design doc
+	 * 
+	 * @param rem
+	 * @return
+	 * @throws HBObjectNotFoundException
+	 * @throws HBMultipleObjectsFoundException
+	 */
+	public boolean removeObj(String rem) throws Exception;
 
-	public boolean createClass(String name)
-			throws HBDuplicateObjectFoundException;
+	/**
+	 * Creates a new class with the given name
+	 * 
+	 * @param name
+	 * @return
+	 * @throws HBDuplicateObjectFoundException
+	 */
+	public boolean createClass(String name) throws Exception;
 
-	public boolean createInterface(String name)
-			throws HBDuplicateObjectFoundException;
+	/**
+	 * Creates a new interface with the given name
+	 * 
+	 * @param name
+	 * @return
+	 * @throws HBDuplicateObjectFoundException
+	 */
+	public boolean createInterface(String name) throws Exception;
 
+	/**
+	 * Method used to visit all objects in the design
+	 * 
+	 * @param visitor
+	 */
 	public void traverse(IHBTreeVisitor visitor);
 
+	/**
+	 * Method to get all of objects in the design with the given name TODO
+	 * remove after refactor
+	 * 
+	 * @param name
+	 * @return
+	 */
 	public List<IObjectBox> getMatchingObjects(String name);
 
+	/**
+	 * Returns the string representation of this design doc
+	 * 
+	 * @return
+	 */
 	public String list();
 
-	public String listObject(String name) throws HBObjectNotFoundException,
-			HBMultipleObjectsFoundException;
+	/**
+	 * Method used to get the string representation of a single object in the
+	 * design
+	 * 
+	 * @param name
+	 * @return
+	 * @throws HBObjectNotFoundException
+	 * @throws HBMultipleObjectsFoundException
+	 */
+	public String listObject(String name) throws Exception;
 
-	public boolean changeName(String name, String newName)
-			throws HBObjectNotFoundException, HBMultipleObjectsFoundException;
+	/**
+	 * Method used to change the name of the given object
+	 * 
+	 * @param name
+	 * @param newName
+	 * @return
+	 * @throws HBObjectNotFoundException
+	 * @throws HBMultipleObjectsFoundException
+	 */
+	public boolean changeName(String name, String newName) throws Exception;
 
-	public boolean changePackage(String name, String packageName)
-			throws HBObjectNotFoundException, HBMultipleObjectsFoundException;
+	/**
+	 * Method used to change the package of the given class
+	 * 
+	 * @param name
+	 * @param pkgName
+	 * @return
+	 * @throws HBObjectNotFoundException
+	 * @throws HBMultipleObjectsFoundException
+	 */
+	public boolean changePackage(String name, String pkgName) throws Exception;
 
 	/**
 	 * Method used to add the given interfaces and classes to the design
