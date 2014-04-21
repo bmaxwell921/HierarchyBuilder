@@ -129,9 +129,6 @@ public class HBMethod implements IMethod {
 		StringTokenizer st = new StringTokenizer(args, A_MAJ_DEL + CmdConstants.RegexOp.OR + A_MIN_DEL);
 		while (st.hasMoreTokens()) {
 			String type = st.nextToken();
-			if (!st.hasMoreTokens()) {
-				throw new MalformattedCommandException(ErrorMessages.MALFORMATTED_PARAM_LIST, args);
-			}
 			String value = st.nextToken();
 			this.args.add(new HBArgument(type, value));
 		}
