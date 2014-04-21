@@ -276,12 +276,12 @@ public class DesignDocTest {
 	public void testRemoveClass() throws Exception {
 		final String name = "CLASS";
 		test.createClass(name);
-		Assert.assertTrue("Test Normal Remove Class.", test.removeClass(name));
+		Assert.assertTrue("Test Normal Remove Class.", test.removeObj(name));
 	}
 	
 	@Test(expected = HBObjectNotFoundException.class)
 	public void testRemoveClassNotFound() throws Exception {
-		test.removeClass("NotReal");
+		test.removeObj("NotReal");
 	}
 
 	@Test
