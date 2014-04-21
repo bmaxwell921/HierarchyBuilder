@@ -81,7 +81,7 @@ public interface ITree {
 	 * @throws HBObjectNotFoundException
 	 *             If the given object doesn't exist in the tree
 	 */
-	public boolean removeObject(IObject rem) throws HBObjectNotFoundException;
+	public boolean removeObject(IObject rem) throws Exception;
 
 	/**
 	 * Method used to get a list of all the objects that match the given name.
