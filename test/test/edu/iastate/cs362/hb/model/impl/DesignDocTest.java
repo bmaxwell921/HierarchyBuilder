@@ -42,26 +42,26 @@ public class DesignDocTest {
 	}
 
 	@Test
-	public void testCreateClass() throws HBDuplicateObjectFoundException {
+	public void testCreateClass() throws Exception {
 		Assert.assertTrue("Creating a class normally should work",
 				test.createClass(OBJECT_NAME));
 	}
 
 	@Test(expected = HBDuplicateObjectFoundException.class)
-	public void testCreateClassDup() throws HBDuplicateObjectFoundException {
+	public void testCreateClassDup() throws Exception {
 		test.createClass(OBJECT_NAME);
 		test.createClass(OBJECT_NAME);
 		Assert.fail("Adding two classes with the name name (and default package) should fail");
 	}
 
 	@Test
-	public void testCreateInterface() throws HBDuplicateObjectFoundException {
+	public void testCreateInterface() throws Exception {
 		Assert.assertTrue("Creating an interface normally should work",
 				test.createInterface(OBJECT_NAME));
 	}
 
 	@Test(expected = HBDuplicateObjectFoundException.class)
-	public void testCreateInterfaceDup() throws HBDuplicateObjectFoundException {
+	public void testCreateInterfaceDup() throws Exception {
 		test.createInterface(OBJECT_NAME);
 		test.createInterface(OBJECT_NAME);
 		Assert.fail("Adding two classes with the name name (and default package) should fail");
