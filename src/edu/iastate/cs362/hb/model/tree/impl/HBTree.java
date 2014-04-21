@@ -26,204 +26,155 @@ import edu.iastate.cs362.hb.model.tree.Pair;
 
 /**
  * The tree structure for the Hierarchy Builder class
+ * 
  * @author Brandon
- *
+ * 
  */
 public class HBTree implements ITree {
-	
+
 	/*
-	 * Map of all the objects in the tree.
-	 * Value is the set of all relationships where the
-	 * key is the 'to' object.
+	 * Map of all the objects in the tree. Value is the set of all relationships
+	 * where the key is the 'to' object.
 	 * 
-	 * I decided to sacrifice speed for clarity because it was getting
-	 * out of hand trying to balance everything
+	 * I decided to sacrifice speed for clarity because it was getting out of
+	 * hand trying to balance everything
 	 */
-	private Map<IObject, Set<Pair<IRelationship, IObject>>> objs;
-	
+	private Set<IObject> objs;
+
 	/**
 	 * Constructs a new, empty HBTree
 	 */
 	public HBTree() {
-		this.objs = new HashMap<>();
+		this.objs = new HashSet<>();
 	}
-	
+
 	@Override
-	public IObject getObject(String className) throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
-		Set<IObject> matches = findAll(className, null);
+	public IObject getObject(String objName) throws Exception {
+		Set<IObject> matches = findAll(objName, null);
 		if (matches.isEmpty()) {
-			throw new HBObjectNotFoundException(ErrorMessages.OBJECT_NOT_FOUND, className);
+			throw new HBObjectNotFoundException(ErrorMessages.OBJECT_NOT_FOUND,
+					objName);
 		}
 		if (matches.size() > 1) {
-			throw new HBMultipleObjectsFoundException(ErrorMessages.MULT_OBJECT_WITH_NAME, className);
+			throw new HBMultipleObjectsFoundException(
+					ErrorMessages.MULT_OBJECT_WITH_NAME, objName);
 		}
-		
+
 		return matches.iterator().next();
 	}
 
 	@Override
-	public boolean addObject(IObject newClass)
-			throws HBDuplicateObjectFoundException {
-		if (containsObject(newClass.getName(), newClass.getPackage())) {
-			throw new HBDuplicateObjectFoundException(ErrorMessages.DUPLICATE_OBJECT_FOUND, newClass.getName(), newClass.getPackage());
+	public boolean addObject(IObject newObj) throws Exception {
+		if (containsObject(newObj.getName(), newObj.getPackage())) {
+			throw new HBDuplicateObjectFoundException(
+					ErrorMessages.DUPLICATE_OBJECT_FOUND, newObj.getName(),
+					newObj.getPackage());
 		}
-		
-		// No relationships to start with 
-		objs.put(newClass, null);
-//		roots.add(newClass);
+		objs.add(newObj);
 		return true;
 	}
 
 	@Override
-	public boolean addRelationship(IObject fromClass, IObject toClass,
-			IRelationship relationship) throws HBObjectNotFoundException,
-			HBDuplicateRelationshipException {
-		if (!containsObject(fromClass.getName(), fromClass.getPackage())) {
-			throw new HBObjectNotFoundException(ErrorMessages.OBJECT_NOT_FOUND, fromClass.getName());
-		}	
-		if (!containsObject(toClass.getName(), toClass.getPackage())) {
-			throw new HBObjectNotFoundException(ErrorMessages.OBJECT_NOT_FOUND, toClass.getName());
+	public boolean addRelationship(IObject from, IObject to, IRelationship rel)
+			throws Exception {
+		if (!containsObject(from.getName(), from.getPackage())) {
+			throw new HBObjectNotFoundException(ErrorMessages.OBJECT_NOT_FOUND,
+					from.getName());
 		}
-		if (relationExists(fromClass, toClass)) {
-			throw new HBDuplicateRelationshipException(ErrorMessages.DUPLICATE_RELATION, fromClass.getName(), toClass.getName());
+		if (!containsObject(to.getName(), to.getPackage())) {
+			throw new HBObjectNotFoundException(ErrorMessages.OBJECT_NOT_FOUND,
+					to.getName());
 		}
-		
-		// The values in objs are the froms in a relationship
-		Set<Pair<IRelationship, IObject>> rel = objs.get(toClass);
-		if (rel == null) {
-			rel = new HashSet<>();
-		}
-		rel.add(new Pair<>(relationship, fromClass));
-		// Put it back in case it was null before
-		objs.put(toClass, rel);
+
+		to.addRelationship(rel, from);
 		return true;
 	}
 
 	@Override
-	public boolean removeRelationship(IObject fromClass, IObject toClass)
-			throws HBObjectNotFoundException, HBRelationshipNotFoundException {
-		if (!containsObject(fromClass.getName(), toClass.getPackage())) {
-			throw new HBObjectNotFoundException(ErrorMessages.OBJECT_NOT_FOUND, fromClass.getName());
+	public boolean removeRelationship(IObject from, IObject to)
+			throws Exception {
+		if (!containsObject(from.getName(), to.getPackage())) {
+			throw new HBObjectNotFoundException(ErrorMessages.OBJECT_NOT_FOUND,
+					from.getName());
 		}
-		if (!containsObject(toClass.getName(), toClass.getPackage())) {
-			throw new HBObjectNotFoundException(ErrorMessages.OBJECT_NOT_FOUND, toClass.getName());
+		if (!containsObject(to.getName(), to.getPackage())) {
+			throw new HBObjectNotFoundException(ErrorMessages.OBJECT_NOT_FOUND,
+					to.getName());
 		}
-		Set<Pair<IRelationship, IObject>> rels = objs.get(toClass);
-		if(rels == null){
-			throw new HBRelationshipNotFoundException(ErrorMessages.RELATION_NOT_FOUND, fromClass.getName(), toClass.getName());
-		}
-		boolean remed = removeRelationFrom(rels, fromClass);
-		if (!remed) {
-			throw new HBRelationshipNotFoundException(ErrorMessages.RELATION_NOT_FOUND, fromClass.getName(), toClass.getName());
-		}
+		to.removeRelationship(from);
 		return true;
 	}
 
 	@Override
-	public boolean removeObject(IObject toRemove)
-			throws HBObjectNotFoundException {
-		if (!containsObject(toRemove.getName(), toRemove.getPackage())) {
-			throw new HBObjectNotFoundException(ErrorMessages.OBJECT_NOT_FOUND, toRemove.getName());
+	public boolean removeObject(IObject rem) throws Exception {
+		if (!containsObject(rem.getName(), rem.getPackage())) {
+			throw new HBObjectNotFoundException(ErrorMessages.OBJECT_NOT_FOUND,
+					rem.getName());
 		}
-		
-		objs.remove(toRemove);
-		removeRelations(toRemove);
+
+		objs.remove(rem);
+		removeRelations(rem);
 		return true;
 	}
-	
+
 	@Override
 	public List<IObjectBox> getMatchingObjects(String name) {
 		List<IObjectBox> objs = new ArrayList<>();
 		for (IObject obj : findAll(name, null)) {
-			objs.add(new HBObjectBox(obj.getId(), obj.getName(), obj.getPackage()));
+			objs.add(new HBObjectBox(obj.getId(), obj.getName(), obj
+					.getPackage()));
 		}
-		
+
 		return objs;
 	}
-	
+
 	@Override
 	public void traverse(IHBTreeVisitor visitor) {
-		// Objects we've visited already
-		Set<IObject> visited = new HashSet<>();
-		traverseAll(visited, visitor);
-	}
-	
-	// Method to actually visit all the objects
-	private void traverseAll(Set<IObject> visited, IHBTreeVisitor visitor) {
-		// Then go through the rest, alphabetically - Just go through it alphabetically
-		List<IObject> keys = new ArrayList<>(objs.keySet());
-		Collections.sort(keys, new Comparator<IObject>() {
-			@Override
+		// Get a new copy so we can sort
+		List<IObject> sortedObjs = new ArrayList<>(objs);
+		Collections.sort(sortedObjs, new Comparator<IObject>() {
 			public int compare(IObject lhs, IObject rhs) {
 				String lhsFull = lhs.getPackage() + lhs.getName();
 				String rhsFull = rhs.getPackage() + rhs.getName();
 				return lhsFull.compareTo(rhsFull);
 			}
 		});
-		
-		for (IObject obj : keys) {
-			if (!visited.contains(obj)) {
-				visitor.visit(obj, objs.get(obj));
-				visited.add(obj);
+
+		for (IObject obj : sortedObjs) {
+			visitor.visit(obj, obj.getRelationships());
+		}
+	}
+
+	// Removes any relationships containing the object rem. Returns whether
+	// something was returned or not
+	private void removeRelations(IObject rem) {
+		for (IObject obj : objs) {
+			if (obj.hasRelationship(rem)) {
+				try {
+					obj.removeRelationship(rem);
+				} catch (Exception e) {
+					// This is impossible due to the above check
+				}
 			}
 		}
 	}
-	
-	// Removes any relationships containing the object rem. Returns whether something was returned or not
-	private boolean removeRelations(IObject rem) {
-		boolean remed = false;
-		for (IObject obj : objs.keySet()) {
-			Set<Pair<IRelationship, IObject>> rel = objs.get(obj);
-			if (rel == null) {
-				continue;
-			}
-			if (removeRelationFrom(rel, rem)) {
-				remed = true;
-			}
-		}
-		return remed;
-	}
-	
-	private boolean removeRelationFrom(Set<Pair<IRelationship, IObject>> rels, IObject from) {
-		boolean remed = false;
-		for (Iterator<Pair<IRelationship, IObject>> iter = rels.iterator(); iter.hasNext(); ) {
-			Pair<IRelationship, IObject> pair = iter.next();
-			if (pair.sec.equals(from)) {
-				iter.remove();
-				remed = true;
-			}
-		}
-		return remed;
-	}
-	
+
 	private boolean containsObject(String objName, String pkg) {
 		return !findAll(objName, pkg).isEmpty();
 	}
-	
-	// checks whether a relation exists between the two objects
-	private boolean relationExists(IObject from, IObject to) {
-		Set<Pair<IRelationship, IObject>> relations = objs.get(to);
-		if (relations == null) {
-			return false;
-		}
-		
-		for (Pair<IRelationship, IObject> rel : relations) {
-			if (rel.sec.equals(from)) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	// Returns a set of all the objects with the given name. Pass null for the package to ignore it
+
+	// Returns a set of all the objects with the given name. Pass null for the
+	// package to ignore it
 	private Set<IObject> findAll(String objName, String pkg) {
 		Set<IObject> ret = new HashSet<>();
-		
-		for (IObject obj : objs.keySet()) {
-			if (obj.getName().equals(objName) && (pkg == null || pkg != null && obj.getPackage().equals(pkg))) {
+
+		for (IObject obj : objs) {
+			if (obj.getName().equals(objName)
+					&& (pkg == null || pkg != null
+							&& obj.getPackage().equals(pkg))) {
 				ret.add(obj);
 			}
-		}	
+		}
 		return ret;
 	}
 }
