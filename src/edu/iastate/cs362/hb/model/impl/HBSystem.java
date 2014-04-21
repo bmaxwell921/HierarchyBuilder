@@ -114,7 +114,7 @@ public class HBSystem implements ISystem {
 
 	@Override
 	public boolean removeClass(String className) throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
-		return doc.removeClass(className);
+		return doc.removeObj(className);
 	}
 
 	@Override
