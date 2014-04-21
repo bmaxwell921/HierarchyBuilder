@@ -43,7 +43,7 @@ public abstract class AHBObject implements IObject {
 	private Set<String> modifiers;
 
 	protected List<IMethod> methods;
-	
+
 	protected Set<Pair<IRelationship, IObject>> relationships;
 
 	/**
@@ -69,15 +69,15 @@ public abstract class AHBObject implements IObject {
 	public boolean hasName(String name) {
 		return this.name != null && this.name.equals(name);
 	}
-	
+
 	@Override
-	public boolean changeName(String newName){
+	public boolean changeName(String newName) {
 		this.name = newName;
 		return true;
 	}
-	
+
 	@Override
-	public boolean changePackage(String packageName){
+	public boolean changePackage(String packageName) {
 		this.pkg = packageName;
 		return true;
 	}
@@ -179,36 +179,42 @@ public abstract class AHBObject implements IObject {
 				return meth;
 			}
 		}
-		throw new HBMethodNotFoundException(ErrorMessages.METHOD_NOT_FOUND, name);
+		throw new HBMethodNotFoundException(ErrorMessages.METHOD_NOT_FOUND,
+				name);
 	}
-	
+
 	@Override
-	public boolean addRelationship(IRelationship rel, IObject fromObj) throws Exception {
-		Pair<IRelationship, IObject> addPair = new Pair<>(rel, fromObj);
-		
-		// Don't add it if it's already there
-		if (relationships.contains(addPair)) {
-			throw new HBDuplicateRelationshipException(ErrorMessages.DUPLICATE_RELATION, fromObj.getName(), this.getName());
+	public boolean addRelationship(IRelationship rel, IObject fromObj)
+			throws Exception {
+		for (Pair<IRelationship, IObject> pair : relationships) {
+			if (pair.sec.equals(fromObj)) {
+				throw new HBDuplicateRelationshipException(
+						ErrorMessages.DUPLICATE_RELATION, fromObj.getName(),
+						this.getName());
+			}
 		}
-		
-		relationships.add(addPair);
-		
-		return true;		
+
+		relationships.add(new Pair<>(rel, fromObj));
+
+		return true;
 	}
-	
+
 	@Override
 	public boolean removeRelationship(IObject fromObj) throws Exception {
-		for (Iterator<Pair<IRelationship, IObject>> iter = relationships.iterator(); iter.hasNext(); ) {
+		for (Iterator<Pair<IRelationship, IObject>> iter = relationships
+				.iterator(); iter.hasNext();) {
 			Pair<IRelationship, IObject> pair = iter.next();
 			if (pair.sec.equals(fromObj)) {
 				iter.remove();
 				return true;
 			}
 		}
-		
-		throw new HBRelationshipNotFoundException(ErrorMessages.RELATION_NOT_FOUND, fromObj.getName(), this.getName());
+
+		throw new HBRelationshipNotFoundException(
+				ErrorMessages.RELATION_NOT_FOUND, fromObj.getName(),
+				this.getName());
 	}
-	
+
 	@Override
 	public boolean hasRelationship(IObject from) {
 		for (Pair<IRelationship, IObject> pair : relationships) {
@@ -218,25 +224,23 @@ public abstract class AHBObject implements IObject {
 		}
 		return false;
 	}
-	
+
 	@Override
-	public Set<Pair<IRelationship, IObject>> getRelationships()	{
+	public Set<Pair<IRelationship, IObject>> getRelationships() {
 		return relationships;
 	}
-	
+
 	@Override
 	public String toString() {
 		return pkg + "." + name;
 	}
-	
-	public int getNumMethods()
-	{
+
+	public int getNumMethods() {
 		return methods.size();
 	}
-	
+
 	@Override
-	public String list()
-	{
+	public String list() {
 		return null;
 	}
 }
