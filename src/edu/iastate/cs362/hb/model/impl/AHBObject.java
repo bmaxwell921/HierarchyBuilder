@@ -3,15 +3,22 @@ package edu.iastate.cs362.hb.model.impl;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.IO;
 
 import edu.iastate.cs362.hb.constants.ErrorMessages;
 import edu.iastate.cs362.hb.constants.ObjectConstants;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateMethodException;
+import edu.iastate.cs362.hb.exceptions.HBDuplicateRelationshipException;
 import edu.iastate.cs362.hb.exceptions.HBMethodNotFoundException;
+import edu.iastate.cs362.hb.exceptions.HBRelationshipNotFoundException;
 import edu.iastate.cs362.hb.model.IMethod;
 import edu.iastate.cs362.hb.model.IObject;
+import edu.iastate.cs362.hb.model.IRelationship;
+import edu.iastate.cs362.hb.model.tree.Pair;
 
 /**
  * Class holding some common implementation between interfaces and classes. This
@@ -36,6 +43,8 @@ public abstract class AHBObject implements IObject {
 	private Set<String> modifiers;
 
 	protected List<IMethod> methods;
+	
+	protected List<Pair<IRelationship, IObject>> relationships;
 
 	/**
 	 * Creates a new AHBObject with the given name that goes in the default
@@ -47,7 +56,8 @@ public abstract class AHBObject implements IObject {
 		this.name = name;
 		this.pkg = ObjectConstants.DEFAULT_PKG;
 		this.modifiers = new HashSet<>();
-		this.methods = new ArrayList<IMethod>();
+		this.methods = new ArrayList<>();
+		this.relationships = new ArrayList<>();
 	}
 
 	@Override
@@ -170,6 +180,33 @@ public abstract class AHBObject implements IObject {
 			}
 		}
 		throw new HBMethodNotFoundException(ErrorMessages.METHOD_NOT_FOUND, name);
+	}
+	
+	@Override
+	public boolean addRelationship(IRelationship rel, IObject fromObj) throws Exception {
+		Pair<IRelationship, IObject> addPair = new Pair<>(rel, fromObj);
+		
+		// Don't add it if it's already there
+		if (relationships.contains(addPair)) {
+			throw new HBDuplicateRelationshipException(ErrorMessages.DUPLICATE_RELATION, fromObj.getName(), this.getName());
+		}
+		
+		relationships.add(addPair);
+		
+		return true;		
+	}
+	
+	@Override
+	public boolean removeRelationship(IObject fromObj) throws Exception {
+		for (Iterator<Pair<IRelationship, IObject>> iter = relationships.iterator(); iter.hasNext(); ) {
+			Pair<IRelationship, IObject> pair = iter.next();
+			if (pair.sec.equals(fromObj)) {
+				iter.remove();
+				return true;
+			}
+		}
+		
+		throw new HBRelationshipNotFoundException(ErrorMessages.RELATION_NOT_FOUND, fromObj.getName(), this.getName());
 	}
 	
 	@Override

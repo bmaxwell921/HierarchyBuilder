@@ -39,6 +39,19 @@ public interface IObject extends Nameable, Identifiable, Modifiable {
 	 */
 	public IMethod getMethod(String name) throws HBMethodNotFoundException;
 	
+	/**
+	 * Adds the given relationship to this object. 
+	 * 	Example:
+	 * 		If we have the relationship: "this extends fromObject"
+	 * @param rel
+	 * @param toObj
+	 * @return
+	 * @throws Exception 
+	 */
+	public boolean addRelationship(IRelationship rel, IObject fromObj) throws Exception;
+	
+	public boolean removeRelationship(IObject fromObj) throws Exception;
+	
 	public String list();
 	
 	public boolean changeName(String newName);
