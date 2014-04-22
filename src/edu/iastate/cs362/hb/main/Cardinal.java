@@ -47,7 +47,8 @@ public class Cardinal {
 	}
 
 	public static void main(String[] args) {
-		System.out.println("Hello and welcome to the ExtremeBuildMachine2 - Electric Boogaloo.");
+		System.out
+				.println("Hello and welcome to the ExtremeBuildMachine2 - Electric Boogaloo.");
 		new Cardinal().run();
 		System.out.println("Thanks for using our software!");
 	}
@@ -58,52 +59,38 @@ public class Cardinal {
 	 */
 	private void run() {
 		Scanner in = new Scanner(System.in);
-		String commandLine = null;
+		String cmdStr = null;
 		boolean exit = false;
 		while (!exit) {
-			commandLine = in.nextLine();
-			ICommand command = null;
+			cmdStr = in.nextLine();
+			ICommand cmd = null;
 			try {
-				command = commander.parseCommand(commandLine);
+				cmd = commander.parseCommand(cmdStr);
 				// First we check what the command name was
-				if (command.getName().equals(CmdConstants.CmdNames.CREATE)) {
-					this.doCreate(command);
-				} else if (command.getName().equals(CmdConstants.CmdNames.ADD)) {
-					doAdd(command);
-				} else if (command.getName().equals(
-						CmdConstants.CmdNames.REMOVE)) {
-					doRemove(command);
-				} else if(command.getName().equals(CmdConstants.CmdNames.CHANGE)) {
-					doChange(command);
-				} else if(command.getName().equals(CmdConstants.CmdNames.LIST)) {
-					doList(command);
-				} else if (command.getName().equals(
-						CmdConstants.CmdNames.EXPORT)) {
-					doExport(command);
-				} else if (command.getName().equals(
-						CmdConstants.CmdNames.IMPORT)){
-					doImport(command);
-				} else if (command.getName().equals(CmdConstants.CmdNames.EXIT)) {
+				if (cmd.getName().equals(CmdConstants.CmdNames.CREATE)) {
+					this.doCreate(cmd);
+				} else if (cmd.getName().equals(CmdConstants.CmdNames.ADD)) {
+					doAdd(cmd);
+				} else if (cmd.getName().equals(CmdConstants.CmdNames.REMOVE)) {
+					doRemove(cmd);
+				} else if (cmd.getName().equals(CmdConstants.CmdNames.CHANGE)) {
+					doChange(cmd);
+				} else if (cmd.getName().equals(CmdConstants.CmdNames.LIST)) {
+					doList(cmd);
+				} else if (cmd.getName().equals(CmdConstants.CmdNames.EXPORT)) {
+					doExport(cmd);
+				} else if (cmd.getName().equals(CmdConstants.CmdNames.IMPORT)) {
+					doImport(cmd);
+				} else if (cmd.getName().equals(CmdConstants.CmdNames.EXIT)) {
 					exit = true;
 					break;
 				}
-				System.out
-						.println(String.format(
-								"System - Completed command \"%s\"",
-								command.toString()));
-			} catch (MalformattedCommandException
-					| MalformattedInputException
-					| HBDuplicateObjectFoundException
-					| HBObjectNotFoundException | HBDuplicateMethodException
-					| HBRelationshipNotFoundException
-					| HBDuplicateRelationshipException
-					| HBMethodNotFoundException me) {
-				System.out.println(me.getMessage());
+				System.out.println(String.format(
+						"System - Completed command \"%s\"", cmd.toString()));
 			} catch (HBMultipleObjectsFoundException e) {
 				System.out.println(e.getMessage());
-				printMatchingObjects(command
-						.getFlagValue(CmdConstants.Flags.NAME));
-			} catch (Exception e){
+				printMatchingObjects(cmd.getFlagValue(CmdConstants.Flags.NAME));
+			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
 		}
@@ -120,142 +107,155 @@ public class Cardinal {
 	}
 
 	// Calling of create methods
-	private boolean doCreate(ICommand command)
-			throws HBDuplicateObjectFoundException {
-		if (command.getSubCommand().matches(
-				CmdConstants.SubCmdNames.CLASS_REGEX)) {
-			return isc.createClass(command
-					.getFlagValue(CmdConstants.Flags.NAME));
-		} else if (command.getSubCommand().matches(
+	private boolean doCreate(ICommand cmd) throws Exception {
+		if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.CLASS_REGEX)) {
+			return isc.createClass(cmd.getFlagValue(CmdConstants.Flags.NAME));
+		} else if (cmd.getSubCommand().matches(
 				CmdConstants.SubCmdNames.INTERFACE_REGEX)) {
-			return isc.createInterface(command
+			return isc.createInterface(cmd
 					.getFlagValue(CmdConstants.Flags.NAME));
 		} else {
-			return isc.createDesign(command
-					.getFlagValue(CmdConstants.Flags.NAME));
+			return isc.createDesign(cmd.getFlagValue(CmdConstants.Flags.NAME));
 		}
 	}
 
 	// Calling of add methods
-	private void doAdd(ICommand command) throws HBObjectNotFoundException,
-			MalformattedCommandException, HBDuplicateMethodException,
-			HBMultipleObjectsFoundException, HBDuplicateRelationshipException {
-		if (command.getSubCommand().matches(
-				CmdConstants.SubCmdNames.PACKAGE_REGEX)) {
-			isc.addPackage(command.getFlagValue(CmdConstants.Flags.NAME),
-					command.getFlagValue(CmdConstants.Flags.CONTAINER_NAME));
-		} else if (command.getSubCommand().matches(
+	private void doAdd(ICommand cmd) throws Exception {
+		if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.PACKAGE_REGEX)) {
+			isc.addPackage(cmd.getFlagValue(CmdConstants.Flags.NAME),
+					cmd.getFlagValue(CmdConstants.Flags.CONTAINER_NAME));
+		} else if (cmd.getSubCommand().matches(
 				CmdConstants.SubCmdNames.METHOD_REGEX)) {
-			if (command.hasFlag(CmdConstants.Flags.INSTANCE)) {
+			if (cmd.hasFlag(CmdConstants.Flags.INSTANCE)) {
 				isc.addInstanceMethod(
-						command.getFlagValue(CmdConstants.Flags.CONTAINER_NAME),
-						command.getFlagValue(CmdConstants.Flags.NAME),
-						command.getFlagValue(CmdConstants.Flags.PARAMETERS),
+						cmd.getFlagValue(CmdConstants.Flags.CONTAINER_NAME),
+						cmd.getFlagValue(CmdConstants.Flags.NAME),
+						cmd.getFlagValue(CmdConstants.Flags.PARAMETERS),
 						CmdConstants.Flags.INSTANCE);
 			} else {
 				isc.addStaticMethod(
-						command.getFlagValue(CmdConstants.Flags.CONTAINER_NAME),
-						command.getFlagValue(CmdConstants.Flags.NAME),
-						command.getFlagValue(CmdConstants.Flags.PARAMETERS),
+						cmd.getFlagValue(CmdConstants.Flags.CONTAINER_NAME),
+						cmd.getFlagValue(CmdConstants.Flags.NAME),
+						cmd.getFlagValue(CmdConstants.Flags.PARAMETERS),
 						CmdConstants.Flags.STATIC);
 			}
-		} else if (command.getSubCommand().matches(
+		} else if (cmd.getSubCommand().matches(
 				CmdConstants.SubCmdNames.RELATIONSHIP_REGEX)) {
 			isc.addRelationship(
-					command.getFlagValue(CmdConstants.Flags.FROM_CLASS_NAME),
-					command.getFlagValue(CmdConstants.Flags.TO_CLASS_NAME),
-					command.getFlagValue(CmdConstants.Flags.TYPE));
+					cmd.getFlagValue(CmdConstants.Flags.FROM_CLASS_NAME),
+					cmd.getFlagValue(CmdConstants.Flags.TO_CLASS_NAME),
+					cmd.getFlagValue(CmdConstants.Flags.TYPE));
 		}
 	}
 
 	// Calling of Remove methods
-	private boolean doRemove(ICommand command)
-			throws HBObjectNotFoundException, HBMultipleObjectsFoundException,
-			HBRelationshipNotFoundException, HBMethodNotFoundException {
-		if (command.getSubCommand().matches(
-				CmdConstants.SubCmdNames.CLASS_REGEX)
-				|| command.getSubCommand().matches(
+	private boolean doRemove(ICommand cmd) throws Exception {
+		if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.CLASS_REGEX)
+				|| cmd.getSubCommand().matches(
 						CmdConstants.SubCmdNames.INTERFACE_REGEX)) {
-			return isc.removeClass(command
-					.getFlagValue(CmdConstants.Flags.NAME));
-		} else if (command.getSubCommand().matches(
+			return isc.removeClass(cmd.getFlagValue(CmdConstants.Flags.NAME));
+		} else if (cmd.getSubCommand().matches(
 				CmdConstants.SubCmdNames.PACKAGE_REGEX)) {
-			return isc.removePackage(command
+			return isc.removePackage(cmd
 					.getFlagValue(CmdConstants.Flags.CONTAINER_NAME));
-		} else if (command.getSubCommand().matches(
+		} else if (cmd.getSubCommand().matches(
 				CmdConstants.SubCmdNames.METHOD_REGEX)) {
 			return isc.removeMethod(
-					command.getFlagValue(CmdConstants.Flags.CONTAINER_NAME),
-					command.getFlagValue(CmdConstants.Flags.NAME));
-		} else if (command.getSubCommand().matches(
+					cmd.getFlagValue(CmdConstants.Flags.CONTAINER_NAME),
+					cmd.getFlagValue(CmdConstants.Flags.NAME));
+		} else if (cmd.getSubCommand().matches(
 				CmdConstants.SubCmdNames.RELATIONSHIP_REGEX)) {
 			return isc.removeRelationship(
-					command.getFlagValue(CmdConstants.Flags.FROM_CLASS_NAME),
-					command.getFlagValue(CmdConstants.Flags.TO_CLASS_NAME));
+					cmd.getFlagValue(CmdConstants.Flags.FROM_CLASS_NAME),
+					cmd.getFlagValue(CmdConstants.Flags.TO_CLASS_NAME));
 		} else
 			return false;
 	}
-	
+
 	/**
 	 * Calling of Export methods
-	 * @param command
+	 * 
+	 * @param cmd
 	 * @return
 	 */
-	private boolean doExport(ICommand command){
-		if(command.getSubCommand().matches(CmdConstants.SubCmdNames.XML_REGEX)){
-			return isc.exportDesignXML(command.getFlagValue(CmdConstants.Flags.PATH));
-		} else if (command.getSubCommand().matches(CmdConstants.SubCmdNames.JSON_REGEX)){
-			return isc.exportDesignJSON(command.getFlagValue(CmdConstants.Flags.PATH));
-		} else if (command.getSubCommand().matches(CmdConstants.SubCmdNames.SOURCE_REGEX)){
-			return isc.exportDesignSource(command.getFlagValue(CmdConstants.Flags.PATH));
+	private boolean doExport(ICommand cmd) {
+		if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.XML_REGEX)) {
+			return isc.exportDesignXML(cmd
+					.getFlagValue(CmdConstants.Flags.PATH));
+		} else if (cmd.getSubCommand().matches(
+				CmdConstants.SubCmdNames.JSON_REGEX)) {
+			return isc.exportDesignJSON(cmd
+					.getFlagValue(CmdConstants.Flags.PATH));
+		} else if (cmd.getSubCommand().matches(
+				CmdConstants.SubCmdNames.SOURCE_REGEX)) {
+			return isc.exportDesignSource(cmd
+					.getFlagValue(CmdConstants.Flags.PATH));
 		} else
 			return false;
 	}
-	
-	private boolean doImport(ICommand command) throws FileNotFoundException, IOException, MalformattedInputException{
-		if(command.getSubCommand().matches(CmdConstants.SubCmdNames.XML_REGEX)){
-			return isc.importDesignXML(command.getFlagValue(CmdConstants.Flags.PATH));
-		} else if(command.getSubCommand().matches(CmdConstants.SubCmdNames.JSON_REGEX)){
-			return isc.importDesignJSON(command.getFlagValue(CmdConstants.Flags.PATH));
-		} else if(command.getSubCommand().matches(CmdConstants.SubCmdNames.SOURCE_REGEX)){
-			return isc.importDesignSource(command.getFlagValue(CmdConstants.Flags.PATH));
+
+	private boolean doImport(ICommand cmd) throws Exception {
+		if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.XML_REGEX)) {
+			return isc.importDesignXML(cmd
+					.getFlagValue(CmdConstants.Flags.PATH));
+		} else if (cmd.getSubCommand().matches(
+				CmdConstants.SubCmdNames.JSON_REGEX)) {
+			return isc.importDesignJSON(cmd
+					.getFlagValue(CmdConstants.Flags.PATH));
+		} else if (cmd.getSubCommand().matches(
+				CmdConstants.SubCmdNames.SOURCE_REGEX)) {
+			return isc.importDesignSource(cmd
+					.getFlagValue(CmdConstants.Flags.PATH));
 		} else
-		return false;
+			return false;
 	}
-	
+
 	/**
 	 * Calling of change methods.
-	 * @param command the command holding the requisite information
+	 * 
+	 * @param cmd
+	 *            the command holding the requisite information
 	 * @return boolean indicating success/failure
-	 * @throws HBMultipleObjectsFoundException 
-	 * @throws HBObjectNotFoundException 
+	 * @throws HBMultipleObjectsFoundException
+	 * @throws HBObjectNotFoundException
 	 */
-	private boolean doChange(ICommand command) throws HBObjectNotFoundException, HBMultipleObjectsFoundException{
-		if(command.getSubCommand().matches(CmdConstants.SubCmdNames.CLASS_REGEX) || command.getSubCommand().matches(CmdConstants.SubCmdNames.INTERFACE_REGEX))
-			return isc.changeName(command.getFlagValue(CmdConstants.Flags.CONTAINER_NAME),
-				command.getFlagValue(CmdConstants.Flags.NAME));
-		else if(command.getSubCommand().matches(CmdConstants.SubCmdNames.PACKAGE_REGEX))
-			return isc.changePackage(command.getFlagValue(CmdConstants.Flags.CONTAINER_NAME),
-					command.getFlagValue(CmdConstants.Flags.NAME));
+	private boolean doChange(ICommand cmd) throws Exception {
+		if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.CLASS_REGEX)
+				|| cmd.getSubCommand().matches(
+						CmdConstants.SubCmdNames.INTERFACE_REGEX))
+			return isc.changeName(
+					cmd.getFlagValue(CmdConstants.Flags.CONTAINER_NAME),
+					cmd.getFlagValue(CmdConstants.Flags.NAME));
+		else if (cmd.getSubCommand().matches(
+				CmdConstants.SubCmdNames.PACKAGE_REGEX))
+			return isc.changePackage(
+					cmd.getFlagValue(CmdConstants.Flags.CONTAINER_NAME),
+					cmd.getFlagValue(CmdConstants.Flags.NAME));
 		else
 			return false;
 	}
-	
+
 	/**
 	 * Calling of change methods.
-	 * @param command the command holding the requisite information
+	 * 
+	 * @param cmd
+	 *            the command holding the requisite information
 	 * @return boolean indicating success/failure
-	 * @throws HBMultipleObjectsFoundException 
-	 * @throws HBObjectNotFoundException 
+	 * @throws HBMultipleObjectsFoundException
+	 * @throws HBObjectNotFoundException
 	 */
-	private boolean doList(ICommand command) throws HBObjectNotFoundException, HBMultipleObjectsFoundException{
-		if(command.getSubCommand().matches(CmdConstants.SubCmdNames.CLASS_REGEX) || command.getSubCommand().matches(CmdConstants.SubCmdNames.INTERFACE_REGEX)){
-			System.out.println(isc.listObject(command.getFlagValue(CmdConstants.Flags.NAME)));
+	private boolean doList(ICommand cmd) throws Exception {
+		if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.CLASS_REGEX)
+				|| cmd.getSubCommand().matches(
+						CmdConstants.SubCmdNames.INTERFACE_REGEX)) {
+			System.out.println(isc.listObject(cmd
+					.getFlagValue(CmdConstants.Flags.NAME)));
 			return true;
-		}else if(command.getSubCommand().matches(CmdConstants.SubCmdNames.DESIGN_REGEX)) {
+		} else if (cmd.getSubCommand().matches(
+				CmdConstants.SubCmdNames.DESIGN_REGEX)) {
 			System.out.println(isc.listDesign());
 			return true;
-		}else
+		} else
 			return false;
 	}
 }
