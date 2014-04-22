@@ -58,81 +58,74 @@ public class SystemController implements ISystemController {
 	 *         field addition
 	 * @throws HBClassNotFoundException
 	 * @throws HBObjectNotFoundException
-	 * @throws HBMultipleObjectsFoundException 
+	 * @throws HBMultipleObjectsFoundException
 	 */
 	@Override
 	public boolean addInstanceField(String className, String iFieldName,
-			String... modifiers) throws HBClassNotFoundException,
-			HBObjectNotFoundException, HBMultipleObjectsFoundException {
+			String... modifiers) throws Exception {
 		return system.addInstanceField(className, iFieldName, modifiers);
 	}
 
 	@Override
-	public boolean addRelationship(String fromClass, String toClass,
-			String relationship) throws HBObjectNotFoundException,
-			HBDuplicateRelationshipException, HBMultipleObjectsFoundException {
-		return system.addRelationship(fromClass, toClass, relationship);
+	public boolean addRelationship(String fromObj, String toObj, String rel)
+			throws Exception {
+		return system.addRelationship(fromObj, toObj, rel);
 	}
 
 	@Override
-	public boolean addPackage(String packageName, String className)
-			throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
-		return system.addPackage(packageName, className);
+	public boolean addPackage(String pkgName, String objName) throws Exception {
+		return system.addPackage(pkgName, objName);
 	}
 
 	@Override
-	public boolean addInstanceMethod(String className, String methodName,
-			String params, String... modifiers)
-			throws HBObjectNotFoundException, MalformattedCommandException,
-			HBDuplicateMethodException, HBMultipleObjectsFoundException {
-		return system.addInstanceMethod(className, methodName, params,
-				modifiers);
+	public boolean addInstanceMethod(String objName, String methodName,
+			String params, String... modifiers) throws Exception {
+		return system.addInstanceMethod(objName, methodName, params, modifiers);
 	}
 
 	@Override
-	public boolean addStaticMethod(String className, String methodName,
-			String params, String... modifiers)
-			throws MalformattedCommandException, HBObjectNotFoundException,
-			HBDuplicateMethodException, HBMultipleObjectsFoundException {
-		return system.addStaticMethod(className, methodName, params, modifiers);
+	public boolean addStaticMethod(String objName, String methodName,
+			String params, String... modifiers) throws Exception {
+		return system.addStaticMethod(objName, methodName, params, modifiers);
 	}
 
 	/**
 	 * Calls system to remove a method
-	 * @throws HBMultipleObjectsFoundException 
-	 * @throws HBObjectNotFoundException 
-	 * @throws HBMethodNotFoundException 
+	 * 
+	 * @throws HBMultipleObjectsFoundException
+	 * @throws HBObjectNotFoundException
+	 * @throws HBMethodNotFoundException
 	 */
 	@Override
-	public boolean removeMethod(String className, String methodName) throws HBObjectNotFoundException, HBMultipleObjectsFoundException, HBMethodNotFoundException {
-		return system.removeMethod(className, methodName);
-		
+	public boolean removeMethod(String objName, String methodName)
+			throws Exception {
+		return system.removeMethod(objName, methodName);
+
 	}
 
 	@Override
-	public boolean removePackage(String className) throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
-		return system.removePackage(className);
+	public boolean removePackage(String objName) throws Exception {
+		return system.removePackage(objName);
 	}
 
 	@Override
-	public boolean removeRelationship(String fromString, String toString) throws HBMultipleObjectsFoundException, HBObjectNotFoundException, HBRelationshipNotFoundException {
-		return system.removeRelationship(fromString, toString);
+	public boolean removeRelationship(String superType, String subType)
+			throws Exception {
+		return system.removeRelationship(superType, subType);
 	}
 
 	@Override
-	public boolean removeClass(String toRemove) throws HBObjectNotFoundException, HBMultipleObjectsFoundException {
-		return system.removeObj(toRemove);
+	public boolean removeClass(String rem) throws Exception {
+		return system.removeObj(rem);
 	}
 
 	@Override
-	public boolean createClass(String name)
-			throws HBDuplicateObjectFoundException {
+	public boolean createClass(String name) throws Exception {
 		return system.createClass(name);
 	}
 
 	@Override
-	public boolean createInterface(String name)
-			throws HBDuplicateObjectFoundException {
+	public boolean createInterface(String name) throws Exception {
 		return system.createInterface(name);
 	}
 
@@ -140,25 +133,25 @@ public class SystemController implements ISystemController {
 	public List<IObjectBox> getMatchingObjects(String name) {
 		return system.getMatchingObjects(name);
 	}
-	
+
 	@Override
-	public String listDesign(){
+	public String listDesign() {
 		return system.listDesign();
 	}
-	
+
 	@Override
-	public String listObject(String name) throws HBObjectNotFoundException, HBMultipleObjectsFoundException{
+	public String listObject(String name) throws Exception {
 		return system.listObject(name);
 	}
-	
+
 	@Override
-	public boolean changeName(String name, String newName) throws HBObjectNotFoundException, HBMultipleObjectsFoundException{
+	public boolean changeName(String name, String newName) throws Exception {
 		return system.changeName(name, newName);
 	}
-	
+
 	@Override
-	public boolean changePackage(String name, String packageName) throws HBObjectNotFoundException, HBMultipleObjectsFoundException{
-		return system.changePackage(name, packageName);
+	public boolean changePackage(String name, String pkgName) throws Exception {
+		return system.changePackage(name, pkgName);
 	}
 
 	@Override
@@ -177,17 +170,17 @@ public class SystemController implements ISystemController {
 	}
 
 	@Override
-	public boolean importDesignXML(String path) throws FileNotFoundException, IOException, MalformattedInputException {
+	public boolean importDesignXML(String path) throws Exception {
 		return system.importDesignXML(path);
 	}
 
 	@Override
-	public boolean importDesignJSON(String path) throws FileNotFoundException, IOException, MalformattedInputException {
+	public boolean importDesignJSON(String path) throws Exception {
 		return system.importDesignJSON(path);
 	}
 
 	@Override
-	public boolean importDesignSource(String path) throws FileNotFoundException, IOException, MalformattedInputException {
+	public boolean importDesignSource(String path) throws Exception {
 		return system.importDesignSource(path);
 	}
 }
