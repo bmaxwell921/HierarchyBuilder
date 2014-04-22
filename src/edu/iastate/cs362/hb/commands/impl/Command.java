@@ -1,7 +1,9 @@
-package edu.iastate.cs362.hb.commands;
+package edu.iastate.cs362.hb.commands.impl;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import edu.iastate.cs362.hb.commands.ICommand;
 
 /**
  * Created command with name and value

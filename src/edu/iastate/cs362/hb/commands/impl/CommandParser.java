@@ -1,5 +1,7 @@
-package edu.iastate.cs362.hb.commands;
+package edu.iastate.cs362.hb.commands.impl;
 
+import edu.iastate.cs362.hb.commands.ICommand;
+import edu.iastate.cs362.hb.commands.ICommandParser;
 import edu.iastate.cs362.hb.constants.CmdConstants;
 import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
 

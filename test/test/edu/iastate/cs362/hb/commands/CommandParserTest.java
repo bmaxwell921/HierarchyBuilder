@@ -4,8 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import edu.iastate.cs362.hb.commands.CommandParser;
 import edu.iastate.cs362.hb.commands.ICommand;
+import edu.iastate.cs362.hb.commands.impl.CommandParser;
 import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
 
 public class CommandParserTest {
