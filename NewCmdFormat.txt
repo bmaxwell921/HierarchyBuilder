@@ -1,0 +1,71 @@
+Format changed to more like Linux man pages (using git as example)
+
+create <subCommand>
+	Sub-Commands:
+		design 		[-COMMON_OPTIONS]
+		class		[-COMMON_OPTIONS]
+		interface	[-COMMON_OPTIONS]
+	COMMON_OPTIONS
+		-name <name>: The name of what is being created
+		-n <name>: Alias for -name
+
+add <subCommand>
+	Sub-Commands:
+		pkg 		[-COMMON_OPTIONS]
+		field 		[-COMMON_OPTIONS] [-FIELD_OPTIONS]
+		method 		[-COMMON_OPTIONS] [-METHOD_OPTIONS]
+		relation 	[-RELATION_OPTIONS]
+	COMMON_OPTIONS
+		-object <obj>: 	The fully qualified name of the object you are modifying. Period delimited
+		-o <obj>: 		Alias for -object
+		-name <name>: 	The name of what is being created
+		-n <name>: 		alias for name
+	FIELD_OPTIONS
+		-type <t>: The type of the field being added
+		-t <t>: Alias for -type
+		-modifiers <MODIFIERS...>: The modifiers to apply to the new field
+		-m <MODIFIERS...>: Alias for -modifiers
+	METHOD_OPTIONS
+		-modifiers <MODIFIERS...>: The modifiers to apply to the method
+		-m <MODIFIERS...>: Alias for -modifiers
+		-return <type>: The return type of the method
+		-r <type>: Alias for -return
+		-args <ARGUMENTS...>: The arguments on the new method. Space delimited
+		-a <ARGUMENTS...>: Alias for -args
+	RELATION_OPTIONS
+		-superType <obj>: The fully qualified name of the object the relationship comes from
+		-sup <obj>: Alias for -superType
+		-subType <obj>: The fully qualified name of the objec the relationship goes to
+		-sub <obj>: Alias for -subType
+		-type <t>: The type of the relationship
+		-t <t>: Alias for -type
+	MODIFIERS
+		public, private, protected, final, static, transient, etc
+	ARGUMENTS
+		<MODIFIERS>-type-name
+
+remove <subCommand>
+	Sub-Commands:
+		object 		[-OBJECT_OPTIONS]
+		pkg 		[-COMMON_OPTIONS]
+		method 		[-COMMON_OPTIONS] [-METHOD_OPTIONS]
+		relation 	[-RELATION_OPTIONS]
+	COMMON_OPTIONS
+		-object <obj>: The fully qualified name of the object you are removing from. Period delimited
+	OBJECT_OPTIONS
+		-name <name>: The name of the object to remove
+		-n <name>: Alias for -name
+	METHOD_OPTIONS
+		-name <name>: The name of the method to remove
+		-n <name>: Alias for -name
+		-args <ARGUMENTS...>: Optional argument, used to differentiate between overloaded methods
+		-a <ARGUMENTS...>: Alias for -args
+	RELATION_OPTIONS
+		-superType <obj>: The fully qualified name of the object the relationship comes from
+		-sup <obj>: Alias for -superType
+		-subType <obj>: The fully qualified name of the objec the relationship goes to
+		-sub <obj>: Alias for -subType
+		-type <t>: The type of the relationship
+		-t <t>: Alias for -type		
+	ARGUMENTS
+		<MODIFIERS>-type-name
