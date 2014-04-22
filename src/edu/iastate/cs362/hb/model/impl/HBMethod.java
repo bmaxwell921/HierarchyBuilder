@@ -8,10 +8,8 @@ import java.util.Set;
 import java.util.StringTokenizer;
 
 import edu.iastate.cs362.hb.constants.CmdConstants;
-import edu.iastate.cs362.hb.constants.ErrorMessages;
-import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
-import edu.iastate.cs362.hb.model.IArgument;
 import edu.iastate.cs362.hb.model.IMethod;
+import edu.iastate.cs362.hb.model.IVariable;
 
 
 /**
@@ -32,7 +30,7 @@ public class HBMethod implements IMethod {
 	private String name;
 	
 	// All the arguments
-	private List<IArgument> args;
+	private List<IVariable> args;
 	
 	// Modifiers for this method
 	private Set<String> modifiers;
@@ -89,7 +87,7 @@ public class HBMethod implements IMethod {
 	}
 
 	@Override
-	public List<IArgument> getArguments() {
+	public List<IVariable> getArguments() {
 		return args;
 	}
 
@@ -135,7 +133,7 @@ public class HBMethod implements IMethod {
 		while (st.hasMoreTokens()) {
 			String type = st.nextToken();
 			String value = st.nextToken();
-			this.args.add(new HBArgument(type, value));
+			this.args.add(new HBVariable(type, value));
 		}
 	}
 }
