@@ -3,6 +3,7 @@ package edu.iastate.cs362.hb.main;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 import edu.iastate.cs362.hb.commands.CommandParser;
@@ -47,8 +48,7 @@ public class Cardinal {
 	}
 
 	public static void main(String[] args) {
-		System.out
-				.println("Hello and welcome to the ExtremeBuildMachine2 - Electric Boogaloo.");
+		doSystemStart();
 		new Cardinal().run();
 		System.out.println("Thanks for using our software!");
 	}
@@ -257,5 +257,26 @@ public class Cardinal {
 			return true;
 		} else
 			return false;
+	}
+	
+	private static void doSystemStart() {
+		System.out.println("Starting system...");
+		Random gen = new Random();
+		int choice = randRange(gen, 0, 25);
+		while (choice < 100) {
+			System.out.println(String.format("%d%%...", choice));
+			choice = randRange(gen, choice+1, choice + 25);
+			try {
+				Thread.sleep(gen.nextInt(1000));
+			} catch (InterruptedException e) {
+				
+			}
+		}
+		System.out.println("100%");
+		System.out.println("System ready, enter a command.");
+	}
+
+	private static int randRange(Random gen, int low, int high) {
+		return gen.nextInt(high - low) + low;
 	}
 }
