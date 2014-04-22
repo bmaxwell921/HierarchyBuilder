@@ -1,4 +1,4 @@
-package test.edu.iastate.cs362.hb.commands;
+package test.edu.iastate.cs362.hb.commands.impl;
 
 import static org.junit.Assert.assertEquals;
 
