@@ -14,6 +14,12 @@ public interface Identifiable {
 	public long getId();
 	
 	/**
+	 * Sets this Identifiable's id
+	 * @param id
+	 */
+	public void setId(long id);
+	
+	/**
 	 * Returns whether this Identifiable's id matches
 	 * the given id
 	 * @param id

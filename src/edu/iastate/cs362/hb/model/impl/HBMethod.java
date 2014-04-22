@@ -26,7 +26,7 @@ public class HBMethod implements IMethod {
 	private static final String A_MIN_DEL = ":";
 	
 	// This guy's id
-	private int id;
+	private long id;
 	
 	// Name of the method
 	private String name;
@@ -56,6 +56,11 @@ public class HBMethod implements IMethod {
 	@Override
 	public long getId() {
 		return id;
+	}
+	
+	@Override
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	@Override

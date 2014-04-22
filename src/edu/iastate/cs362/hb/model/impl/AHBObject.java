@@ -31,7 +31,7 @@ import edu.iastate.cs362.hb.model.tree.Pair;
 public abstract class AHBObject implements IObject {
 
 	// Id of this object
-	private int id;
+	private long id;
 
 	// This object's pacakge
 	private String pkg;
@@ -85,6 +85,11 @@ public abstract class AHBObject implements IObject {
 	@Override
 	public long getId() {
 		return id;
+	}
+	
+	@Override
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	@Override

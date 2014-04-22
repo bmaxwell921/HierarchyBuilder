@@ -1,5 +1,6 @@
 package edu.iastate.cs362.hb.model;
 
+import edu.iastate.cs362.hb.model.attributes.Identifiable;
 import edu.iastate.cs362.hb.model.attributes.Modifiable;
 import edu.iastate.cs362.hb.model.attributes.Nameable;
 
@@ -9,5 +10,5 @@ import edu.iastate.cs362.hb.model.attributes.Nameable;
  * @author Brandon
  *
  */
-public interface IInstanceField extends Nameable, Modifiable {
+public interface IInstanceField extends Nameable, Modifiable, Identifiable {
 }

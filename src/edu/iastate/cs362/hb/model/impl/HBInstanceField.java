@@ -8,6 +8,8 @@ import edu.iastate.cs362.hb.model.IInstanceField;
 
 public class HBInstanceField implements IInstanceField {
 	
+	private long id;
+	
 	private String name;
 	
 	private Set<String> modifiers;
@@ -43,5 +45,20 @@ public class HBInstanceField implements IInstanceField {
 	@Override
 	public Set<String> getModifiers() {
 		return modifiers;
+	}
+
+	@Override
+	public long getId() {
+		return id;
+	}
+
+	@Override
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	@Override
+	public boolean hasId(long id) {
+		return this.id == id;
 	}
 }
