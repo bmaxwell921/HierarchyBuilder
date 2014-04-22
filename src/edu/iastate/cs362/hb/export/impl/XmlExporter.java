@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.Set;
 
 import edu.iastate.cs362.hb.export.IExporter;
-import edu.iastate.cs362.hb.model.IArgument;
 import edu.iastate.cs362.hb.model.IClass;
 import edu.iastate.cs362.hb.model.IDesignDoc;
 import edu.iastate.cs362.hb.model.IMethod;
 import edu.iastate.cs362.hb.model.IObject;
 import edu.iastate.cs362.hb.model.IRelationship;
+import edu.iastate.cs362.hb.model.IVariable;
 import edu.iastate.cs362.hb.model.impl.HBClass;
 import edu.iastate.cs362.hb.model.tree.IHBTreeVisitor;
 import edu.iastate.cs362.hb.model.tree.Pair;
@@ -68,7 +68,7 @@ public class XmlExporter implements IExporter {
 		sb.append("<name>");
 		sb.append(meth.getName());
 		sb.append("</name>\n");
-		for(IArgument arg : meth.getArguments()){
+		for(IVariable arg : meth.getArguments()){
 			sb.append("<argument>");
 			sb.append("<type>");
 			sb.append(arg.getType());
