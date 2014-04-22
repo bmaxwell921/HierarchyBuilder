@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.iastate.cs362.hb.model.IClass;
-import edu.iastate.cs362.hb.model.IInstanceField;
 import edu.iastate.cs362.hb.model.IMethod;
+import edu.iastate.cs362.hb.model.IVariable;
 
 /**
  * Class representing a Class in the Hierarchy
@@ -14,14 +14,14 @@ import edu.iastate.cs362.hb.model.IMethod;
  */
 public class HBClass extends AHBObject implements IClass{
 	
-	private List<IInstanceField> fields;
+	private List<IVariable> fields;
 	public HBClass(String name){
 		super(name);
-		fields = new ArrayList<IInstanceField>();
+		fields = new ArrayList<>();
 	}
 
 	@Override
-	public boolean addInstanceField(IInstanceField i) {
+	public boolean addInstanceField(IVariable i) {
 		return fields.add(i);
 	}	
 	
