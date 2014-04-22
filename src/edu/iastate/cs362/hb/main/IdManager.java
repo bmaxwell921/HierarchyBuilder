@@ -72,9 +72,25 @@ public class IdManager {
 	 * Returns the id associated with the given information
 	 * @param info
 	 * @return
+	 * 		the id of the given key, or INVALID_ID
 	 */
 	public long accessId(String...info) {
 		String key = buildKey(info);
+		if (!idMap.containsKey(key)) {
+			return INVALID_ID;
+		}
+		return idMap.get(key);
+	}
+	
+	/**
+	 * Keys are build as fully qualified names for Identifiables,
+	 * so if the user knows the fully qualified name they can use
+	 * this method
+	 * @param key
+	 * @return
+	 * 		the id of the given key, or INVALID_ID
+	 */
+	public long accessIdWithKey(String key) {
 		if (!idMap.containsKey(key)) {
 			return INVALID_ID;
 		}
