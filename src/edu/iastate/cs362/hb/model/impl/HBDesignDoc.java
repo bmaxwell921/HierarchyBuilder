@@ -12,6 +12,7 @@ import edu.iastate.cs362.hb.exceptions.HBMultipleObjectsFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBRelationshipNotFoundException;
 import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
+import edu.iastate.cs362.hb.main.IdManager;
 import edu.iastate.cs362.hb.model.IClass;
 import edu.iastate.cs362.hb.model.IDesignDoc;
 import edu.iastate.cs362.hb.model.IInstanceField;
@@ -67,8 +68,8 @@ public class HBDesignDoc implements IDesignDoc {
 	@Override
 	public boolean addPackage(String pkgName, String objName) throws Exception {
 		IObject clazz = tree.getObject(objName);
-		clazz.addPackage(pkgName);
-		return true;
+		IdManager.getInstance().updateInfo(clazz.getId(), clazz.getPackage(), clazz.getName());
+		return clazz.addPackage(pkgName);
 	}
 
 	@Override
@@ -105,6 +106,7 @@ public class HBDesignDoc implements IDesignDoc {
 	@Override
 	public boolean removePackage(String objName) throws Exception {
 		IObject toRem = tree.getObject(objName);
+		IdManager.getInstance().updateInfo(toRem.getId(), toRem.getPackage(), toRem.getName());
 		return toRem.removePackage();
 	}
 
@@ -120,18 +122,21 @@ public class HBDesignDoc implements IDesignDoc {
 	public boolean removeObj(String rem) throws Exception,
 			HBMultipleObjectsFoundException {
 		IObject toRem = tree.getObject(rem);
+		IdManager.getInstance().remove(toRem.getId());
 		return tree.removeObject(toRem);
 	}
 
 	@Override
 	public boolean createClass(String name) throws Exception {
 		IClass clazz = new HBClass(name);
+		IdManager.getInstance().registerObject(clazz, clazz.getPackage(), clazz.getName());
 		return tree.addObject(clazz);
 	}
 
 	@Override
 	public boolean createInterface(String name) throws Exception {
 		IObject interf = new HBInterface(name);
+		IdManager.getInstance().registerObject(interf, interf.getPackage(), interf.getName());
 		return tree.addObject(interf);
 	}
 
@@ -174,13 +179,17 @@ public class HBDesignDoc implements IDesignDoc {
 
 	@Override
 	public boolean changeName(String name, String newName) throws Exception {
-		return tree.getObject(name).changeName(newName);
+		IObject obj = tree.getObject(name);
+		IdManager.getInstance().updateInfo(obj.getId(), obj.getPackage(), obj.getName());
+		return obj.changeName(newName);
 	}
 
 	@Override
 	public boolean changePackage(String name, String pkgName)
 			throws Exception {
-		return tree.getObject(name).changePackage(pkgName);
+		IObject obj = tree.getObject(name);
+		IdManager.getInstance().updateInfo(obj.getId(), obj.getPackage(), obj.getName());
+		return obj.changePackage(pkgName);
 	}
 
 	@Override
