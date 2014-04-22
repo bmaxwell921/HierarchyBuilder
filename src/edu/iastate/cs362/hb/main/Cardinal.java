@@ -1,7 +1,5 @@
 package edu.iastate.cs362.hb.main;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
@@ -12,15 +10,8 @@ import edu.iastate.cs362.hb.commands.ICommandParser;
 import edu.iastate.cs362.hb.constants.CmdConstants;
 import edu.iastate.cs362.hb.controller.ISystemController;
 import edu.iastate.cs362.hb.controller.impl.SystemController;
-import edu.iastate.cs362.hb.exceptions.HBDuplicateMethodException;
-import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
-import edu.iastate.cs362.hb.exceptions.HBDuplicateRelationshipException;
-import edu.iastate.cs362.hb.exceptions.HBMethodNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBMultipleObjectsFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
-import edu.iastate.cs362.hb.exceptions.HBRelationshipNotFoundException;
-import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
-import edu.iastate.cs362.hb.exceptions.MalformattedInputException;
 import edu.iastate.cs362.hb.model.IObjectBox;
 import edu.iastate.cs362.hb.model.impl.HBSystem;
 
