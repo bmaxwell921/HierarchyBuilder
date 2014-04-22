@@ -42,7 +42,7 @@ add <subCommand>
 	MODIFIERS
 		public, private, protected, final, static, transient, etc
 	ARGUMENTS
-		<MODIFIERS>-type-name
+		<MODIFIERS...>-type-name
 
 remove <subCommand>
 	Sub-Commands:
@@ -68,4 +68,4 @@ remove <subCommand>
 		-type <t>: The type of the relationship
 		-t <t>: Alias for -type		
 	ARGUMENTS
-		<MODIFIERS>-type-name
+		<MODIFIERS...>-type-name
