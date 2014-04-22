@@ -65,7 +65,7 @@ public class CommandParser implements ICommandParser {
 		// Subcommand expects a dash
 		// Fixed exception happening when commands like exit are called
 		if (commandList.length > 1) {
-			addSubCommand(c, commandList[1].substring(1));
+			addSubCommand(c, commandList[1]);
 		}
 
 		for (int i = 2; i < commandList.length; i++) {

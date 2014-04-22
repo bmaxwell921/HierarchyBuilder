@@ -14,7 +14,7 @@ public class CommandParserTest {
 	public void testCreate() throws MalformattedCommandException
 	{
 		CommandParser parser = new CommandParser();
-		String command = "CREATE -DESIGN -NAME Wobbly";
+		String command = "CREATE DESIGN -NAME Wobbly";
 		ICommand c = parser.parseCommand(command);
 		assertEquals(c.getName(), "create");
 	}
@@ -23,7 +23,7 @@ public class CommandParserTest {
 	public void testCreateDesign() throws MalformattedCommandException
 	{
 		CommandParser parser = new CommandParser();
-		String command = "CREATE -DESIGN -NAME Wobbly";
+		String command = "CREATE DESIGN -NAME Wobbly";
 		ICommand c = parser.parseCommand(command);
 		assertEquals(c.getSubCommand(), "design");
 	}
@@ -32,7 +32,7 @@ public class CommandParserTest {
 	public void testCreateDesignNamedCommand() throws MalformattedCommandException
 	{
 		CommandParser parser = new CommandParser();
-		String command = "CREATE -DESIGN -NAME Wobbly";
+		String command = "CREATE DESIGN -NAME Wobbly";
 		ICommand c = parser.parseCommand(command);
 		assertEquals(c.getFlagValue("name"), "Wobbly");
 	}
@@ -41,7 +41,7 @@ public class CommandParserTest {
 	public void addTest() throws MalformattedCommandException
 	{
 		CommandParser parser = new CommandParser();
-		String command = "ADD -CLASS -NAME NAME";
+		String command = "ADD CLASS -NAME NAME";
 		ICommand c = parser.parseCommand(command);
 		assertEquals(c.getName(), "add");
 	}
@@ -50,7 +50,7 @@ public class CommandParserTest {
 	public void addClass() throws MalformattedCommandException
 	{
 		CommandParser parser = new CommandParser();
-		String command = "ADD -CLASS -NAME NAME";
+		String command = "ADD CLASS -NAME NAME";
 		ICommand c = parser.parseCommand(command);
 		assertEquals(c.getSubCommand(), "class");
 	}
@@ -59,7 +59,7 @@ public class CommandParserTest {
 	public void addClassNamed() throws MalformattedCommandException
 	{
 		CommandParser parser = new CommandParser();
-		String command = "ADD -CLASS -NAME NAME";
+		String command = "ADD CLASS -NAME NAME";
 		ICommand c = parser.parseCommand(command);
 		assertEquals(c.getFlagValue("name"), "NAME");
 	}
@@ -68,7 +68,7 @@ public class CommandParserTest {
 	public void createDesign() throws MalformattedCommandException
 	{
 		CommandParser parser = new CommandParser();
-		String command = "CREATE -DESIGN";
+		String command = "CREATE DESIGN";
 		ICommand c = parser.parseCommand(command);
 		assertEquals(c.getName(), "create");
 	}
@@ -77,7 +77,7 @@ public class CommandParserTest {
 	public void createDesignSubCommand() throws MalformattedCommandException
 	{
 		CommandParser parser = new CommandParser();
-		String command = "CREATE -DESIGN";
+		String command = "CREATE DESIGN";
 		ICommand c = parser.parseCommand(command);
 		assertEquals(c.getSubCommand(), "design");
 	}
@@ -86,7 +86,7 @@ public class CommandParserTest {
 	public void createDesignNamed() throws MalformattedCommandException
 	{
 		CommandParser parser = new CommandParser();
-		String command = "CREATE -DESIGN -NaMe brandonsaloser";
+		String command = "CREATE DESIGN -NaMe brandonsaloser";
 		ICommand c = parser.parseCommand(command);
 		assertEquals(c.getFlagValue("name"), "brandonsaloser");
 	}
@@ -95,7 +95,7 @@ public class CommandParserTest {
 	public void removeDesignNamed() throws MalformattedCommandException
 	{
 		CommandParser parser = new CommandParser();
-		String command = "Remove -DESIGN -NaMe brandonsaloser";
+		String command = "Remove DESIGN -NaMe brandonsaloser";
 		ICommand c = parser.parseCommand(command);
 		assertEquals(c.getFlagValue("name"), "brandonsaloser");
 	
@@ -105,7 +105,7 @@ public class CommandParserTest {
 	public void removeDesign() throws MalformattedCommandException
 	{
 		CommandParser parser = new CommandParser();
-		String command = "Remove -DESIGN -NaMe brandonsaloser";
+		String command = "Remove DESIGN -NaMe brandonsaloser";
 		ICommand c = parser.parseCommand(command);
 		assertEquals(c.getName(), "remove");
 	}
@@ -114,7 +114,7 @@ public class CommandParserTest {
 	public void removeDesignSubtype() throws MalformattedCommandException
 	{
 		CommandParser parser = new CommandParser();
-		String command = "Remove -DESIGN -NaMe brandonsaloser";
+		String command = "Remove DESIGN -NaMe brandonsaloser";
 		ICommand c = parser.parseCommand(command);
 		assertEquals(c.getName(), "remove");
 	}
