@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-import edu.iastate.cs362.hb.commands.CommandParser;
 import edu.iastate.cs362.hb.commands.ICommand;
 import edu.iastate.cs362.hb.commands.ICommandParser;
+import edu.iastate.cs362.hb.commands.impl.CommandParser;
 import edu.iastate.cs362.hb.constants.CmdConstants;
 import edu.iastate.cs362.hb.controller.ISystemController;
 import edu.iastate.cs362.hb.controller.impl.SystemController;
