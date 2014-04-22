@@ -1,25 +1,27 @@
 package edu.iastate.cs362.hb.model.impl;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 
 import edu.iastate.cs362.hb.model.IVariable;
 
 public class HBVariable implements IVariable {
-
-	// The type of the variable
-	private String type;
 	
 	// It's id
 	private long id;
 	
 	private String name;
 	
+	// The type of the variable
+	private String type;
+	
 	private Set<String> modifiers;
 	
 	public HBVariable(String name, String type) {
 		this.name = name;
 		this.type = type;
+		this.modifiers = new HashSet<>();
 	}
 
 	@Override
