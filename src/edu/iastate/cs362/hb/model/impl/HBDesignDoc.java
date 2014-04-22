@@ -4,22 +4,15 @@ import java.util.List;
 import java.util.Set;
 
 import edu.iastate.cs362.hb.exceptions.HBClassNotFoundException;
-import edu.iastate.cs362.hb.exceptions.HBDuplicateMethodException;
-import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
-import edu.iastate.cs362.hb.exceptions.HBDuplicateRelationshipException;
-import edu.iastate.cs362.hb.exceptions.HBMethodNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBMultipleObjectsFoundException;
-import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
-import edu.iastate.cs362.hb.exceptions.HBRelationshipNotFoundException;
-import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
 import edu.iastate.cs362.hb.main.IdManager;
 import edu.iastate.cs362.hb.model.IClass;
 import edu.iastate.cs362.hb.model.IDesignDoc;
-import edu.iastate.cs362.hb.model.IInstanceField;
 import edu.iastate.cs362.hb.model.IMethod;
 import edu.iastate.cs362.hb.model.IObject;
 import edu.iastate.cs362.hb.model.IObjectBox;
 import edu.iastate.cs362.hb.model.IRelationship;
+import edu.iastate.cs362.hb.model.IVariable;
 import edu.iastate.cs362.hb.model.tree.IHBTreeVisitor;
 import edu.iastate.cs362.hb.model.tree.ITree;
 import edu.iastate.cs362.hb.model.tree.Pair;
@@ -39,7 +32,7 @@ public class HBDesignDoc implements IDesignDoc {
 	}
 
 	@Override
-	public boolean addInstanceField(String className, String fieldName,
+	public boolean addInstanceField(String className, String fieldName, String fieldType,
 			String... modifiers) throws Exception {
 		IObject obj = tree.getObject(className);
 		// if obj is not a Class (its an interface) then we can't add an
@@ -50,7 +43,7 @@ public class HBDesignDoc implements IDesignDoc {
 		// now we know obj is an HBClass.
 		HBClass cl = (HBClass) obj;
 
-		IInstanceField i = new HBInstanceField(fieldName);
+		IVariable i = new HBVariable(fieldName, fieldType);
 		i.addModifiers(modifiers);
 
 		return cl.addInstanceField(i);

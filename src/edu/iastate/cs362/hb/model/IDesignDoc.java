@@ -28,7 +28,8 @@ public interface IDesignDoc extends Nameable {
 	 * given class
 	 * 
 	 * @param className
-	 * @param instanceFieldName
+	 * @param fieldName
+	 * @param fieldType
 	 * @param modifiers
 	 * @return
 	 * @throws HBClassNotFoundException
@@ -39,7 +40,7 @@ public interface IDesignDoc extends Nameable {
 	 *             If there are multiple classes in the design doc with the
 	 *             given name
 	 */
-	public boolean addInstanceField(String className, String instanceFieldName,
+	public boolean addInstanceField(String className, String fieldName, String fieldType,
 			String... modifiers) throws Exception;
 
 	/**
