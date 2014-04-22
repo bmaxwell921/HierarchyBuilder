@@ -85,6 +85,21 @@ public class IdManager {
 	}
 	
 	/**
+	 * Keys are build as fully qualified names for Identifiables,
+	 * so if the user knows the fully qualified name they can use
+	 * this method
+	 * @param key
+	 * @return
+	 * 		the id of the given key, or INVALID_ID
+	 */
+	public long accessIdWithKey(String key) {
+		if (!idMap.containsKey(key)) {
+			return INVALID_ID;
+		}
+		return idMap.get(key);
+	}
+	
+	/**
 	 * Updates information associated with the given id
 	 * @param id
 	 * @param info
@@ -111,21 +126,6 @@ public class IdManager {
 				return;
 			}
 		}
-	}
-	
-	/**
-	 * Keys are build as fully qualified names for Identifiables,
-	 * so if the user knows the fully qualified name they can use
-	 * this method
-	 * @param key
-	 * @return
-	 * 		the id of the given key, or INVALID_ID
-	 */
-	public long accessIdWithKey(String key) {
-		if (!idMap.containsKey(key)) {
-			return INVALID_ID;
-		}
-		return idMap.get(key);
 	}
 	
 	private String buildKey(String...info) {
