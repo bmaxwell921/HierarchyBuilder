@@ -17,8 +17,8 @@ public interface ISystemController {
 
 	public boolean createDesign(String name);
 
-	public boolean addInstanceField(String className, String iFieldName,
-			String... modifiers) throws Exception;
+	public boolean addInstanceField(String className, String fieldName,
+			String fieldType, String... modifiers) throws Exception;
 
 	public boolean addRelationship(String fromObj, String toObj, String rel)
 			throws Exception;

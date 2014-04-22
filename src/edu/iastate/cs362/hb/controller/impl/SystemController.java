@@ -61,9 +61,10 @@ public class SystemController implements ISystemController {
 	 * @throws HBMultipleObjectsFoundException
 	 */
 	@Override
-	public boolean addInstanceField(String className, String iFieldName,
-			String... modifiers) throws Exception {
-		return system.addInstanceField(className, iFieldName, modifiers);
+	public boolean addInstanceField(String className, String fieldName,
+			String fieldType, String... modifiers) throws Exception {
+		return system.addInstanceField(className, fieldName, fieldType,
+				modifiers);
 	}
 
 	@Override
