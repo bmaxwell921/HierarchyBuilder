@@ -33,7 +33,7 @@ public class IdManager {
 		nextId = 0;
 	}
 	
-	public IdManager getInstance() {
+	public static IdManager getInstance() {
 		if (instance == null) {
 			instance = new IdManager();
 		}
