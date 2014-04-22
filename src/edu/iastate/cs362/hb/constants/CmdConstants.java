@@ -10,7 +10,22 @@ package edu.iastate.cs362.hb.constants;
  */
 public class CmdConstants {
 
-
+	// Regular expressions used to check if commands are valid
+	public class Validation {
+		public class Create {
+			public static final String COMMON = "-(name|n)\\s+\\w+";
+			public static final String DESIGN = CmdNames.CREATE + "\\s+design\\s+" + COMMON;
+			public static final String CLASS = CmdNames.CREATE + "\\s+class\\s+" + COMMON;
+			public static final String INTERFACE = CmdNames.CREATE + "\\s+interface\\s+" + COMMON;
+		}
+		
+		public class Add {
+			public static final String COMMON = "-(object|o)\\s+\\w+\\s+-(name|n)\\s+\\w+";
+			public static final String FIELD_COMMON = "";
+			public static final String FIELD = CmdNames.ADD + "\\s+field\\s+" + COMMON + "\\s+" + FIELD_COMMON;
+		}
+	}
+	
 	public class CmdNames {
 		public static final String CREATE = "create";
 		public static final String ADD = "add";
