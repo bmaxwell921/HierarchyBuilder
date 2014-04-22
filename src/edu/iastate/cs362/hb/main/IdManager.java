@@ -1,7 +1,9 @@
 package edu.iastate.cs362.hb.main;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 import edu.iastate.cs362.hb.model.attributes.Identifiable;
 
@@ -80,6 +82,35 @@ public class IdManager {
 			return INVALID_ID;
 		}
 		return idMap.get(key);
+	}
+	
+	/**
+	 * Updates information associated with the given id
+	 * @param id
+	 * @param info
+	 */
+	public void updateInfo(long id, String...info) {
+		for (String key : idMap.keySet()) {
+			if (idMap.get(key) != null && idMap.get(key).equals(id)) {
+				idMap.put(buildKey(info), id);
+				return;
+			}
+		}
+	}
+	
+	/**
+	 * Removes the given id
+	 * @param id
+	 */
+	public void remove(long id) {
+		Set<String> keys = idMap.keySet();
+		for (Iterator<String> iter = keys.iterator(); iter.hasNext(); ) {
+			String key = iter.next();
+			if (idMap.get(key).equals(id)) {
+				iter.remove();
+				return;
+			}
+		}
 	}
 	
 	/**
