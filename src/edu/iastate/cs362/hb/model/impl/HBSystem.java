@@ -56,8 +56,8 @@ public class HBSystem implements ISystem {
 	 */
 	@Override
 	public boolean addInstanceField(String className, String fieldName,
-			String... modifiers) throws Exception {
-		return doc.addInstanceField(className, fieldName, modifiers);
+			String fieldType, String... modifiers) throws Exception {
+		return doc.addInstanceField(className, fieldName, fieldType, modifiers);
 	}
 
 	@Override

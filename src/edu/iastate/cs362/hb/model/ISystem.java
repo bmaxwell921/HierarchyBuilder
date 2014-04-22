@@ -27,7 +27,7 @@ public interface ISystem {
 	public boolean createDesign(String name);
 
 	public boolean addInstanceField(String className, String fieldName,
-			String... modifiers) throws Exception;
+			String fieldType, String... modifiers) throws Exception;
 
 	public boolean addRelationship(String superType, String subType, String rel)
 			throws Exception;
