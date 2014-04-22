@@ -12,7 +12,6 @@ import edu.iastate.cs362.hb.importer.IImporter;
 import edu.iastate.cs362.hb.io.DesignDocBox;
 import edu.iastate.cs362.hb.model.IClass;
 import edu.iastate.cs362.hb.model.IDesignDoc;
-import edu.iastate.cs362.hb.model.impl.HBClass;
 import edu.iastate.cs362.hb.model.impl.HBDesignDoc;
 
 public class XmlImporter implements IImporter {
@@ -85,6 +84,8 @@ public class XmlImporter implements IImporter {
 		String endTag = "</" + tag + '>';
 		int startIndex = str.indexOf(startTag);
 		int endIndex = str.indexOf(endTag);
+		
+		return null;
 	}
 
 }
