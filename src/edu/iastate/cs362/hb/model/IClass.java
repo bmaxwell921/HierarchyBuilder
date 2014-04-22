@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface IClass extends IObject {
 	
-	public boolean addInstanceField(IInstanceField i);
+	public boolean addInstanceField(IVariable i);
 	
 	public List<IMethod> getMethods();
 }

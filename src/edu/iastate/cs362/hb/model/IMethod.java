@@ -19,7 +19,7 @@ public interface IMethod extends Nameable, Identifiable, Modifiable {
 	 * Returns a list of all the arguments in this method
 	 * @return
 	 */
-	public List<IArgument> getArguments();
+	public List<IVariable> getArguments();
 	
 	/**
 	 * Converts the given string to HBArgument objects, then 
