@@ -76,6 +76,12 @@ public class CmdConstants {
 		private static final String SOURCE_SHORT = "s";
 		public static final String SOURCE_REGEX = SOURCE + RegexOp.OR + SOURCE_SHORT;
 		
+		//Iteration 3
+		//Cache
+		public static final String CACHE = "cache";
+		private static final String CACHE_SHORT = "ch";
+		public static final String CACHE_REGEX = CACHE + RegexOp.OR + CACHE_SHORT;
+		
 	}
 	
 	public class Flags {
@@ -135,6 +141,16 @@ public class CmdConstants {
 		public static final String PATH = "path";
 		private static final String PATH_SHORT = "pA";
 		public static final String PATH_REGEX = PATH + RegexOp.OR + PATH_SHORT; //Might have some confliction with p from Parameters
+		
+		//Iteration 3
+		public static final String METHOD = "method";
+		private static final String METHOD_SHORT = "m";
+		public static final String METHOD_REGEX = METHOD + RegexOp.OR + METHOD_SHORT;
+		
+		public static final String MODIFIER = "modifier";
+		private static final String MODIFIER_SHORT = "mS";
+		public static final String MODIFIER_REGEX = MODIFIER + RegexOp.OR + MODIFIER_SHORT;
+		
 	}
 	
 	public class RegexOp {

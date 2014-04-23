@@ -105,6 +105,8 @@ public class Cardinal {
 				CmdConstants.SubCmdNames.INTERFACE_REGEX)) {
 			return isc.createInterface(cmd
 					.getFlagValue(CmdConstants.Flags.NAME));
+		} else if(cmd.getSubCommand().matches(CmdConstants.SubCmdNames.CACHE_REGEX)){
+			return doCache(cmd);
 		} else {
 			return isc.createDesign(cmd.getFlagValue(CmdConstants.Flags.NAME));
 		}
@@ -267,6 +269,17 @@ public class Cardinal {
 		System.out.println("System ready, enter a command.");
 	}
 
+	private boolean doCache(ICommand cmd){
+		if(cmd.getFlagValue(CmdConstants.Flags.TYPE).equalsIgnoreCase(CmdConstants.SubCmdNames.METHOD)){
+			
+		} else if (cmd.getFlagValue(CmdConstants.Flags.TYPE).equalsIgnoreCase(CmdConstants.Flags.INSTANCE)){
+			
+		} else if (cmd.getFlagValue(CmdConstants.Flags.TYPE).equalsIgnoreCase(CmdConstants.Flags.MODIFIER)){
+			
+		} else
+			return false;
+	}
+	
 	private static int randRange(Random gen, int low, int high) {
 		return gen.nextInt(high - low) + low;
 	}
