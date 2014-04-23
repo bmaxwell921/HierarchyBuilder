@@ -3,6 +3,7 @@ package edu.iastate.cs362.hb.model.impl;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 import edu.iastate.cs362.hb.exceptions.HBClassNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateMethodException;
@@ -190,6 +191,69 @@ public class HBSystem implements ISystem {
 		importer = new SourceImporter();
 		doc = importer.doImport(path);
 		return true;
+	}
+
+	@Override
+	public boolean changeModifiers(long objId, Set<String> modifiers) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean changeclassField(long objId, long fieldId, String type,
+			Set<String> modifiers) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean changeClassMethod(long objId, long methodId,
+			String methodName, List<String> methodArgs, Set<String> modifiers) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public String listCachedMethod(long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String listCachedVariable(long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String cacheMethod(String methodName, String returnType,
+			Set<String> modifiers, List<String> arguments) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public long cacheVariable(String name, String type, Set<String> modifiers) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public String listCachedModifierSet(long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public long cacheModifierSet(Set<String> modifiers) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public String showHelp() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -3,6 +3,7 @@ package edu.iastate.cs362.hb.model;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 import edu.iastate.cs362.hb.exceptions.HBClassNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateMethodException;
@@ -101,4 +102,16 @@ public interface ISystem {
 	 * @throws MalformattedInputException
 	 */
 	public boolean importDesignSource(String path) throws Exception;
+	
+	//Iteration 3
+	public boolean changeModifiers(long objId, Set<String> modifiers);
+	public boolean changeclassField(long objId, long fieldId, String type, Set<String> modifiers);
+	public boolean changeClassMethod(long objId, long methodId, String methodName, List<String> methodArgs, Set<String> modifiers);
+	public String listCachedMethod(long id);
+	public String listCachedVariable(long id);
+	public String cacheMethod(String methodName, String returnType, Set<String> modifiers, List<String> arguments);
+	public long cacheVariable(String name, String type, Set<String> modifiers);
+	public String listCachedModifierSet(long id);
+	public long cacheModifierSet(Set<String> modifiers);
+	public String showHelp();
 }
