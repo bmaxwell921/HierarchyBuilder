@@ -1,8 +1,12 @@
 package edu.iastate.cs362.hb.main;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Set;
 
 import edu.iastate.cs362.hb.commands.ICommand;
 import edu.iastate.cs362.hb.commands.ICommandParser;
@@ -12,6 +16,7 @@ import edu.iastate.cs362.hb.controller.ISystemController;
 import edu.iastate.cs362.hb.controller.impl.SystemController;
 import edu.iastate.cs362.hb.exceptions.HBMultipleObjectsFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
+import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
 import edu.iastate.cs362.hb.model.IObjectBox;
 import edu.iastate.cs362.hb.model.impl.HBSystem;
 
@@ -22,7 +27,7 @@ import edu.iastate.cs362.hb.model.impl.HBSystem;
  */
 public class Cardinal {
 	// TODO! check for id AND name instead of just taking a name
-	//TEEHEE Broke brandon's streak.
+	// TEEHEE Broke brandon's streak.
 	// Object responsible for parsing commands
 	private ICommandParser commander;
 
@@ -105,7 +110,8 @@ public class Cardinal {
 				CmdConstants.SubCmdNames.INTERFACE_REGEX)) {
 			return isc.createInterface(cmd
 					.getFlagValue(CmdConstants.Flags.NAME));
-		} else if(cmd.getSubCommand().matches(CmdConstants.SubCmdNames.CACHE_REGEX)){
+		} else if (cmd.getSubCommand().matches(
+				CmdConstants.SubCmdNames.CACHE_REGEX)) {
 			return doCache(cmd);
 		} else {
 			return isc.createDesign(cmd.getFlagValue(CmdConstants.Flags.NAME));
@@ -251,35 +257,68 @@ public class Cardinal {
 		} else
 			return false;
 	}
-	
+
 	private static void doSystemStart() {
 		System.out.println("Starting system...");
 		Random gen = new Random();
 		int choice = randRange(gen, 0, 25);
 		while (choice < 100) {
 			System.out.println(String.format("%d%%...", choice));
-			choice = randRange(gen, choice+1, choice + 25);
+			choice = randRange(gen, choice + 1, choice + 25);
 			try {
 				Thread.sleep(gen.nextInt(1000));
 			} catch (InterruptedException e) {
-				
+
 			}
 		}
 		System.out.println("100%");
 		System.out.println("System ready, enter a command.");
 	}
 
-	private boolean doCache(ICommand cmd){
-		if(cmd.getFlagValue(CmdConstants.Flags.TYPE).equalsIgnoreCase(CmdConstants.SubCmdNames.METHOD)){
-			
-		} else if (cmd.getFlagValue(CmdConstants.Flags.TYPE).equalsIgnoreCase(CmdConstants.Flags.INSTANCE)){
-			
-		} else if (cmd.getFlagValue(CmdConstants.Flags.TYPE).equalsIgnoreCase(CmdConstants.Flags.MODIFIER)){
-			
-		} else
+	private boolean doCache(ICommand cmd) throws MalformattedCommandException {
+		long id = 0;
+		if (cmd.getFlagValue(CmdConstants.Flags.TYPE).equalsIgnoreCase(
+				CmdConstants.SubCmdNames.METHOD)) {
+			String methodName = cmd.getFlagValue(CmdConstants.Flags.NAME);
+			String returnType = cmd.getFlagValue(CmdConstants.Flags.RETURN);
+			String modifiersStr = cmd.getFlagValue(CmdConstants.Flags.MODIFIER);
+			Set<String> modifiers = new HashSet<String>(
+					Arrays.asList(modifiersStr.split(",")));
+			String argumentsStr = cmd
+					.getFlagValue(CmdConstants.Flags.ARGUMENTS);
+			List<String> arguments = new ArrayList<String>(
+					Arrays.asList(argumentsStr.split(",")));
+			id = isc.cacheMethod(methodName, returnType, modifiers, arguments);
+			if (id == -1) {
+				throw new MalformattedCommandException("ID unable to set");
+			}
+		} else if (cmd.getFlagValue(CmdConstants.Flags.TYPE).equalsIgnoreCase(
+				CmdConstants.Flags.INSTANCE)) {
+			String methodName = cmd.getFlagValue(CmdConstants.Flags.NAME);
+			String returnType = cmd.getFlagValue(CmdConstants.Flags.RETURN);
+			String modifiersStr = cmd.getFlagValue(CmdConstants.Flags.MODIFIER);
+			Set<String> modifiers = new HashSet<String>(
+					Arrays.asList(modifiersStr.split(",")));
+			id = isc.cacheVariable(methodName, returnType, modifiers);
+			if (id == -1) {
+				throw new MalformattedCommandException("ID unable to set");
+			}
+		} else if (cmd.getFlagValue(CmdConstants.Flags.TYPE).equalsIgnoreCase(
+				CmdConstants.Flags.MODIFIER)) {
+			String modifiersStr = cmd.getFlagValue(CmdConstants.Flags.MODIFIER);
+			Set<String> modifiers = new HashSet<String>(
+					Arrays.asList(modifiersStr.split(",")));
+			id = isc.cacheModifierSet(modifiers);
+			if (id == -1) {
+				throw new MalformattedCommandException("ID unable to set");
+			}
+		} else {
 			return false;
+		}
+		System.out.println("ID is set to: " + id);
+		return true;
 	}
-	
+
 	private static int randRange(Random gen, int low, int high) {
 		return gen.nextInt(high - low) + low;
 	}

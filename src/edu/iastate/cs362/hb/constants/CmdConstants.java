@@ -151,6 +151,10 @@ public class CmdConstants {
 		private static final String MODIFIER_SHORT = "mS";
 		public static final String MODIFIER_REGEX = MODIFIER + RegexOp.OR + MODIFIER_SHORT;
 		
+		public static final String RETURN = "return";
+		private static final String RETURN_SHORT = "r";
+		public static final String RETURN_REGEX = RETURN + RegexOp.OR + RETURN_SHORT;
+		
 	}
 	
 	public class RegexOp {
