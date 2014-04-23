@@ -226,10 +226,10 @@ public class HBSystem implements ISystem {
 	}
 
 	@Override
-	public String cacheMethod(String methodName, String returnType,
+	public long cacheMethod(String methodName, String returnType,
 			Set<String> modifiers, List<String> arguments) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 	@Override

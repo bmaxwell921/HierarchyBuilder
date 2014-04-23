@@ -221,14 +221,12 @@ public class SystemController implements ISystemController {
 	@Override
 	public long cacheMethod(String methodName, String returnType,
 			Set<String> modifiers, List<String> arguments) {
-		// TODO Auto-generated method stub
-		return 0;
+		return system.cacheMethod(methodName, returnType, modifiers, arguments);
 	}
 
 	@Override
 	public long cacheVariable(String name, String type, Set<String> modifiers) {
-		// TODO Auto-generated method stub
-		return 0;
+		return system.cacheVariable(name, type, modifiers);
 	}
 
 	@Override
@@ -239,8 +237,7 @@ public class SystemController implements ISystemController {
 
 	@Override
 	public long cacheModifierSet(Set<String> modifiers) {
-		// TODO Auto-generated method stub
-		return 0;
+		return system.cacheModifierSet(modifiers);
 	}
 
 	@Override
