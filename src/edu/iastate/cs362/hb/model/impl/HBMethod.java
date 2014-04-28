@@ -29,6 +29,9 @@ public class HBMethod implements IMethod {
 	// Name of the method
 	private String name;
 	
+	//Return type of method
+	private String returnType;
+	
 	// All the arguments
 	private List<IVariable> args;
 	
@@ -164,5 +167,11 @@ public class HBMethod implements IMethod {
 		}
 		toRet += ")";
 		return toRet;
+	}
+
+	@Override
+	public void addReturnType(String returnType) {
+		this.returnType = returnType;
+		
 	}
 }
