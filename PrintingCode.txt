@@ -1,0 +1,10 @@
+In a Linux Terminal run these two commands:
+1) find ./src -name '*.java' -print0 | xargs -0 enscript --font=Courier@10 --output=input.ps
+2) gs -dBATCH -dNOPAUSE -sDEVICE=pdfwrite -sOutputFile=project.pdf input.ps
+
+That will combine all the Java files into one pdf.
+On Windows you'll have to get cygwin and install the enscript and gs package...idr what their actual names are.
+
+Clean up (after printing):
+rm input.ps
+rm project.pdf
