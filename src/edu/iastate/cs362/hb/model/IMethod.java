@@ -32,5 +32,8 @@ public interface IMethod extends Nameable, Identifiable, Modifiable {
 
 	public void addArguments(List<String> methodArgs);
 
+	public void addReturnType(String returnType);
+	
+	
 	public String list();
 }

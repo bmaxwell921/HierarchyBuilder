@@ -18,15 +18,25 @@ import edu.iastate.cs362.hb.importer.IImporter;
 import edu.iastate.cs362.hb.importer.impl.JsonImporter;
 import edu.iastate.cs362.hb.importer.impl.SourceImporter;
 import edu.iastate.cs362.hb.importer.impl.XmlImporter;
+import edu.iastate.cs362.hb.main.CacheManager;
+import edu.iastate.cs362.hb.main.IdManager;
 import edu.iastate.cs362.hb.model.IDesignDoc;
+import edu.iastate.cs362.hb.model.IMethod;
 import edu.iastate.cs362.hb.model.IObjectBox;
 import edu.iastate.cs362.hb.model.ISystem;
+import edu.iastate.cs362.hb.model.IVariable;
+import edu.iastate.cs362.hb.model.attributes.Identifiable;
 
 public class HBSystem implements ISystem {
 
 	private IDesignDoc doc;
 	private IExporter exporter;
 	private IImporter importer;
+	private CacheManager cache;
+	
+	public HBSystem(){
+		cache = CacheManager.getInstance();
+	}
 
 	@Override
 	public boolean createDesign(String name) {
@@ -208,39 +218,39 @@ public class HBSystem implements ISystem {
 
 	@Override
 	public String listCachedMethod(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return CacheManager.getMappings(id);
 	}
 
 	@Override
 	public String listCachedVariable(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return CacheManager.getMappings(id);
 	}
 
 	@Override
 	public long cacheMethod(String methodName, String returnType,
 			Set<String> modifiers, List<String> arguments) {
-		// TODO Auto-generated method stub
-		return 0;
+		IMethod method = new HBMethod(methodName);
+		method.addArguments(arguments);
+		method.addModifiers(modifiers);
+		method.addReturnType(returnType);
+		return cache.addItem(method, methodName);
 	}
 
 	@Override
 	public long cacheVariable(String name, String type, Set<String> modifiers) {
-		// TODO Auto-generated method stub
-		return 0;
+		IVariable var = new HBVariable(name, type);
+		var.addModifiers(modifiers);
+		return cache.addItem(var, name);
 	}
 
 	@Override
 	public String listCachedModifierSet(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return CacheManager.getMappings(id);
 	}
 
 	@Override
 	public long cacheModifierSet(Set<String> modifiers) {
-		// TODO Auto-generated method stub
-		return 0;
+		return cache.addItem(modifiers, "Modifier Set");
 	}
 
 	@Override
