@@ -58,8 +58,16 @@ public class HBTree implements ITree {
 	}
 	
 	@Override
-	public IObject getObject(long objId){
-		return null;
+	public IObject getObject(long objId) throws Exception{
+		Set<IObject> matches = findAll(objId, null);
+		if(matches.isEmpty()) {
+			throw new HBObjectNotFoundException(ErrorMessages.OBJECT_NOT_FOUND, "Id: " + objId);
+		}
+		if(matches.size() > 1) {
+			throw new HBMultipleObjectsFoundException(ErrorMessages.MULT_OBJECT_WITH_ID, objId);
+		}
+		
+		return matches.iterator().next();
 	}
 
 	@Override
@@ -169,6 +177,19 @@ public class HBTree implements ITree {
 
 		for (IObject obj : objs) {
 			if (obj.getName().equals(objName)
+					&& (pkg == null || pkg != null
+							&& obj.getPackage().equals(pkg))) {
+				ret.add(obj);
+			}
+		}
+		return ret;
+	}
+	
+	private Set<IObject> findAll(long objId, String pkg) {
+		Set<IObject> ret = new HashSet<>();
+
+		for (IObject obj : objs) {
+			if (obj.getId() == (objId)
 					&& (pkg == null || pkg != null
 							&& obj.getPackage().equals(pkg))) {
 				ret.add(obj);

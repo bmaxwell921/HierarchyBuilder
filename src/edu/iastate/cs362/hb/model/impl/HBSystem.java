@@ -190,19 +190,19 @@ public class HBSystem implements ISystem {
 	}
 
 	@Override
-	public boolean changeModifiers(long objId, Set<String> modifiers) {
+	public boolean changeModifiers(long objId, Set<String> modifiers) throws Exception {
 		return doc.changeModifiers(objId, modifiers);
 	}
 
 	@Override
 	public boolean changeClassField(long objId, long fieldId, String fieldName, String type,
-			Set<String> modifiers) {
+			Set<String> modifiers) throws Exception {
 		return doc.changeClassField(objId, fieldId, fieldName, type, modifiers);
 	}
 
 	@Override
 	public boolean changeClassMethod(long objId, long methodId,
-			String methodName, List<String> methodArgs, Set<String> modifiers) {
+			String methodName, List<String> methodArgs, Set<String> modifiers) throws Exception {
 		return doc.changeClassMethod(objId, methodId, methodName, methodArgs, modifiers);
 	}
 

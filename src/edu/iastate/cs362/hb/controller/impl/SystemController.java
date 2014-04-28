@@ -178,19 +178,19 @@ public class SystemController implements ISystemController {
 	}
 
 	@Override
-	public boolean changeModifiers(long objId, Set<String> modifiers) {
+	public boolean changeModifiers(long objId, Set<String> modifiers) throws Exception {
 		return system.changeModifiers(objId, modifiers);
 	}
 
 	@Override
 	public boolean changeClassField(long objId, long fieldId, String fieldName, String type,
-			Set<String> modifiers) {
+			Set<String> modifiers) throws Exception {
 		return system.changeClassField(objId, fieldId, fieldName, type, modifiers);
 	}
 
 	@Override
 	public boolean changeClassMethod(long objId, long methodId,
-			String methodName, List<String> methodArgs, Set<String> modifiers) {
+			String methodName, List<String> methodArgs, Set<String> modifiers) throws Exception {
 		return system.changeClassMethod(objId, methodId, methodName, methodArgs, modifiers);
 	}
 

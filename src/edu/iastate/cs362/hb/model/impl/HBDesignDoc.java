@@ -218,14 +218,14 @@ public class HBDesignDoc implements IDesignDoc {
 	}
 
 	@Override
-	public boolean changeModifiers(long objId, Set<String> modifiers) {
+	public boolean changeModifiers(long objId, Set<String> modifiers) throws Exception {
 		IObject toUse = tree.getObject(objId);
 		return toUse.changeModifiers(modifiers);
 	}
 
 	@Override
 	public boolean changeClassField(long objId, long fieldId, String fieldName, String type,
-			Set<String> modifiers) {
+			Set<String> modifiers) throws Exception {
 		IObject toUse = tree.getObject(objId);
 		if(!(toUse instanceof HBClass)){
 			return false;
@@ -237,7 +237,7 @@ public class HBDesignDoc implements IDesignDoc {
 
 	@Override
 	public boolean changeClassMethod(long objId, long methodId,
-			String methodName, List<String> methodArgs, Set<String> modifiers) {
+			String methodName, List<String> methodArgs, Set<String> modifiers) throws Exception {
 		IObject toUse = tree.getObject(objId);
 		IMethod newMethod = new HBMethod(methodName);
 		newMethod.addArguments(methodArgs);

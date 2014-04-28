@@ -35,8 +35,9 @@ public interface ITree {
 	 * 
 	 * @param id
 	 * @return
+	 * @throws Exception 
 	 */
-	public IObject getObject(long id);
+	public IObject getObject(long id) throws Exception;
 
 	/**
 	 * Method used to add an object to the tree

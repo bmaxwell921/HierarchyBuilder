@@ -244,8 +244,9 @@ public interface IDesignDoc extends Nameable {
 	 * @param objId
 	 * @param modifiers
 	 * @return
+	 * @throws Exception
 	 */
-	public boolean changeModifiers(long objId, Set<String> modifiers);
+	public boolean changeModifiers(long objId, Set<String> modifiers) throws Exception;
 	
 	/**
 	 * 
@@ -253,9 +254,10 @@ public interface IDesignDoc extends Nameable {
 	 * @param fieldId
 	 * @param type
 	 * @param modifiers
-	 * @return
+	 * @return 
+	 * @throws Exception
 	 */
-	public boolean changeClassField(long objId, long fieldId, String fieldName, String type, Set<String> modifiers);
+	public boolean changeClassField(long objId, long fieldId, String fieldName, String type, Set<String> modifiers) throws Exception;
 	
 	/**
 	 * 
@@ -265,6 +267,7 @@ public interface IDesignDoc extends Nameable {
 	 * @param methodArgs
 	 * @param modifiers
 	 * @return
+	 * @throws Exception 
 	 */
-	public boolean changeClassMethod(long objId, long methodId, String methodName, List<String> methodArgs, Set<String> modifiers);
+	public boolean changeClassMethod(long objId, long methodId, String methodName, List<String> methodArgs, Set<String> modifiers) throws Exception;
 }

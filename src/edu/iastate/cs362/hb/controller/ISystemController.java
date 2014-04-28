@@ -71,11 +71,11 @@ public interface ISystemController {
 	public boolean importDesignSource(String path) throws Exception;
 	
 	//Added for iteration 3
-	public boolean changeModifiers(long objId, Set<String> modifiers);
+	public boolean changeModifiers(long objId, Set<String> modifiers) throws Exception;
 	
-	public boolean changeClassField(long objId, long fieldId, String fieldName, String type, Set<String> modifiers);
+	public boolean changeClassField(long objId, long fieldId, String fieldName, String type, Set<String> modifiers) throws Exception;
 	
-	public boolean changeClassMethod(long objId, long methodId, String methodName, List<String> methodArgs, Set<String> modifiers);
+	public boolean changeClassMethod(long objId, long methodId, String methodName, List<String> methodArgs, Set<String> modifiers) throws Exception;
 	
 	public String listCachedMethod(long id);
 	
