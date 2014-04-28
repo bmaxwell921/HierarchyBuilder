@@ -12,11 +12,13 @@ public class CacheManager {
 		private Class<? extends Object> type;
 		private Object object;
 		private String name;
+		private String strType;
 
-		public Wrapper(Object obj, String name) {
+		public Wrapper(Object obj, String name, String strType) {
 			type = obj.getClass();
 			object = obj;
 			this.name = name;
+			this.strType = strType;
 		}
 	}
 
@@ -32,8 +34,8 @@ public class CacheManager {
 		return instance;
 	}
 
-	public long addItem(Object o, String name) {
-		list.add(new Wrapper(o, name));
+	public long addItem(Object o, String name, String strType) {
+		list.add(new Wrapper(o, name, strType));
 		return nextID++;
 	}
 
@@ -57,7 +59,7 @@ public class CacheManager {
 		}
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < instance.list.size(); i++) {
-			String str = i + "/t" + instance.list.get(i).name + "\n";
+			String str = i + "\t" + instance.list.get(i).strType + "\t" + instance.list.get(i).name + "\n";
 			sb.append(str);
 		}
 		return sb.toString();
@@ -70,7 +72,7 @@ public class CacheManager {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < instance.list.size(); i++) {
 			if (instance.list.get(i).type == type) {
-				String str = i + "/t" + instance.list.get(i).name + "\n";
+				String str = i + "\t" + instance.list.get(i).name + "\n";
 				sb.append(str);
 			}
 		}
@@ -79,7 +81,7 @@ public class CacheManager {
 	
 	public static String getMappings(long id){
 		if(instance == null) return null;
-		return id + "/t" + instance.list.get((int) id).name;
+		return id + "\t" + instance.list.get((int) id).strType + "\t" + instance.list.get((int) id).name;
 	}
 
 }

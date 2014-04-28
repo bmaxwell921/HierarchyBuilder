@@ -233,14 +233,14 @@ public class HBSystem implements ISystem {
 		method.addArguments(arguments);
 		method.addModifiers(modifiers);
 		method.addReturnType(returnType);
-		return cache.addItem(method, methodName);
+		return cache.addItem(method, methodName, "variable");
 	}
 
 	@Override
 	public long cacheVariable(String name, String type, Set<String> modifiers) {
 		IVariable var = new HBVariable(name, type);
 		var.addModifiers(modifiers);
-		return cache.addItem(var, name);
+		return cache.addItem(var, name, "variable");
 	}
 
 	@Override
@@ -250,7 +250,7 @@ public class HBSystem implements ISystem {
 
 	@Override
 	public long cacheModifierSet(Set<String> modifiers) {
-		return cache.addItem(modifiers, "Modifier Set");
+		return cache.addItem(modifiers, "Modifier Set", "modifier");
 	}
 
 	@Override

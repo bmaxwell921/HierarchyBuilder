@@ -315,7 +315,8 @@ public class Cardinal {
 		} else {
 			return false;
 		}
-		System.out.println("ID is set to: " + id);
+		System.out.println("New cache item created with id: " + id);
+		System.out.println(CacheManager.getMappings(id));
 		return true;
 	}
 
