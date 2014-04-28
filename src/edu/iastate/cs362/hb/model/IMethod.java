@@ -2,7 +2,6 @@ package edu.iastate.cs362.hb.model;
 
 import java.util.List;
 
-import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
 import edu.iastate.cs362.hb.model.attributes.Identifiable;
 import edu.iastate.cs362.hb.model.attributes.Modifiable;
 import edu.iastate.cs362.hb.model.attributes.Nameable;
@@ -32,4 +31,6 @@ public interface IMethod extends Nameable, Identifiable, Modifiable {
 	public void addArguments(String args);
 
 	public void addArguments(List<String> methodArgs);
+
+	public String list();
 }

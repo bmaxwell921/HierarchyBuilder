@@ -1,5 +1,6 @@
 package edu.iastate.cs362.hb.model.impl;
 
+
 /**
  * Class representing an interface. Do we even need it if it's empty?? I guess it's nice to have
  * @author Brandon
@@ -19,7 +20,7 @@ public class HBInterface extends AHBObject{
 		toRet += this.getName() + "\n" + "Methods: \n";
 		for(int i = 0; i < this.getNumMethods(); i++)
 		{
-			toRet += " " + methods.get(i).getName();
+			toRet += " " + methods.get(i).list();
 			toRet += "\n";
 		}
 		return toRet;

@@ -98,6 +98,16 @@ public class HBVariable implements IVariable {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String list() {
+		String toRet = "";
+		for(String mod: modifiers){
+			toRet += mod + " ";
+		}
+		toRet += type + " " + name;
+		return toRet;
+	}
 	
 	
 }

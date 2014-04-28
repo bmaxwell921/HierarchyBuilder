@@ -151,4 +151,18 @@ public class HBMethod implements IMethod {
 			this.args.add(new HBVariable(type, value));
 		}
 	}
+
+	@Override
+	public String list() {
+		String toRet = "";
+		for(String mod: modifiers){
+			toRet += mod + " ";
+		}
+		toRet += " " + name + "(";
+		for(int i = 0; i < args.size(); i++){
+			toRet += args.get(i) + ", ";
+		}
+		toRet += ")";
+		return toRet;
+	}
 }

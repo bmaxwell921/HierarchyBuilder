@@ -9,7 +9,6 @@ import edu.iastate.cs362.hb.exceptions.HBClassNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBRelationshipNotFoundException;
-import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
 import edu.iastate.cs362.hb.model.IDesignDoc;
 import edu.iastate.cs362.hb.model.impl.HBDesignDoc;
 

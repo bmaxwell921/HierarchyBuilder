@@ -11,7 +11,6 @@ import edu.iastate.cs362.hb.exceptions.HBMethodNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBMultipleObjectsFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBRelationshipNotFoundException;
-import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
 import edu.iastate.cs362.hb.model.attributes.Nameable;
 import edu.iastate.cs362.hb.model.tree.IHBTreeVisitor;
 

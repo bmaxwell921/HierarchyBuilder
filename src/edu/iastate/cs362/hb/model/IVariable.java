@@ -12,4 +12,6 @@ public interface IVariable extends Nameable, Modifiable, Identifiable {
 	 */
 	public String getType();
 
+	public String list();
+
 }

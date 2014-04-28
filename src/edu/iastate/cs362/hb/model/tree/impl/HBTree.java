@@ -3,26 +3,20 @@ package edu.iastate.cs362.hb.model.tree.impl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import edu.iastate.cs362.hb.constants.ErrorMessages;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
-import edu.iastate.cs362.hb.exceptions.HBDuplicateRelationshipException;
 import edu.iastate.cs362.hb.exceptions.HBMultipleObjectsFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
-import edu.iastate.cs362.hb.exceptions.HBRelationshipNotFoundException;
 import edu.iastate.cs362.hb.model.IObject;
 import edu.iastate.cs362.hb.model.IObjectBox;
 import edu.iastate.cs362.hb.model.IRelationship;
 import edu.iastate.cs362.hb.model.impl.HBObjectBox;
 import edu.iastate.cs362.hb.model.tree.IHBTreeVisitor;
 import edu.iastate.cs362.hb.model.tree.ITree;
-import edu.iastate.cs362.hb.model.tree.Pair;
 
 /**
  * The tree structure for the Hierarchy Builder class

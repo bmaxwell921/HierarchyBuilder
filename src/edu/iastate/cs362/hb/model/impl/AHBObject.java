@@ -7,8 +7,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.IO;
-
 import edu.iastate.cs362.hb.constants.ErrorMessages;
 import edu.iastate.cs362.hb.constants.ObjectConstants;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateMethodException;
@@ -255,12 +253,17 @@ public abstract class AHBObject implements IObject {
 		return null;
 	}
 	
+	@Override
 	public boolean changeModifiers(Set<String> modifiers){
-		return false;
+		return modifiers.addAll(modifiers);
 	}
+	
+	@Override
 	public boolean changeClassField(long fieldId, IVariable i){
 		return false;
 	}
+	
+	@Override
 	public boolean changeClassMethod(long methodId, IMethod m){
 		return false;
 	}

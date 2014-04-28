@@ -31,13 +31,13 @@ public class HBClass extends AHBObject implements IClass{
 		toRet += this.getName() + "\n" + "Fields: \n";
 		for(int i = 0; i < fields.size(); i++)
 		{
-			toRet += " " + fields.get(i).getName();
+			toRet += " " + fields.get(i).list();
 			toRet += "\n";
 		}
 		toRet += "Methods: \n";
 		for(int i = 0; i < this.getNumMethods(); i++)
 		{
-			toRet += " " + methods.get(i).getName();
+			toRet += " " + methods.get(i).list();
 			toRet += "\n";
 		}
 		return toRet;
