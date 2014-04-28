@@ -1,5 +1,7 @@
 package edu.iastate.cs362.hb.model.impl;
 
+import edu.iastate.cs362.hb.model.IVariable;
+
 
 /**
  * Class representing an interface. Do we even need it if it's empty?? I guess it's nice to have
@@ -24,5 +26,10 @@ public class HBInterface extends AHBObject{
 			toRet += "\n";
 		}
 		return toRet;
+	}
+
+	@Override
+	public boolean changeClassField(long fieldId, IVariable i) {
+		return false;
 	}
 }

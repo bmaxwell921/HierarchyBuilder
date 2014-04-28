@@ -47,4 +47,16 @@ public class HBClass extends AHBObject implements IClass{
 	public List<IMethod> getMethods() {
 		return methods;
 	}
+	
+	@Override
+	public boolean changeClassField(long fieldId, IVariable i){
+		for(int j = 0; j < fields.size(); j++){
+			IVariable toCheck = fields.get(j);
+			if(toCheck.getId() == fieldId){
+				toCheck = i;
+				return true;
+			}
+		}
+		return false;
+	}
 }

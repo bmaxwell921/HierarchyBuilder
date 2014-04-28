@@ -227,6 +227,9 @@ public class HBDesignDoc implements IDesignDoc {
 	public boolean changeClassField(long objId, long fieldId, String fieldName, String type,
 			Set<String> modifiers) {
 		IObject toUse = tree.getObject(objId);
+		if(!(toUse instanceof HBClass)){
+			return false;
+		}
 		IVariable newVar = new HBVariable(fieldName, type);
 		newVar.addModifiers(modifiers);
 		return toUse.changeClassField(fieldId, newVar);

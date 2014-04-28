@@ -16,7 +16,6 @@ import edu.iastate.cs362.hb.exceptions.HBRelationshipNotFoundException;
 import edu.iastate.cs362.hb.model.IMethod;
 import edu.iastate.cs362.hb.model.IObject;
 import edu.iastate.cs362.hb.model.IRelationship;
-import edu.iastate.cs362.hb.model.IVariable;
 import edu.iastate.cs362.hb.model.tree.Pair;
 
 /**
@@ -255,16 +254,19 @@ public abstract class AHBObject implements IObject {
 	
 	@Override
 	public boolean changeModifiers(Set<String> modifiers){
+		modifiers.removeAll(modifiers);
 		return modifiers.addAll(modifiers);
 	}
 	
 	@Override
-	public boolean changeClassField(long fieldId, IVariable i){
-		return false;
-	}
-	
-	@Override
 	public boolean changeClassMethod(long methodId, IMethod m){
+		for(int i = 0; i < methods.size(); i++){
+			IMethod toCheck = methods.get(i);
+			if(toCheck.getId() == methodId){
+				toCheck = m;
+				return true;
+			}
+		}
 		return false;
 	}
 }
