@@ -185,7 +185,7 @@ public class SystemController implements ISystemController {
 	@Override
 	public boolean changeClassField(long objId, long fieldId, String fieldName, String type,
 			Set<String> modifiers) {
-		return system.changeClassField(objId, fieldId, type, modifiers);
+		return system.changeClassField(objId, fieldId, fieldName, type, modifiers);
 	}
 
 	@Override
