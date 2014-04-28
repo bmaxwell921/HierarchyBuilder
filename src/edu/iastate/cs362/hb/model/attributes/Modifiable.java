@@ -28,4 +28,6 @@ public interface Modifiable {
 	 * @return
 	 */
 	public Set<String> getModifiers();
+
+	void addModifiers(Set<String> modifiers);
 }

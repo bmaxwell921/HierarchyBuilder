@@ -72,14 +72,22 @@ public interface ISystemController {
 	
 	//Added for iteration 3
 	public boolean changeModifiers(long objId, Set<String> modifiers);
-	public boolean changeclassField(long objId, long fieldId, String type, Set<String> modifiers);
+	
+	public boolean changeClassField(long objId, long fieldId, String fieldName, String type, Set<String> modifiers);
+	
 	public boolean changeClassMethod(long objId, long methodId, String methodName, List<String> methodArgs, Set<String> modifiers);
+	
 	public String listCachedMethod(long id);
+	
 	public String listCachedVariable(long id);
+	
 	public long cacheMethod(String methodName, String returnType, Set<String> modifiers, List<String> arguments);
+	
 	public long cacheVariable(String name, String type, Set<String> modifiers);
+	
 	public String listCachedModifierSet(long id);
+	
 	public long cacheModifierSet(Set<String> modifiers);
+	
 	public String showHelp();
-
 }

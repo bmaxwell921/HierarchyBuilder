@@ -81,4 +81,10 @@ public interface IObject extends Nameable, Identifiable, Modifiable {
 	public boolean changeName(String newName);
 	
 	public boolean changePackage(String packageName);
+	
+	public boolean changeModifiers(Set<String> modifiers);
+	
+	public boolean changeClassField(long fieldId, IVariable i);
+	
+	public boolean changeClassMethod(long methodId, IMethod m);
 }

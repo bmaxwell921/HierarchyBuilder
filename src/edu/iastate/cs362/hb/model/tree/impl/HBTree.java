@@ -62,6 +62,11 @@ public class HBTree implements ITree {
 
 		return matches.iterator().next();
 	}
+	
+	@Override
+	public IObject getObject(long objId){
+		return null;
+	}
 
 	@Override
 	public boolean addObject(IObject newObj) throws Exception {

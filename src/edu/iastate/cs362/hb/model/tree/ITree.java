@@ -30,6 +30,13 @@ public interface ITree {
 	 *             if multiple objects exist in the tree with this name
 	 */
 	public IObject getObject(String objName) throws Exception;
+	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public IObject getObject(long id);
 
 	/**
 	 * Method used to add an object to the tree

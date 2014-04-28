@@ -1,22 +1,13 @@
 package edu.iastate.cs362.hb.controller.impl;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
 import edu.iastate.cs362.hb.controller.ISystemController;
 import edu.iastate.cs362.hb.exceptions.HBClassNotFoundException;
-import edu.iastate.cs362.hb.exceptions.HBDuplicateMethodException;
-import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
-import edu.iastate.cs362.hb.exceptions.HBDuplicateRelationshipException;
 import edu.iastate.cs362.hb.exceptions.HBMethodNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBMultipleObjectsFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
-import edu.iastate.cs362.hb.exceptions.HBRelationshipNotFoundException;
-import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
-import edu.iastate.cs362.hb.exceptions.MalformattedInputException;
-import edu.iastate.cs362.hb.model.IDesignDoc;
 import edu.iastate.cs362.hb.model.IObjectBox;
 import edu.iastate.cs362.hb.model.ISystem;
 
@@ -188,22 +179,19 @@ public class SystemController implements ISystemController {
 
 	@Override
 	public boolean changeModifiers(long objId, Set<String> modifiers) {
-		// TODO Auto-generated method stub
-		return false;
+		return system.changeModifiers(objId, modifiers);
 	}
 
 	@Override
-	public boolean changeclassField(long objId, long fieldId, String type,
+	public boolean changeClassField(long objId, long fieldId, String fieldName, String type,
 			Set<String> modifiers) {
-		// TODO Auto-generated method stub
-		return false;
+		return system.changeClassField(objId, fieldId, type, modifiers);
 	}
 
 	@Override
 	public boolean changeClassMethod(long objId, long methodId,
 			String methodName, List<String> methodArgs, Set<String> modifiers) {
-		// TODO Auto-generated method stub
-		return false;
+		return system.changeClassMethod(objId, methodId, methodName, methodArgs, modifiers);
 	}
 
 	@Override

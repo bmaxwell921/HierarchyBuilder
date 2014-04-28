@@ -72,6 +72,11 @@ public class HBMethod implements IMethod {
 	}
 
 	@Override
+	public void addModifiers(Set<String> modifiers){
+		this.modifiers.addAll(modifiers);
+	}
+	
+	@Override
 	public boolean removeModifier(String modifier) {
 		return this.modifiers.remove(modifier);
 	}
@@ -131,6 +136,16 @@ public class HBMethod implements IMethod {
 		}
 		StringTokenizer st = new StringTokenizer(args, A_MAJ_DEL + CmdConstants.RegexOp.OR + A_MIN_DEL);
 		while (st.hasMoreTokens()) {
+			String type = st.nextToken();
+			String value = st.nextToken();
+			this.args.add(new HBVariable(type, value));
+		}
+	}
+	
+	@Override
+	public void addArguments(List<String> methodArgs){
+		for(int i = 0; i < methodArgs.size(); i++){
+			StringTokenizer st = new StringTokenizer(methodArgs.get(i), A_MAJ_DEL + CmdConstants.RegexOp.OR + A_MIN_DEL);
 			String type = st.nextToken();
 			String value = st.nextToken();
 			this.args.add(new HBVariable(type, value));

@@ -30,4 +30,6 @@ public interface IMethod extends Nameable, Identifiable, Modifiable {
 	 * @param args 
 	 */
 	public void addArguments(String args);
+
+	public void addArguments(List<String> methodArgs);
 }

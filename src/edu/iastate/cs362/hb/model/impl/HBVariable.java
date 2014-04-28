@@ -38,6 +38,11 @@ public class HBVariable implements IVariable {
 	public void addModifiers(String... modifiers) {
 		this.modifiers.addAll(Arrays.asList(modifiers));
 	}
+	
+	@Override
+	public void addModifiers(Set<String> modifiers){
+		this.modifiers.addAll(modifiers);
+	}
 
 	@Override
 	public boolean removeModifier(String modifier) {

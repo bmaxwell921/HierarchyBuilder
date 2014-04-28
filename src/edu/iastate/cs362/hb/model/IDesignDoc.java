@@ -240,4 +240,32 @@ public interface IDesignDoc extends Nameable {
 	 */
 	public void addAllInner(Set<? extends IObject> interfaces,
 			Set<? extends IObject> classes);
+	/**
+	 * 
+	 * @param objId
+	 * @param modifiers
+	 * @return
+	 */
+	public boolean changeModifiers(long objId, Set<String> modifiers);
+	
+	/**
+	 * 
+	 * @param objId
+	 * @param fieldId
+	 * @param type
+	 * @param modifiers
+	 * @return
+	 */
+	public boolean changeClassField(long objId, long fieldId, String fieldName, String type, Set<String> modifiers);
+	
+	/**
+	 * 
+	 * @param objId
+	 * @param methodId
+	 * @param methodName
+	 * @param methodArgs
+	 * @param modifiers
+	 * @return
+	 */
+	public boolean changeClassMethod(long objId, long methodId, String methodName, List<String> methodArgs, Set<String> modifiers);
 }

@@ -216,4 +216,29 @@ public class HBDesignDoc implements IDesignDoc {
 			System.out.println(e.getMessage());
 		}
 	}
+
+	@Override
+	public boolean changeModifiers(long objId, Set<String> modifiers) {
+		IObject toUse = tree.getObject(objId);
+		return toUse.changeModifiers(modifiers);
+	}
+
+	@Override
+	public boolean changeClassField(long objId, long fieldId, String fieldName, String type,
+			Set<String> modifiers) {
+		IObject toUse = tree.getObject(objId);
+		IVariable newVar = new HBVariable(fieldName, type);
+		newVar.addModifiers(modifiers);
+		return toUse.changeClassField(fieldId, newVar);
+	}
+
+	@Override
+	public boolean changeClassMethod(long objId, long methodId,
+			String methodName, List<String> methodArgs, Set<String> modifiers) {
+		IObject toUse = tree.getObject(objId);
+		IMethod newMethod = new HBMethod(methodName);
+		newMethod.addArguments(methodArgs);
+		newMethod.addModifiers(modifiers);
+		return toUse.changeClassMethod(methodId, newMethod);
+	}
 }

@@ -195,22 +195,19 @@ public class HBSystem implements ISystem {
 
 	@Override
 	public boolean changeModifiers(long objId, Set<String> modifiers) {
-		// TODO Auto-generated method stub
-		return false;
+		return doc.changeModifiers(objId, modifiers);
 	}
 
 	@Override
-	public boolean changeclassField(long objId, long fieldId, String type,
+	public boolean changeClassField(long objId, long fieldId, String fieldName, String type,
 			Set<String> modifiers) {
-		// TODO Auto-generated method stub
-		return false;
+		return doc.changeClassField(objId, fieldId, fieldName, type, modifiers);
 	}
 
 	@Override
 	public boolean changeClassMethod(long objId, long methodId,
 			String methodName, List<String> methodArgs, Set<String> modifiers) {
-		// TODO Auto-generated method stub
-		return false;
+		return doc.changeClassMethod(objId, methodId, methodName, methodArgs, modifiers);
 	}
 
 	@Override
