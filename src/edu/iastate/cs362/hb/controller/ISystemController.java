@@ -27,7 +27,7 @@ public interface ISystemController {
 	public boolean addPackage(String pkgName, String objName) throws Exception;
 
 	public boolean addObject(String type, Object obj) throws Exception;
-	
+
 	public boolean addInstanceMethod(String objName, String methodName,
 			String params, String... modifiers) throws Exception;
 
@@ -71,25 +71,30 @@ public interface ISystemController {
 	public boolean importDesignJSON(String path) throws Exception;
 
 	public boolean importDesignSource(String path) throws Exception;
-	
-	//Added for iteration 3
-	public boolean changeModifiers(long objId, Set<String> modifiers) throws Exception;
-	
-	public boolean changeClassField(long objId, long fieldId, String fieldName, String type, Set<String> modifiers) throws Exception;
-	
-	public boolean changeClassMethod(long objId, long methodId, String methodName, List<String> methodArgs, Set<String> modifiers) throws Exception;
-	
+
+	// Added for iteration 3
+	public boolean changeModifiers(long objId, Set<String> modifiers)
+			throws Exception;
+
+	public boolean changeClassField(long objId, long fieldId, String fieldName,
+			String type, Set<String> modifiers) throws Exception;
+
+	public boolean changeClassMethod(long objId, long methodId,
+			String methodName, List<String> methodArgs, Set<String> modifiers)
+			throws Exception;
+
 	public String listCachedMethod(long id);
-	
+
 	public String listCachedVariable(long id);
-	
-	public long cacheMethod(String methodName, String returnType, Set<String> modifiers, List<String> arguments);
-	
+
+	public long cacheMethod(String methodName, String returnType,
+			Set<String> modifiers, List<String> arguments);
+
 	public long cacheVariable(String name, String type, Set<String> modifiers);
-	
+
 	public String listCachedModifierSet(long id);
-	
+
 	public long cacheModifierSet(Set<String> modifiers);
-	
+
 	public String showHelp();
 }

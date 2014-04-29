@@ -33,8 +33,8 @@ public class HBSystem implements ISystem {
 	private IExporter exporter;
 	private IImporter importer;
 	private CacheManager cache;
-	
-	public HBSystem(){
+
+	public HBSystem() {
 		cache = CacheManager.getInstance();
 	}
 
@@ -200,20 +200,23 @@ public class HBSystem implements ISystem {
 	}
 
 	@Override
-	public boolean changeModifiers(long objId, Set<String> modifiers) throws Exception {
+	public boolean changeModifiers(long objId, Set<String> modifiers)
+			throws Exception {
 		return doc.changeModifiers(objId, modifiers);
 	}
 
 	@Override
-	public boolean changeClassField(long objId, long fieldId, String fieldName, String type,
-			Set<String> modifiers) throws Exception {
+	public boolean changeClassField(long objId, long fieldId, String fieldName,
+			String type, Set<String> modifiers) throws Exception {
 		return doc.changeClassField(objId, fieldId, fieldName, type, modifiers);
 	}
 
 	@Override
 	public boolean changeClassMethod(long objId, long methodId,
-			String methodName, List<String> methodArgs, Set<String> modifiers) throws Exception {
-		return doc.changeClassMethod(objId, methodId, methodName, methodArgs, modifiers);
+			String methodName, List<String> methodArgs, Set<String> modifiers)
+			throws Exception {
+		return doc.changeClassMethod(objId, methodId, methodName, methodArgs,
+				modifiers);
 	}
 
 	@Override
@@ -230,14 +233,14 @@ public class HBSystem implements ISystem {
 	public long cacheMethod(String methodName, String returnType,
 			Set<String> modifiers, List<String> arguments) {
 		IMethod method = new HBMethod(methodName);
-		//any of these methods may be null check for that.
-		if(arguments != null){
+		// any of these methods may be null check for that.
+		if (arguments != null) {
 			method.addArguments(arguments);
 		}
-		if(modifiers != null){
+		if (modifiers != null) {
 			method.addModifiers(modifiers);
 		}
-		if(returnType != null){
+		if (returnType != null) {
 			method.addReturnType(returnType);
 		}
 		return cache.addItem(method, methodName, "method");
@@ -268,21 +271,22 @@ public class HBSystem implements ISystem {
 
 	@Override
 	public boolean addObject(String type, Object obj) throws Exception {
-		switch(type.toUpperCase()){
+		switch (type.toUpperCase()) {
 		case "METHOD":
 			IMethod method = (HBMethod) obj;
 			StringBuilder sb = new StringBuilder();
 			StringBuilder mod = new StringBuilder();
-			for(IVariable s : method.getArguments()){
+			for (IVariable s : method.getArguments()) {
 				sb.append(s.getType() + ":" + s.getName() + ",");
 			}
-			for(String s : method.getModifiers()){
+			for (String s : method.getModifiers()) {
 				mod.append(s);
 			}
-			return doc.addInstanceMethod(method.getName(), method.getName(), sb.toString(), mod.toString());
+			return doc.addInstanceMethod(method.getName(), method.getName(),
+					sb.toString(), mod.toString());
 		case "VARIABLE":
 		case "INSTANCE":
-			
+
 			break;
 		}
 		return false;
