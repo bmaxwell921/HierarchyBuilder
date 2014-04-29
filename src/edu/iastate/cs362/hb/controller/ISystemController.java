@@ -28,7 +28,7 @@ public interface ISystemController {
 
 	public boolean addObject(String type, Object obj) throws Exception;
 
-	public boolean addInstanceMethod(String objName, String methodName,
+	public boolean addInstanceMethod(long objId, String methodName, String returnType,
 			String params, String... modifiers) throws Exception;
 
 	public boolean addStaticMethod(String objName, String methodName,

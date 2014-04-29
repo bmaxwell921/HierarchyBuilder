@@ -27,7 +27,7 @@ public interface ISystem {
 
 	public boolean addPackage(String pkgName, long objId) throws Exception;
 
-	public boolean addInstanceMethod(String objName, String methodName,
+	public boolean addInstanceMethod(long objId, String methodName,
 			String params, String... modifiers) throws Exception;
 
 	public boolean addStaticMethod(String objName, String methodName,

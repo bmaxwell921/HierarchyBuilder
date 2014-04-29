@@ -79,7 +79,7 @@ public interface IDesignDoc extends Nameable {
 	 * Creates a new instance method in the given class with the given
 	 * information
 	 * 
-	 * @param objName
+	 * @param objId
 	 * @param methodName
 	 * @param params
 	 * @param modifiers
@@ -93,7 +93,7 @@ public interface IDesignDoc extends Nameable {
 	 *             If multiple objects with the given name exist in the design
 	 *             doc
 	 */
-	public boolean addInstanceMethod(String objName, String methodName,
+	public boolean addInstanceMethod(long objId, String methodName,
 			String params, String... modifiers) throws Exception;
 
 	/**

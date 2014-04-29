@@ -135,16 +135,17 @@ public class Cardinal {
 			long id = IdManager.getInstance().accessIdWithKey(cmd.getFlagValue(CmdConstants.Flags.OBJECT));
 			isc.addPackage(cmd.getFlagValue(CmdConstants.Flags.NAME), id);
 			return;
-		} 
-		if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.METHOD)) {
+		}
+		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.METHOD)) {
 			if (cmd.hasFlag(CmdConstants.Flags.INSTANCE)) {
 				long id = IdManager.getInstance().accessIdWithKey(cmd.getFlagValue(CmdConstants.Flags.OBJECT));
-				isc.addInstanceMethod(cmd.getFlagValue(CmdConstants.Flags.CONTAINER_NAME), cmd.getFlagValue(CmdConstants.Flags.NAME),
-						cmd.getFlagValue(CmdConstants.Flags.PARAMETERS), CmdConstants.Flags.INSTANCE);
+				isc.addInstanceMethod(id, cmd.getFlagValue(CmdConstants.Flags.NAME), cmd.getFlagValue(CmdConstants.Flags.RETURN),
+						cmd.getFlagValue(CmdConstants.Flags.PARAMETERS), cmd.getFlagValue(CmdConstants.Flags.MODIFIER));
 				return;
 			}
 			isc.addStaticMethod(cmd.getFlagValue(CmdConstants.Flags.CONTAINER_NAME), cmd.getFlagValue(CmdConstants.Flags.NAME),
-						cmd.getFlagValue(CmdConstants.Flags.PARAMETERS), CmdConstants.Flags.STATIC);
+					cmd.getFlagValue(CmdConstants.Flags.PARAMETERS), CmdConstants.Flags.STATIC);
+			return;
 		} else if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.RELATIONSHIP_REGEX)) {
 			isc.addRelationship(cmd.getFlagValue(CmdConstants.Flags.FROM_CLASS_NAME), cmd.getFlagValue(CmdConstants.Flags.TO_CLASS_NAME),
 					cmd.getFlagValue(CmdConstants.Flags.TYPE));

@@ -66,9 +66,9 @@ public class HBDesignDoc implements IDesignDoc {
 	}
 
 	@Override
-	public boolean addInstanceMethod(String objName, String methodName,
+	public boolean addInstanceMethod(long objId, String methodName,
 			String params, String... modifiers) throws Exception {
-		return addMethod(objName, methodName, params, modifiers);
+		return addMethod(objId, methodName, params, modifiers);
 	}
 
 	@Override
@@ -77,13 +77,13 @@ public class HBDesignDoc implements IDesignDoc {
 		return addMethod(objName, methodName, params, modifiers);
 	}
 
-	private boolean addMethod(String objName, String methodName, String params,
+	private boolean addMethod(long objId, String methodName, String params,
 			String... modifiers) throws Exception {
 		IMethod method = new HBMethod(methodName);
 		method.addModifiers(modifiers);
 		method.addArguments(params);
 
-		IObject clazz = tree.getObject(objName);
+		IObject clazz = tree.getObject(objId);
 		return clazz.addMethod(method);
 	}
 

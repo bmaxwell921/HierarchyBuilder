@@ -71,7 +71,7 @@ public class SystemController implements ISystemController {
 	}
 
 	@Override
-	public boolean addInstanceMethod(String objName, String methodName,
+	public boolean addInstanceMethod(long objId, String methodName, String returnType,
 			String params, String... modifiers) throws Exception {
 		return system.addInstanceMethod(objName, methodName, params, modifiers);
 	}
