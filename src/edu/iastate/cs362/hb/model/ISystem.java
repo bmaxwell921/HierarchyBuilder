@@ -38,7 +38,7 @@ public interface ISystem {
 
 	public boolean removePackage(long objId) throws Exception;
 
-	public boolean removeRelationship(String superType, String subType)
+	public boolean removeRelationship(long superId, long subId)
 			throws Exception;
 
 	public boolean removeObj(long remId) throws Exception;

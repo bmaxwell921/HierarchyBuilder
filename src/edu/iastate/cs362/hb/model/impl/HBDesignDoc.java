@@ -104,10 +104,10 @@ public class HBDesignDoc implements IDesignDoc {
 	}
 
 	@Override
-	public boolean removeRelationship(String fromName, String toName)
+	public boolean removeRelationship(long superId, long subId)
 			throws Exception {
-		IObject from = tree.getObject(fromName);
-		IObject to = tree.getObject(toName);
+		IObject from = tree.getObject(superId);
+		IObject to = tree.getObject(subId);
 		return tree.removeRelationship(from, to);
 	}
 

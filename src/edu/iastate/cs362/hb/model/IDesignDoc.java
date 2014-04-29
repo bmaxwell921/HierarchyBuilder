@@ -137,14 +137,14 @@ public interface IDesignDoc extends Nameable {
 	/**
 	 * Removes the relationship between the two given objects
 	 * 
-	 * @param fromName
-	 * @param toName
+	 * @param superId
+	 * @param subId
 	 * @return
 	 * @throws HBMultipleObjectsFoundException
 	 * @throws HBObjectNotFoundException
 	 * @throws HBRelationshipNotFoundException
 	 */
-	public boolean removeRelationship(String fromName, String toName)
+	public boolean removeRelationship(long superId, long subId)
 			throws Exception;
 
 	/**

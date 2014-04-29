@@ -108,9 +108,9 @@ public class HBSystem implements ISystem {
 	}
 
 	@Override
-	public boolean removeRelationship(String superType, String subType)
+	public boolean removeRelationship(long superId, long subId)
 			throws Exception {
-		return doc.removeRelationship(superType, subType);
+		return doc.removeRelationship(superId, subId);
 	}
 
 	@Override

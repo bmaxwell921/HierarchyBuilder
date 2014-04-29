@@ -39,7 +39,7 @@ public interface ISystemController {
 
 	public boolean removePackage(long objId) throws Exception;
 
-	public boolean removeRelationship(String superType, String subType)
+	public boolean removeRelationship(long superId, long subId)
 			throws Exception;
 
 	public boolean removeClass(long remId) throws Exception;

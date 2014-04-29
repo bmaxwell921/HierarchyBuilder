@@ -102,9 +102,9 @@ public class SystemController implements ISystemController {
 	}
 
 	@Override
-	public boolean removeRelationship(String superType, String subType)
+	public boolean removeRelationship(long superId, long subId)
 			throws Exception {
-		return system.removeRelationship(superType, subType);
+		return system.removeRelationship(superId, subId);
 	}
 
 	@Override
