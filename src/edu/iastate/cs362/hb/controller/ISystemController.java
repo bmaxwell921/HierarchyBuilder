@@ -42,7 +42,7 @@ public interface ISystemController {
 	public boolean removeRelationship(String superType, String subType)
 			throws Exception;
 
-	public boolean removeClass(String rem) throws Exception;
+	public boolean removeClass(long remId) throws Exception;
 
 	public boolean createClass(String name) throws Exception;
 

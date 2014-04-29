@@ -114,8 +114,8 @@ public class HBSystem implements ISystem {
 	}
 
 	@Override
-	public boolean removeObj(String objName) throws Exception {
-		return doc.removeObj(objName);
+	public boolean removeObj(long remId) throws Exception {
+		return doc.removeObj(remId);
 	}
 
 	@Override

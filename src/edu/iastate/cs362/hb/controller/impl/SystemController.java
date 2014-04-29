@@ -108,8 +108,8 @@ public class SystemController implements ISystemController {
 	}
 
 	@Override
-	public boolean removeClass(String rem) throws Exception {
-		return system.removeObj(rem);
+	public boolean removeClass(long remId) throws Exception {
+		return system.removeObj(remId);
 	}
 
 	@Override

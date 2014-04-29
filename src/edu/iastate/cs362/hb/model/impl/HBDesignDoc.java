@@ -112,9 +112,9 @@ public class HBDesignDoc implements IDesignDoc {
 	}
 
 	@Override
-	public boolean removeObj(String rem) throws Exception,
+	public boolean removeObj(long remId) throws Exception,
 			HBMultipleObjectsFoundException {
-		IObject toRem = tree.getObject(rem);
+		IObject toRem = tree.getObject(remId);
 		IdManager.getInstance().remove(toRem.getId());
 		return tree.removeObject(toRem);
 	}

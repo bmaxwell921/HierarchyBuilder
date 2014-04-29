@@ -150,12 +150,12 @@ public interface IDesignDoc extends Nameable {
 	/**
 	 * Removes the object with the given name from this design doc
 	 * 
-	 * @param rem
+	 * @param remId
 	 * @return
 	 * @throws HBObjectNotFoundException
 	 * @throws HBMultipleObjectsFoundException
 	 */
-	public boolean removeObj(String rem) throws Exception;
+	public boolean removeObj(long remId) throws Exception;
 
 	/**
 	 * Creates a new class with the given name

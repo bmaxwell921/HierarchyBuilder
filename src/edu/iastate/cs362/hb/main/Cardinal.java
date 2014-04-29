@@ -153,21 +153,28 @@ public class Cardinal {
 			long subId = IdManager.getInstance().accessIdWithKey(cmd.getFlagValue(CmdConstants.Flags.SUBTYPE));
 			isc.addRelationship(superId, subId, cmd.getFlagValue(CmdConstants.Flags.TYPE));
 			return;
-		} else if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.CACHE_REGEX)) {
-			// Get type
-			String type = cmd.getFlagValue(CmdConstants.Flags.TYPE).toUpperCase();
-			long id = Long.parseLong(CmdConstants.Flags.ID);
-			isc.addObject(type, CacheManager.getInstance().getObject(id));
-		}
+		} 
+		
+		// TODO fix this
+//		if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.CACHE_REGEX)) {
+//			// Get type
+//			String type = cmd.getFlagValue(CmdConstants.Flags.TYPE).toUpperCase();
+//			long id = Long.parseLong(CmdConstants.Flags.ID);
+//			isc.addObject(type, CacheManager.getInstance().getObject(id));
+//			return;
+//		}
 	}
 
 	// Calling of Remove methods
 	private boolean doRemove(ICommand cmd) throws Exception {
-		if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.CLASS_REGEX)
-				|| cmd.getSubCommand().matches(CmdConstants.SubCmdNames.INTERFACE_REGEX)) {
-			return isc.removeClass(cmd.getFlagValue(CmdConstants.Flags.NAME));
-		} else if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.PACKAGE_REGEX)) {
-			return isc.removePackage(cmd.getFlagValue(CmdConstants.Flags.CONTAINER_NAME));
+		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.CLASS)
+				|| cmd.getSubCommand().equals(CmdConstants.SubCmdNames.INTERFACE)) {
+			long id = IdManager.getInstance().accessIdWithKey(cmd.getFlagValue(CmdConstants.Flags.OBJECT));
+			return isc.removeClass(id);
+		} 
+		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.PACKAGE)) {
+			long id = IdManager.getInstance().accessIdWithKey(cmd.getFlagValue(CmdConstants.Flags.OBJECT));
+			return isc.removePackage(id);
 		} else if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.METHOD_REGEX)) {
 			return isc.removeMethod(cmd.getFlagValue(CmdConstants.Flags.CONTAINER_NAME), cmd.getFlagValue(CmdConstants.Flags.NAME));
 		} else if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.RELATIONSHIP_REGEX)) {

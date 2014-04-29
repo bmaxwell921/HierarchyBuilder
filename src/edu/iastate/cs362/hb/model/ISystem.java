@@ -41,7 +41,7 @@ public interface ISystem {
 	public boolean removeRelationship(String superType, String subType)
 			throws Exception;
 
-	public boolean removeObj(String objName) throws Exception;
+	public boolean removeObj(long remId) throws Exception;
 
 	public boolean createClass(String name) throws Exception;
 
