@@ -232,7 +232,7 @@ public class SystemController implements ISystemController {
 	}
 
 	@Override
-	public boolean addObject(String type, Object obj) {
+	public boolean addObject(String type, Object obj) throws Exception {
 		return system.addObject(type, obj);
 	}
 }

@@ -26,7 +26,7 @@ public interface ISystemController {
 
 	public boolean addPackage(String pkgName, String objName) throws Exception;
 
-	public boolean addObject(String type, Object obj);
+	public boolean addObject(String type, Object obj) throws Exception;
 	
 	public boolean addInstanceMethod(String objName, String methodName,
 			String params, String... modifiers) throws Exception;
