@@ -97,8 +97,8 @@ public class HBDesignDoc implements IDesignDoc {
 	}
 
 	@Override
-	public boolean removePackage(String objName) throws Exception {
-		IObject toRem = tree.getObject(objName);
+	public boolean removePackage(long objId) throws Exception {
+		IObject toRem = tree.getObject(objId);
 		IdManager.getInstance().updateInfo(toRem.getId(), toRem.getPackage(), toRem.getName());
 		return toRem.removePackage();
 	}

@@ -103,8 +103,8 @@ public class HBSystem implements ISystem {
 	}
 
 	@Override
-	public boolean removePackage(String objName) throws Exception {
-		return doc.removePackage(objName);
+	public boolean removePackage(long objId) throws Exception {
+		return doc.removePackage(objId);
 	}
 
 	@Override

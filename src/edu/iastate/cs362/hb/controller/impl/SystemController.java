@@ -97,8 +97,8 @@ public class SystemController implements ISystemController {
 	}
 
 	@Override
-	public boolean removePackage(String objName) throws Exception {
-		return system.removePackage(objName);
+	public boolean removePackage(long objId) throws Exception {
+		return system.removePackage(objId);
 	}
 
 	@Override

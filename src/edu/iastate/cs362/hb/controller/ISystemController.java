@@ -37,7 +37,7 @@ public interface ISystemController {
 	public boolean removeMethod(String objName, String methodName)
 			throws Exception;
 
-	public boolean removePackage(String objName) throws Exception;
+	public boolean removePackage(long objId) throws Exception;
 
 	public boolean removeRelationship(String superType, String subType)
 			throws Exception;

@@ -127,12 +127,12 @@ public interface IDesignDoc extends Nameable {
 	/**
 	 * Removes the current package name from the given object
 	 * 
-	 * @param objName
+	 * @param objId
 	 * @return
 	 * @throws HBObjectNotFoundException
 	 * @throws HBMultipleObjectsFoundException
 	 */
-	public boolean removePackage(String objName) throws Exception;
+	public boolean removePackage(long objId) throws Exception;
 
 	/**
 	 * Removes the relationship between the two given objects
