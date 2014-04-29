@@ -60,9 +60,9 @@ public class SystemController implements ISystemController {
 	}
 
 	@Override
-	public boolean addRelationship(String fromObj, String toObj, String rel)
+	public boolean addRelationship(long superId, long subId, String rel)
 			throws Exception {
-		return system.addRelationship(fromObj, toObj, rel);
+		return system.addRelationship(superId, subId, rel);
 	}
 
 	@Override

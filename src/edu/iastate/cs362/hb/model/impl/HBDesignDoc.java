@@ -50,7 +50,7 @@ public class HBDesignDoc implements IDesignDoc {
 	}
 
 	@Override
-	public boolean addRelationship(String fromName, String toName, String rel)
+	public boolean addRelationship(long fromName, long toName, String rel)
 			throws Exception {
 		IObject from = tree.getObject(fromName);
 		IObject to = tree.getObject(toName);

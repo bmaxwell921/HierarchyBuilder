@@ -147,9 +147,12 @@ public class Cardinal {
 					cmd.getFlagValue(CmdConstants.Flags.PARAMETERS), cmd.getFlagValue(CmdConstants.Flags.MODIFIER) + ","
 							+ CmdConstants.Flags.STATIC);
 			return;
-		} else if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.RELATIONSHIP_REGEX)) {
-			isc.addRelationship(cmd.getFlagValue(CmdConstants.Flags.FROM_CLASS_NAME), cmd.getFlagValue(CmdConstants.Flags.TO_CLASS_NAME),
-					cmd.getFlagValue(CmdConstants.Flags.TYPE));
+		}
+		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.RELATIONSHIP)) {
+			long superId = IdManager.getInstance().accessIdWithKey(cmd.getFlagValue(CmdConstants.Flags.SUPERTYPE));
+			long subId = IdManager.getInstance().accessIdWithKey(cmd.getFlagValue(CmdConstants.Flags.SUBTYPE));
+			isc.addRelationship(superId, subId, cmd.getFlagValue(CmdConstants.Flags.TYPE));
+			return;
 		} else if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.CACHE_REGEX)) {
 			// Get type
 			String type = cmd.getFlagValue(CmdConstants.Flags.TYPE).toUpperCase();

@@ -45,8 +45,8 @@ public interface IDesignDoc extends Nameable {
 	/**
 	 * Creates a new relationship from super to sub
 	 * 
-	 * @param superType
-	 * @param subType
+	 * @param superId
+	 * @param subId
 	 * @param rel
 	 * @return
 	 * @throws HBObjectNotFoundException
@@ -58,7 +58,7 @@ public interface IDesignDoc extends Nameable {
 	 *             If there are multiple objects with the name superType or
 	 *             subType
 	 */
-	public boolean addRelationship(String superType, String subType, String rel)
+	public boolean addRelationship(long superId, long subId, String rel)
 			throws Exception;
 
 	/**

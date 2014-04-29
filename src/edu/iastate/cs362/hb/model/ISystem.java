@@ -22,7 +22,7 @@ public interface ISystem {
 	public boolean addInstanceField(String className, String fieldName,
 			String fieldType, String... modifiers) throws Exception;
 
-	public boolean addRelationship(String superType, String subType, String rel)
+	public boolean addRelationship(long superId, long subId, String rel)
 			throws Exception;
 
 	public boolean addPackage(String pkgName, long objId) throws Exception;

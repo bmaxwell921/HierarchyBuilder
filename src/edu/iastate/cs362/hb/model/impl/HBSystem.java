@@ -68,9 +68,9 @@ public class HBSystem implements ISystem {
 	}
 
 	@Override
-	public boolean addRelationship(String superType, String subType, String rel)
+	public boolean addRelationship(long superId, long subId, String rel)
 			throws Exception {
-		return doc.addRelationship(superType, subType, rel);
+		return doc.addRelationship(superId, subId, rel);
 	}
 
 	@Override
@@ -282,8 +282,9 @@ public class HBSystem implements ISystem {
 			for (String s : method.getModifiers()) {
 				mod.append(s);
 			}
-			return doc.addInstanceMethod(method.getName(), method.getName(),
-					sb.toString(), mod.toString());
+//			return doc.addInstanceMethod(method.getName(), method.getName(),
+//					sb.toString(), mod.toString());
+			return false;
 		case "VARIABLE":
 		case "INSTANCE":
 
