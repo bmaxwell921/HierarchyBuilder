@@ -133,6 +133,7 @@ public class CmdConstants {
 		private static final String INSTANCE_SHORT = "i";
 		public static final String INSTANCE_REGEX = INSTANCE + RegexOp.OR + INSTANCE_SHORT;
 		
+		public static final String STATIC = "static";		
 	}
 	
 	public class RegexOp {
