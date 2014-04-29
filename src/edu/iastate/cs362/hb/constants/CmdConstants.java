@@ -85,49 +85,22 @@ public class CmdConstants {
 	}
 	
 	public class Flags {
-		// TODO we need to handle the short versions of the names as well
+		
+		//Create flags
 		public static final String NAME = "name";
 		private static final String NAME_SHORT = "n";
 		public static final String NAME_REGEX = NAME + RegexOp.OR + NAME_SHORT;
 		
-		public static final String ARGUMENTS = "arguments";
+		public static final String ARGUMENTS = "args";
 		private static final String ARGUMENTS_SHORT = "a";
 		public static final String ARGUMENTS_REGEX = ARGUMENTS + RegexOp.OR + ARGUMENTS_SHORT;
 		
 		public static final String ID = "id";
 		public static final String ID_REGEX = ID;
 		
-		public static final String TO_CLASS_NAME = "toClassName";
-		private static final String TO_CLASS_NAME_SHORT = "tcn";
-		public static final String TO_CLASS_NAME_REGEX = TO_CLASS_NAME + RegexOp.OR + TO_CLASS_NAME_SHORT;
-		
-		public static final String TO_CLASS_ID = "toClassId";
-		private static final String TO_CLASS_ID_SHORT = "tcid";
-		public static final String TO_CLASS_ID_REGEX = TO_CLASS_ID + RegexOp.OR + TO_CLASS_ID_SHORT;
-		
-		public static final String FROM_CLASS_NAME = "fromClassName";
-		private static final String FROM_CLASS_NAME_SHORT = "fcn";
-		public static final String FROM_CLASS_NAME_REGEX = FROM_CLASS_NAME + RegexOp.OR + FROM_CLASS_NAME_SHORT;
-		
-		public static final String FROM_CLASS_ID = "fromClassId";
-		private static final String FROM_CLASS_ID_SHORT = "fcid";
-		public static final String FROM_CLASS_ID_REGEX = FROM_CLASS_ID + RegexOp.OR + FROM_CLASS_ID_SHORT;
-		
 		public static final String TYPE = "type";
-		public static final String TYPE_REGEX = TYPE;
-		
-		public static final String CONTAINER_NAME = "containername";
-		private static final String CONTAINER_ABBREV = "cname"; //May not use
-		private static final String CONTAINER_NAME_SHORT = "cn";
-		public static final String CONTAINER_NAME_REGEX = CONTAINER_NAME + RegexOp.OR + CONTAINER_ABBREV + RegexOp.OR + CONTAINER_NAME_SHORT;
-		
-		public static final String STATIC = "static";
-		private static final String STATIC_SHORT = "s";
-		public static final String STATIC_REGEX = STATIC + RegexOp.OR + STATIC_SHORT;
-		
-		public static final String INSTANCE = "instance";
-		private static final String INSTANCE_SHORT = "i";
-		public static final String INSTANCE_REGEX = INSTANCE + RegexOp.OR + INSTANCE_SHORT;
+		private static final String TYPE_SHORT = "t";
+		public static final String TYPE_REGEX = TYPE + RegexOp.OR + TYPE_SHORT;
 		
 		public static final String HELP = "help";
 		private static final String HELP_SHORT = "h";
@@ -137,6 +110,17 @@ public class CmdConstants {
 		private static final String PARAMETERS_SHORT = "p";
 		public static final String PARAMETERS_REGEX = PARAMETERS + RegexOp.OR + PARAMETERS_SHORT;
 		
+		public static final String SUPERTYPE = "superType";
+		private static final String SUPERTYPE_SHORT = "sup";
+		public static final String SUPERTYPE_REGEX = SUPERTYPE + RegexOp.OR + SUPERTYPE_SHORT;
+		
+		public static final String SUBTYPE = "subtype";
+		private static final String SUBTYPE_SHORT = "sub";
+		public static final String SUBTYPE_REGEX = SUBTYPE + RegexOp.OR + SUBTYPE_SHORT;
+		
+		public static final String OBJECT = "object";
+		private static final String OBJECT_SHORT = "obj";
+		public static final String OBJECT_REGEX = OBJECT + RegexOp.OR + OBJECT_SHORT;
 		//Path for importers/exporters
 		public static final String PATH = "path";
 		private static final String PATH_SHORT = "pA";
@@ -154,6 +138,10 @@ public class CmdConstants {
 		public static final String RETURN = "return";
 		private static final String RETURN_SHORT = "r";
 		public static final String RETURN_REGEX = RETURN + RegexOp.OR + RETURN_SHORT;
+		
+		public static final String INSTANCE = "instance";
+		private static final String INSTANCE_SHORT = "i";
+		public static final String INSTANCE_REGEX = INSTANCE + RegexOp.OR + INSTANCE_SHORT;
 		
 	}
 	

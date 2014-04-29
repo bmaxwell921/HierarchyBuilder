@@ -11,12 +11,12 @@ create <subCommand>
 		-n <name>: Alias for -name
 	CACHE_OPTIONS
 		-type <type>: Type of cached item to ceate. Method,Instance,Modifier
-		-return <type>: The return type of the method (Must have -type method)
-		-r <type>: Alias for -return
+		return <type>: The return type of the method (Must have -type method)
+		r <type>: Alias for -return
 		-args <ARGUMENTS...>: The arguments on the new method. Space delimited (Must have -type method)
 		-a <ARGUMENTS...>: Alias for -args	
-		-modifiers <MODIFIERS...>: The modifiers to apply to the new field
-		-m <MODIFIERS...>: Alias for -modifiers
+		modifiers <MODIFIERS...>: The modifiers to apply to the new field
+		m <MODIFIERS...>: Alias for -modifiers
 		
 
 add <subCommand>
@@ -27,8 +27,8 @@ add <subCommand>
 		relation 	[-RELATION_OPTIONS]
 		cache		[-CACHE_OPTIONS]
 	COMMON_OPTIONS
-		-object <obj>: 	The fully qualified name of the object you are modifying. Period delimited
-		-o <obj>: 		Alias for -object
+		object <obj>: 	The fully qualified name of the object you are modifying. Period delimited
+		o <obj>: 		Alias for -object
 		-name <name>: 	The name of what is being created
 		-n <name>: 		alias for name
 	FIELD_OPTIONS
@@ -66,7 +66,7 @@ remove <subCommand>
 		method 		[-COMMON_OPTIONS] [-METHOD_OPTIONS]
 		relation 	[-RELATION_OPTIONS]
 	COMMON_OPTIONS
-		-object <obj>: The fully qualified name of the object you are removing from. Period delimited
+		object <obj>: The fully qualified name of the object you are removing from. Period delimited
 	OBJECT_OPTIONS
 		-name <name>: The name of the object to remove
 		-n <name>: Alias for -name
@@ -90,3 +90,21 @@ list <subCommand>
 		cache	[-CACHE_OPTIONS]
 	CACHE_OPTIONS
 		-id <id> ID of the cache option to list
+		
+import <subCommand>
+	Sub-Commands:
+		xml 	[-PORT-OPTIONS]
+		json	[-PORT-OPTIONS]
+		source	[-PORT-OPTIONS]
+	PORT-OPTIONS
+		-path <path>: path to output file to
+		-p <path>: alias to path
+		
+export <subCommand>
+	Sub-Commands:
+		xml 	[-PORT-OPTIONS]
+		json	[-PORT-OPTIONS]
+		source	[-PORT-OPTIONS]
+	PORT-OPTIONS
+		-path <path>: path to output file to
+		-p <path>: alias to path

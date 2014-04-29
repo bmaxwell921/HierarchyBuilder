@@ -100,43 +100,19 @@ public class CommandParser implements ICommandParser {
 	public boolean addFlag(Command c, String input, String value)
 			throws MalformattedCommandException {
 		boolean valueUsed = false;
-		if (input.matches(CmdConstants.Flags.CONTAINER_NAME)) {
-			c.addFlagValue(CmdConstants.Flags.CONTAINER_NAME, value);
-			valueUsed = true;
-		} else if (input.matches(CmdConstants.Flags.HELP_REGEX)) {
+		if (input.matches(CmdConstants.Flags.HELP_REGEX)) {
 			c.addFlagValue(CmdConstants.Flags.HELP, null);
-		} else if (input.matches(CmdConstants.Flags.INSTANCE_REGEX)) {
-			c.addFlagValue(CmdConstants.Flags.INSTANCE, null);
 		} else if (input.matches(CmdConstants.Flags.NAME_REGEX)) {
 			c.addFlagValue(CmdConstants.Flags.NAME, value);
 			valueUsed = true;
 		} else if (input.matches(CmdConstants.Flags.PARAMETERS_REGEX)) {
 			c.addFlagValue(CmdConstants.Flags.PARAMETERS, value);
 			valueUsed = true;
-		} else if (input.matches(CmdConstants.Flags.STATIC_REGEX)) {
-			c.addFlagValue(CmdConstants.Flags.STATIC, null);
 		} else if(input.matches(CmdConstants.Flags.PATH_REGEX)){
 			c.addFlagValue(CmdConstants.Flags.PATH, value);
 			valueUsed = true;
-		}else if(input.matches(CmdConstants.Flags.CONTAINER_NAME_REGEX)){
-			c.addFlagValue(CmdConstants.Flags.CONTAINER_NAME, value);
-			valueUsed = true;
-		} else if(input.matches(CmdConstants.Flags.FROM_CLASS_ID_REGEX)){
-			c.addFlagValue(CmdConstants.Flags.FROM_CLASS_ID, value);
-			valueUsed = true;
-		} else if(input.matches(CmdConstants.Flags.FROM_CLASS_NAME_REGEX)) {
-			c.addFlagValue(CmdConstants.Flags.FROM_CLASS_NAME_REGEX, value);
-			valueUsed = true;
 		} else if(input.matches(CmdConstants.Flags.ID_REGEX)) {
 			c.addFlagValue(CmdConstants.Flags.ID, value);
-			valueUsed = true;
-		} else if(input.matches(CmdConstants.Flags.INSTANCE_REGEX)){
-			c.addFlagValue(CmdConstants.Flags.INSTANCE, null);
-		} else if(input.matches(CmdConstants.Flags.TO_CLASS_ID_REGEX)){
-			c.addFlagValue(CmdConstants.Flags.TO_CLASS_ID, value);
-			valueUsed = true;
-		} else if(input.matches(CmdConstants.Flags.TO_CLASS_NAME_REGEX)){
-			c.addFlagValue(CmdConstants.Flags.TO_CLASS_NAME, value);
 			valueUsed = true;
 		} else if(input.matches(CmdConstants.Flags.TYPE_REGEX)){
 			c.addFlagValue(CmdConstants.Flags.TYPE, value);
@@ -147,6 +123,21 @@ public class CommandParser implements ICommandParser {
 		} else if (input.matches(CmdConstants.Flags.RETURN_REGEX)){
 			c.addFlagValue(CmdConstants.Flags.RETURN, value);
 			valueUsed = true;
+		} else if (input.matches(CmdConstants.Flags.SUPERTYPE_REGEX)){
+			c.addFlagValue(CmdConstants.Flags.SUPERTYPE, value);
+			valueUsed = true;
+		} else if (input.matches(CmdConstants.Flags.SUBTYPE_REGEX)){
+			c.addFlagValue(CmdConstants.Flags.SUBTYPE, value);
+			valueUsed = true;
+		} else if (input.matches(CmdConstants.Flags.OBJECT_REGEX)){
+			c.addFlagValue(CmdConstants.Flags.OBJECT, value);
+			valueUsed = true;
+		} else if (input.matches(CmdConstants.Flags.METHOD_REGEX)){
+			c.addFlagValue(CmdConstants.Flags.METHOD, null);
+		} else if (input.matches(CmdConstants.Flags.MODIFIER_REGEX)){
+			c.addFlagValue(CmdConstants.Flags.MODIFIER, null);
+		} else if (input.matches(CmdConstants.Flags.INSTANCE_REGEX)){
+			c.addFlagValue(CmdConstants.Flags.INSTANCE, null);
 		} else {
 			throw new MalformattedCommandException("Malformatted flag values!",
 					input, value);
