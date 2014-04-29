@@ -175,9 +175,12 @@ public class Cardinal {
 		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.PACKAGE)) {
 			long id = IdManager.getInstance().accessIdWithKey(cmd.getFlagValue(CmdConstants.Flags.OBJECT));
 			return isc.removePackage(id);
-		} else if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.METHOD_REGEX)) {
-			return isc.removeMethod(cmd.getFlagValue(CmdConstants.Flags.CONTAINER_NAME), cmd.getFlagValue(CmdConstants.Flags.NAME));
-		} else if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.RELATIONSHIP_REGEX)) {
+		} 
+		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.METHOD)) {
+			long id = IdManager.getInstance().accessIdWithKey(cmd.getFlagValue(CmdConstants.Flags.OBJECT));
+			return isc.removeMethod(id, cmd.getFlagValue(CmdConstants.Flags.NAME));
+		} 
+		if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.RELATIONSHIP_REGEX)) {
 			return isc.removeRelationship(cmd.getFlagValue(CmdConstants.Flags.FROM_CLASS_NAME),
 					cmd.getFlagValue(CmdConstants.Flags.TO_CLASS_NAME));
 		} else

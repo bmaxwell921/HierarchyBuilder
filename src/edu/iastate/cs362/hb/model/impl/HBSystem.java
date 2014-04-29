@@ -97,9 +97,9 @@ public class HBSystem implements ISystem {
 	 * 
 	 */
 	@Override
-	public boolean removeMethod(String objName, String methodName)
+	public boolean removeMethod(long objId, String methodName)
 			throws Exception {
-		return doc.removeMethod(objName, methodName);
+		return doc.removeMethod(objId, methodName);
 	}
 
 	@Override

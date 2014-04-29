@@ -114,14 +114,14 @@ public interface IDesignDoc extends Nameable {
 	/**
 	 * Removes the method with the given name from the given class
 	 * 
-	 * @param objName
+	 * @param objId
 	 * @param methodName
 	 * @return
 	 * @throws HBObjectNotFoundException
 	 * @throws HBMultipleObjectsFoundException
 	 * @throws HBMethodNotFoundException
 	 */
-	public boolean removeMethod(String objName, String methodName)
+	public boolean removeMethod(long objId, String methodName)
 			throws Exception;
 
 	/**

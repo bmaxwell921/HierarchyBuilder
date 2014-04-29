@@ -33,7 +33,7 @@ public interface ISystem {
 	public boolean addStaticMethod(long objId, String methodName,
 			String params, String... modifiers) throws Exception;
 
-	public boolean removeMethod(String objName, String methodName)
+	public boolean removeMethod(long objId, String methodName)
 			throws Exception;
 
 	public boolean removePackage(long objId) throws Exception;

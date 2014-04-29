@@ -88,9 +88,9 @@ public class HBDesignDoc implements IDesignDoc {
 	}
 
 	@Override
-	public boolean removeMethod(String objName, String methodName)
+	public boolean removeMethod(long objId, String methodName)
 			throws Exception {
-		HBClass clazz = (HBClass) tree.getObject(objName);
+		HBClass clazz = (HBClass) tree.getObject(objId);
 		IMethod method = clazz.getMethod(methodName);
 		clazz.removeMethod(method);
 		return true;

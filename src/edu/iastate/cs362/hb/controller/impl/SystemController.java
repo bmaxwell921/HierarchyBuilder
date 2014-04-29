@@ -90,9 +90,9 @@ public class SystemController implements ISystemController {
 	 * @throws HBMethodNotFoundException
 	 */
 	@Override
-	public boolean removeMethod(String objName, String methodName)
+	public boolean removeMethod(long objId, String methodName)
 			throws Exception {
-		return system.removeMethod(objName, methodName);
+		return system.removeMethod(objId, methodName);
 
 	}
 
