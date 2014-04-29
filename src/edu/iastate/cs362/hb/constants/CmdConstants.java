@@ -39,29 +39,22 @@ public class CmdConstants {
 	}
 	
 	public class SubCmdNames {
+		// Create subcommands
 		public static final String DESIGN = "design";
-		private static final String DESIGN_SHORT = "d";
-		public static final String DESIGN_REGEX = DESIGN + RegexOp.OR + DESIGN_SHORT;
-		
 		public static final String CLASS = "class";
-		private static final String CLASS_SHORT = "c";
-		public static final String CLASS_REGEX = CLASS + RegexOp.OR + CLASS_SHORT;
-		
 		public static final String INTERFACE = "interface";
-		private static final String INTERFACE_SHORT = "i";
-		public static final String INTERFACE_REGEX = INTERFACE + RegexOp.OR + INTERFACE_SHORT;
 		
-		public static final String PACKAGE = "package";
-		private static final String PACKAGE_SHORT = "p";
-		public static final String PACKAGE_REGEX = PACKAGE + RegexOp.OR + PACKAGE_SHORT;
-		
+		// Add subcommands
+		public static final String PACKAGE = "pkg";
+		public static final String FIELD = "field";
 		public static final String METHOD = "method";
-		private static final String METHOD_SHORT = "m";
-		public static final String METHOD_REGEX = METHOD + RegexOp.OR + METHOD_SHORT;
+		public static final String RELATIONSHIP="relation";
+		public static final String CACHE = "cache";
 		
-		public static final String RELATIONSHIP="relationship";
-		private static final String RELATIONSHIP_SHORT = "r";
-		public static final String RELATIONSHIP_REGEX = RELATIONSHIP + RegexOp.OR + RELATIONSHIP_SHORT;
+		// Remove subcommands
+		public static final String OBJECT = "object";
+		// Also has package, method, and relation
+		
 		
 		//EXPORT / IMPORT COMMANDS
 		public static final String XML = "xml";
@@ -75,12 +68,6 @@ public class CmdConstants {
 		public static final String SOURCE = "source";
 		private static final String SOURCE_SHORT = "s";
 		public static final String SOURCE_REGEX = SOURCE + RegexOp.OR + SOURCE_SHORT;
-		
-		//Iteration 3
-		//Cache
-		public static final String CACHE = "cache";
-		private static final String CACHE_SHORT = "ch";
-		public static final String CACHE_REGEX = CACHE + RegexOp.OR + CACHE_SHORT;
 		
 	}
 	
@@ -123,8 +110,8 @@ public class CmdConstants {
 		public static final String OBJECT_REGEX = OBJECT + RegexOp.OR + OBJECT_SHORT;
 		//Path for importers/exporters
 		public static final String PATH = "path";
-		private static final String PATH_SHORT = "pA";
-		public static final String PATH_REGEX = PATH + RegexOp.OR + PATH_SHORT; //Might have some confliction with p from Parameters
+		private static final String PATH_SHORT = "p";
+		public static final String PATH_REGEX = PATH + RegexOp.OR + PATH_SHORT;
 		
 		//Iteration 3
 		public static final String METHOD = "method";
@@ -132,7 +119,7 @@ public class CmdConstants {
 		public static final String METHOD_REGEX = METHOD + RegexOp.OR + METHOD_SHORT;
 		
 		public static final String MODIFIER = "modifier";
-		private static final String MODIFIER_SHORT = "mS";
+		private static final String MODIFIER_SHORT = "mod";
 		public static final String MODIFIER_REGEX = MODIFIER + RegexOp.OR + MODIFIER_SHORT;
 		
 		public static final String RETURN = "return";

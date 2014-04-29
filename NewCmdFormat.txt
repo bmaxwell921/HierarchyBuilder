@@ -16,7 +16,7 @@ create <subCommand>
 		-args <ARGUMENTS...>: The arguments on the new method. Space delimited (Must have -type method)
 		-a <ARGUMENTS...>: Alias for -args	
 		modifiers <MODIFIERS...>: The modifiers to apply to the new field
-		m <MODIFIERS...>: Alias for -modifiers
+		mod <MODIFIERS...>: Alias for -modifiers
 		
 
 add <subCommand>
