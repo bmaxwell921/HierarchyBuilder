@@ -73,7 +73,7 @@ public interface IDesignDoc extends Nameable {
 	 *             If multiple objects with the given name exist in the design
 	 *             doc
 	 */
-	public boolean addPackage(String pkg, String objName) throws Exception;
+	public boolean addPackage(String pkg, long objId) throws Exception;
 
 	/**
 	 * Creates a new instance method in the given class with the given

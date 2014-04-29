@@ -44,9 +44,10 @@ public class Cardinal {
 	}
 
 	public static void main(String[] args) {
-		doSystemStart();
+		// doSystemStart();
+		System.out.println("System ready.");
 		new Cardinal().run();
-		System.out.println("Thanks for using our software!");
+		System.out.println("System Exit.");
 	}
 
 	/**
@@ -56,8 +57,7 @@ public class Cardinal {
 	private void run() {
 		Scanner in = new Scanner(System.in);
 		String cmdStr = null;
-		boolean exit = false;
-		while (!exit) {
+		while (true) {
 			cmdStr = in.nextLine();
 			ICommand cmd = null;
 			try {
@@ -65,29 +65,41 @@ public class Cardinal {
 				// First we check what the command name was
 				if (cmd.getName().equals(CmdConstants.CmdNames.CREATE)) {
 					this.doCreate(cmd);
-				} else if (cmd.getName().equals(CmdConstants.CmdNames.ADD)) {
+					continue;
+				}
+				if (cmd.getName().equals(CmdConstants.CmdNames.ADD)) {
 					doAdd(cmd);
-				} else if (cmd.getName().equals(CmdConstants.CmdNames.REMOVE)) {
+					continue;
+				}
+				if (cmd.getName().equals(CmdConstants.CmdNames.REMOVE)) {
 					doRemove(cmd);
-				} else if (cmd.getName().equals(CmdConstants.CmdNames.CHANGE)) {
+					continue;
+				}
+				if (cmd.getName().equals(CmdConstants.CmdNames.CHANGE)) {
 					doChange(cmd);
-				} else if (cmd.getName().equals(CmdConstants.CmdNames.LIST)) {
+					continue;
+				}
+				if (cmd.getName().equals(CmdConstants.CmdNames.LIST)) {
 					doList(cmd);
-				} else if (cmd.getName().equals(CmdConstants.CmdNames.EXPORT)) {
+					continue;
+				}
+				if (cmd.getName().equals(CmdConstants.CmdNames.EXPORT)) {
 					doExport(cmd);
-				} else if (cmd.getName().equals(CmdConstants.CmdNames.IMPORT)) {
+					continue;
+				}
+				if (cmd.getName().equals(CmdConstants.CmdNames.IMPORT)) {
 					doImport(cmd);
-				} else if (cmd.getName().equals(CmdConstants.CmdNames.EXIT)) {
-					exit = true;
+					continue;
+				}
+				if (cmd.getName().equals(CmdConstants.CmdNames.EXIT)) {
 					break;
 				}
-				System.out.println(String.format(
-						"System - Completed command \"%s\"", cmd.toString()));
+				System.out.println(String.format("System - Completed command \"%s\"", cmd.toString()));
 			} catch (HBMultipleObjectsFoundException e) {
 				System.out.println(e.getMessage());
 				printMatchingObjects(cmd.getFlagValue(CmdConstants.Flags.NAME));
 			} catch (Exception e) {
-				System.out.println(e.getClass() + "\t" + e.getMessage());
+				System.out.println(e.getMessage());
 			}
 		}
 		in.close();
@@ -104,51 +116,41 @@ public class Cardinal {
 
 	// Calling of create methods
 	private boolean doCreate(ICommand cmd) throws Exception {
-		if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.CLASS_REGEX)) {
+		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.CLASS)) {
 			return isc.createClass(cmd.getFlagValue(CmdConstants.Flags.NAME));
-		} else if (cmd.getSubCommand().matches(
-				CmdConstants.SubCmdNames.INTERFACE_REGEX)) {
-			return isc.createInterface(cmd
-					.getFlagValue(CmdConstants.Flags.NAME));
-		} else if (cmd.getSubCommand().matches(
-				CmdConstants.SubCmdNames.CACHE_REGEX)) {
-			return doCache(cmd);
-		} else {
-			return isc.createDesign(cmd.getFlagValue(CmdConstants.Flags.NAME));
 		}
+		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.INTERFACE)) {
+			return isc.createInterface(cmd.getFlagValue(CmdConstants.Flags.NAME));
+		}
+		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.CACHE)) {
+			return doCache(cmd);
+		}
+		return isc.createDesign(cmd.getFlagValue(CmdConstants.Flags.NAME));
 	}
 
 	// Calling of add methods
 	private void doAdd(ICommand cmd) throws Exception {
-		if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.PACKAGE_REGEX)) {
-			isc.addPackage(cmd.getFlagValue(CmdConstants.Flags.NAME),
-					cmd.getFlagValue(CmdConstants.Flags.CONTAINER_NAME));
-		} else if (cmd.getSubCommand().matches(
-				CmdConstants.SubCmdNames.METHOD_REGEX)) {
+		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.PACKAGE)) {
+			// First get the id of the object to modify, then modify it
+			long id = IdManager.getInstance().accessIdWithKey(cmd.getFlagValue(CmdConstants.Flags.OBJECT));
+			isc.addPackage(cmd.getFlagValue(CmdConstants.Flags.NAME), id);
+			return;
+		} 
+		if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.METHOD)) {
 			if (cmd.hasFlag(CmdConstants.Flags.INSTANCE)) {
-				isc.addInstanceMethod(
-						cmd.getFlagValue(CmdConstants.Flags.CONTAINER_NAME),
-						cmd.getFlagValue(CmdConstants.Flags.NAME),
-						cmd.getFlagValue(CmdConstants.Flags.PARAMETERS),
-						CmdConstants.Flags.INSTANCE);
-			} else {
-				isc.addStaticMethod(
-						cmd.getFlagValue(CmdConstants.Flags.CONTAINER_NAME),
-						cmd.getFlagValue(CmdConstants.Flags.NAME),
-						cmd.getFlagValue(CmdConstants.Flags.PARAMETERS),
-						CmdConstants.Flags.STATIC);
+				long id = IdManager.getInstance().accessIdWithKey(cmd.getFlagValue(CmdConstants.Flags.OBJECT));
+				isc.addInstanceMethod(cmd.getFlagValue(CmdConstants.Flags.CONTAINER_NAME), cmd.getFlagValue(CmdConstants.Flags.NAME),
+						cmd.getFlagValue(CmdConstants.Flags.PARAMETERS), CmdConstants.Flags.INSTANCE);
+				return;
 			}
-		} else if (cmd.getSubCommand().matches(
-				CmdConstants.SubCmdNames.RELATIONSHIP_REGEX)) {
-			isc.addRelationship(
-					cmd.getFlagValue(CmdConstants.Flags.FROM_CLASS_NAME),
-					cmd.getFlagValue(CmdConstants.Flags.TO_CLASS_NAME),
+			isc.addStaticMethod(cmd.getFlagValue(CmdConstants.Flags.CONTAINER_NAME), cmd.getFlagValue(CmdConstants.Flags.NAME),
+						cmd.getFlagValue(CmdConstants.Flags.PARAMETERS), CmdConstants.Flags.STATIC);
+		} else if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.RELATIONSHIP_REGEX)) {
+			isc.addRelationship(cmd.getFlagValue(CmdConstants.Flags.FROM_CLASS_NAME), cmd.getFlagValue(CmdConstants.Flags.TO_CLASS_NAME),
 					cmd.getFlagValue(CmdConstants.Flags.TYPE));
-		} else if (cmd.getSubCommand().matches(
-				CmdConstants.SubCmdNames.CACHE_REGEX)) {
+		} else if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.CACHE_REGEX)) {
 			// Get type
-			String type = cmd.getFlagValue(CmdConstants.Flags.TYPE)
-					.toUpperCase();
+			String type = cmd.getFlagValue(CmdConstants.Flags.TYPE).toUpperCase();
 			long id = Long.parseLong(CmdConstants.Flags.ID);
 			isc.addObject(type, CacheManager.getInstance().getObject(id));
 		}
@@ -157,22 +159,14 @@ public class Cardinal {
 	// Calling of Remove methods
 	private boolean doRemove(ICommand cmd) throws Exception {
 		if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.CLASS_REGEX)
-				|| cmd.getSubCommand().matches(
-						CmdConstants.SubCmdNames.INTERFACE_REGEX)) {
+				|| cmd.getSubCommand().matches(CmdConstants.SubCmdNames.INTERFACE_REGEX)) {
 			return isc.removeClass(cmd.getFlagValue(CmdConstants.Flags.NAME));
-		} else if (cmd.getSubCommand().matches(
-				CmdConstants.SubCmdNames.PACKAGE_REGEX)) {
-			return isc.removePackage(cmd
-					.getFlagValue(CmdConstants.Flags.CONTAINER_NAME));
-		} else if (cmd.getSubCommand().matches(
-				CmdConstants.SubCmdNames.METHOD_REGEX)) {
-			return isc.removeMethod(
-					cmd.getFlagValue(CmdConstants.Flags.CONTAINER_NAME),
-					cmd.getFlagValue(CmdConstants.Flags.NAME));
-		} else if (cmd.getSubCommand().matches(
-				CmdConstants.SubCmdNames.RELATIONSHIP_REGEX)) {
-			return isc.removeRelationship(
-					cmd.getFlagValue(CmdConstants.Flags.FROM_CLASS_NAME),
+		} else if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.PACKAGE_REGEX)) {
+			return isc.removePackage(cmd.getFlagValue(CmdConstants.Flags.CONTAINER_NAME));
+		} else if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.METHOD_REGEX)) {
+			return isc.removeMethod(cmd.getFlagValue(CmdConstants.Flags.CONTAINER_NAME), cmd.getFlagValue(CmdConstants.Flags.NAME));
+		} else if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.RELATIONSHIP_REGEX)) {
+			return isc.removeRelationship(cmd.getFlagValue(CmdConstants.Flags.FROM_CLASS_NAME),
 					cmd.getFlagValue(CmdConstants.Flags.TO_CLASS_NAME));
 		} else
 			return false;
@@ -186,32 +180,22 @@ public class Cardinal {
 	 */
 	private boolean doExport(ICommand cmd) {
 		if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.XML_REGEX)) {
-			return isc.exportDesignXML(cmd
-					.getFlagValue(CmdConstants.Flags.PATH));
-		} else if (cmd.getSubCommand().matches(
-				CmdConstants.SubCmdNames.JSON_REGEX)) {
-			return isc.exportDesignJSON(cmd
-					.getFlagValue(CmdConstants.Flags.PATH));
-		} else if (cmd.getSubCommand().matches(
-				CmdConstants.SubCmdNames.SOURCE_REGEX)) {
-			return isc.exportDesignSource(cmd
-					.getFlagValue(CmdConstants.Flags.PATH));
+			return isc.exportDesignXML(cmd.getFlagValue(CmdConstants.Flags.PATH));
+		} else if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.JSON_REGEX)) {
+			return isc.exportDesignJSON(cmd.getFlagValue(CmdConstants.Flags.PATH));
+		} else if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.SOURCE_REGEX)) {
+			return isc.exportDesignSource(cmd.getFlagValue(CmdConstants.Flags.PATH));
 		} else
 			return false;
 	}
 
 	private boolean doImport(ICommand cmd) throws Exception {
 		if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.XML_REGEX)) {
-			return isc.importDesignXML(cmd
-					.getFlagValue(CmdConstants.Flags.PATH));
-		} else if (cmd.getSubCommand().matches(
-				CmdConstants.SubCmdNames.JSON_REGEX)) {
-			return isc.importDesignJSON(cmd
-					.getFlagValue(CmdConstants.Flags.PATH));
-		} else if (cmd.getSubCommand().matches(
-				CmdConstants.SubCmdNames.SOURCE_REGEX)) {
-			return isc.importDesignSource(cmd
-					.getFlagValue(CmdConstants.Flags.PATH));
+			return isc.importDesignXML(cmd.getFlagValue(CmdConstants.Flags.PATH));
+		} else if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.JSON_REGEX)) {
+			return isc.importDesignJSON(cmd.getFlagValue(CmdConstants.Flags.PATH));
+		} else if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.SOURCE_REGEX)) {
+			return isc.importDesignSource(cmd.getFlagValue(CmdConstants.Flags.PATH));
 		} else
 			return false;
 	}
@@ -227,16 +211,10 @@ public class Cardinal {
 	 */
 	private boolean doChange(ICommand cmd) throws Exception {
 		if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.CLASS_REGEX)
-				|| cmd.getSubCommand().matches(
-						CmdConstants.SubCmdNames.INTERFACE_REGEX))
-			return isc.changeName(
-					cmd.getFlagValue(CmdConstants.Flags.CONTAINER_NAME),
-					cmd.getFlagValue(CmdConstants.Flags.NAME));
-		else if (cmd.getSubCommand().matches(
-				CmdConstants.SubCmdNames.PACKAGE_REGEX))
-			return isc.changePackage(
-					cmd.getFlagValue(CmdConstants.Flags.CONTAINER_NAME),
-					cmd.getFlagValue(CmdConstants.Flags.NAME));
+				|| cmd.getSubCommand().matches(CmdConstants.SubCmdNames.INTERFACE_REGEX))
+			return isc.changeName(cmd.getFlagValue(CmdConstants.Flags.CONTAINER_NAME), cmd.getFlagValue(CmdConstants.Flags.NAME));
+		else if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.PACKAGE_REGEX))
+			return isc.changePackage(cmd.getFlagValue(CmdConstants.Flags.CONTAINER_NAME), cmd.getFlagValue(CmdConstants.Flags.NAME));
 		else
 			return false;
 	}
@@ -252,17 +230,13 @@ public class Cardinal {
 	 */
 	private boolean doList(ICommand cmd) throws Exception {
 		if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.CLASS_REGEX)
-				|| cmd.getSubCommand().matches(
-						CmdConstants.SubCmdNames.INTERFACE_REGEX)) {
-			System.out.println(isc.listObject(cmd
-					.getFlagValue(CmdConstants.Flags.NAME)));
+				|| cmd.getSubCommand().matches(CmdConstants.SubCmdNames.INTERFACE_REGEX)) {
+			System.out.println(isc.listObject(cmd.getFlagValue(CmdConstants.Flags.NAME)));
 			return true;
-		} else if (cmd.getSubCommand().matches(
-				CmdConstants.SubCmdNames.DESIGN_REGEX)) {
+		} else if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.DESIGN_REGEX)) {
 			System.out.println(isc.listDesign());
 			return true;
-		} else if (cmd.getSubCommand().matches(
-				CmdConstants.SubCmdNames.CACHE_REGEX)) {
+		} else if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.CACHE_REGEX)) {
 			// get ID
 			long id = Long.parseLong(cmd.getFlagValue(CmdConstants.Flags.ID));
 			String type = cmd.getFlagValue(CmdConstants.Flags.TYPE);
@@ -312,45 +286,37 @@ public class Cardinal {
 		// Initialized to null
 		Set<String> modifiers = null;
 		List<String> arguments = null;
-		if (cmd.getFlagValue(CmdConstants.Flags.TYPE).equalsIgnoreCase(
-				CmdConstants.SubCmdNames.METHOD)) {
+		if (cmd.getFlagValue(CmdConstants.Flags.TYPE).equalsIgnoreCase(CmdConstants.SubCmdNames.METHOD)) {
 			String methodName = cmd.getFlagValue(CmdConstants.Flags.NAME);
 			String returnType = cmd.getFlagValue(CmdConstants.Flags.RETURN);
 			String modifiersStr = cmd.getFlagValue(CmdConstants.Flags.MODIFIER);
 			// null check
 			if (modifiersStr != null) {
-				modifiers = new HashSet<String>(Arrays.asList(modifiersStr
-						.split(",")));
+				modifiers = new HashSet<String>(Arrays.asList(modifiersStr.split(",")));
 			}
-			String argumentsStr = cmd
-					.getFlagValue(CmdConstants.Flags.ARGUMENTS);
+			String argumentsStr = cmd.getFlagValue(CmdConstants.Flags.ARGUMENTS);
 			if (argumentsStr != null) {
-				arguments = new ArrayList<String>(Arrays.asList(argumentsStr
-						.split(",")));
+				arguments = new ArrayList<String>(Arrays.asList(argumentsStr.split(",")));
 			}
 			id = isc.cacheMethod(methodName, returnType, modifiers, arguments);
 			if (id == -1) {
 				throw new MalformattedCommandException("ID unable to set");
 			}
-		} else if (cmd.getFlagValue(CmdConstants.Flags.TYPE).equalsIgnoreCase(
-				CmdConstants.Flags.INSTANCE)) {
+		} else if (cmd.getFlagValue(CmdConstants.Flags.TYPE).equalsIgnoreCase(CmdConstants.Flags.INSTANCE)) {
 			String methodName = cmd.getFlagValue(CmdConstants.Flags.NAME);
 			String returnType = cmd.getFlagValue(CmdConstants.Flags.RETURN);
 			String modifiersStr = cmd.getFlagValue(CmdConstants.Flags.MODIFIER);
 			if (modifiersStr != null) {
-				modifiers = new HashSet<String>(Arrays.asList(modifiersStr
-						.split(",")));
+				modifiers = new HashSet<String>(Arrays.asList(modifiersStr.split(",")));
 			}
 			id = isc.cacheVariable(methodName, returnType, modifiers);
 			if (id == -1) {
 				throw new MalformattedCommandException("ID unable to set");
 			}
-		} else if (cmd.getFlagValue(CmdConstants.Flags.TYPE).equalsIgnoreCase(
-				CmdConstants.Flags.MODIFIER)) {
+		} else if (cmd.getFlagValue(CmdConstants.Flags.TYPE).equalsIgnoreCase(CmdConstants.Flags.MODIFIER)) {
 			String modifiersStr = cmd.getFlagValue(CmdConstants.Flags.MODIFIER);
 			if (modifiersStr != null) {
-				modifiers = new HashSet<String>(Arrays.asList(modifiersStr
-						.split(",")));
+				modifiers = new HashSet<String>(Arrays.asList(modifiersStr.split(",")));
 			}
 			id = isc.cacheModifierSet(modifiers);
 			if (id == -1) {
