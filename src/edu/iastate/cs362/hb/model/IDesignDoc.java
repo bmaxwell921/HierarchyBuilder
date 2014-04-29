@@ -99,7 +99,7 @@ public interface IDesignDoc extends Nameable {
 	/**
 	 * Creates a new static method in the given class with the given information
 	 * 
-	 * @param objName
+	 * @param objId
 	 * @param methodName
 	 * @param params
 	 * @param modifiers
@@ -108,7 +108,7 @@ public interface IDesignDoc extends Nameable {
 	 * @throws HBDuplicateMethodException
 	 * @throws HBMultipleObjectsFoundException
 	 */
-	public boolean addStaticMethod(String objName, String methodName,
+	public boolean addStaticMethod(long objId, String methodName,
 			String params, String... modifiers) throws Exception;
 
 	/**

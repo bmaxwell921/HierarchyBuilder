@@ -85,9 +85,9 @@ public class HBSystem implements ISystem {
 	}
 
 	@Override
-	public boolean addStaticMethod(String objName, String methodName,
+	public boolean addStaticMethod(long objId, String methodName,
 			String params, String... modifiers) throws Exception {
-		return doc.addStaticMethod(objName, methodName, params, modifiers);
+		return doc.addStaticMethod(objId, methodName, params, modifiers);
 	}
 
 	/**

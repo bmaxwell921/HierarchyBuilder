@@ -73,13 +73,13 @@ public class SystemController implements ISystemController {
 	@Override
 	public boolean addInstanceMethod(long objId, String methodName, String returnType,
 			String params, String... modifiers) throws Exception {
-		return system.addInstanceMethod(objName, methodName, params, modifiers);
+		return system.addInstanceMethod(objId, methodName, params, modifiers);
 	}
 
 	@Override
-	public boolean addStaticMethod(String objName, String methodName,
+	public boolean addStaticMethod(long objId, String methodName,
 			String params, String... modifiers) throws Exception {
-		return system.addStaticMethod(objName, methodName, params, modifiers);
+		return system.addStaticMethod(objId, methodName, params, modifiers);
 	}
 
 	/**

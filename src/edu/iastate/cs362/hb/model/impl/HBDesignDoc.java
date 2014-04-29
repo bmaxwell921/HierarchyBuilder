@@ -72,9 +72,9 @@ public class HBDesignDoc implements IDesignDoc {
 	}
 
 	@Override
-	public boolean addStaticMethod(String objName, String methodName,
+	public boolean addStaticMethod(long objId, String methodName,
 			String params, String... modifiers) throws Exception {
-		return addMethod(objName, methodName, params, modifiers);
+		return addMethod(objId, methodName, params, modifiers);
 	}
 
 	private boolean addMethod(long objId, String methodName, String params,
