@@ -17,8 +17,7 @@ public class CommandParser implements ICommandParser {
 	 * Parses a string command into a command object
 	 */
 	@Override
-	public ICommand parseCommand(String command)
-			throws MalformattedCommandException {
+	public ICommand parseCommand(String command) throws MalformattedCommandException {
 
 		String[] commandList = command.split(" ");
 		String[] nonChangedList = new String[commandList.length];
@@ -58,8 +57,7 @@ public class CommandParser implements ICommandParser {
 			c = new Command(CmdConstants.CmdNames.LIST);
 			break;
 		default:
-			throw new MalformattedCommandException(
-					"Malformatted command name!", commandList[0]);
+			throw new MalformattedCommandException("Malformatted command name!", commandList[0]);
 		}
 
 		// Subcommand expects a dash
@@ -71,8 +69,7 @@ public class CommandParser implements ICommandParser {
 		for (int i = 2; i < commandList.length; i++) {
 			if (commandList[i].charAt(0) == '-') {
 				// Flag
-				boolean valueUsed = addFlag(c, commandList[i].substring(1),
-					 	 (i+1) >= nonChangedList.length ? null : nonChangedList[i + 1]);
+				boolean valueUsed = addFlag(c, commandList[i].substring(1), (i + 1) >= nonChangedList.length ? null : nonChangedList[i + 1]);
 				if (valueUsed) {
 					i++;
 				}
@@ -97,8 +94,7 @@ public class CommandParser implements ICommandParser {
 	 * @throws MalformattedCommandException
 	 *             If the input is not a known flag, this exception is thrown
 	 */
-	public boolean addFlag(Command c, String input, String value)
-			throws MalformattedCommandException {
+	public boolean addFlag(Command c, String input, String value) throws MalformattedCommandException {
 		boolean valueUsed = false;
 		if (input.matches(CmdConstants.Flags.HELP_REGEX)) {
 			c.addFlagValue(CmdConstants.Flags.HELP, null);
@@ -108,39 +104,38 @@ public class CommandParser implements ICommandParser {
 		} else if (input.matches(CmdConstants.Flags.PARAMETERS_REGEX)) {
 			c.addFlagValue(CmdConstants.Flags.PARAMETERS, value);
 			valueUsed = true;
-		} else if(input.matches(CmdConstants.Flags.PATH_REGEX)){
+		} else if (input.matches(CmdConstants.Flags.PATH_REGEX)) {
 			c.addFlagValue(CmdConstants.Flags.PATH, value);
 			valueUsed = true;
-		} else if(input.matches(CmdConstants.Flags.ID_REGEX)) {
+		} else if (input.matches(CmdConstants.Flags.ID_REGEX)) {
 			c.addFlagValue(CmdConstants.Flags.ID, value);
 			valueUsed = true;
-		} else if(input.matches(CmdConstants.Flags.TYPE_REGEX)){
+		} else if (input.matches(CmdConstants.Flags.TYPE_REGEX)) {
 			c.addFlagValue(CmdConstants.Flags.TYPE, value);
 			valueUsed = true;
-		} else if (input.matches(CmdConstants.Flags.ARGUMENTS_REGEX)){
+		} else if (input.matches(CmdConstants.Flags.ARGUMENTS_REGEX)) {
 			c.addFlagValue(CmdConstants.Flags.ARGUMENTS, value);
 			valueUsed = true;
-		} else if (input.matches(CmdConstants.Flags.RETURN_REGEX)){
+		} else if (input.matches(CmdConstants.Flags.RETURN_REGEX)) {
 			c.addFlagValue(CmdConstants.Flags.RETURN, value);
 			valueUsed = true;
-		} else if (input.matches(CmdConstants.Flags.SUPERTYPE_REGEX)){
+		} else if (input.matches(CmdConstants.Flags.SUPERTYPE_REGEX)) {
 			c.addFlagValue(CmdConstants.Flags.SUPERTYPE, value);
 			valueUsed = true;
-		} else if (input.matches(CmdConstants.Flags.SUBTYPE_REGEX)){
+		} else if (input.matches(CmdConstants.Flags.SUBTYPE_REGEX)) {
 			c.addFlagValue(CmdConstants.Flags.SUBTYPE, value);
 			valueUsed = true;
-		} else if (input.matches(CmdConstants.Flags.OBJECT_REGEX)){
+		} else if (input.matches(CmdConstants.Flags.OBJECT_REGEX)) {
 			c.addFlagValue(CmdConstants.Flags.OBJECT, value);
 			valueUsed = true;
-		} else if (input.matches(CmdConstants.Flags.METHOD_REGEX)){
+		} else if (input.matches(CmdConstants.Flags.METHOD_REGEX)) {
 			c.addFlagValue(CmdConstants.Flags.METHOD, null);
-		} else if (input.matches(CmdConstants.Flags.MODIFIER_REGEX)){
+		} else if (input.matches(CmdConstants.Flags.MODIFIER_REGEX)) {
 			c.addFlagValue(CmdConstants.Flags.MODIFIER, null);
-		} else if (input.matches(CmdConstants.Flags.INSTANCE_REGEX)){
+		} else if (input.matches(CmdConstants.Flags.INSTANCE_REGEX)) {
 			c.addFlagValue(CmdConstants.Flags.INSTANCE, null);
 		} else {
-			throw new MalformattedCommandException("Malformatted flag values!",
-					input, value);
+			throw new MalformattedCommandException("Malformatted flag values!", input, value);
 		}
 
 		return valueUsed;
@@ -156,32 +151,10 @@ public class CommandParser implements ICommandParser {
 	 * @throws MalformattedCommandException
 	 *             If sub-command is not known, this is thrown
 	 */
-	public void addSubCommand(Command c, String input)
-			throws MalformattedCommandException {
-		if (input.matches(CmdConstants.SubCmdNames.CLASS_REGEX)) {
-			c.setSubCommand(CmdConstants.SubCmdNames.CLASS);
-		} else if (input.matches(CmdConstants.SubCmdNames.DESIGN_REGEX)) {
-			c.setSubCommand(CmdConstants.SubCmdNames.DESIGN);
-		} else if (input.matches(CmdConstants.SubCmdNames.INTERFACE_REGEX)) {
-			c.setSubCommand(CmdConstants.SubCmdNames.INTERFACE);
-		} else if (input.matches(CmdConstants.SubCmdNames.METHOD_REGEX)) {
-			c.setSubCommand(CmdConstants.SubCmdNames.METHOD);
-		} else if (input.matches(CmdConstants.SubCmdNames.PACKAGE_REGEX)) {
-			c.setSubCommand(CmdConstants.SubCmdNames.PACKAGE);
-		} else if (input.matches(CmdConstants.SubCmdNames.RELATIONSHIP_REGEX)) {
-			c.setSubCommand(CmdConstants.SubCmdNames.RELATIONSHIP);
-		} else if (input.matches(CmdConstants.SubCmdNames.XML_REGEX)){
-			c.setSubCommand(CmdConstants.SubCmdNames.XML);
-		} else if (input.matches(CmdConstants.SubCmdNames.JSON_REGEX)){
-			c.setSubCommand(CmdConstants.SubCmdNames.JSON);
-		} else if (input.matches(CmdConstants.SubCmdNames.SOURCE_REGEX)){
-			c.setSubCommand(CmdConstants.SubCmdNames.SOURCE);
-		} else if (input.matches(CmdConstants.SubCmdNames.CACHE_REGEX)){
-			c.setSubCommand(CmdConstants.SubCmdNames.CACHE);
-		} else {
-			throw new MalformattedCommandException(
-					"Malformatted sub-command name!", input);
+	public void addSubCommand(Command c, String input) throws MalformattedCommandException {
+		if (!input.matches(CmdConstants.SubCmdNames.ANY)) {
+			throw new MalformattedCommandException("Unknown Subcommand name: %s", input);
 		}
-
+		c.setSubCommand(input);
 	}
 }
