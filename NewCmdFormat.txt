@@ -5,9 +5,19 @@ create <subCommand>
 		design 		[-COMMON_OPTIONS]
 		class		[-COMMON_OPTIONS]
 		interface	[-COMMON_OPTIONS]
+		cache		[-COMMON_OPTIONS] [-CACHE_OPTIONS]
 	COMMON_OPTIONS
 		-name <name>: The name of what is being created
 		-n <name>: Alias for -name
+	CACHE_OPTIONS
+		-type <type>: Type of cached item to ceate. Method,Instance,Modifier
+		-return <type>: The return type of the method (Must have -type method)
+		-r <type>: Alias for -return
+		-args <ARGUMENTS...>: The arguments on the new method. Space delimited (Must have -type method)
+		-a <ARGUMENTS...>: Alias for -args	
+		-modifiers <MODIFIERS...>: The modifiers to apply to the new field
+		-m <MODIFIERS...>: Alias for -modifiers
+		
 
 add <subCommand>
 	Sub-Commands:
@@ -15,6 +25,7 @@ add <subCommand>
 		field 		[-COMMON_OPTIONS] [-FIELD_OPTIONS]
 		method 		[-COMMON_OPTIONS] [-METHOD_OPTIONS]
 		relation 	[-RELATION_OPTIONS]
+		cache		[-CACHE_OPTIONS]
 	COMMON_OPTIONS
 		-object <obj>: 	The fully qualified name of the object you are modifying. Period delimited
 		-o <obj>: 		Alias for -object
@@ -43,6 +54,10 @@ add <subCommand>
 		public, private, protected, final, static, transient, etc
 	ARGUMENTS
 		<MODIFIERS...>-type-name
+	CACHE_OPTIONS
+		-type <type>: Type of cached item to be added (method,instance,modifiers)
+		-t <type>: alias for -type
+		-id <id>: Id of cached item to add
 
 remove <subCommand>
 	Sub-Commands:
@@ -69,3 +84,9 @@ remove <subCommand>
 		-t <t>: Alias for -type		
 	ARGUMENTS
 		<MODIFIERS...>-type-name
+		
+list <subCommand>
+	Sub-Commands:
+		cache	[-CACHE_OPTIONS]
+	CACHE_OPTIONS
+		-id <id> ID of the cache option to list
