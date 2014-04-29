@@ -196,14 +196,12 @@ public class SystemController implements ISystemController {
 
 	@Override
 	public String listCachedMethod(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return system.listCachedMethod(id);
 	}
 
 	@Override
 	public String listCachedVariable(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return system.listCachedVariable(id);
 	}
 
 	@Override
@@ -219,8 +217,7 @@ public class SystemController implements ISystemController {
 
 	@Override
 	public String listCachedModifierSet(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return system.listCachedModifierSet(id);
 	}
 
 	@Override

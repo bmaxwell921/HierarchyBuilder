@@ -230,10 +230,17 @@ public class HBSystem implements ISystem {
 	public long cacheMethod(String methodName, String returnType,
 			Set<String> modifiers, List<String> arguments) {
 		IMethod method = new HBMethod(methodName);
-		method.addArguments(arguments);
-		method.addModifiers(modifiers);
-		method.addReturnType(returnType);
-		return cache.addItem(method, methodName, "variable");
+		//any of these methods may be null check for that.
+		if(arguments != null){
+			method.addArguments(arguments);
+		}
+		if(modifiers != null){
+			method.addModifiers(modifiers);
+		}
+		if(returnType != null){
+			method.addReturnType(returnType);
+		}
+		return cache.addItem(method, methodName, "method");
 	}
 
 	@Override

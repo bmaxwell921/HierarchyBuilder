@@ -144,6 +144,9 @@ public class CommandParser implements ICommandParser {
 		} else if (input.matches(CmdConstants.Flags.ARGUMENTS_REGEX)){
 			c.addFlagValue(CmdConstants.Flags.ARGUMENTS, value);
 			valueUsed = true;
+		} else if (input.matches(CmdConstants.Flags.RETURN_REGEX)){
+			c.addFlagValue(CmdConstants.Flags.RETURN, value);
+			valueUsed = true;
 		} else {
 			throw new MalformattedCommandException("Malformatted flag values!",
 					input, value);
@@ -182,6 +185,8 @@ public class CommandParser implements ICommandParser {
 			c.setSubCommand(CmdConstants.SubCmdNames.JSON);
 		} else if (input.matches(CmdConstants.SubCmdNames.SOURCE_REGEX)){
 			c.setSubCommand(CmdConstants.SubCmdNames.SOURCE);
+		} else if (input.matches(CmdConstants.SubCmdNames.CACHE_REGEX)){
+			c.setSubCommand(CmdConstants.SubCmdNames.CACHE);
 		} else {
 			throw new MalformattedCommandException(
 					"Malformatted sub-command name!", input);

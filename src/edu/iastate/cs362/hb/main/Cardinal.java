@@ -87,7 +87,7 @@ public class Cardinal {
 				System.out.println(e.getMessage());
 				printMatchingObjects(cmd.getFlagValue(CmdConstants.Flags.NAME));
 			} catch (Exception e) {
-				System.out.println(e.getMessage());
+				System.out.println(e.getClass() + "\t" + e.getMessage());
 			}
 		}
 		in.close();
@@ -254,6 +254,31 @@ public class Cardinal {
 				CmdConstants.SubCmdNames.DESIGN_REGEX)) {
 			System.out.println(isc.listDesign());
 			return true;
+		} else if (cmd.getSubCommand().matches(
+				CmdConstants.SubCmdNames.CACHE_REGEX)) {
+			// get ID
+			long id = Long.parseLong(cmd.getFlagValue(CmdConstants.Flags.ID));
+			String type = cmd.getFlagValue(CmdConstants.Flags.TYPE);
+			if (type == null) {
+				return false;
+			}
+			String listable = "";
+			switch (type.toUpperCase()) {
+			case "METHOD":
+				listable = isc.listCachedMethod(id);
+				break;
+			case "VARIABLE":
+			case "INSTANCE":
+				listable = isc.listCachedVariable(id);
+				break;
+			case "MODIFIER":
+				listable = isc.listCachedModifierSet(id);
+				break;
+			default:
+				return false;
+			}
+			System.out.println(listable);
+			return true;
 		} else
 			return false;
 	}
@@ -277,17 +302,25 @@ public class Cardinal {
 
 	private boolean doCache(ICommand cmd) throws MalformattedCommandException {
 		long id = 0;
+		// Initialized to null
+		Set<String> modifiers = null;
+		List<String> arguments = null;
 		if (cmd.getFlagValue(CmdConstants.Flags.TYPE).equalsIgnoreCase(
 				CmdConstants.SubCmdNames.METHOD)) {
 			String methodName = cmd.getFlagValue(CmdConstants.Flags.NAME);
 			String returnType = cmd.getFlagValue(CmdConstants.Flags.RETURN);
 			String modifiersStr = cmd.getFlagValue(CmdConstants.Flags.MODIFIER);
-			Set<String> modifiers = new HashSet<String>(
-					Arrays.asList(modifiersStr.split(",")));
+			// null check
+			if (modifiersStr != null) {
+				modifiers = new HashSet<String>(Arrays.asList(modifiersStr
+						.split(",")));
+			}
 			String argumentsStr = cmd
 					.getFlagValue(CmdConstants.Flags.ARGUMENTS);
-			List<String> arguments = new ArrayList<String>(
-					Arrays.asList(argumentsStr.split(",")));
+			if (argumentsStr != null) {
+				arguments = new ArrayList<String>(Arrays.asList(argumentsStr
+						.split(",")));
+			}
 			id = isc.cacheMethod(methodName, returnType, modifiers, arguments);
 			if (id == -1) {
 				throw new MalformattedCommandException("ID unable to set");
@@ -297,8 +330,10 @@ public class Cardinal {
 			String methodName = cmd.getFlagValue(CmdConstants.Flags.NAME);
 			String returnType = cmd.getFlagValue(CmdConstants.Flags.RETURN);
 			String modifiersStr = cmd.getFlagValue(CmdConstants.Flags.MODIFIER);
-			Set<String> modifiers = new HashSet<String>(
-					Arrays.asList(modifiersStr.split(",")));
+			if (modifiersStr != null) {
+				modifiers = new HashSet<String>(Arrays.asList(modifiersStr
+						.split(",")));
+			}
 			id = isc.cacheVariable(methodName, returnType, modifiers);
 			if (id == -1) {
 				throw new MalformattedCommandException("ID unable to set");
@@ -306,8 +341,10 @@ public class Cardinal {
 		} else if (cmd.getFlagValue(CmdConstants.Flags.TYPE).equalsIgnoreCase(
 				CmdConstants.Flags.MODIFIER)) {
 			String modifiersStr = cmd.getFlagValue(CmdConstants.Flags.MODIFIER);
-			Set<String> modifiers = new HashSet<String>(
-					Arrays.asList(modifiersStr.split(",")));
+			if (modifiersStr != null) {
+				modifiers = new HashSet<String>(Arrays.asList(modifiersStr
+						.split(",")));
+			}
 			id = isc.cacheModifierSet(modifiers);
 			if (id == -1) {
 				throw new MalformattedCommandException("ID unable to set");
