@@ -230,4 +230,9 @@ public class SystemController implements ISystemController {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public boolean addObject(String type, Object obj) {
+		return system.addObject(type, obj);
+	}
 }

@@ -115,4 +115,6 @@ public interface ISystem {
 	public long cacheModifierSet(Set<String> modifiers);
 	
 	public String showHelp();
+	
+	public boolean addObject(String type, Object obj) throws Exception;
 }

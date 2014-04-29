@@ -266,4 +266,26 @@ public class HBSystem implements ISystem {
 		return null;
 	}
 
+	@Override
+	public boolean addObject(String type, Object obj) throws Exception {
+		switch(type.toUpperCase()){
+		case "METHOD":
+			IMethod method = (HBMethod) obj;
+			StringBuilder sb = new StringBuilder();
+			StringBuilder mod = new StringBuilder();
+			for(IVariable s : method.getArguments()){
+				sb.append(s.getType() + ":" + s.getName() + ",");
+			}
+			for(String s : method.getModifiers()){
+				mod.append(s);
+			}
+			return doc.addInstanceMethod(method.getName(), method.getName(), sb.toString(), mod.toString());
+		case "VARIABLE":
+		case "INSTANCE":
+			
+			break;
+		}
+		return false;
+	}
+
 }
