@@ -56,7 +56,7 @@ public interface ISystemController {
 
 	public boolean changeName(long objId, String newName) throws Exception;
 
-	public boolean changePackage(String objName, String pkgName)
+	public boolean changePackage(long objId, String pkgName)
 			throws Exception;
 
 	// Added for iteration 2

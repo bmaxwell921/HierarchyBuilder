@@ -178,9 +178,9 @@ public class HBDesignDoc implements IDesignDoc {
 	}
 
 	@Override
-	public boolean changePackage(String name, String pkgName)
+	public boolean changePackage(long objId, String pkgName)
 			throws Exception {
-		IObject obj = tree.getObject(name);
+		IObject obj = tree.getObject(objId);
 		IdManager.getInstance().updateInfo(obj.getId(), obj.getPackage(), obj.getName());
 		return obj.changePackage(pkgName);
 	}

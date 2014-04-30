@@ -223,13 +223,13 @@ public interface IDesignDoc extends Nameable {
 	/**
 	 * Method used to change the package of the given class
 	 * 
-	 * @param name
+	 * @param objId
 	 * @param pkgName
 	 * @return
 	 * @throws HBObjectNotFoundException
 	 * @throws HBMultipleObjectsFoundException
 	 */
-	public boolean changePackage(String name, String pkgName) throws Exception;
+	public boolean changePackage(long objId, String pkgName) throws Exception;
 
 	/**
 	 * Method used to add the given interfaces and classes to the design

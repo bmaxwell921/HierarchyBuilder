@@ -231,8 +231,9 @@ public class Cardinal {
 		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.CLASS) || cmd.getSubCommand().equals(CmdConstants.SubCmdNames.INTERFACE)) {
 			return isc.changeName(id, cmd.getFlagValue(CmdConstants.Flags.NAME));
 		}
-		if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.PACKAGE_REGEX))
-			return isc.changePackage(cmd.getFlagValue(CmdConstants.Flags.CONTAINER_NAME), cmd.getFlagValue(CmdConstants.Flags.NAME));
+		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.PACKAGE)) {
+			return isc.changePackage(id, cmd.getFlagValue(CmdConstants.Flags.NAME));
+		}
 		return false;
 	}
 

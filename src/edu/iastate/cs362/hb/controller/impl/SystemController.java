@@ -143,7 +143,7 @@ public class SystemController implements ISystemController {
 	}
 
 	@Override
-	public boolean changePackage(String name, String pkgName) throws Exception {
+	public boolean changePackage(long name, String pkgName) throws Exception {
 		return system.changePackage(name, pkgName);
 	}
 

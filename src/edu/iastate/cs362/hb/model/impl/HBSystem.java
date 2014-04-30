@@ -151,9 +151,9 @@ public class HBSystem implements ISystem {
 	}
 
 	@Override
-	public boolean changePackage(String name, String packageName)
+	public boolean changePackage(long objId, String pkgName)
 			throws Exception {
-		return doc.changePackage(name, packageName);
+		return doc.changePackage(objId, pkgName);
 	}
 
 	@Override
