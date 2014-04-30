@@ -1,12 +1,12 @@
 Stuff to Demo:
 	Alex:
 		- add class instance field
-		- add relationship
-		- remove class/interface package
-		- remoce class/interface
-		- remove relationship
-		- list design
-		- list class/interface
+		X - add relationship
+		X - remove class/interface package
+		X - remove class/interface
+		X - remove relationship
+		X - list design
+		X - list class/interface
 		- change class/interface name
 		- change class/interface package
 		- change class modifiers
@@ -42,13 +42,30 @@ Command orders:
 	Alex:
 		create design -name Name
 		
-		create class -name Class
+		create class -name Class1
 		list class -object default.Class
 		
 		create class -name Class2
 		list design -> see both of these classes.
 		
-		add relationship 
+		add relation -sup default.Class1 -sub default.Class2 -t extends -> new relationship
+		list design -> see that the new relationship was added! Cool stuff!
+		
+		remove relation -sup default.Class1 -sub default.Class2
+		list design -> see that the new relationship is now removed forever.
+		
+		remove class -object default.Class1
+		list design -> notice that it is only Class2 at this point
+		list class -object default.Class1 -> notice that the Object is not found in the design.
+		
+		create interface -name Interface
+		list design -->>> there's a new interface in there now.
+		list interface -object default.Interface
+		
+		remove interface -object default.Interface
+		list design --> No more interface :(
+		
+		add field 
 
 	Brandon:
 		create design -name Name

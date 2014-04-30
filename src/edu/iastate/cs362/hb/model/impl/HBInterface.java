@@ -1,6 +1,11 @@
 package edu.iastate.cs362.hb.model.impl;
 
+import java.util.Set;
+
+import edu.iastate.cs362.hb.model.IObject;
+import edu.iastate.cs362.hb.model.IRelationship;
 import edu.iastate.cs362.hb.model.IVariable;
+import edu.iastate.cs362.hb.model.tree.Pair;
 
 
 /**
@@ -23,6 +28,12 @@ public class HBInterface extends AHBObject{
 		for(int i = 0; i < this.getNumMethods(); i++)
 		{
 			toRet += " " + methods.get(i).list();
+			toRet += "\n";
+		}
+		toRet += "Relationships: \n";
+		Set<Pair<IRelationship, IObject>> relations = this.getRelationships();
+		for(Pair<IRelationship, IObject> pair: relations) {
+			toRet += " " + this.getName() + " " + pair.fir.getName() + " " + pair.sec.getName();
 			toRet += "\n";
 		}
 		return toRet;
