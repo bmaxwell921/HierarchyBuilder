@@ -8,13 +8,11 @@ import com.google.gson.GsonBuilder;
 
 import edu.iastate.cs362.hb.importer.IImporter;
 import edu.iastate.cs362.hb.importer.creator.MethodCreator;
-import edu.iastate.cs362.hb.importer.creator.ObjectCreator;
 import edu.iastate.cs362.hb.importer.creator.RelationCreator;
 import edu.iastate.cs362.hb.importer.creator.VariableCreator;
 import edu.iastate.cs362.hb.io.DesignDocBox;
 import edu.iastate.cs362.hb.model.IDesignDoc;
 import edu.iastate.cs362.hb.model.IMethod;
-import edu.iastate.cs362.hb.model.IObject;
 import edu.iastate.cs362.hb.model.IRelationship;
 import edu.iastate.cs362.hb.model.IVariable;
 import edu.iastate.cs362.hb.model.impl.HBDesignDoc;
@@ -31,8 +29,7 @@ public class JsonImporter implements IImporter {
 	public IDesignDoc doImport(String path) {
 		Gson gson = new GsonBuilder().registerTypeAdapter(IMethod.class, new MethodCreator())
 				.registerTypeAdapter(IRelationship.class, new RelationCreator())
-				.registerTypeAdapter(IVariable.class, new VariableCreator())
-				.registerTypeAdapter(IObject.class, new ObjectCreator()).create();
+				.registerTypeAdapter(IVariable.class, new VariableCreator()).create();
 		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 			StringBuilder sb = new StringBuilder();
 			String read = "";
