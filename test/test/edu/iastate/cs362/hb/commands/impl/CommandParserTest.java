@@ -128,5 +128,43 @@ public class CommandParserTest {
 		ICommand c = test.parseCommand(command);
 		assertEquals(c.getName(), "list");
 	}
+	
+	@Test
+	public void listTestName() throws MalformattedCommandException {
+		String command = "list DESIGN";
+		ICommand c = test.parseCommand(command);
+		assertEquals(c.getSubCommand(), "design");
+	}
+	
+	@Test
+	public void listClassTest() throws MalformattedCommandException {
+		String command = "list CLASS -name className";
+		ICommand c = test.parseCommand(command);
+		assertEquals(c.getSubCommand(), "class");
+	}
+	
+	@Test
+	public void listClassTest2() throws MalformattedCommandException {
+		String command = "list cLaSs -name className";
+		ICommand c = test.parseCommand(command);
+		assertEquals(c.getFlagValue("name"), "className");
+	}
+	
+	@Test (expected = MalformattedCommandException.class)
+	public void listTest3() throws MalformattedCommandException {
+		String command = "list someGarbage";
+		test.parseCommand(command);
+	}
 
+	@Test (expected = MalformattedCommandException.class)
+	public void listTestException() throws MalformattedCommandException {
+		String command = "ls";
+		test.parseCommand(command);
+	}
+	
+	@Test (expected = MalformattedCommandException.class)
+	public void listTestException2() throws MalformattedCommandException {
+		String command = "list class";
+		test.parseCommand(command);
+	}
 }
