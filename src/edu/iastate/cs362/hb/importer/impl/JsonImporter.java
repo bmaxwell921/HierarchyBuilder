@@ -20,8 +20,6 @@ public class JsonImporter implements IImporter {
 	@Override
 	public IDesignDoc doImport(String path) {
 		Gson gson = new Gson();
-		
-
 		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 			StringBuilder sb = new StringBuilder();
 			String read = "";

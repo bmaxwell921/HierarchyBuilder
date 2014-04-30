@@ -115,6 +115,14 @@ public class IdManager {
 		idMap.remove(oldKey);
 	}
 	
+	/*
+	 * Used when loading designs from a file. Sets the given info
+	 * to the given id
+	 */
+	public void loadInfo(long id, String...info) {
+		idMap.put(buildKey(info), id);
+	}
+	
 	/**
 	 * Removes the given id
 	 * @param id

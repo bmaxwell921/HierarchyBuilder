@@ -32,7 +32,9 @@ public class JsonExporter implements IExporter {
 		File out = new File(path);
 		// Create things as needed
 		if (!out.exists()) {
-			out.getParentFile().mkdirs();
+			if (out.getParent() != null) {
+				out.getParentFile().mkdirs();
+			}
 		}
 		try (FileWriter fw = new FileWriter(out)) {
 			fw.write(gson.toJson(ddBox));
