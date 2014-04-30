@@ -161,8 +161,8 @@ public class HBMethod implements IMethod {
 		for(String mod: modifiers){
 			toRet += mod + " ";
 		}
-		toRet += " " + returnType;
-		toRet += " " + name + "(";
+		toRet += returnType + " ";
+		toRet += name + " (";
 		for(int i = 0; i < args.size(); i++){
 			toRet += args.get(i).list();
 			if (i != args.size() - 1) {
