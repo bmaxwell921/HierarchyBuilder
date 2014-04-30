@@ -19,8 +19,8 @@ Stuff to Demo:
 		X - add class/interface package
 		X - add class/interface instance method
 		X - add class/interface static method
-		- export as JSON
-		- import as JSON
+		X - export as JSON
+		X - import as JSON
 		- import as Source -> Doesn't work
 		- show help
 	
@@ -86,6 +86,9 @@ Command orders:
 		add method -object default.Interf1 -name Method2 -modifiers public,static -return void -args int:a,int:b
 
 		export json -path out.json - Look at the output json file
+
+		import json -path out.json
+		list design -> Notice how the full design was loaded in
 
 	Rob:
 		create design -name MyDesign
