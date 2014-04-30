@@ -71,7 +71,7 @@ Command orders:
 		
 
 	Brandon:
-		create design -name Name
+		create design -name Design
 		
 		create class -name Class1
 		list class -object default.Class1 -> Can see there was a new empty class created
@@ -82,13 +82,19 @@ Command orders:
 		add pkg -object default.Class1 -name edu.iastate
 		list class -object edu.iastate.Class1 -> Notice how we need to update the package
 
-		add method -object edu.iastate.Class1 -name Method1 -modifiers public -return void -args int:a,int:b
-		add method -object default.Interf1 -name Method2 -modifiers public,static -return void -args int:a,int:b
-
 		export json -path out.json - Look at the output json file
+
+		create design -name NewOne
+		list design -> Show how it's an empty design
 
 		import json -path out.json
 		list design -> Notice how the full design was loaded in
+
+		add method -object edu.iastate.Class1 -name Method1 -modifiers public -return void -args int:a,int:b
+		list class -object edu.iastate.Class1
+
+		add method -object default.Interf1 -name Method2 -modifiers public,static -return void -args int:a,int:b
+		list interface -object default.Interf1
 
 		help -> Note how command formats is printed. Not complete yet
 
