@@ -189,22 +189,29 @@ public class HBDesignDoc implements IDesignDoc {
 	public void addAllInner(Set<? extends IObject> interfaces,
 			Set<? extends IObject> classes) {
 		try {
+			long biggestId = Integer.MIN_VALUE;
 			// Add the objects
 			if (interfaces != null) {
 				for (IObject interf : interfaces) {
 					tree.addObject(interf);
 					IdManager.getInstance().loadInfo(interf.getId(), interf.getPackage(), interf.getName());
+					if (interf.getId() > biggestId) {
+						biggestId = interf.getId();
+					}
 				}
 			}
 			if (classes != null) {
 				for (IObject clazz : classes) {
 					tree.addObject(clazz);
 					IdManager.getInstance().loadInfo(clazz.getId(), clazz.getPackage(), clazz.getName());
+					if (clazz.getId() > biggestId) {
+						biggestId = clazz.getId();
+					}
 				}
 			}
-		
 			
-
+			IdManager.getInstance().setNextId(biggestId + 1);
+		
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
