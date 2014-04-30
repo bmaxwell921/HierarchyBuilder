@@ -171,8 +171,8 @@ public class HBDesignDoc implements IDesignDoc {
 	}
 
 	@Override
-	public boolean changeName(String name, String newName) throws Exception {
-		IObject obj = tree.getObject(name);
+	public boolean changeName(long objId, String newName) throws Exception {
+		IObject obj = tree.getObject(objId);
 		IdManager.getInstance().updateInfo(obj.getId(), obj.getPackage(), obj.getName());
 		return obj.changeName(newName);
 	}

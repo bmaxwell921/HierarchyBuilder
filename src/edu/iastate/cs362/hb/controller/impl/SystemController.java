@@ -138,8 +138,8 @@ public class SystemController implements ISystemController {
 	}
 
 	@Override
-	public boolean changeName(String name, String newName) throws Exception {
-		return system.changeName(name, newName);
+	public boolean changeName(long objId, String newName) throws Exception {
+		return system.changeName(objId, newName);
 	}
 
 	@Override

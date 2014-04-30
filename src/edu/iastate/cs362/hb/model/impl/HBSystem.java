@@ -146,8 +146,8 @@ public class HBSystem implements ISystem {
 	}
 
 	@Override
-	public boolean changeName(String name, String newName) throws Exception {
-		return doc.changeName(name, newName);
+	public boolean changeName(long objId, String newName) throws Exception {
+		return doc.changeName(objId, newName);
 	}
 
 	@Override

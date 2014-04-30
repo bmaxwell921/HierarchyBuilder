@@ -53,7 +53,7 @@ public interface ISystem {
 
 	public String listObject(String name) throws Exception;
 
-	public boolean changeName(String name, String newName) throws Exception;
+	public boolean changeName(long objId, String newName) throws Exception;
 
 	public boolean changePackage(String name, String packageName)
 			throws Exception;

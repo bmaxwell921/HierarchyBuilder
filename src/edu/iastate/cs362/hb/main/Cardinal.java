@@ -153,33 +153,34 @@ public class Cardinal {
 			long subId = IdManager.getInstance().accessIdWithKey(cmd.getFlagValue(CmdConstants.Flags.SUBTYPE));
 			isc.addRelationship(superId, subId, cmd.getFlagValue(CmdConstants.Flags.TYPE));
 			return;
-		} 
-		
+		}
+
 		// TODO fix this
-//		if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.CACHE_REGEX)) {
-//			// Get type
-//			String type = cmd.getFlagValue(CmdConstants.Flags.TYPE).toUpperCase();
-//			long id = Long.parseLong(CmdConstants.Flags.ID);
-//			isc.addObject(type, CacheManager.getInstance().getObject(id));
-//			return;
-//		}
+		// if
+		// (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.CACHE_REGEX)) {
+		// // Get type
+		// String type =
+		// cmd.getFlagValue(CmdConstants.Flags.TYPE).toUpperCase();
+		// long id = Long.parseLong(CmdConstants.Flags.ID);
+		// isc.addObject(type, CacheManager.getInstance().getObject(id));
+		// return;
+		// }
 	}
 
 	// Calling of Remove methods
 	private boolean doRemove(ICommand cmd) throws Exception {
-		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.CLASS)
-				|| cmd.getSubCommand().equals(CmdConstants.SubCmdNames.INTERFACE)) {
+		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.CLASS) || cmd.getSubCommand().equals(CmdConstants.SubCmdNames.INTERFACE)) {
 			long id = IdManager.getInstance().accessIdWithKey(cmd.getFlagValue(CmdConstants.Flags.OBJECT));
 			return isc.removeClass(id);
-		} 
+		}
 		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.PACKAGE)) {
 			long id = IdManager.getInstance().accessIdWithKey(cmd.getFlagValue(CmdConstants.Flags.OBJECT));
 			return isc.removePackage(id);
-		} 
+		}
 		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.METHOD)) {
 			long id = IdManager.getInstance().accessIdWithKey(cmd.getFlagValue(CmdConstants.Flags.OBJECT));
 			return isc.removeMethod(id, cmd.getFlagValue(CmdConstants.Flags.NAME));
-		} 
+		}
 		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.RELATIONSHIP)) {
 			long superId = IdManager.getInstance().accessIdWithKey(cmd.getFlagValue(CmdConstants.Flags.SUPERTYPE));
 			long subId = IdManager.getInstance().accessIdWithKey(cmd.getFlagValue(CmdConstants.Flags.SUBTYPE));
@@ -226,13 +227,13 @@ public class Cardinal {
 	 * @throws HBObjectNotFoundException
 	 */
 	private boolean doChange(ICommand cmd) throws Exception {
-		if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.CLASS_REGEX)
-				|| cmd.getSubCommand().matches(CmdConstants.SubCmdNames.INTERFACE_REGEX))
-			return isc.changeName(cmd.getFlagValue(CmdConstants.Flags.CONTAINER_NAME), cmd.getFlagValue(CmdConstants.Flags.NAME));
-		else if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.PACKAGE_REGEX))
+		long id = IdManager.getInstance().accessIdWithKey(cmd.getFlagValue(CmdConstants.Flags.OBJECT));
+		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.CLASS) || cmd.getSubCommand().equals(CmdConstants.SubCmdNames.INTERFACE)) {
+			return isc.changeName(id, cmd.getFlagValue(CmdConstants.Flags.NAME));
+		}
+		if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.PACKAGE_REGEX))
 			return isc.changePackage(cmd.getFlagValue(CmdConstants.Flags.CONTAINER_NAME), cmd.getFlagValue(CmdConstants.Flags.NAME));
-		else
-			return false;
+		return false;
 	}
 
 	/**

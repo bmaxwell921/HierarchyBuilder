@@ -212,13 +212,13 @@ public interface IDesignDoc extends Nameable {
 	/**
 	 * Method used to change the name of the given object
 	 * 
-	 * @param name
+	 * @param objId
 	 * @param newName
 	 * @return
 	 * @throws HBObjectNotFoundException
 	 * @throws HBMultipleObjectsFoundException
 	 */
-	public boolean changeName(String name, String newName) throws Exception;
+	public boolean changeName(long objId, String newName) throws Exception;
 
 	/**
 	 * Method used to change the package of the given class
