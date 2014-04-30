@@ -252,8 +252,8 @@ public abstract class AHBObject implements IObject {
 	
 	@Override
 	public boolean changeModifiers(Set<String> modifiers){
-		modifiers.removeAll(modifiers);
-		return modifiers.addAll(modifiers);
+		this.modifiers.removeAll(modifiers);
+		return this.modifiers.addAll(modifiers);
 	}
 	
 	@Override

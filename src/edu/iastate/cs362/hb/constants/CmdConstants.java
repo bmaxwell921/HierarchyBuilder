@@ -74,7 +74,7 @@ public class CmdConstants {
 		
 		public static final String ANY = DESIGN + RegexOp.OR + CLASS + RegexOp.OR + INTERFACE + RegexOp.OR + INTERFACE + RegexOp.OR + PACKAGE + RegexOp.OR + 
 				FIELD + RegexOp.OR + METHOD  + RegexOp.OR + RELATIONSHIP + RegexOp.OR + CACHE + RegexOp.OR + OBJECT + RegexOp.OR + 
-				XML_REGEX + RegexOp.OR + JSON_REGEX + RegexOp.OR + SOURCE_REGEX;
+				XML_REGEX + RegexOp.OR + JSON_REGEX + RegexOp.OR + SOURCE_REGEX + RegexOp.OR + MODIFIER;
 	}
 	
 	public class Flags {

@@ -7,9 +7,9 @@ Stuff to Demo:
 		X - remove relationship
 		X - list design
 		X - list class/interface
-		- change class/interface name
-		- change class/interface package
-		- change class modifiers
+		X - change class/interface name
+		X - change class/interface package
+		X - change class modifiers
 		- change class field
 		- change class method
 	
@@ -43,7 +43,7 @@ Command orders:
 		create design -name Name
 		
 		create class -name Class1
-		list class -object default.Class
+		list class -object default.Class1
 		
 		create class -name Class2
 		list design -> see both of these classes.
@@ -59,7 +59,7 @@ Command orders:
 		list class -object default.Class1 -> notice that the Object is not found in the design.
 		
 		create interface -name Interface
-		list design -->>> there's a new interface in there now.
+		list design -->>> there's a new interface in there now. Note that interfaces cannot have fields.
 		list interface -object default.Interface
 		
 		remove interface -object default.Interface
@@ -68,8 +68,23 @@ Command orders:
 		add field -object default.Class2 -name counterVariable -t int -mod public,static
 		list design --> there is a new instance field!
 		
+		change class -object default.Class2 -name newName   -> class has a new name
+		list design -> note that the instance field stayed.
+		list class -object default.Class2 -> Object no longer appears (it was renamed)
 		
+		add pkg -object default.newName -name edu.iastate
+		list class -object edu.iastate.newName
+		
+		change pkg -object edu.iastate.newName -name newPackage
+		list design -> note that the package is now changed.
+		list edu.iastate.newName -> Object not found
+		
+		change modifier -object newPackage.Class2 -mod public
+		list class -object newPackage.Class2  --> note that this class is now public.
 
+		add method -object newPackage.Class2 -name Method1 -modifiers public -return void -args int:a,int:b
+		change method -object newPackage.Class2 -oldName Method1 -name newMethod -modifiers private -return int -args string:c
+		
 	Brandon:
 		create design -name Design
 		
