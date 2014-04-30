@@ -36,7 +36,10 @@ public class HBVariable implements IVariable {
 
 	@Override
 	public void addModifiers(String... modifiers) {
-		this.modifiers.addAll(Arrays.asList(modifiers));
+		if (modifiers == null || modifiers.length < 1) {
+			return;
+		}
+		this.modifiers.addAll(Arrays.asList(modifiers[0].split(",")));
 	}
 	
 	@Override

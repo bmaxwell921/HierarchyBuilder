@@ -17,8 +17,8 @@ Stuff to Demo:
 		X - create design 			
 		X - create class/interface
 		X - add class/interface package
-		- add class/interface instance method
-		- add class/interface static method
+		X - add class/interface instance method
+		X - add class/interface static method
 		- export as JSON
 		- import as JSON
 		- import as Source -> Doesn't work
@@ -80,6 +80,7 @@ Command orders:
 		list class -object edu.iastate.Class1 -> Notice how we need to update the package
 
 		add method -object edu.iastate.Class1 -name Method1 -modifiers public -return void -args int:a,int:b
+		add method -object default.Interf1 -name Method2 -modifiers public,static -return void -args int:a,int:b
 
 	Rob:
 		create design -name MyDesign

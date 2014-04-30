@@ -43,7 +43,7 @@ public class Cardinal {
 	}
 
 	public static void main(String[] args) {
-//		doSystemStart();
+		// doSystemStart();
 		System.out.println("System ready.");
 		new Cardinal().run();
 		System.out.println("System Exit.");
@@ -54,7 +54,7 @@ public class Cardinal {
 	 * String commands.
 	 */
 	private void run() {
-		
+
 		Scanner in = new Scanner(System.in);
 		String cmdStr = null;
 		while (true) {
@@ -133,8 +133,7 @@ public class Cardinal {
 				return;
 			}
 			isc.addStaticMethod(id, cmd.getFlagValue(CmdConstants.Flags.NAME), cmd.getFlagValue(CmdConstants.Flags.RETURN),
-					cmd.getFlagValue(CmdConstants.Flags.ARGUMENTS), cmd.getFlagValue(CmdConstants.Flags.MODIFIER) + ","
-							+ CmdConstants.Flags.STATIC);
+					cmd.getFlagValue(CmdConstants.Flags.ARGUMENTS), cmd.getFlagValue(CmdConstants.Flags.MODIFIER));
 			return;
 		}
 		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.RELATIONSHIP)) {
@@ -144,16 +143,13 @@ public class Cardinal {
 			return;
 		}
 
-		// TODO fix this
-		// if
-		// (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.CACHE_REGEX)) {
-		// // Get type
-		// String type =
-		// cmd.getFlagValue(CmdConstants.Flags.TYPE).toUpperCase();
-		// long id = Long.parseLong(CmdConstants.Flags.ID);
-		// isc.addObject(type, CacheManager.getInstance().getObject(id));
-		// return;
-		// }
+		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.CACHE)) {
+			// Get type
+			String type = cmd.getFlagValue(CmdConstants.Flags.TYPE).toUpperCase();
+			long id = Long.parseLong(CmdConstants.Flags.ID);
+			isc.addObject(type, CacheManager.getInstance().getObject(id));
+			return;
+		}
 	}
 
 	// Calling of Remove methods
@@ -187,23 +183,27 @@ public class Cardinal {
 	private boolean doExport(ICommand cmd) {
 		if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.XML_REGEX)) {
 			return isc.exportDesignXML(cmd.getFlagValue(CmdConstants.Flags.PATH));
-		} else if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.JSON_REGEX)) {
+		} 
+		if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.JSON_REGEX)) {
 			return isc.exportDesignJSON(cmd.getFlagValue(CmdConstants.Flags.PATH));
-		} else if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.SOURCE_REGEX)) {
+		} 
+		if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.SOURCE_REGEX)) {
 			return isc.exportDesignSource(cmd.getFlagValue(CmdConstants.Flags.PATH));
-		} else
-			return false;
+		} 
+		return false;
 	}
 
 	private boolean doImport(ICommand cmd) throws Exception {
 		if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.XML_REGEX)) {
 			return isc.importDesignXML(cmd.getFlagValue(CmdConstants.Flags.PATH));
-		} else if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.JSON_REGEX)) {
+		} 
+		if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.JSON_REGEX)) {
 			return isc.importDesignJSON(cmd.getFlagValue(CmdConstants.Flags.PATH));
-		} else if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.SOURCE_REGEX)) {
+		} 
+		if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.SOURCE_REGEX)) {
 			return isc.importDesignSource(cmd.getFlagValue(CmdConstants.Flags.PATH));
-		} else
-			return false;
+		} 
+		return false;
 	}
 
 	/**
@@ -356,7 +356,7 @@ public class Cardinal {
 		System.out.println("100%");
 		System.out.println("System ready, enter a command.");
 	}
-	
+
 	private static int randRange(Random gen, int low, int high) {
 		return gen.nextInt(high - low) + low;
 	}
