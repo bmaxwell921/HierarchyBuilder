@@ -34,12 +34,12 @@ public interface ISystemController {
 	public boolean addStaticMethod(long objId, String methodName,
 			String params, String... modifiers) throws Exception;
 
-	public boolean removeMethod(String objName, String methodName)
+	public boolean removeMethod(long objId, String methodName)
 			throws Exception;
 
-	public boolean removePackage(String objName) throws Exception;
+	public boolean removePackage(long objId) throws Exception;
 
-	public boolean removeRelationship(String superType, String subType)
+	public boolean removeRelationship(long superId, long subId)
 			throws Exception;
 
 	public boolean removeClass(long remId) throws Exception;
@@ -52,11 +52,11 @@ public interface ISystemController {
 
 	public String listDesign();
 
-	public String listObject(String name) throws Exception;
+	public String listObject(long objId) throws Exception;
 
-	public boolean changeName(String name, String newName) throws Exception;
+	public boolean changeName(long objId, String newName) throws Exception;
 
-	public boolean changePackage(String objName, String pkgName)
+	public boolean changePackage(long objId, String pkgName)
 			throws Exception;
 
 	// Added for iteration 2

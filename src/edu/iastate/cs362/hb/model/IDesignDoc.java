@@ -114,37 +114,37 @@ public interface IDesignDoc extends Nameable {
 	/**
 	 * Removes the method with the given name from the given class
 	 * 
-	 * @param objName
+	 * @param objId
 	 * @param methodName
 	 * @return
 	 * @throws HBObjectNotFoundException
 	 * @throws HBMultipleObjectsFoundException
 	 * @throws HBMethodNotFoundException
 	 */
-	public boolean removeMethod(String objName, String methodName)
+	public boolean removeMethod(long objId, String methodName)
 			throws Exception;
 
 	/**
 	 * Removes the current package name from the given object
 	 * 
-	 * @param objName
+	 * @param objId
 	 * @return
 	 * @throws HBObjectNotFoundException
 	 * @throws HBMultipleObjectsFoundException
 	 */
-	public boolean removePackage(String objName) throws Exception;
+	public boolean removePackage(long objId) throws Exception;
 
 	/**
 	 * Removes the relationship between the two given objects
 	 * 
-	 * @param fromName
-	 * @param toName
+	 * @param superId
+	 * @param subId
 	 * @return
 	 * @throws HBMultipleObjectsFoundException
 	 * @throws HBObjectNotFoundException
 	 * @throws HBRelationshipNotFoundException
 	 */
-	public boolean removeRelationship(String fromName, String toName)
+	public boolean removeRelationship(long superId, long subId)
 			throws Exception;
 
 	/**
@@ -202,34 +202,34 @@ public interface IDesignDoc extends Nameable {
 	 * Method used to get the string representation of a single object in the
 	 * design
 	 * 
-	 * @param name
+	 * @param objId
 	 * @return
 	 * @throws HBObjectNotFoundException
 	 * @throws HBMultipleObjectsFoundException
 	 */
-	public String listObject(String name) throws Exception;
+	public String listObject(long objId) throws Exception;
 
 	/**
 	 * Method used to change the name of the given object
 	 * 
-	 * @param name
+	 * @param objId
 	 * @param newName
 	 * @return
 	 * @throws HBObjectNotFoundException
 	 * @throws HBMultipleObjectsFoundException
 	 */
-	public boolean changeName(String name, String newName) throws Exception;
+	public boolean changeName(long objId, String newName) throws Exception;
 
 	/**
 	 * Method used to change the package of the given class
 	 * 
-	 * @param name
+	 * @param objId
 	 * @param pkgName
 	 * @return
 	 * @throws HBObjectNotFoundException
 	 * @throws HBMultipleObjectsFoundException
 	 */
-	public boolean changePackage(String name, String pkgName) throws Exception;
+	public boolean changePackage(long objId, String pkgName) throws Exception;
 
 	/**
 	 * Method used to add the given interfaces and classes to the design

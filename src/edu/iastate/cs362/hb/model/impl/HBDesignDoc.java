@@ -88,26 +88,26 @@ public class HBDesignDoc implements IDesignDoc {
 	}
 
 	@Override
-	public boolean removeMethod(String objName, String methodName)
+	public boolean removeMethod(long objId, String methodName)
 			throws Exception {
-		HBClass clazz = (HBClass) tree.getObject(objName);
+		HBClass clazz = (HBClass) tree.getObject(objId);
 		IMethod method = clazz.getMethod(methodName);
 		clazz.removeMethod(method);
 		return true;
 	}
 
 	@Override
-	public boolean removePackage(String objName) throws Exception {
-		IObject toRem = tree.getObject(objName);
+	public boolean removePackage(long objId) throws Exception {
+		IObject toRem = tree.getObject(objId);
 		IdManager.getInstance().updateInfo(toRem.getId(), toRem.getPackage(), toRem.getName());
 		return toRem.removePackage();
 	}
 
 	@Override
-	public boolean removeRelationship(String fromName, String toName)
+	public boolean removeRelationship(long superId, long subId)
 			throws Exception {
-		IObject from = tree.getObject(fromName);
-		IObject to = tree.getObject(toName);
+		IObject from = tree.getObject(superId);
+		IObject to = tree.getObject(subId);
 		return tree.removeRelationship(from, to);
 	}
 
@@ -166,21 +166,21 @@ public class HBDesignDoc implements IDesignDoc {
 	}
 
 	@Override
-	public String listObject(String name) throws Exception {
-		return tree.getObject(name).list();
+	public String listObject(long objId) throws Exception {
+		return tree.getObject(objId).list();
 	}
 
 	@Override
-	public boolean changeName(String name, String newName) throws Exception {
-		IObject obj = tree.getObject(name);
+	public boolean changeName(long objId, String newName) throws Exception {
+		IObject obj = tree.getObject(objId);
 		IdManager.getInstance().updateInfo(obj.getId(), obj.getPackage(), obj.getName());
 		return obj.changeName(newName);
 	}
 
 	@Override
-	public boolean changePackage(String name, String pkgName)
+	public boolean changePackage(long objId, String pkgName)
 			throws Exception {
-		IObject obj = tree.getObject(name);
+		IObject obj = tree.getObject(objId);
 		IdManager.getInstance().updateInfo(obj.getId(), obj.getPackage(), obj.getName());
 		return obj.changePackage(pkgName);
 	}

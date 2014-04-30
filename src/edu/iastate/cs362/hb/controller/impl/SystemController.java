@@ -90,21 +90,21 @@ public class SystemController implements ISystemController {
 	 * @throws HBMethodNotFoundException
 	 */
 	@Override
-	public boolean removeMethod(String objName, String methodName)
+	public boolean removeMethod(long objId, String methodName)
 			throws Exception {
-		return system.removeMethod(objName, methodName);
+		return system.removeMethod(objId, methodName);
 
 	}
 
 	@Override
-	public boolean removePackage(String objName) throws Exception {
-		return system.removePackage(objName);
+	public boolean removePackage(long objId) throws Exception {
+		return system.removePackage(objId);
 	}
 
 	@Override
-	public boolean removeRelationship(String superType, String subType)
+	public boolean removeRelationship(long superId, long subId)
 			throws Exception {
-		return system.removeRelationship(superType, subType);
+		return system.removeRelationship(superId, subId);
 	}
 
 	@Override
@@ -133,17 +133,17 @@ public class SystemController implements ISystemController {
 	}
 
 	@Override
-	public String listObject(String name) throws Exception {
-		return system.listObject(name);
+	public String listObject(long objId) throws Exception {
+		return system.listObject(objId);
 	}
 
 	@Override
-	public boolean changeName(String name, String newName) throws Exception {
-		return system.changeName(name, newName);
+	public boolean changeName(long objId, String newName) throws Exception {
+		return system.changeName(objId, newName);
 	}
 
 	@Override
-	public boolean changePackage(String name, String pkgName) throws Exception {
+	public boolean changePackage(long name, String pkgName) throws Exception {
 		return system.changePackage(name, pkgName);
 	}
 
