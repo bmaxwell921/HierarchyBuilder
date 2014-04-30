@@ -27,8 +27,6 @@ import edu.iastate.cs362.hb.model.impl.HBSystem;
  * 
  */
 public class Cardinal {
-	// TODO! check for id AND name instead of just taking a name
-	// TEEHEE Broke brandon's streak.
 	// Object responsible for parsing commands
 	private ICommandParser commander;
 
