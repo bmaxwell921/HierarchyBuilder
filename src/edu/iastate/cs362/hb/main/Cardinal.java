@@ -95,23 +95,11 @@ public class Cardinal {
 					break;
 				}
 				System.out.println(String.format("System - Completed command \"%s\"", cmd.toString()));
-			} catch (HBMultipleObjectsFoundException e) {
-				System.out.println(e.getMessage());
-				printMatchingObjects(cmd.getFlagValue(CmdConstants.Flags.NAME));
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
 		}
 		in.close();
-	}
-
-	// Method used to get all the objects that match the given name
-	private void printMatchingObjects(String name) {
-		List<IObjectBox> matches = isc.getMatchingObjects(name);
-		for (IObjectBox box : matches) {
-			System.out.println(box.toString());
-		}
-
 	}
 
 	// Calling of create methods
@@ -133,8 +121,13 @@ public class Cardinal {
 		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.PACKAGE)) {
 			// First get the id of the object to modify, then modify it
 			long id = IdManager.getInstance().accessIdWithKey(cmd.getFlagValue(CmdConstants.Flags.OBJECT));
-			isc.addPackage(cmd.getFlagValue(CmdConstants.Flags.NAME), id);
+			isc.addPackage(id, cmd.getFlagValue(CmdConstants.Flags.NAME));
 			return;
+		}
+		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.FIELD)) {
+			long id = IdManager.getInstance().accessIdWithKey(cmd.getFlagValue(CmdConstants.Flags.OBJECT));
+			isc.addInstanceField(id, cmd.getFlagValue(CmdConstants.Flags.NAME), cmd.getFlagValue(CmdConstants.Flags.TYPE),
+					cmd.getFlagValue(CmdConstants.Flags.MODIFIER));
 		}
 		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.METHOD)) {
 			long id = IdManager.getInstance().accessIdWithKey(cmd.getFlagValue(CmdConstants.Flags.OBJECT));
@@ -247,16 +240,15 @@ public class Cardinal {
 	 * @throws HBObjectNotFoundException
 	 */
 	private boolean doList(ICommand cmd) throws Exception {
-		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.CLASS)
-				|| cmd.getSubCommand().matches(CmdConstants.SubCmdNames.INTERFACE)) {
+		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.CLASS) || cmd.getSubCommand().matches(CmdConstants.SubCmdNames.INTERFACE)) {
 			long id = IdManager.getInstance().accessIdWithKey(cmd.getFlagValue(CmdConstants.Flags.OBJECT));
 			System.out.println(isc.listObject(id));
 			return true;
-		} 
+		}
 		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.DESIGN)) {
 			System.out.println(isc.listDesign());
 			return true;
-		} 
+		}
 		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.CACHE)) {
 			// get ID
 			long id = Long.parseLong(cmd.getFlagValue(CmdConstants.Flags.ID));

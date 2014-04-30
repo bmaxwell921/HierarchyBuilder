@@ -40,7 +40,7 @@ public class SystemController implements ISystemController {
 	 * addInstanceField(String className, String iFieldName, String...
 	 * modifiers) calls addInstanceField in System
 	 * 
-	 * @param className
+	 * @param objId
 	 *            a String for the class name instance field is a part of
 	 * @param iFieldName
 	 *            a String for the instance field's name
@@ -53,9 +53,9 @@ public class SystemController implements ISystemController {
 	 * @throws HBMultipleObjectsFoundException
 	 */
 	@Override
-	public boolean addInstanceField(String className, String fieldName,
+	public boolean addInstanceField(long objId, String fieldName,
 			String fieldType, String... modifiers) throws Exception {
-		return system.addInstanceField(className, fieldName, fieldType,
+		return system.addInstanceField(objId, fieldName, fieldType,
 				modifiers);
 	}
 
@@ -66,8 +66,8 @@ public class SystemController implements ISystemController {
 	}
 
 	@Override
-	public boolean addPackage(String pkgName, long objId) throws Exception {
-		return system.addPackage(pkgName, objId);
+	public boolean addPackage(long objId, String pkgName) throws Exception {
+		return system.addPackage(objId, pkgName);
 	}
 
 	@Override
@@ -120,11 +120,6 @@ public class SystemController implements ISystemController {
 	@Override
 	public boolean createInterface(String name) throws Exception {
 		return system.createInterface(name);
-	}
-
-	@Override
-	public List<IObjectBox> getMatchingObjects(String name) {
-		return system.getMatchingObjects(name);
 	}
 
 	@Override

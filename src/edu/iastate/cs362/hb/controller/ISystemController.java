@@ -18,13 +18,13 @@ public interface ISystemController {
 
 	public boolean createDesign(String name);
 
-	public boolean addInstanceField(String className, String fieldName,
+	public boolean addInstanceField(long objId, String fieldName,
 			String fieldType, String... modifiers) throws Exception;
 
 	public boolean addRelationship(long superId, long subId, String rel)
 			throws Exception;
 
-	public boolean addPackage(String pkgName, long objId) throws Exception;
+	public boolean addPackage(long objId, String pkgName) throws Exception;
 
 	public boolean addObject(String type, Object obj) throws Exception;
 
@@ -47,8 +47,6 @@ public interface ISystemController {
 	public boolean createClass(String name) throws Exception;
 
 	public boolean createInterface(String name) throws Exception;
-
-	public List<IObjectBox> getMatchingObjects(String name);
 
 	public String listDesign();
 

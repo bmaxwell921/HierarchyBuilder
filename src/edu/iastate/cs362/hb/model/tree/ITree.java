@@ -18,18 +18,6 @@ import edu.iastate.cs362.hb.model.IRelationship;
  * 
  */
 public interface ITree {
-
-	/**
-	 * Method used to get an object from the tree
-	 * 
-	 * @param objName
-	 * @return
-	 * @throws HBObjectNotFoundException
-	 *             if the object isn't found in the tree
-	 * @throws HBMultipleObjectsFoundException
-	 *             if multiple objects exist in the tree with this name
-	 */
-	public IObject getObject(String objName) throws Exception;
 	
 	/**
 	 * 
@@ -91,15 +79,6 @@ public interface ITree {
 	 */
 	public boolean removeObject(IObject rem) throws Exception;
 
-	/**
-	 * Method used to get a list of all the objects that match the given name.
-	 * 
-	 * TODO remove after we implement Id Map
-	 * 
-	 * @param name
-	 * @return
-	 */
-	public List<IObjectBox> getMatchingObjects(String name);
 
 	/**
 	 * Traverses the tree hierarchy with the given visitor. Starts by going

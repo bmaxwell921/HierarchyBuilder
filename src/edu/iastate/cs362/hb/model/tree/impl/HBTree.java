@@ -41,38 +41,20 @@ public class HBTree implements ITree {
 	public HBTree() {
 		this.objs = new HashSet<>();
 	}
-
-	@Override
-	public IObject getObject(String objName) throws Exception {
-		Set<IObject> matches = findAll(objName, null);
-		if (matches.isEmpty()) {
-			throw new HBObjectNotFoundException(ErrorMessages.OBJECT_NOT_FOUND,
-					objName);
-		}
-		if (matches.size() > 1) {
-			throw new HBMultipleObjectsFoundException(
-					ErrorMessages.MULT_OBJECT_WITH_NAME, objName);
-		}
-
-		return matches.iterator().next();
-	}
 	
 	@Override
 	public IObject getObject(long objId) throws Exception{
-		Set<IObject> matches = findAll(objId, null);
-		if(matches.isEmpty()) {
-			throw new HBObjectNotFoundException(ErrorMessages.OBJECT_NOT_FOUND, "Id: " + objId);
+		for (IObject obj : objs) {
+			if (obj.hasId(objId)) {
+				return obj;
+			}
 		}
-		if(matches.size() > 1) {
-			throw new HBMultipleObjectsFoundException(ErrorMessages.MULT_OBJECT_WITH_ID, objId);
-		}
-		
-		return matches.iterator().next();
+		throw new HBObjectNotFoundException("Object not found in the design.");
 	}
 
 	@Override
 	public boolean addObject(IObject newObj) throws Exception {
-		if (containsObject(newObj.getName(), newObj.getPackage())) {
+		if (containsObject(newObj.getId())) {
 			throw new HBDuplicateObjectFoundException(
 					ErrorMessages.DUPLICATE_OBJECT_FOUND, newObj.getName(),
 					newObj.getPackage());
@@ -84,11 +66,11 @@ public class HBTree implements ITree {
 	@Override
 	public boolean addRelationship(IObject from, IObject to, IRelationship rel)
 			throws Exception {
-		if (!containsObject(from.getName(), from.getPackage())) {
+		if (!containsObject(from.getId())) {
 			throw new HBObjectNotFoundException(ErrorMessages.OBJECT_NOT_FOUND,
 					from.getName());
 		}
-		if (!containsObject(to.getName(), to.getPackage())) {
+		if (!containsObject(to.getId())) {
 			throw new HBObjectNotFoundException(ErrorMessages.OBJECT_NOT_FOUND,
 					to.getName());
 		}
@@ -98,23 +80,23 @@ public class HBTree implements ITree {
 	}
 
 	@Override
-	public boolean removeRelationship(IObject from, IObject to)
+	public boolean removeRelationship(IObject superType, IObject subType)
 			throws Exception {
-		if (!containsObject(from.getName(), to.getPackage())) {
+		if (!containsObject(superType.getId())) {
 			throw new HBObjectNotFoundException(ErrorMessages.OBJECT_NOT_FOUND,
-					from.getName());
+					superType.getName());
 		}
-		if (!containsObject(to.getName(), to.getPackage())) {
+		if (!containsObject(subType.getId())) {
 			throw new HBObjectNotFoundException(ErrorMessages.OBJECT_NOT_FOUND,
-					to.getName());
+					subType.getName());
 		}
-		to.removeRelationship(from);
+		subType.removeRelationship(superType);
 		return true;
 	}
 
 	@Override
 	public boolean removeObject(IObject rem) throws Exception {
-		if (!containsObject(rem.getName(), rem.getPackage())) {
+		if (!containsObject(rem.getId())) {
 			throw new HBObjectNotFoundException(ErrorMessages.OBJECT_NOT_FOUND,
 					rem.getName());
 		}
@@ -122,17 +104,6 @@ public class HBTree implements ITree {
 		objs.remove(rem);
 		removeRelations(rem);
 		return true;
-	}
-
-	@Override
-	public List<IObjectBox> getMatchingObjects(String name) {
-		List<IObjectBox> objs = new ArrayList<>();
-		for (IObject obj : findAll(name, null)) {
-			objs.add(new HBObjectBox(obj.getId(), obj.getName(), obj
-					.getPackage()));
-		}
-
-		return objs;
 	}
 
 	@Override
@@ -166,23 +137,13 @@ public class HBTree implements ITree {
 		}
 	}
 
-	private boolean containsObject(String objName, String pkg) {
-		return !findAll(objName, pkg).isEmpty();
-	}
-
-	// Returns a set of all the objects with the given name. Pass null for the
-	// package to ignore it
-	private Set<IObject> findAll(String objName, String pkg) {
-		Set<IObject> ret = new HashSet<>();
-
+	private boolean containsObject(long id) {
 		for (IObject obj : objs) {
-			if (obj.getName().equals(objName)
-					&& (pkg == null || pkg != null
-							&& obj.getPackage().equals(pkg))) {
-				ret.add(obj);
+			if (obj.hasId(id)) {
+				return true;
 			}
 		}
-		return ret;
+		return false;
 	}
 	
 	private Set<IObject> findAll(long objId, String pkg) {
