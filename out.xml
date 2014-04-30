@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <design>
-<class><id>0</id>
-<name>BuilderClass</name>
+<interface><id>1</id>
+<name>Interf1</name>
 <package>default</package>
-<method><id>0</id>
-<name>BuildStuff</name>
-</method>
+</interface>
+
+<class><id>0</id>
+<name>MyFirstClass</name>
+<package>default</package>
 </class>
 
 </design>
