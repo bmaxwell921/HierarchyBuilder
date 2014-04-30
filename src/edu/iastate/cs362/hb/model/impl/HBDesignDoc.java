@@ -82,8 +82,8 @@ public class HBDesignDoc implements IDesignDoc {
 		method.addModifiers(modifiers);
 		method.addArguments(params);
 		method.addReturnType(returnType);
-
 		IObject clazz = tree.getObject(objId);
+
 		return clazz.addMethod(method);
 	}
 
@@ -242,6 +242,6 @@ public class HBDesignDoc implements IDesignDoc {
 		IMethod newMethod = new HBMethod(methodName);
 		newMethod.addArguments(methodArgs);
 		newMethod.addModifiers(modifiers);
-		return toUse.changeClassMethod(methodId, newMethod);
+		return toUse.changeClassMethod(methodId, newMethod, methodArgs);
 	}
 }

@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import edu.iastate.cs362.hb.main.IdManager;
 import edu.iastate.cs362.hb.model.IVariable;
 
 public class HBVariable implements IVariable {
@@ -119,6 +120,15 @@ public class HBVariable implements IVariable {
 		}
 		toRet += type + " " + name;
 		return toRet;
+	}
+
+	@Override
+	public boolean update(IVariable i) {
+		this.name = i.getName();
+		this.type = i.getType();
+		this.modifiers = i.getModifiers();
+		IdManager.getInstance().updateInfo(id, name);
+		return true;
 	}
 	
 	

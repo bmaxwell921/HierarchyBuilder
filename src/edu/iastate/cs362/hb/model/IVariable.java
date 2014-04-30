@@ -14,4 +14,6 @@ public interface IVariable extends Nameable, Modifiable, Identifiable {
 
 	public String list();
 
+	public boolean update(IVariable i);
+
 }

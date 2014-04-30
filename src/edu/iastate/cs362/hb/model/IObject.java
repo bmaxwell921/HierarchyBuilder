@@ -1,5 +1,6 @@
 package edu.iastate.cs362.hb.model;
 
+import java.util.List;
 import java.util.Set;
 
 import edu.iastate.cs362.hb.exceptions.HBDuplicateMethodException;
@@ -86,5 +87,5 @@ public interface IObject extends Nameable, Identifiable, Modifiable {
 	
 	public boolean changeClassField(long fieldId, IVariable i);
 	
-	public boolean changeClassMethod(long methodId, IMethod m);
+	public boolean changeClassMethod(long methodId, IMethod m, List<String> methodArgs);
 }

@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.StringTokenizer;
 
 import edu.iastate.cs362.hb.constants.CmdConstants;
+import edu.iastate.cs362.hb.main.IdManager;
 import edu.iastate.cs362.hb.model.IMethod;
 import edu.iastate.cs362.hb.model.IVariable;
 
@@ -150,7 +151,7 @@ public class HBMethod implements IMethod {
 		while (st.hasMoreTokens()) {
 			String type = st.nextToken();
 			String value = st.nextToken();
-			this.args.add(new HBVariable(type, value));
+			this.args.add(new HBVariable(value, type));/*Alex switched this.*/
 		}
 	}
 	
@@ -160,7 +161,7 @@ public class HBMethod implements IMethod {
 			StringTokenizer st = new StringTokenizer(methodArgs.get(i), A_MAJ_DEL + CmdConstants.RegexOp.OR + A_MIN_DEL);
 			String type = st.nextToken();
 			String value = st.nextToken();
-			this.args.add(new HBVariable(type, value));
+			this.args.add(new HBVariable(value, type));/*Alex switched this.*/
 		}
 	}
 
@@ -189,7 +190,19 @@ public class HBMethod implements IMethod {
 		this.returnType = returnType;
 	}
 
+	@Override
 	public String getReturnType() {
 		return returnType;
+	}
+
+	@Override
+	public boolean update(IMethod m, List<String> args) {
+		this.name = m.getName();
+		this.returnType = "void"; //m.getReturnType() but it wasn't working right.
+		this.args = new ArrayList<>();
+		addArguments(args);
+		this.modifiers = m.getModifiers();
+		IdManager.getInstance().updateInfo(id, name);
+		return false;
 	}
 }

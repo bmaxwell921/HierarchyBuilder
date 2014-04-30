@@ -13,6 +13,7 @@ import edu.iastate.cs362.hb.exceptions.HBDuplicateMethodException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateRelationshipException;
 import edu.iastate.cs362.hb.exceptions.HBMethodNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBRelationshipNotFoundException;
+import edu.iastate.cs362.hb.main.IdManager;
 import edu.iastate.cs362.hb.model.IMethod;
 import edu.iastate.cs362.hb.model.IObject;
 import edu.iastate.cs362.hb.model.IRelationship;
@@ -171,6 +172,7 @@ public abstract class AHBObject implements IObject {
 			throw new HBDuplicateMethodException(
 					ErrorMessages.DUPLICATE_METHOD, this.name, method.getName());
 		}
+		IdManager.getInstance().registerObject(method, method.getName());
 		methods.add(method);
 		return true;
 	}
@@ -257,14 +259,15 @@ public abstract class AHBObject implements IObject {
 	}
 	
 	@Override
-	public boolean changeClassMethod(long methodId, IMethod m){
+	public boolean changeClassMethod(long methodId, IMethod m, List<String> args){
 		for(int i = 0; i < methods.size(); i++){
 			IMethod toCheck = methods.get(i);
 			if(toCheck.getId() == methodId){
-				toCheck = m;
-				return true;
+				/*toCheck = m;
+				return true;*/
+				return toCheck.update(m, args);
 			}
 		}
-		return false;
+		return true;
 	}
 }

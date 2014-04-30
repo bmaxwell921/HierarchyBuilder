@@ -36,4 +36,8 @@ public interface IMethod extends Nameable, Identifiable, Modifiable {
 	
 	
 	public String list();
+
+	public boolean update(IMethod m, List<String> args);
+
+	String getReturnType();
 }

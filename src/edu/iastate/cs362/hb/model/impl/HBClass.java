@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import edu.iastate.cs362.hb.main.IdManager;
 import edu.iastate.cs362.hb.model.IClass;
 import edu.iastate.cs362.hb.model.IMethod;
 import edu.iastate.cs362.hb.model.IObject;
@@ -27,6 +28,7 @@ public class HBClass extends AHBObject implements IClass{
 
 	@Override
 	public boolean addInstanceField(IVariable i) {
+		IdManager.getInstance().registerObject(i, i.getName());
 		return fields.add(i);
 	}	
 	
@@ -80,10 +82,10 @@ public class HBClass extends AHBObject implements IClass{
 		for(int j = 0; j < fields.size(); j++){
 			IVariable toCheck = fields.get(j);
 			if(toCheck.getId() == fieldId){
-				toCheck = i;
-				return true;
+				return toCheck.update(i);
 			}
 		}
 		return false;
+
 	}
 }
