@@ -38,7 +38,7 @@ add <subCommand>
 		-m <MODIFIERS...>: Alias for -modifiers
 	METHOD_OPTIONS
 		-modifiers <MODIFIERS...>: The modifiers to apply to the method
-		-m <MODIFIERS...>: Alias for -modifiers
+		-mod <MODIFIERS...>: Alias for -modifiers
 		-return <type>: The return type of the method
 		-r <type>: Alias for -return
 		-args <ARGUMENTS...>: The arguments on the new method. Space delimited
