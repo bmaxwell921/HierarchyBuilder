@@ -32,20 +32,31 @@ public class HBClass extends AHBObject implements IClass{
 	@Override
 	public String list(){
 		String toRet = "";
-		toRet += this.getPackage() + "." + this.getName() + "\n" + "Fields: \n";
-		for(int i = 0; i < fields.size(); i++)
-		{
+		toRet += this.getPackage() + "." + this.getName() + "\n" + "Fields: ";
+		if(fields.size() == 0){
+			toRet += "(none)";
+		}
+		toRet += "\n";
+		for(int i = 0; i < fields.size(); i++){
 			toRet += " " + fields.get(i).list();
 			toRet += "\n";
 		}
-		toRet += "Methods: \n";
+		toRet += "Methods: ";
+		if(this.getNumMethods() == 0){
+			toRet += "(none)";
+		}
+		toRet += "\n";
 		for(int i = 0; i < this.getNumMethods(); i++)
 		{
 			toRet += " " + methods.get(i).list();
 			toRet += "\n";
 		}
-		toRet += "Relationships: \n";
+		toRet += "Relationships: ";
 		Set<Pair<IRelationship, IObject>> relations = this.getRelationships();
+		if(relations.isEmpty()){
+			toRet += "(none)";
+		}
+		toRet += "\n";
 		for(Pair<IRelationship, IObject> pair: relations) {
 			toRet += " " + this.getName() + " " + pair.fir.getName() + " " + pair.sec.getName();
 			toRet += "\n";

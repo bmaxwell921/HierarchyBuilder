@@ -148,7 +148,7 @@ public class HBDesignDoc implements IDesignDoc {
 		final StringBuilder sb = new StringBuilder();
 		sb.append("Design: ");
 		sb.append(this.name);
-		sb.append("\n");
+		sb.append("\n===================================\n");
 		tree.traverse(new IHBTreeVisitor() {
 			@Override
 			public void visit(IObject o,
