@@ -49,7 +49,7 @@ public class HBSystem implements ISystem {
 	 * addInstanceField(String className, String iFieldName, String...
 	 * modifiers) calls addInstanceField in HBDesignDoc
 	 * 
-	 * @param className
+	 * @param objId
 	 *            a String for the class name instance field is a part of
 	 * @param iFieldName
 	 *            a String for the instance field's name
@@ -62,9 +62,9 @@ public class HBSystem implements ISystem {
 	 * @throws HBMultipleObjectsFoundException
 	 */
 	@Override
-	public boolean addInstanceField(String className, String fieldName,
+	public boolean addInstanceField(long objId, String fieldName,
 			String fieldType, String... modifiers) throws Exception {
-		return doc.addInstanceField(className, fieldName, fieldType, modifiers);
+		return doc.addInstanceField(objId, fieldName, fieldType, modifiers);
 	}
 
 	@Override
@@ -126,11 +126,6 @@ public class HBSystem implements ISystem {
 	@Override
 	public boolean createInterface(String name) throws Exception {
 		return doc.createInterface(name);
-	}
-
-	@Override
-	public List<IObjectBox> getMatchingObjects(String name) {
-		return doc.getMatchingObjects(name);
 	}
 
 	@Override

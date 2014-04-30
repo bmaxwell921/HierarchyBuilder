@@ -32,9 +32,9 @@ public class HBDesignDoc implements IDesignDoc {
 	}
 
 	@Override
-	public boolean addInstanceField(String className, String fieldName, String fieldType,
+	public boolean addInstanceField(long objId, String fieldName, String fieldType,
 			String... modifiers) throws Exception {
-		IObject obj = tree.getObject(className);
+		IObject obj = tree.getObject(objId);
 		// if obj is not a Class (its an interface) then we can't add an
 		// instance field
 		if (!(obj instanceof HBClass))
@@ -59,8 +59,8 @@ public class HBDesignDoc implements IDesignDoc {
 	}
 
 	@Override
-	public boolean addPackage(long pkgName, String pkg) throws Exception {
-		IObject clazz = tree.getObject(pkg);
+	public boolean addPackage(long objId, String pkg) throws Exception {
+		IObject clazz = tree.getObject(objId);
 		IdManager.getInstance().updateInfo(clazz.getId(), clazz.getPackage(), clazz.getName());
 		return clazz.addPackage(pkg);
 	}
@@ -141,11 +141,6 @@ public class HBDesignDoc implements IDesignDoc {
 	@Override
 	public boolean hasName(String name) {
 		return this.name != null && this.name.equals(name);
-	}
-
-	@Override
-	public List<IObjectBox> getMatchingObjects(String name) {
-		return tree.getMatchingObjects(name);
 	}
 
 	@Override

@@ -26,7 +26,7 @@ public interface IDesignDoc extends Nameable {
 	 * Creates a new instance field with the given name and modifiers in the
 	 * given class
 	 * 
-	 * @param className
+	 * @param objId
 	 * @param fieldName
 	 * @param fieldType
 	 * @param modifiers
@@ -39,7 +39,7 @@ public interface IDesignDoc extends Nameable {
 	 *             If there are multiple classes in the design doc with the
 	 *             given name
 	 */
-	public boolean addInstanceField(String className, String fieldName, String fieldType,
+	public boolean addInstanceField(long objId, String fieldName, String fieldType,
 			String... modifiers) throws Exception;
 
 	/**
@@ -181,15 +181,6 @@ public interface IDesignDoc extends Nameable {
 	 * @param visitor
 	 */
 	public void traverse(IHBTreeVisitor visitor);
-
-	/**
-	 * Method to get all of objects in the design with the given name TODO
-	 * remove after refactor
-	 * 
-	 * @param name
-	 * @return
-	 */
-	public List<IObjectBox> getMatchingObjects(String name);
 
 	/**
 	 * Returns the string representation of this design doc
