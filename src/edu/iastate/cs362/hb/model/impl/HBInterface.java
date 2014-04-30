@@ -1,5 +1,8 @@
 package edu.iastate.cs362.hb.model.impl;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 import edu.iastate.cs362.hb.model.IObject;
@@ -24,6 +27,11 @@ public class HBInterface extends AHBObject{
 	@Override
 	public String list(){
 		String toRet = "";
+		List<String> mods = new ArrayList<>(this.getModifiers());
+		Collections.sort(mods);
+		for(String mod: mods){
+			toRet += mod + " ";
+		}
 		toRet += this.getPackage() + "." + this.getName() + "\n" + "Methods: ";
 		if(this.getNumMethods() == 0){
 			toRet += "(none)";

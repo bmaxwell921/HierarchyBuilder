@@ -167,7 +167,9 @@ public class HBMethod implements IMethod {
 	@Override
 	public String list() {
 		String toRet = "";
-		for(String mod: modifiers){
+		List<String> mods = new ArrayList<>(modifiers);
+		Collections.sort(mods);
+		for(String mod: mods){
 			toRet += mod + " ";
 		}
 		toRet += returnType + " ";

@@ -1,6 +1,7 @@
 package edu.iastate.cs362.hb.model.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -32,7 +33,8 @@ public class HBClass extends AHBObject implements IClass{
 	@Override
 	public String list(){
 		String toRet = "";
-		Set<String> mods = this.getModifiers();
+		List<String> mods = new ArrayList<>(this.getModifiers());
+		Collections.sort(mods);
 		for(String mod : mods){
 			toRet += mod + " ";
 		}
