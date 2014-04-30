@@ -40,7 +40,15 @@ Stuff to Demo:
 
 Command orders:
 	Alex:
-
+		create design -name Name
+		
+		create class -name Class
+		list class -object default.Class
+		
+		create class -name Class2
+		list design -> see both of these classes.
+		
+		add relationship 
 
 	Brandon:
 		create design -name Name
@@ -57,3 +65,13 @@ Command orders:
 		add method -object edu.iastate.Class1 -name Method1 -modifiers public -return void -args int:a,int:b
 
 	Rob:
+		create design -name MyDesign
+		
+		create class -name MyFirstClass
+		create interface -name Interf1
+		export xml -path out.xml
+		
+		create cache -type method -name MyMethod -return void
+		list cache -id 0 -type method  -> assuming 0 is the id of the previous add
+		
+		

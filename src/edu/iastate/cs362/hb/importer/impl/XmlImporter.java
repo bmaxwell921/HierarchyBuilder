@@ -52,7 +52,7 @@ public class XmlImporter implements IImporter {
 						classList.add(buildClassFromString(file.substring(file.indexOf('>', i + 1) + 1, file.indexOf("</class>"))));
 						break;
 					case "INTERFACE":
-
+						
 						break;
 					default:
 						throw new MalformattedInputException(

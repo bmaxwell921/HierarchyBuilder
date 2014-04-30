@@ -27,8 +27,6 @@ import edu.iastate.cs362.hb.model.impl.HBSystem;
  * 
  */
 public class Cardinal {
-	// TODO! check for id AND name instead of just taking a name
-	// TEEHEE Broke brandon's streak.
 	// Object responsible for parsing commands
 	private ICommandParser commander;
 
@@ -265,6 +263,7 @@ public class Cardinal {
 			long id = Long.parseLong(cmd.getFlagValue(CmdConstants.Flags.ID));
 			String type = cmd.getFlagValue(CmdConstants.Flags.TYPE);
 			if (type == null) {
+				System.out.println("Please specify a type");
 				return false;
 			}
 			String listable = "";
@@ -280,6 +279,7 @@ public class Cardinal {
 				listable = isc.listCachedModifierSet(id);
 				break;
 			default:
+				System.out.println("Unknown type given");
 				return false;
 			}
 			System.out.println(listable);
