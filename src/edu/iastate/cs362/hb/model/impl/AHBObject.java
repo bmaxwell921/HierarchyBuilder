@@ -248,9 +248,7 @@ public abstract class AHBObject implements IObject {
 	}
 
 	@Override
-	public String list() {
-		return null;
-	}
+	abstract public String list();
 	
 	@Override
 	public boolean changeModifiers(Set<String> modifiers){
