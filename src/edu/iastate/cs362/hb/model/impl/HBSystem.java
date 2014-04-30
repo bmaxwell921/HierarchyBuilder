@@ -19,13 +19,10 @@ import edu.iastate.cs362.hb.importer.impl.JsonImporter;
 import edu.iastate.cs362.hb.importer.impl.SourceImporter;
 import edu.iastate.cs362.hb.importer.impl.XmlImporter;
 import edu.iastate.cs362.hb.main.CacheManager;
-import edu.iastate.cs362.hb.main.IdManager;
 import edu.iastate.cs362.hb.model.IDesignDoc;
 import edu.iastate.cs362.hb.model.IMethod;
-import edu.iastate.cs362.hb.model.IObjectBox;
 import edu.iastate.cs362.hb.model.ISystem;
 import edu.iastate.cs362.hb.model.IVariable;
-import edu.iastate.cs362.hb.model.attributes.Identifiable;
 
 public class HBSystem implements ISystem {
 

@@ -3,8 +3,6 @@ package edu.iastate.cs362.hb.controller;
 import java.util.List;
 import java.util.Set;
 
-import edu.iastate.cs362.hb.model.IObjectBox;
-
 /**
  * 
  * Controller for the System.
