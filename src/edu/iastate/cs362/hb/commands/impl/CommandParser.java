@@ -134,7 +134,8 @@ public class CommandParser implements ICommandParser {
 		} else if (input.matches(CmdConstants.Flags.METHOD_REGEX)) {
 			c.addFlagValue(CmdConstants.Flags.METHOD, null);
 		} else if (input.matches(CmdConstants.Flags.MODIFIER_REGEX)) {
-			c.addFlagValue(CmdConstants.Flags.MODIFIER, null);
+			c.addFlagValue(CmdConstants.Flags.MODIFIER, value);
+			valueUsed = true;
 		} else if (input.matches(CmdConstants.Flags.INSTANCE_REGEX)) {
 			c.addFlagValue(CmdConstants.Flags.INSTANCE, null);
 		} else {
