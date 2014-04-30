@@ -55,6 +55,8 @@ public class CmdConstants {
 		public static final String OBJECT = "object";
 		// Also has package, method, and relation
 		
+		//Change subcommands need this
+		public static final String MODIFIER = "modifier";
 		
 		//EXPORT / IMPORT COMMANDS
 		public static final String XML = "xml";
@@ -80,6 +82,10 @@ public class CmdConstants {
 		public static final String NAME = "name";
 		private static final String NAME_SHORT = "n";
 		public static final String NAME_REGEX = NAME + RegexOp.OR + NAME_SHORT;
+		
+		public static final String OLDNAME = "oldName";
+		private static final String OLDNAME_SHORT = "oldN";
+		public static final String OLDNAME_REGEX = OLDNAME + RegexOp.OR + OLDNAME_SHORT;
 		
 		public static final String ARGUMENTS = "args";
 		private static final String ARGUMENTS_SHORT = "a";

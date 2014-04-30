@@ -101,6 +101,9 @@ public class CommandParser implements ICommandParser {
 		} else if (input.matches(CmdConstants.Flags.NAME_REGEX)) {
 			c.addFlagValue(CmdConstants.Flags.NAME, value);
 			valueUsed = true;
+		} else if (input.matches(CmdConstants.Flags.OLDNAME_REGEX)) {
+			c.addFlagValue(CmdConstants.Flags.OLDNAME, value);
+			valueUsed = true;
 		} else if (input.matches(CmdConstants.Flags.PARAMETERS_REGEX)) {
 			c.addFlagValue(CmdConstants.Flags.PARAMETERS, value);
 			valueUsed = true;
