@@ -133,7 +133,7 @@ public class IdManager {
 		for (String iPiece : info) {
 			sb.append(iPiece).append(INFO_DELIM);
 		}
-		return sb.toString();
+		return sb.toString().substring(0, sb.length() - 1);
 	}
 	
 	/**

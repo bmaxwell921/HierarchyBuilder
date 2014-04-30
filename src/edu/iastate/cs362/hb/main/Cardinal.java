@@ -46,7 +46,7 @@ public class Cardinal {
 
 	public static void main(String[] args) {
 //		doSystemStart();
-		// System.out.println("System ready.");
+		System.out.println("System ready.");
 		new Cardinal().run();
 		System.out.println("System Exit.");
 	}
