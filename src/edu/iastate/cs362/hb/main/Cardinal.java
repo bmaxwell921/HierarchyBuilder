@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-//import java.util.Random;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -18,6 +18,8 @@ import edu.iastate.cs362.hb.exceptions.HBMultipleObjectsFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
 import edu.iastate.cs362.hb.model.impl.HBSystem;
+
+//import java.util.Random;
 
 /**
  * 
@@ -43,8 +45,8 @@ public class Cardinal {
 	}
 
 	public static void main(String[] args) {
-		// doSystemStart();
-		System.out.println("System ready.");
+//		doSystemStart();
+		// System.out.println("System ready.");
 		new Cardinal().run();
 		System.out.println("System Exit.");
 	}
@@ -54,6 +56,7 @@ public class Cardinal {
 	 * String commands.
 	 */
 	private void run() {
+		
 		Scanner in = new Scanner(System.in);
 		String cmdStr = null;
 		while (true) {
@@ -64,31 +67,24 @@ public class Cardinal {
 				// First we check what the command name was
 				if (cmd.getName().equals(CmdConstants.CmdNames.CREATE)) {
 					this.doCreate(cmd);
-					continue;
 				}
 				if (cmd.getName().equals(CmdConstants.CmdNames.ADD)) {
 					doAdd(cmd);
-					continue;
 				}
 				if (cmd.getName().equals(CmdConstants.CmdNames.REMOVE)) {
 					doRemove(cmd);
-					continue;
 				}
 				if (cmd.getName().equals(CmdConstants.CmdNames.CHANGE)) {
 					doChange(cmd);
-					continue;
 				}
 				if (cmd.getName().equals(CmdConstants.CmdNames.LIST)) {
 					doList(cmd);
-					continue;
 				}
 				if (cmd.getName().equals(CmdConstants.CmdNames.EXPORT)) {
 					doExport(cmd);
-					continue;
 				}
 				if (cmd.getName().equals(CmdConstants.CmdNames.IMPORT)) {
 					doImport(cmd);
-					continue;
 				}
 				if (cmd.getName().equals(CmdConstants.CmdNames.EXIT)) {
 					break;
@@ -226,21 +222,21 @@ public class Cardinal {
 		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.PACKAGE)) {
 			return isc.changePackage(id, cmd.getFlagValue(CmdConstants.Flags.NAME));
 		}
-		if(cmd.getSubCommand().equals(CmdConstants.SubCmdNames.METHOD)) {
+		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.METHOD)) {
 			long oldId = IdManager.getInstance().accessIdWithKey(cmd.getFlagValue(CmdConstants.Flags.OLDNAME));
 			HashSet<String> mods = new HashSet<>(Arrays.asList(CmdConstants.Flags.MODIFIER.split(",")));
 			List<String> args = Arrays.asList(CmdConstants.Flags.ARGUMENTS.split(","));
 			return isc.changeClassMethod(id, oldId, cmd.getFlagValue(CmdConstants.Flags.NAME), args, mods);
 		}
-		if(cmd.getSubCommand().equals(CmdConstants.SubCmdNames.MODIFIER)) {
+		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.MODIFIER)) {
 			HashSet<String> mods = new HashSet<>(Arrays.asList(CmdConstants.Flags.MODIFIER.split(",")));
 			return isc.changeModifiers(id, mods);
 		}
-		if(cmd.getSubCommand().equals(CmdConstants.SubCmdNames.FIELD)){
+		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.FIELD)) {
 			long oldId = IdManager.getInstance().accessIdWithKey(cmd.getFlagValue(CmdConstants.Flags.OLDNAME));
 			HashSet<String> mods = new HashSet<>(Arrays.asList(CmdConstants.Flags.MODIFIER.split(",")));
-			return isc.changeClassField(id, oldId, cmd.getFlagValue(CmdConstants.Flags.NAME), 
-					cmd.getFlagValue(CmdConstants.Flags.TYPE), mods);
+			return isc.changeClassField(id, oldId, cmd.getFlagValue(CmdConstants.Flags.NAME), cmd.getFlagValue(CmdConstants.Flags.TYPE),
+					mods);
 		}
 		return false;
 	}
@@ -292,23 +288,6 @@ public class Cardinal {
 			return false;
 	}
 
-/*	private static void doSystemStart() {
-		System.out.println("Starting system...");
-		Random gen = new Random();
-		int choice = randRange(gen, 0, 25);
-		while (choice < 100) {
-			System.out.println(String.format("%d%%...", choice));
-			choice = randRange(gen, choice + 1, choice + 25);
-			try {
-				Thread.sleep(gen.nextInt(1000));
-			} catch (InterruptedException e) {
-
-			}
-		}
-		System.out.println("100%");
-		System.out.println("System ready, enter a command.");
-	}
-*/
 	private boolean doCache(ICommand cmd) throws MalformattedCommandException {
 		long id = 0;
 		// Initialized to null
@@ -357,9 +336,26 @@ public class Cardinal {
 		System.out.println(CacheManager.getMappings(id));
 		return true;
 	}
-/*
+
+	private static void doSystemStart() {
+		System.out.println("Starting system...");
+		Random gen = new Random();
+		int choice = randRange(gen, 0, 25);
+		while (choice < 100) {
+			System.out.println(String.format("%d%%...", choice));
+			choice = randRange(gen, choice + 1, choice + 25);
+			try {
+				Thread.sleep(gen.nextInt(1000));
+			} catch (InterruptedException e) {
+
+			}
+		}
+		System.out.println("100%");
+		System.out.println("System ready, enter a command.");
+	}
+	
 	private static int randRange(Random gen, int low, int high) {
 		return gen.nextInt(high - low) + low;
 	}
-*/
+
 }
