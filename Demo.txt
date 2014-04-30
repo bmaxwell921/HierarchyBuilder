@@ -90,6 +90,8 @@ Command orders:
 		import json -path out.json
 		list design -> Notice how the full design was loaded in
 
+		help -> Note how command formats is printed. Not complete yet
+
 	Rob:
 		create design -name MyDesign
 		create class -name Class1

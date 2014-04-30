@@ -84,6 +84,9 @@ public class Cardinal {
 				if (cmd.getName().equals(CmdConstants.CmdNames.IMPORT)) {
 					doImport(cmd);
 				}
+				if (cmd.getName().equals(CmdConstants.CmdNames.HELP)) {
+					doHelp();
+				}
 				if (cmd.getName().equals(CmdConstants.CmdNames.EXIT)) {
 					break;
 				}
@@ -93,6 +96,10 @@ public class Cardinal {
 			}
 		}
 		in.close();
+	}
+
+	private void doHelp() {
+		System.out.println(isc.showHelp());		
 	}
 
 	// Calling of create methods

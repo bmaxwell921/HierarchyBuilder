@@ -36,6 +36,7 @@ public class CmdConstants {
 		public static final String IMPORT = "import";
 		public static final String CHANGE = "change";
 		public static final String LIST = "list";
+		public static final String HELP = "help";
 	}
 	
 	public class SubCmdNames {
