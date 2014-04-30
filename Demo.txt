@@ -3,7 +3,7 @@ Stuff to Demo:
 		- add class instance field
 		- add relationship
 		- remove class/interface package
-		- remoce class/interface
+		- remove class/interface
 		- remove relationship
 		- list design
 		- list class/interface
