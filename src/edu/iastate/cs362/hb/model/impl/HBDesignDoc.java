@@ -193,19 +193,17 @@ public class HBDesignDoc implements IDesignDoc {
 			if (interfaces != null) {
 				for (IObject interf : interfaces) {
 					tree.addObject(interf);
+					IdManager.getInstance().loadInfo(interf.getId(), interf.getPackage(), interf.getName());
 				}
 			}
 			if (classes != null) {
 				for (IObject clazz : classes) {
 					tree.addObject(clazz);
+					IdManager.getInstance().loadInfo(clazz.getId(), clazz.getPackage(), clazz.getName());
 				}
 			}
-
-			/*
-			 * Then add the relationships TODO how to do this?? I think I'll
-			 * need to rework the IObject class to have relationships in it,
-			 * otherwise Gson won't export that information
-			 */
+		
+			
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
