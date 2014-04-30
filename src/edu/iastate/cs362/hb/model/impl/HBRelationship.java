@@ -7,7 +7,7 @@ public class HBRelationship implements IRelationship {
 	private String name;
 
 	public HBRelationship() {
-		// Constructor for serialization
+		this("");
 	}
 	
 	public HBRelationship(String relationship) {

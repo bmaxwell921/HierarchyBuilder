@@ -41,12 +41,13 @@ public class HBMethod implements IMethod {
 	
 	public HBMethod(String name) {
 		this.name = name;
+		this.returnType = "";
 		this.args = new ArrayList<>();
 		this.modifiers = new HashSet<>();
 	}
 
 	public HBMethod() {
-		// Constructor for serialization
+		this("");
 	}
 
 	@Override

@@ -110,6 +110,7 @@ public class IdManager {
 			if (idMap.get(key) != null && idMap.get(key).equals(id)) {
 				idMap.put(buildKey(info), id);
 				oldKey = key;
+				break;
 			}
 		}
 		idMap.remove(oldKey);
