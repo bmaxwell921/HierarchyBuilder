@@ -166,8 +166,8 @@ public class HBDesignDoc implements IDesignDoc {
 	}
 
 	@Override
-	public String listObject(String name) throws Exception {
-		return tree.getObject(name).list();
+	public String listObject(long objId) throws Exception {
+		return tree.getObject(objId).list();
 	}
 
 	@Override

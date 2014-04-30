@@ -51,7 +51,7 @@ public interface ISystem {
 
 	public String listDesign();
 
-	public String listObject(String name) throws Exception;
+	public String listObject(long objId) throws Exception;
 
 	public boolean changeName(long objId, String newName) throws Exception;
 

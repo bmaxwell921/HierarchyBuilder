@@ -5,7 +5,7 @@ create <subCommand>
 		design 		[-COMMON_OPTIONS]
 		class		[-COMMON_OPTIONS]
 		interface	[-COMMON_OPTIONS]
-		cache		[-COMMON_OPTIONS] [-CACHE_OPTIONS]
+		cache		[-COMMON_OPTIONS] [-CACHE_OPTIONS] <- Shouldn't need to create the cache
 	COMMON_OPTIONS
 		-name <name>: The name of what is being created
 		-n <name>: Alias for -name

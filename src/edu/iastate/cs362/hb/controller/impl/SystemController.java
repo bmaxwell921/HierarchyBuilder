@@ -133,8 +133,8 @@ public class SystemController implements ISystemController {
 	}
 
 	@Override
-	public String listObject(String name) throws Exception {
-		return system.listObject(name);
+	public String listObject(long objId) throws Exception {
+		return system.listObject(objId);
 	}
 
 	@Override

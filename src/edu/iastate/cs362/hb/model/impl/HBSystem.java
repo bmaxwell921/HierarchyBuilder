@@ -141,8 +141,8 @@ public class HBSystem implements ISystem {
 	}
 
 	@Override
-	public String listObject(String name) throws Exception {
-		return doc.listObject(name);
+	public String listObject(long objId) throws Exception {
+		return doc.listObject(objId);
 	}
 
 	@Override

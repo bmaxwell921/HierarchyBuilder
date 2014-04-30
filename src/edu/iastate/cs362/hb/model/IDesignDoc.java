@@ -202,12 +202,12 @@ public interface IDesignDoc extends Nameable {
 	 * Method used to get the string representation of a single object in the
 	 * design
 	 * 
-	 * @param name
+	 * @param objId
 	 * @return
 	 * @throws HBObjectNotFoundException
 	 * @throws HBMultipleObjectsFoundException
 	 */
-	public String listObject(String name) throws Exception;
+	public String listObject(long objId) throws Exception;
 
 	/**
 	 * Method used to change the name of the given object
