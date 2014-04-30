@@ -133,8 +133,7 @@ public class Cardinal {
 				return;
 			}
 			isc.addStaticMethod(id, cmd.getFlagValue(CmdConstants.Flags.NAME), cmd.getFlagValue(CmdConstants.Flags.RETURN),
-					cmd.getFlagValue(CmdConstants.Flags.ARGUMENTS), cmd.getFlagValue(CmdConstants.Flags.MODIFIER) + ","
-							+ CmdConstants.Flags.STATIC);
+					cmd.getFlagValue(CmdConstants.Flags.ARGUMENTS), cmd.getFlagValue(CmdConstants.Flags.MODIFIER));
 			return;
 		}
 		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.RELATIONSHIP)) {
@@ -184,23 +183,27 @@ public class Cardinal {
 	private boolean doExport(ICommand cmd) {
 		if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.XML_REGEX)) {
 			return isc.exportDesignXML(cmd.getFlagValue(CmdConstants.Flags.PATH));
-		} else if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.JSON_REGEX)) {
+		} 
+		if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.JSON_REGEX)) {
 			return isc.exportDesignJSON(cmd.getFlagValue(CmdConstants.Flags.PATH));
-		} else if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.SOURCE_REGEX)) {
+		} 
+		if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.SOURCE_REGEX)) {
 			return isc.exportDesignSource(cmd.getFlagValue(CmdConstants.Flags.PATH));
-		} else
-			return false;
+		} 
+		return false;
 	}
 
 	private boolean doImport(ICommand cmd) throws Exception {
 		if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.XML_REGEX)) {
 			return isc.importDesignXML(cmd.getFlagValue(CmdConstants.Flags.PATH));
-		} else if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.JSON_REGEX)) {
+		} 
+		if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.JSON_REGEX)) {
 			return isc.importDesignJSON(cmd.getFlagValue(CmdConstants.Flags.PATH));
-		} else if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.SOURCE_REGEX)) {
+		} 
+		if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.SOURCE_REGEX)) {
 			return isc.importDesignSource(cmd.getFlagValue(CmdConstants.Flags.PATH));
-		} else
-			return false;
+		} 
+		return false;
 	}
 
 	/**

@@ -71,7 +71,10 @@ public class HBMethod implements IMethod {
 
 	@Override
 	public void addModifiers(String... modifier) {
-		this.modifiers.addAll(Arrays.asList(modifier));
+		if (modifier.length == 0) {
+			return;
+		}
+		this.modifiers.addAll(Arrays.asList(modifier[0].split(",")));
 	}
 
 	@Override
