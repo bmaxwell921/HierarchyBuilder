@@ -76,17 +76,18 @@ Command orders:
 		
 		change pkg -object edu.iastate.newName -name newPackage
 		list design -> note that the package is now changed.
-		list edu.iastate.newName -> Object not found
+		list class -object edu.iastate.newName -> Object not found
 		
-		change modifier -object newPackage.Class2 -mod public
-		list class -object newPackage.Class2  --> note that this class is now public.
+		change modifier -object newPackage.newName -mod public
+		list class -object newPackage.newName  --> note that this class is now public.
 		
-		change field -object newPackage.Class2 -oldName counterVariable -name newVar -t double -mod private
-		list design --note that the class method has now changed accordingly.
+		change field -object newPackage.newName -oldName counterVariable -name newVar -t double -mod private
+		list design --note that the class field has now changed accordingly.
 		
-		add method -object newPackage.Class2 -name method1 -modifiers public -return void -args int:a,int:b
+		add method -object newPackage.newName -name method1 -modifiers public -return void -args double:a,String:b
 		list design
-		change method -object newPackage.Class2 -oldName method1 -name newMethod -mod private -return int -args int:c
+		change method -object newPackage.newName -oldName method1 -name newMethod -mod private -return void -args int:c
+		list design
 		
 	Brandon:
 		create design -name Design
