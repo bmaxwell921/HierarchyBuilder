@@ -31,7 +31,7 @@ public abstract class AHBObject implements IObject {
 	// Id of this object
 	private long id;
 
-	// This object's pacakge
+	// This object's package
 	private String pkg;
 
 	// This object's name

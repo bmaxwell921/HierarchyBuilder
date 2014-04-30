@@ -84,15 +84,22 @@ public class Cardinal {
 				if (cmd.getName().equals(CmdConstants.CmdNames.IMPORT)) {
 					doImport(cmd);
 				}
+				if (cmd.getName().equals(CmdConstants.CmdNames.HELP)) {
+					doHelp();
+				}
 				if (cmd.getName().equals(CmdConstants.CmdNames.EXIT)) {
 					break;
 				}
 				System.out.println(String.format("System - Completed command \"%s\"", cmd.toString()));
 			} catch (Exception e) {
-				System.out.println(e.getMessage());
+				System.out.println("Unknown Error" + e.getMessage());
 			}
 		}
 		in.close();
+	}
+
+	private void doHelp() {
+		System.out.println(isc.showHelp());		
 	}
 
 	// Calling of create methods
@@ -319,7 +326,7 @@ public class Cardinal {
 			if (modifiersStr != null) {
 				modifiers = new HashSet<String>(Arrays.asList(modifiersStr.split(",")));
 			}
-			id = isc.cacheVariable(methodName, returnType, modifiers);
+			id = isc.cacheVariable(methodName, "instance", modifiers);
 			if (id == -1) {
 				throw new MalformattedCommandException("ID unable to set");
 			}

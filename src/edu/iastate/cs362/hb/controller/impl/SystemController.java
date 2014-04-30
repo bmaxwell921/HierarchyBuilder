@@ -225,8 +225,7 @@ public class SystemController implements ISystemController {
 
 	@Override
 	public String showHelp() {
-		// TODO Auto-generated method stub
-		return null;
+		return system.showHelp();
 	}
 
 	@Override

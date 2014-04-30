@@ -1,6 +1,9 @@
 package edu.iastate.cs362.hb.model.impl;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
@@ -30,6 +33,8 @@ public class HBSystem implements ISystem {
 	private IExporter exporter;
 	private IImporter importer;
 	private CacheManager cache;
+	
+	private String helpCache;
 
 	public HBSystem() {
 		cache = CacheManager.getInstance();
@@ -257,8 +262,21 @@ public class HBSystem implements ISystem {
 
 	@Override
 	public String showHelp() {
-		// TODO Auto-generated method stub
-		return null;
+		if (helpCache != null) {
+			return helpCache;
+		}
+		try (BufferedReader br = new BufferedReader(new FileReader("." + File.separator + "NewCmdFormat.txt"))) {
+			StringBuilder sb = new StringBuilder();
+			String read = "";
+			while ((read = br.readLine()) != null) {
+				sb.append(read);
+				sb.append("\n");
+			}
+			helpCache = sb.toString();
+			return helpCache;
+		} catch (Exception e) {
+			return "Unable to find help";
+		}
 	}
 
 	@Override
