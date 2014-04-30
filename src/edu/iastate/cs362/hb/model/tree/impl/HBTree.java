@@ -9,12 +9,9 @@ import java.util.Set;
 
 import edu.iastate.cs362.hb.constants.ErrorMessages;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
-import edu.iastate.cs362.hb.exceptions.HBMultipleObjectsFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.model.IObject;
-import edu.iastate.cs362.hb.model.IObjectBox;
 import edu.iastate.cs362.hb.model.IRelationship;
-import edu.iastate.cs362.hb.model.impl.HBObjectBox;
 import edu.iastate.cs362.hb.model.tree.IHBTreeVisitor;
 import edu.iastate.cs362.hb.model.tree.ITree;
 
@@ -155,18 +152,5 @@ public class HBTree implements ITree {
 			}
 		}
 		return false;
-	}
-	
-	private Set<IObject> findAll(long objId, String pkg) {
-		Set<IObject> ret = new HashSet<>();
-
-		for (IObject obj : objs) {
-			if (obj.getId() == (objId)
-					&& (pkg == null || pkg != null
-							&& obj.getPackage().equals(pkg))) {
-				ret.add(obj);
-			}
-		}
-		return ret;
 	}
 }
