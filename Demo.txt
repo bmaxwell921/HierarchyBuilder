@@ -1,6 +1,6 @@
 Stuff to Demo:
 	Alex:
-		- add class instance field
+		X - add class instance field
 		X - add relationship
 		X - remove class/interface package
 		X - remove class/interface
@@ -65,7 +65,10 @@ Command orders:
 		remove interface -object default.Interface
 		list design --> No more interface :(
 		
-		add field 
+		add field -object default.Class2 -name counterVariable -t int -mod public,static
+		list design --> there is a new instance field!
+		
+		
 
 	Brandon:
 		create design -name Name
