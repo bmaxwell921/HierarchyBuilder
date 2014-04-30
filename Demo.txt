@@ -65,3 +65,13 @@ Command orders:
 		add method -object edu.iastate.Class1 -name Method1 -modifiers public -return void -args int:a,int:b
 
 	Rob:
+		create design -name MyDesign
+		
+		create class -name MyFirstClass
+		create interface -name Interf1
+		export xml -path out.xml
+		
+		create cache -type method -name MyMethod -return void
+		list cache -id 0 -type method  -> assuming 0 is the id of the previous add
+		
+		
