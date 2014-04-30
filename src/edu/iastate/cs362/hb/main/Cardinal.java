@@ -133,7 +133,7 @@ public class Cardinal {
 		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.PACKAGE)) {
 			// First get the id of the object to modify, then modify it
 			long id = IdManager.getInstance().accessIdWithKey(cmd.getFlagValue(CmdConstants.Flags.OBJECT));
-			isc.addPackage(cmd.getFlagValue(CmdConstants.Flags.NAME), id);
+			isc.addPackage(id, cmd.getFlagValue(CmdConstants.Flags.NAME));
 			return;
 		}
 		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.METHOD)) {

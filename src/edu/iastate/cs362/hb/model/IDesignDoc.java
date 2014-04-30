@@ -64,7 +64,7 @@ public interface IDesignDoc extends Nameable {
 	/**
 	 * Adds the given packageName to the given object
 	 * 
-	 * @param pkg
+	 * @param objId
 	 * @param objName
 	 * @return
 	 * @throws HBObjectNotFoundException
@@ -73,7 +73,7 @@ public interface IDesignDoc extends Nameable {
 	 *             If multiple objects with the given name exist in the design
 	 *             doc
 	 */
-	public boolean addPackage(String pkg, long objId) throws Exception;
+	public boolean addPackage(long objId, String pkg) throws Exception;
 
 	/**
 	 * Creates a new instance method in the given class with the given

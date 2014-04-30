@@ -74,8 +74,8 @@ public class HBSystem implements ISystem {
 	}
 
 	@Override
-	public boolean addPackage(String pkgName, long objId) throws Exception {
-		return doc.addPackage(pkgName, objId);
+	public boolean addPackage(long objId, String pkgName) throws Exception {
+		return doc.addPackage(objId, pkgName);
 	}
 
 	@Override

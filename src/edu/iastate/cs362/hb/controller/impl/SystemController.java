@@ -66,8 +66,8 @@ public class SystemController implements ISystemController {
 	}
 
 	@Override
-	public boolean addPackage(String pkgName, long objId) throws Exception {
-		return system.addPackage(pkgName, objId);
+	public boolean addPackage(long objId, String pkgName) throws Exception {
+		return system.addPackage(objId, pkgName);
 	}
 
 	@Override

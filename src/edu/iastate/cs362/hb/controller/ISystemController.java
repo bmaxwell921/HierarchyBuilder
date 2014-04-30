@@ -24,7 +24,7 @@ public interface ISystemController {
 	public boolean addRelationship(long superId, long subId, String rel)
 			throws Exception;
 
-	public boolean addPackage(String pkgName, long objId) throws Exception;
+	public boolean addPackage(long objId, String pkgName) throws Exception;
 
 	public boolean addObject(String type, Object obj) throws Exception;
 
