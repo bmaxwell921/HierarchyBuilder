@@ -65,22 +65,23 @@ public class HBDesignDoc implements IDesignDoc {
 	}
 
 	@Override
-	public boolean addInstanceMethod(long objId, String methodName,
+	public boolean addInstanceMethod(long objId, String methodName, String returnType,
 			String params, String... modifiers) throws Exception {
-		return addMethod(objId, methodName, params, modifiers);
+		return addMethod(objId, methodName, returnType, params, modifiers);
 	}
 
 	@Override
-	public boolean addStaticMethod(long objId, String methodName,
+	public boolean addStaticMethod(long objId, String methodName, String returnType,
 			String params, String... modifiers) throws Exception {
-		return addMethod(objId, methodName, params, modifiers);
+		return addMethod(objId, methodName, returnType, params, modifiers);
 	}
 
-	private boolean addMethod(long objId, String methodName, String params,
+	private boolean addMethod(long objId, String methodName, String returnType, String params,
 			String... modifiers) throws Exception {
 		IMethod method = new HBMethod(methodName);
 		method.addModifiers(modifiers);
 		method.addArguments(params);
+		method.addReturnType(returnType);
 
 		IObject clazz = tree.getObject(objId);
 		return clazz.addMethod(method);

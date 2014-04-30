@@ -76,15 +76,15 @@ public class HBSystem implements ISystem {
 	}
 
 	@Override
-	public boolean addInstanceMethod(long objId, String methodName,
+	public boolean addInstanceMethod(long objId, String methodName, String returnType,
 			String params, String... modifiers) throws Exception {
-		return doc.addInstanceMethod(objId, methodName, params, modifiers);
+		return doc.addInstanceMethod(objId, methodName, returnType, params, modifiers);
 	}
 
 	@Override
-	public boolean addStaticMethod(long objId, String methodName,
+	public boolean addStaticMethod(long objId, String methodName, String returnType,
 			String params, String... modifiers) throws Exception {
-		return doc.addStaticMethod(objId, methodName, params, modifiers);
+		return doc.addStaticMethod(objId, methodName, returnType, params, modifiers);
 	}
 
 	/**

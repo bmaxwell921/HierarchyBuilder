@@ -108,7 +108,10 @@ public class Cardinal {
 		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.CACHE)) {
 			return doCache(cmd);
 		}
-		return isc.createDesign(cmd.getFlagValue(CmdConstants.Flags.NAME));
+		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.DESIGN)) {
+			return isc.createDesign(cmd.getFlagValue(CmdConstants.Flags.NAME));
+		}
+		return false;
 	}
 
 	// Calling of add methods
