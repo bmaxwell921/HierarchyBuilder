@@ -44,6 +44,10 @@ public class HBMethod implements IMethod {
 		this.modifiers = new HashSet<>();
 	}
 
+	public HBMethod() {
+		// Constructor for serialization
+	}
+
 	@Override
 	public String getName() {
 		return name;

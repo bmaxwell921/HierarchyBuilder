@@ -24,6 +24,10 @@ public class HBVariable implements IVariable {
 		this.modifiers = new HashSet<>();
 	}
 
+	public HBVariable() {
+		// Constructor for deserialization
+	}
+
 	@Override
 	public String getName() {	
 		return name;
