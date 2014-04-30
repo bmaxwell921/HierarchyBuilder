@@ -72,7 +72,7 @@ public class CmdConstants {
 		private static final String SOURCE_SHORT = "s";
 		public static final String SOURCE_REGEX = SOURCE + RegexOp.OR + SOURCE_SHORT;
 		
-		public static final String ANY = DESIGN + RegexOp.OR + CLASS + RegexOp.OR + INTERFACE + RegexOp.OR + PACKAGE + RegexOp.OR + 
+		public static final String ANY = DESIGN + RegexOp.OR + CLASS + RegexOp.OR + INTERFACE + RegexOp.OR + INTERFACE + RegexOp.OR + PACKAGE + RegexOp.OR + 
 				FIELD + RegexOp.OR + METHOD  + RegexOp.OR + RELATIONSHIP + RegexOp.OR + CACHE + RegexOp.OR + OBJECT + RegexOp.OR + 
 				XML_REGEX + RegexOp.OR + JSON_REGEX + RegexOp.OR + SOURCE_REGEX;
 	}
