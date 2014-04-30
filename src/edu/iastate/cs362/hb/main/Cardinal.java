@@ -93,7 +93,6 @@ public class Cardinal {
 				System.out.println(String.format("System - Completed command \"%s\"", cmd.toString()));
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
-				e.printStackTrace();
 			}
 		}
 		in.close();
