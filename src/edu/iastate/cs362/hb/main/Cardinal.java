@@ -92,7 +92,7 @@ public class Cardinal {
 				}
 				System.out.println(String.format("System - Completed command \"%s\"", cmd.toString()));
 			} catch (Exception e) {
-				System.out.println("Unknown Error" + e.getMessage());
+				System.out.println(e.getMessage());
 			}
 		}
 		in.close();
