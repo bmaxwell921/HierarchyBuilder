@@ -14,7 +14,7 @@ Stuff to Demo:
 		- change class method
 	
 	Brandon:
-		- create design
+		- create design 			
 		- create class/interface
 		- add class/interface package
 		- add class/interface instance method
@@ -37,3 +37,17 @@ Stuff to Demo:
 		- list cached variable
 		- list cached method
 		- list cached modifier set
+
+Command orders:
+	Alex:
+
+
+	Brandon:
+		create design -name Name
+		create class -name Class1
+		list class -object default.Class1 -> Can see there was a new empty class created
+		create interface -name Interf1
+		
+
+
+	Rob:
