@@ -225,17 +225,17 @@ public class Cardinal {
 		}
 		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.METHOD)) {
 			long oldId = IdManager.getInstance().accessIdWithKey(cmd.getFlagValue(CmdConstants.Flags.OLDNAME));
-			HashSet<String> mods = new HashSet<>(Arrays.asList(CmdConstants.Flags.MODIFIER.split(",")));
-			List<String> args = Arrays.asList(CmdConstants.Flags.ARGUMENTS.split(","));
+			HashSet<String> mods = new HashSet<>(Arrays.asList(cmd.getFlagValue(CmdConstants.Flags.MODIFIER).split(",")));
+			List<String> args = Arrays.asList(cmd.getFlagValue(CmdConstants.Flags.ARGUMENTS).split(","));
 			return isc.changeClassMethod(id, oldId, cmd.getFlagValue(CmdConstants.Flags.NAME), args, mods);
 		}
 		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.MODIFIER)) {
-			HashSet<String> mods = new HashSet<>(Arrays.asList(CmdConstants.Flags.MODIFIER.split(",")));
+			HashSet<String> mods = new HashSet<>(Arrays.asList(cmd.getFlagValue(CmdConstants.Flags.MODIFIER).split(",")));
 			return isc.changeModifiers(id, mods);
 		}
 		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.FIELD)) {
 			long oldId = IdManager.getInstance().accessIdWithKey(cmd.getFlagValue(CmdConstants.Flags.OLDNAME));
-			HashSet<String> mods = new HashSet<>(Arrays.asList(CmdConstants.Flags.MODIFIER.split(",")));
+			HashSet<String> mods = new HashSet<>(Arrays.asList(cmd.getFlagValue(CmdConstants.Flags.MODIFIER).split(",")));
 			return isc.changeClassField(id, oldId, cmd.getFlagValue(CmdConstants.Flags.NAME), cmd.getFlagValue(CmdConstants.Flags.TYPE),
 					mods);
 		}

@@ -32,6 +32,10 @@ public class HBClass extends AHBObject implements IClass{
 	@Override
 	public String list(){
 		String toRet = "";
+		Set<String> mods = this.getModifiers();
+		for(String mod : mods){
+			toRet += mod + " ";
+		}
 		toRet += this.getPackage() + "." + this.getName() + "\n" + "Fields: ";
 		if(fields.size() == 0){
 			toRet += "(none)";
