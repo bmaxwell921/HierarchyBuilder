@@ -10,8 +10,6 @@ Stuff to Demo:
 		X - change class/interface name
 		X - change class/interface package
 		X - change class modifiers
-		- change class field
-		- change class method
 	
 	Brandon:
 		X - create design 			
@@ -81,9 +79,6 @@ Command orders:
 		
 		change modifier -object newPackage.Class2 -mod public
 		list class -object newPackage.Class2  --> note that this class is now public.
-
-		add method -object newPackage.Class2 -name Method1 -modifiers public -return void -args int:a,int:b
-		change method -object newPackage.Class2 -oldName Method1 -name newMethod -modifiers private -return int -args string:c
 		
 	Brandon:
 		create design -name Name

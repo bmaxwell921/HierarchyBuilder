@@ -84,8 +84,8 @@ public class CmdConstants {
 		private static final String NAME_SHORT = "n";
 		public static final String NAME_REGEX = NAME + RegexOp.OR + NAME_SHORT;
 		
-		public static final String OLDNAME = "oldName";
-		private static final String OLDNAME_SHORT = "oldN";
+		public static final String OLDNAME = "oldname";
+		private static final String OLDNAME_SHORT = "oldn";
 		public static final String OLDNAME_REGEX = OLDNAME + RegexOp.OR + OLDNAME_SHORT;
 		
 		public static final String ARGUMENTS = "args";
