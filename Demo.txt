@@ -40,7 +40,15 @@ Stuff to Demo:
 
 Command orders:
 	Alex:
-
+		create design -name Name
+		
+		create class -name Class
+		list class -object default.Class
+		
+		create class -name Class2
+		list design -> see both of these classes.
+		
+		add relationship 
 
 	Brandon:
 		create design -name Name
