@@ -1,7 +1,10 @@
 package edu.iastate.cs362.hb.model.impl;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import edu.iastate.cs362.hb.model.IVariable;
@@ -109,7 +112,9 @@ public class HBVariable implements IVariable {
 	@Override
 	public String list() {
 		String toRet = "";
-		for(String mod: modifiers){
+		List<String> mods = new ArrayList<>(modifiers);
+		Collections.sort(mods);
+		for(String mod: mods){
 			toRet += mod + " ";
 		}
 		toRet += type + " " + name;

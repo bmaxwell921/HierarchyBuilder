@@ -1,6 +1,6 @@
 Stuff to Demo:
 	Alex:
-		- add class instance field
+		X - add class instance field
 		X - add relationship
 		X - remove class/interface package
 		X - remove class/interface
@@ -65,7 +65,10 @@ Command orders:
 		remove interface -object default.Interface
 		list design --> No more interface :(
 		
-		add field 
+		add field -object default.Class2 -name counterVariable -t int -mod public,static
+		list design --> there is a new instance field!
+		
+		
 
 	Brandon:
 		create design -name Name
@@ -86,11 +89,14 @@ Command orders:
 
 	Rob:
 		create design -name MyDesign
-		
+		create class -name Class1
+		add pkg -object default.Class1 -name edu.iastate
 		create class -name MyFirstClass
 		create interface -name Interf1
+		add method -object edu.iastate.Class1 -name Method1 -modifiers public -return void -args int:a,int:b
 		export xml -path out.xml
-		
+		remove method -object edu.iastate.Class1 -name Method1
+		export xml -path out2.xml
 		create cache -type method -name MyMethod -return void
 		list cache -id 0 -type method  -> assuming 0 is the id of the previous add
 		

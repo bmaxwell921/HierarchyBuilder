@@ -87,6 +87,7 @@ remove <subCommand>
 		
 list <subCommand>
 	Sub-Commands:
+		design
 		cache	[-CACHE_OPTIONS]
 	CACHE_OPTIONS
 		-id <id> ID of the cache option to list
