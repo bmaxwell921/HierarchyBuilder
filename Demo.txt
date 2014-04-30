@@ -90,11 +90,14 @@ Command orders:
 	Rob:
 		create design -name MyDesign
 		create class -name Class1
+		export xml -path out.xml
+		import xml -path out.xml
+		list design
 		add pkg -object default.Class1 -name edu.iastate
 		create class -name MyFirstClass
 		create interface -name Interf1
 		add method -object edu.iastate.Class1 -name Method1 -modifiers public -return void -args int:a,int:b
-		export xml -path out.xml
+		export xml -path out2.xml
 		remove method -object edu.iastate.Class1 -name Method1
 		export xml -path out2.xml
 		create cache -type method -name MyMethod -return void

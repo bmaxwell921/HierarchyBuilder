@@ -1,27 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <design>
-<interface><id>2</id>
-<name>Interf1</name>
-<package>default</package>
-</interface>
-
-<class><id>1</id>
-<name>MyFirstClass</name>
-<package>default</package>
-</class>
-
 <class><id>0</id>
 <name>Class1</name>
-<package>edu.iastate</package>
-<method><id>0</id>
-<name>Method1</name>
-<argument><type>a</type>
-<name>int</name>
-</argument>
-<argument><type>b</type>
-<name>int</name>
-</argument>
-</method>
+<package>default</package>
 </class>
 
 </design>
