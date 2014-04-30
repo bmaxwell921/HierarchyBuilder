@@ -54,7 +54,7 @@ public class HBTree implements ITree {
 
 	@Override
 	public boolean addObject(IObject newObj) throws Exception {
-		if (containsObject(newObj.getId())) {
+		if (containsObject(newObj.getPackage(), newObj.getName())) {
 			throw new HBDuplicateObjectFoundException(
 					ErrorMessages.DUPLICATE_OBJECT_FOUND, newObj.getName(),
 					newObj.getPackage());
@@ -137,9 +137,20 @@ public class HBTree implements ITree {
 		}
 	}
 
+	// This one is used when looking up objects
 	private boolean containsObject(long id) {
 		for (IObject obj : objs) {
 			if (obj.hasId(id)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	// This one is used when creating objects for the first time
+	private boolean containsObject(String pkg, String name) {
+		for (IObject obj : objs) {
+			if (obj.getPackage().equals(pkg) && obj.hasName(name)) {
 				return true;
 			}
 		}
