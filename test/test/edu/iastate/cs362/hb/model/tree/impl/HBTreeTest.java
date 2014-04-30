@@ -17,7 +17,6 @@ import edu.iastate.cs362.hb.model.IObject;
 import edu.iastate.cs362.hb.model.IRelationship;
 import edu.iastate.cs362.hb.model.impl.HBClass;
 import edu.iastate.cs362.hb.model.impl.HBInterface;
-import edu.iastate.cs362.hb.model.impl.HBObjectBox;
 import edu.iastate.cs362.hb.model.impl.HBRelationship;
 import edu.iastate.cs362.hb.model.tree.IHBTreeVisitor;
 import edu.iastate.cs362.hb.model.tree.Pair;
@@ -33,6 +32,8 @@ public class HBTreeTest {
 
 	// THE TREE!
 	private HBTree test;
+	
+	private int id = 0;
 
 	// Common vars
 	private IObject clazz = new HBClass("TestClass");
@@ -46,6 +47,11 @@ public class HBTreeTest {
 	@Before
 	public void setUp() {
 		test = new HBTree();
+		id = 0;
+		clazz.setId(id++);
+		clazz2.setId(id++);
+		interf.setId(id++);
+		interf2.setId(id++);
 	}
 
 	/*
@@ -58,15 +64,13 @@ public class HBTreeTest {
 	@Test
 	public void testGetObject() throws Exception {
 		test.addObject(clazz);
-		IObject getRes = test.getObject(clazz.getName());
-		Assert.assertEquals(
-				"Getting an object that was just added should work", clazz,
-				getRes);
+		IObject getRes = test.getObject(0);
+		Assert.assertEquals("Getting an object that was just added should work", clazz, getRes);
 	}
 
 	@Test(expected = HBObjectNotFoundException.class)
 	public void testGetObjectNotFound() throws Exception {
-		test.getObject(clazz.getName());
+		test.getObject(0);
 		Assert.fail("Attempting to get an object that was never added should fail");
 	}
 
@@ -80,7 +84,8 @@ public class HBTreeTest {
 	@Test
 	public void testAddClass() throws Exception {
 		test.addObject(clazz);
-		Assert.assertEquals(clazz, test.getObject(clazz.getName()));
+		long id = 0;
+		Assert.assertEquals(clazz, test.getObject(id));
 	}
 
 	@Test(expected = HBDuplicateObjectFoundException.class)
@@ -93,13 +98,14 @@ public class HBTreeTest {
 	@Test
 	public void testAddInterface() throws Exception {
 		test.addObject(interf);
-		Assert.assertEquals(interf, test.getObject(interf.getName()));
+		Assert.assertEquals(interf, test.getObject(interf.getId()));
 	}
 
 	@Test(expected = HBDuplicateObjectFoundException.class)
 	public void testDuplicateInterface() throws Exception {
 		test.addObject(interf);
 		IObject interf2 = new HBInterface(interf.getName());
+		interf2.setId(interf.getId());
 		test.addObject(interf2);
 	}
 
@@ -114,24 +120,10 @@ public class HBTreeTest {
 	}
 
 	@Test
-	public void testDuplicateNameNotPackage() throws Exception {
-		final String name = "DuppedName";
-		final String pkg = "package";
-		IObject clazz1 = new HBClass(name);
-		test.addObject(clazz1);
-
-		IObject clazz2 = new HBClass(name);
-		clazz2.addPackage(pkg);
-		Assert.assertTrue("Adding a class with a different package is fine",
-				test.addObject(clazz2));
-	}
-
-	@Test
 	public void testNormalAddRelationship_InterToClass() throws Exception {
 		test.addObject(clazz);
 		test.addObject(interf);
-		Assert.assertTrue("Adding a relationship normally should work",
-				test.addRelationship(interf, clazz, impl));
+		Assert.assertTrue("Adding a relationship normally should work", test.addRelationship(interf, clazz, impl));
 	}
 
 	@Test(expected = HBObjectNotFoundException.class)
@@ -152,8 +144,7 @@ public class HBTreeTest {
 	public void testNormalAddRelationship_ClassToClass() throws Exception {
 		test.addObject(clazz);
 		test.addObject(clazz2);
-		Assert.assertTrue("Adding a relationship normally should work",
-				test.addRelationship(clazz, clazz2, ext));
+		Assert.assertTrue("Adding a relationship normally should work", test.addRelationship(clazz, clazz2, ext));
 	}
 
 	@Test(expected = HBObjectNotFoundException.class)
@@ -174,8 +165,7 @@ public class HBTreeTest {
 	public void testNormalAddRelationship_InterToInter() throws Exception {
 		test.addObject(interf);
 		test.addObject(interf2);
-		Assert.assertTrue("Adding a relationship normally should work",
-				test.addRelationship(interf, interf2, ext));
+		Assert.assertTrue("Adding a relationship normally should work", test.addRelationship(interf, interf2, ext));
 	}
 
 	@Test(expected = HBObjectNotFoundException.class)
@@ -198,8 +188,7 @@ public class HBTreeTest {
 	public void testNormalAddRelationship_ClassToInter() throws Exception {
 		test.addObject(clazz);
 		test.addObject(interf);
-		Assert.assertTrue("Adding a relationship normally should work",
-				test.addRelationship(clazz, interf, ext));
+		Assert.assertTrue("Adding a relationship normally should work", test.addRelationship(clazz, interf, ext));
 	}
 
 	@Test(expected = HBObjectNotFoundException.class)
@@ -236,8 +225,7 @@ public class HBTreeTest {
 	@Test
 	public void testRemoveObjectNorm_Class() throws Exception {
 		test.addObject(clazz);
-		Assert.assertTrue("Removing a class normally should work",
-				test.removeObject(clazz));
+		Assert.assertTrue("Removing a class normally should work", test.removeObject(clazz));
 	}
 
 	@Test(expected = HBObjectNotFoundException.class)
@@ -248,8 +236,7 @@ public class HBTreeTest {
 	@Test
 	public void testRemoveObjectNorm_Inter() throws Exception {
 		test.addObject(interf);
-		Assert.assertTrue("Removing a class normally should work",
-				test.removeObject(interf));
+		Assert.assertTrue("Removing a class normally should work", test.removeObject(interf));
 	}
 
 	@Test(expected = HBObjectNotFoundException.class)
@@ -263,41 +250,34 @@ public class HBTreeTest {
 		test.addObject(clazz2);
 		test.addRelationship(clazz, clazz2, ext);
 
-		Assert.assertTrue("Removing a relationship normally should work",
-				test.removeRelationship(clazz, clazz2));
+		Assert.assertTrue("Removing a relationship normally should work", test.removeRelationship(clazz, clazz2));
 	}
 
 	@Test
-	public void testRemoveRelationshipNormal_ClassToInterface()
-			throws Exception {
+	public void testRemoveRelationshipNormal_ClassToInterface() throws Exception {
 		test.addObject(clazz);
 		test.addObject(interf);
 		test.addRelationship(clazz, interf, impl);
 
-		Assert.assertTrue("Removing a relationship normally should work",
-				test.removeRelationship(clazz, interf));
+		Assert.assertTrue("Removing a relationship normally should work", test.removeRelationship(clazz, interf));
 	}
 
 	@Test
-	public void testRemoveRelationshipNormal_InterfaceToClass()
-			throws Exception {
+	public void testRemoveRelationshipNormal_InterfaceToClass() throws Exception {
 		test.addObject(interf);
 		test.addObject(clazz);
 		test.addRelationship(interf, clazz, impl);
 
-		Assert.assertTrue("Removing a relationship normally should work",
-				test.removeRelationship(interf, clazz));
+		Assert.assertTrue("Removing a relationship normally should work", test.removeRelationship(interf, clazz));
 	}
 
 	@Test
-	public void testRemoveRelationshipNormal_InterfaceToInterface()
-			throws Exception {
+	public void testRemoveRelationshipNormal_InterfaceToInterface() throws Exception {
 		test.addObject(interf);
 		test.addObject(interf2);
 		test.addRelationship(interf, interf2, ext);
 
-		Assert.assertTrue("Removing a relationship normally should work",
-				test.removeRelationship(interf, interf2));
+		Assert.assertTrue("Removing a relationship normally should work", test.removeRelationship(interf, interf2));
 	}
 
 	@Test(expected = HBObjectNotFoundException.class)
@@ -343,111 +323,81 @@ public class HBTreeTest {
 	}
 
 	@Test
-	public void testGetMatchingName() throws Exception {
-		IObject obj1 = new HBClass("name");
-		obj1.addPackage("pkg1");
-		IObject obj2 = new HBClass("name");
-		obj2.addPackage("pkg2");
-
-		test.addObject(obj1);
-		test.addObject(obj2);
-
-		List<HBObjectBox> boxes = new ArrayList<HBObjectBox>() {
-			{
-				add(new HBObjectBox(0, "name", "pkg1"));
-				add(new HBObjectBox(0, "name", "pkg2"));
-			}
-		};
-
-		Assert.assertEquals("Getting the matching names normally should work.",
-				boxes, test.getMatchingObjects("name"));
-	}
-	
-	@Test
-	public void testGetMatchingName_InterfaceAndClass() throws Exception {
-		IObject obj1 = new HBInterface("name");
-		obj1.addPackage("pkg1");
-		IObject obj2 = new HBClass("name");
-		obj2.addPackage("pkg2");
-		
-		test.addObject(obj1);
-		test.addObject(obj2);
-		
-		List<HBObjectBox> boxes = new ArrayList<HBObjectBox>() {
-			{
-				add(new HBObjectBox(0, "name", "pkg1"));
-				add(new HBObjectBox(0, "name", "pkg2"));
-			}
-		};
-
-		Assert.assertEquals("Getting the matching names normally should work.",
-				boxes, test.getMatchingObjects("name"));
-	}
-	
-	@Test
 	public void testTraverseSingle_Class() throws Exception {
 		test.addObject(clazz);
 		HBTreeAccum accumulator = new HBTreeAccum();
 		test.traverse(accumulator);
-		
-		List<IObject> correct = new ArrayList<IObject>() {{
-			add(clazz);
-		}};
+
+		List<IObject> correct = new ArrayList<IObject>() {
+			{
+				add(clazz);
+			}
+		};
 		Assert.assertEquals(correct, accumulator.objs);
 	}
-	
+
 	@Test
 	public void testTraverseTwoAlphabetical_Class() throws Exception {
 		final IObject a = new HBClass("a");
+		a.setId(id++);
 		final IObject b = new HBClass("b");
-		
+		b.setId(id++);
+
 		test.addObject(a);
 		test.addObject(b);
-		
+
 		HBTreeAccum accumulator = new HBTreeAccum();
 		test.traverse(accumulator);
-		
-		List<IObject> correct = new ArrayList<IObject>() {{
-			add(a);
-			add(b);
-		}};
+
+		List<IObject> correct = new ArrayList<IObject>() {
+			{
+				add(a);
+				add(b);
+			}
+		};
 		Assert.assertEquals(correct, accumulator.objs);
 	}
-	
+
 	@Test
 	public void testTraverseSingle_Inter() throws Exception {
 		test.addObject(interf);
 		HBTreeAccum accumulator = new HBTreeAccum();
 		test.traverse(accumulator);
-		
-		List<IObject> correct = new ArrayList<IObject>() {{
-			add(interf);
-		}};
+
+		List<IObject> correct = new ArrayList<IObject>() {
+			{
+				add(interf);
+			}
+		};
 		Assert.assertEquals(correct, accumulator.objs);
 	}
-	
+
 	@Test
 	public void testTraverseTwoAlphabetical_Inter() throws Exception {
 		final IObject a = new HBInterface("a");
+		a.setId(id++);
 		final IObject b = new HBInterface("b");
-		
+		b.setId(id++);
+
 		test.addObject(a);
 		test.addObject(b);
-		
+
 		HBTreeAccum accumulator = new HBTreeAccum();
 		test.traverse(accumulator);
-		
-		List<IObject> correct = new ArrayList<IObject>() {{
-			add(a);
-			add(b);
-		}};
+
+		List<IObject> correct = new ArrayList<IObject>() {
+			{
+				add(a);
+				add(b);
+			}
+		};
 		Assert.assertEquals(correct, accumulator.objs);
 	}
-	
+
 	@Test
 	public void testTraverseMulti_Mixed() throws Exception {
 		List<IObject> correct = new ArrayList<>();
-		
+
 		// Set them up
 		for (int i = 0; i < 26; ++i) {
 			IObject add;
@@ -456,10 +406,11 @@ public class HBTreeTest {
 			} else {
 				add = new HBInterface("" + (char) ('a' + i));
 			}
+			add.setId(id++);
 			test.addObject(add);
 			correct.add(add);
 		}
-		
+
 		HBTreeAccum accumulator = new HBTreeAccum();
 		test.traverse(accumulator);
 		Assert.assertEquals(correct, accumulator.objs);
@@ -469,13 +420,14 @@ public class HBTreeTest {
 	public void tearDown() {
 		test = null;
 	}
-	
-	// Visitor that just stores the objects that were visited, in the order they were visited
+
+	// Visitor that just stores the objects that were visited, in the order they
+	// were visited
 	private class HBTreeAccum implements IHBTreeVisitor {
-		
+
 		// The visited objs
 		public final List<IObject> objs;
-		
+
 		public HBTreeAccum() {
 			objs = new ArrayList<>();
 		}
