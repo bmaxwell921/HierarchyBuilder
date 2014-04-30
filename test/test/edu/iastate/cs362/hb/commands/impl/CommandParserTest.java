@@ -162,9 +162,39 @@ public class CommandParserTest {
 		test.parseCommand(command);
 	}
 	
-	@Test (expected = MalformattedCommandException.class)
-	public void listTestException2() throws MalformattedCommandException {
-		String command = "list class";
-		test.parseCommand(command);
+	@Test 
+	public void listNullTest() throws MalformattedCommandException {
+		String command = "list class -name ";
+		ICommand c = test.parseCommand(command);
+		assertEquals(c.getFlagValue("name"), null);
 	}
+	
+	@Test
+	public void listCacheTest() throws MalformattedCommandException {
+		String command = "list cache -id 8675";
+		ICommand c = test.parseCommand(command);
+		assertEquals(c.getFlagValue("id"), "8675");
+	}
+	
+	@Test
+	public void listCacheTest2() throws MalformattedCommandException {
+		String command = "list cache -id 8675";
+		ICommand c = test.parseCommand(command);
+		assertEquals(c.getName(), "list");
+	}
+	
+	@Test
+	public void listCacheTest3() throws MalformattedCommandException {
+		String command = "list cache -id 8675";
+		ICommand c = test.parseCommand(command);
+		assertEquals(c.getSubCommand(), "cache");
+	}
+	
+	@Test
+	public void listCacheException() throws MalformattedCommandException {
+		String command = "list cache -id ";
+		ICommand c = test.parseCommand(command);
+		assertEquals(c.getFlagValue("id"), null);
+	}
+	
 }
