@@ -105,12 +105,14 @@ public class IdManager {
 	 * @param info
 	 */
 	public void updateInfo(long id, String...info) {
+		String oldKey = null;
 		for (String key : idMap.keySet()) {
 			if (idMap.get(key) != null && idMap.get(key).equals(id)) {
 				idMap.put(buildKey(info), id);
-				return;
+				oldKey = key;
 			}
 		}
+		idMap.remove(oldKey);
 	}
 	
 	/**

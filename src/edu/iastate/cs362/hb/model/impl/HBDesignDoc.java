@@ -60,7 +60,7 @@ public class HBDesignDoc implements IDesignDoc {
 	@Override
 	public boolean addPackage(long objId, String pkg) throws Exception {
 		IObject clazz = tree.getObject(objId);
-		IdManager.getInstance().updateInfo(clazz.getId(), clazz.getPackage(), clazz.getName());
+		IdManager.getInstance().updateInfo(clazz.getId(), pkg, clazz.getName());
 		return clazz.addPackage(pkg);
 	}
 

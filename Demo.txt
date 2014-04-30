@@ -14,9 +14,9 @@ Stuff to Demo:
 		- change class method
 	
 	Brandon:
-		- create design 			
-		- create class/interface
-		- add class/interface package
+		X - create design 			
+		X - create class/interface
+		X - add class/interface package
 		- add class/interface instance method
 		- add class/interface static method
 		- export as JSON
@@ -44,10 +44,16 @@ Command orders:
 
 	Brandon:
 		create design -name Name
+		
 		create class -name Class1
 		list class -object default.Class1 -> Can see there was a new empty class created
-		create interface -name Interf1
 		
+		create interface -name Interf1
+		list interface -object default.Interf1 -> Can see there was a new interface created
+		
+		add pkg -object default.Class1 -name edu.iastate
+		list class -object edu.iastate.Class1 -> Notice how we need to update the package
 
+		
 
 	Rob:

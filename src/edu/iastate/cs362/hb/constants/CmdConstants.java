@@ -127,7 +127,7 @@ public class CmdConstants {
 		private static final String METHOD_SHORT = "m";
 		public static final String METHOD_REGEX = METHOD + RegexOp.OR + METHOD_SHORT;
 		
-		public static final String MODIFIER = "modifier";
+		public static final String MODIFIER = "modifiers";
 		private static final String MODIFIER_SHORT = "mod";
 		public static final String MODIFIER_REGEX = MODIFIER + RegexOp.OR + MODIFIER_SHORT;
 		

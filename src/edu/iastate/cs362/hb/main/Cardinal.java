@@ -126,13 +126,13 @@ public class Cardinal {
 		}
 		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.METHOD)) {
 			long id = IdManager.getInstance().accessIdWithKey(cmd.getFlagValue(CmdConstants.Flags.OBJECT));
-			if (cmd.hasFlag(CmdConstants.Flags.INSTANCE)) {
+			if (cmd.hasFlag(CmdConstants.Flags.MODIFIER) && !cmd.getFlagValue(CmdConstants.Flags.MODIFIER).contains("static")) {
 				isc.addInstanceMethod(id, cmd.getFlagValue(CmdConstants.Flags.NAME), cmd.getFlagValue(CmdConstants.Flags.RETURN),
-						cmd.getFlagValue(CmdConstants.Flags.PARAMETERS), cmd.getFlagValue(CmdConstants.Flags.MODIFIER));
+						cmd.getFlagValue(CmdConstants.Flags.ARGUMENTS), cmd.getFlagValue(CmdConstants.Flags.MODIFIER));
 				return;
 			}
 			isc.addStaticMethod(id, cmd.getFlagValue(CmdConstants.Flags.NAME), cmd.getFlagValue(CmdConstants.Flags.RETURN),
-					cmd.getFlagValue(CmdConstants.Flags.PARAMETERS), cmd.getFlagValue(CmdConstants.Flags.MODIFIER) + ","
+					cmd.getFlagValue(CmdConstants.Flags.ARGUMENTS), cmd.getFlagValue(CmdConstants.Flags.MODIFIER) + ","
 							+ CmdConstants.Flags.STATIC);
 			return;
 		}
