@@ -153,17 +153,4 @@ public class HBTree implements ITree {
 		}
 		return false;
 	}
-	
-	private Set<IObject> findAll(long objId, String pkg) {
-		Set<IObject> ret = new HashSet<>();
-
-		for (IObject obj : objs) {
-			if (obj.getId() == (objId)
-					&& (pkg == null || pkg != null
-							&& obj.getPackage().equals(pkg))) {
-				ret.add(obj);
-			}
-		}
-		return ret;
-	}
 }

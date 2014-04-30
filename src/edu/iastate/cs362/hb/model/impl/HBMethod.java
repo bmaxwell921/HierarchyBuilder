@@ -172,6 +172,9 @@ public class HBMethod implements IMethod {
 	@Override
 	public void addReturnType(String returnType) {
 		this.returnType = returnType;
-		
+	}
+
+	public String getReturnType() {
+		return returnType;
 	}
 }
