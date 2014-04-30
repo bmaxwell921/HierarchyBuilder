@@ -56,6 +56,11 @@ public class CommandParser implements ICommandParser {
 		case CmdConstants.CmdNames.LIST:
 			c = new Command(CmdConstants.CmdNames.LIST);
 			break;
+		case CmdConstants.CmdNames.HELP:
+			// Quit fast here
+			c = new Command(CmdConstants.CmdNames.HELP);
+			c.setSubCommand("");
+			return c;
 		default:
 			throw new MalformattedCommandException("Malformatted command name!", commandList[0]);
 		}
