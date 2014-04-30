@@ -28,7 +28,7 @@ public class HBVariable implements IVariable {
 	}
 
 	public HBVariable() {
-		// Constructor for deserialization
+		this("", "");
 	}
 
 	@Override
