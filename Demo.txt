@@ -1,0 +1,39 @@
+Stuff to Demo:
+	Alex:
+		- add class instance field
+		- add relationship
+		- remove class/interface package
+		- remoce class/interface
+		- remove relationship
+		- list design
+		- list class/interface
+		- change class/interface name
+		- change class/interface package
+		- change class modifiers
+		- change class field
+		- change class method
+	
+	Brandon:
+		- create design
+		- create class/interface
+		- add class/interface package
+		- add class/interface instance method
+		- add class/interface static method
+		- export as JSON
+		- import as JSON
+		- import as Source -> Doesn't work
+		- show help
+	
+	Rob:
+		- All the command parsing stuff
+		- remove class/interface instance method
+		- remove class/interface static method
+		- export as XML
+		- export as Source
+		- import as XML
+		- cache variable
+		- chache method
+		- chache modifier set
+		- list cached variable
+		- list cached method
+		- list cached modifier set
