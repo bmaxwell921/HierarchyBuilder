@@ -9,6 +9,7 @@ import edu.iastate.cs362.hb.exceptions.HBClassNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBDuplicateObjectFoundException;
 import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.exceptions.HBRelationshipNotFoundException;
+import edu.iastate.cs362.hb.main.IdManager;
 import edu.iastate.cs362.hb.model.IDesignDoc;
 import edu.iastate.cs362.hb.model.impl.HBDesignDoc;
 
@@ -26,24 +27,24 @@ public class DesignDocTest {
 	// Object to test
 	private IDesignDoc test;
 
+	private int id;
+
 	@Before
 	public void setUp() {
 		test = new HBDesignDoc(TEST_NAME);
+		id = 0;
 	}
 
 	@Test
 	public void testCreateDesign() {
 		// Should just execute without fail
 		IDesignDoc doc = new HBDesignDoc(TEST_NAME);
-		Assert.assertEquals(
-				"Newly created design doc should have the correct name",
-				TEST_NAME, doc.getName());
+		Assert.assertEquals("Newly created design doc should have the correct name", TEST_NAME, doc.getName());
 	}
 
 	@Test
 	public void testCreateClass() throws Exception {
-		Assert.assertTrue("Creating a class normally should work",
-				test.createClass(OBJECT_NAME));
+		Assert.assertTrue("Creating a class normally should work", test.createClass(OBJECT_NAME));
 	}
 
 	@Test(expected = HBDuplicateObjectFoundException.class)
@@ -55,8 +56,7 @@ public class DesignDocTest {
 
 	@Test
 	public void testCreateInterface() throws Exception {
-		Assert.assertTrue("Creating an interface normally should work",
-				test.createInterface(OBJECT_NAME));
+		Assert.assertTrue("Creating an interface normally should work", test.createInterface(OBJECT_NAME));
 	}
 
 	@Test(expected = HBDuplicateObjectFoundException.class)
@@ -67,85 +67,91 @@ public class DesignDocTest {
 	}
 
 	@Test
-	public void testAddPackage() throws Exception,
-			HBObjectNotFoundException {
+	public void testAddPackage() throws Exception, HBObjectNotFoundException {
 		String pkgName = "package";
 		test.createClass(OBJECT_NAME);
+
 		Assert.assertTrue("Adding a package to an object should work",
-				test.addPackage(pkgName, OBJECT_NAME));
+				test.addPackage(IdManager.getInstance().accessId("default", OBJECT_NAME), pkgName));
 	}
 
 	@Test(expected = HBObjectNotFoundException.class)
 	public void testAddPackageNotFound() throws Exception {
 		String pkgName = "package";
-		test.addPackage(pkgName, OBJECT_NAME);
+		test.addPackage(IdManager.getInstance().accessId("default", OBJECT_NAME), pkgName);
 	}
-	
+
 	@Test
 	public void testAddInstanceField() throws Exception {
 		final String instanceFieldName = "aField";
 		final String modifier = "itsaModifier";
 		test.createClass(OBJECT_NAME);
-		Assert.assertTrue("Adding an instance field, MSS.", 
-				test.addInstanceField(OBJECT_NAME, instanceFieldName, modifier));
+		Assert.assertTrue("Adding an instance field, MSS.",
+				test.addInstanceField(IdManager.getInstance().accessId("default", OBJECT_NAME), instanceFieldName, modifier));
 	}
-	
+
 	@Test
 	public void testAddInstanceField2ElectricBoogaloo() throws Exception {
 		final String instanceFieldName = "iMadeThisTestForFun";
 		final String modifier = "awesome";
 		final String className = "bestTestEver";
 		test.createClass(className);
-		Assert.assertTrue("Adding an instance field, MSS.", 
-				test.addInstanceField(className, instanceFieldName, modifier));
+		Assert.assertTrue("Adding an instance field, MSS.",
+				test.addInstanceField(IdManager.getInstance().accessId("default", className), instanceFieldName, modifier));
 	}
-	
+
 	@Test(expected = HBObjectNotFoundException.class)
 	public void testAddInstanceFieldToNonexistentClass() throws Exception {
 		final String instanceFieldName = "themagic";
 		final String modifier = "oftelevision";
 		test.createClass(OBJECT_NAME);
-		test.addInstanceField("APPLESAUCE!", instanceFieldName, modifier);
+		test.addInstanceField(IdManager.getInstance().accessId("default", "NonExist"), instanceFieldName, modifier);
 	}
-	
+
 	@Test(expected = HBClassNotFoundException.class)
 	public void testAddInstaceFieldToInterface() throws Exception {
 		final String instanceFieldName = "AREYOUSTILLTHERE?";
 		final String modifier = "turretVoice";
 		test.createInterface(OBJECT_NAME);
-		test.addInstanceField(OBJECT_NAME, instanceFieldName, modifier);
+		test.addInstanceField(IdManager.getInstance().accessId("default", OBJECT_NAME), instanceFieldName, modifier);
 	}
-	
+
 	@Test
-	public void addRelationshipTest() throws Exception{
+	public void addRelationshipTest() throws Exception {
 		final String fromClass = "thistestName";
 		final String toClass = "soundsLikeIm";
 		final String relationshipName = "aPsychologist";
 		test.createClass(fromClass);
 		test.createClass(toClass);
-		Assert.assertTrue("Adding a relationship to existing Objects should work", 
-				test.addRelationship(fromClass, toClass, relationshipName));
+		Assert.assertTrue(
+				"Adding a relationship to existing Objects should work",
+				test.addRelationship(IdManager.getInstance().accessId("default", fromClass),
+						IdManager.getInstance().accessId("default", toClass), relationshipName));
 	}
-	
+
 	@Test
-	public void addRelationshipTest2() throws Exception{
+	public void addRelationshipTest2() throws Exception {
 		final String fromInterface = "genericName";
 		final String toClass = "unassumingName";
 		final String relationshipName = "theyfittogether";
 		test.createInterface(fromInterface);
 		test.createClass(toClass);
-		Assert.assertTrue("Adding a relationship to existing Objects should work", 
-				test.addRelationship(fromInterface, toClass, relationshipName));
+		Assert.assertTrue(
+				"Adding a relationship to existing Objects should work",
+				test.addRelationship(IdManager.getInstance().accessId("default", fromInterface),
+						IdManager.getInstance().accessId("default", toClass), relationshipName));
 	}
-	
+
 	@Test(expected = HBObjectNotFoundException.class)
-	public void addRelationshipTestNonExistentClass() throws Exception{
+	public void addRelationshipTestNonExistentClass() throws Exception {
 		final String fromClass = "thistestName";
 		final String toClass = "soundsLikeIm";
 		final String relationshipName = "aPsychologist";
 		test.createClass(fromClass);
-		Assert.assertTrue("Adding a relationship to existing Objects should work", 
-				test.addRelationship(fromClass, toClass, relationshipName));
+		Assert.assertTrue(
+				"Adding a relationship to existing Objects should work",
+				test.addRelationship(IdManager.getInstance().accessId("default", fromClass),
+						IdManager.getInstance().accessId("default", toClass), relationshipName));
 	}
 
 	@Test
@@ -155,9 +161,9 @@ public class DesignDocTest {
 		final String modifier = "i";
 		test.createClass(OBJECT_NAME);
 		Assert.assertTrue("Adding an instance method normally should work",
-				test.addInstanceMethod(OBJECT_NAME, METHOD_NAME, params, modifier));
+				test.addInstanceMethod(IdManager.getInstance().accessId("default", OBJECT_NAME), METHOD_NAME, params, modifier));
 	}
-	
+
 	@Test
 	public void testAddInstanceMethodToInterface() throws Exception {
 		final String METHOD_NAME = "method";
@@ -165,27 +171,27 @@ public class DesignDocTest {
 		final String modifier = "i";
 		test.createInterface(OBJECT_NAME);
 		Assert.assertTrue("Adding an instance method normally should work",
-				test.addInstanceMethod(OBJECT_NAME, METHOD_NAME, params, modifier));
+				test.addInstanceMethod(IdManager.getInstance().accessId("default", OBJECT_NAME), METHOD_NAME, params, modifier));
 	}
-	
-	@Test (expected = HBObjectNotFoundException.class)
+
+	@Test(expected = HBObjectNotFoundException.class)
 	public void testAddInstanceMethodWithoutClass() throws Exception {
 		final String METHOD_NAME = "method";
 		final String params = "String:name,int:id";
 		final String modifier = "i";
-		test.addInstanceMethod(OBJECT_NAME, METHOD_NAME, params, modifier);
+		test.addInstanceMethod(IdManager.getInstance().accessId("default", OBJECT_NAME), METHOD_NAME, params, modifier);
 	}
-	
-	//@Test (expected = MalformattedCommandException.class)
+
+	// @Test (expected = MalformattedCommandException.class)
 	public void testAddInstanceMethodInvalidParamsMissing() throws Exception {
 		// TODO I think this should be handled in the CommandParser
 		final String METHOD_NAME = "method";
 		final String params = "String:name,int:";
 		final String modifier = "i";
 		test.createInterface(OBJECT_NAME);
-		test.addInstanceMethod(OBJECT_NAME, METHOD_NAME, params, modifier);
+		test.addInstanceMethod(IdManager.getInstance().accessId("default", OBJECT_NAME), METHOD_NAME, params, modifier);
 	}
-	
+
 	@Test
 	public void testAddStaticMethodToClass() throws Exception {
 		final String METHOD_NAME = "method";
@@ -193,9 +199,9 @@ public class DesignDocTest {
 		final String modifier = "i";
 		test.createClass(OBJECT_NAME);
 		Assert.assertTrue("Adding an instance method normally should work",
-				test.addStaticMethod(OBJECT_NAME, METHOD_NAME, params, modifier));
+				test.addStaticMethod(IdManager.getInstance().accessId("default", OBJECT_NAME), METHOD_NAME, params, modifier));
 	}
-	
+
 	@Test
 	public void testAddStaticMethodToInterface() throws Exception {
 		final String METHOD_NAME = "method";
@@ -203,99 +209,108 @@ public class DesignDocTest {
 		final String modifier = "i";
 		test.createInterface(OBJECT_NAME);
 		Assert.assertTrue("Adding an instance method normally should work",
-				test.addStaticMethod(OBJECT_NAME, METHOD_NAME, params, modifier));
+				test.addStaticMethod(IdManager.getInstance().accessId("default", OBJECT_NAME), METHOD_NAME, params, modifier));
 	}
-	
-	@Test (expected = HBObjectNotFoundException.class)
+
+	@Test(expected = HBObjectNotFoundException.class)
 	public void testAddStaticMethodWithoutClass() throws Exception {
 		final String METHOD_NAME = "method";
 		final String params = "String:name,int:id";
 		final String modifier = "i";
-		test.addStaticMethod(OBJECT_NAME, METHOD_NAME, params, modifier);
+		test.addStaticMethod(IdManager.getInstance().accessId("default", OBJECT_NAME), METHOD_NAME, params, modifier);
 	}
-	
-	//@Test (expected = MalformattedCommandException.class)
+
+	// @Test (expected = MalformattedCommandException.class)
 	public void testAddStaticMethodInvalidParamsMissing() throws Exception {
 		// TODO I think this should be handled in the CommandParser
 		final String METHOD_NAME = "method";
 		final String params = "String:name,int:";
 		final String modifier = "i";
 		test.createInterface(OBJECT_NAME);
-		test.addStaticMethod(OBJECT_NAME, METHOD_NAME, params, modifier);
+		test.addStaticMethod(IdManager.getInstance().accessId("default", OBJECT_NAME), METHOD_NAME, params, modifier);
 	}
-	
+
 	@Test
-	public void testRemoveRelationship() throws Exception{
+	public void testRemoveRelationship() throws Exception {
 		final String fromClass = "genericName";
 		final String toClass = "unassumingName";
 		final String relationshipName = "theyfittogether";
 		test.createClass(fromClass);
 		test.createClass(toClass);
-		test.addRelationship(fromClass, toClass, relationshipName);
-		Assert.assertTrue("Test normal Remove", test.removeRelationship(fromClass, toClass));
+		test.addRelationship(IdManager.getInstance().accessId("default", fromClass), IdManager.getInstance().accessId("default", toClass),
+				relationshipName);
+		Assert.assertTrue(
+				"Test normal Remove",
+				test.removeRelationship(IdManager.getInstance().accessId("default", fromClass),
+						IdManager.getInstance().accessId("default", toClass)));
 	}
-	
+
 	@Test(expected = HBRelationshipNotFoundException.class)
-	public void testRemoveRelationshipThatDoesntExist() throws Exception{
+	public void testRemoveRelationshipThatDoesntExist() throws Exception {
 		final String fromClass = "imaClass";
 		final String toClass = "imaClass2";
 		final String relationshipName = "theyfittogether";
 		test.createClass(fromClass);
 		test.createClass(toClass);
-		test.addRelationship(fromClass, toClass, relationshipName);
-		test.removeRelationship(fromClass, toClass);
-		test.removeRelationship(fromClass, toClass);
+		test.addRelationship(IdManager.getInstance().accessId("default", fromClass), IdManager.getInstance().accessId("default", toClass), relationshipName);
+		test.removeRelationship(IdManager.getInstance().accessId("default", fromClass), IdManager.getInstance().accessId("default", toClass));
+		test.removeRelationship(IdManager.getInstance().accessId("default", fromClass), IdManager.getInstance().accessId("default", toClass));
 	}
-	
+
 	@Test(expected = HBRelationshipNotFoundException.class)
-	public void testRemoveRelationshipThatDoesntExist1() throws Exception{
+	public void testRemoveRelationshipThatDoesntExist1() throws Exception {
 		String fromClass = "imaClass";
 		String toClass = "imaClass2";
 		test.createClass(fromClass);
 		test.createClass(toClass);
-		test.removeRelationship(fromClass, toClass);
+		test.removeRelationship(IdManager.getInstance().accessId("default", fromClass), IdManager.getInstance()
+				.accessId("default", toClass));
 	}
-	
-	@Test(expected = HBObjectNotFoundException.class) 
-	public void testRemoveRelationshipClassesNotReal() throws Exception{
-		test.removeRelationship("IMNOTREAL", "NEITHERAMI");
+
+	@Test(expected = HBObjectNotFoundException.class)
+	public void testRemoveRelationshipClassesNotReal() throws Exception {
+		test.removeRelationship(IdManager.getInstance().accessId("default", "NotReal"),
+				IdManager.getInstance().accessId("default", "MeEither"));
 	}
-	
-	@Test(expected = HBObjectNotFoundException.class) 
-	public void testRemoveRelationshipClassesNotReal1() throws Exception{
+
+	@Test(expected = HBObjectNotFoundException.class)
+	public void testRemoveRelationshipClassesNotReal1() throws Exception {
 		test.createClass("IMNOTREAL");
-		test.removeRelationship("IMNOTREAL", "NEITHERAMI");
+		test.removeRelationship(IdManager.getInstance().accessId("default", "IMNOTREAL"),
+				IdManager.getInstance().accessId("default", "NEITHERAMI"));
 	}
-	
-	@Test(expected = HBObjectNotFoundException.class) 
-	public void testRemoveRelationshipClassesNotReal2() throws Exception{
+
+	@Test(expected = HBObjectNotFoundException.class)
+	public void testRemoveRelationshipClassesNotReal2() throws Exception {
 		test.createClass("BUTIAM");
-		test.removeRelationship("IMNOTREAL", "BUTIAM");
+		test.removeRelationship(IdManager.getInstance().accessId("default", "IMNOTREAL"),
+				IdManager.getInstance().accessId("default", "BUTIAM"));
 	}
-	
+
 	@Test
 	public void testRemoveClass() throws Exception {
 		final String name = "CLASS";
 		test.createClass(name);
-		Assert.assertTrue("Test Normal Remove Class.", test.removeObj(name));
+		Assert.assertTrue("Test Normal Remove Class.", test.removeObj(IdManager.getInstance().accessId("default", name)));
 	}
-	
+
 	@Test(expected = HBObjectNotFoundException.class)
 	public void testRemoveClassNotFound() throws Exception {
-		test.removeObj("NotReal");
+		test.removeObj(IdManager.getInstance().accessId("default", "NotReal"));
 	}
 
 	@Test
-	public void testThisStuff() throws Exception{
+	public void testThisStuff() throws Exception {
 		test.createClass(TEST_NAME);
 		test.createClass("CAATS");
-		test.addRelationship(TEST_NAME, "CAATS", "extends");
-		//TODO can we get actual tests for this?
-//		System.out.println(test.list());
-		//String.replace("\\s+", "");
+		test.addRelationship(IdManager.getInstance().accessId("default", TEST_NAME), IdManager.getInstance().accessId("default", "CAATS"),
+				"extends");
+		// TODO can we get actual tests for this?
+		// System.out.println(test.list());
+		// String.replace("\\s+", "");
 		Assert.assertEquals(true, true);
 	}
-	
+
 	@After
 	public void tearDown() {
 		test = null;
