@@ -167,7 +167,7 @@ public class HBDesignDoc implements IDesignDoc {
 	@Override
 	public boolean changeName(long objId, String newName) throws Exception {
 		IObject obj = tree.getObject(objId);
-		IdManager.getInstance().updateInfo(obj.getId(), obj.getPackage(), obj.getName());
+		IdManager.getInstance().updateInfo(obj.getId(), obj.getPackage(), newName);
 		return obj.changeName(newName);
 	}
 
@@ -175,7 +175,7 @@ public class HBDesignDoc implements IDesignDoc {
 	public boolean changePackage(long objId, String pkgName)
 			throws Exception {
 		IObject obj = tree.getObject(objId);
-		IdManager.getInstance().updateInfo(obj.getId(), obj.getPackage(), obj.getName());
+		IdManager.getInstance().updateInfo(obj.getId(), pkgName, obj.getName());
 		return obj.changePackage(pkgName);
 	}
 
