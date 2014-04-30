@@ -93,7 +93,7 @@ public interface IDesignDoc extends Nameable {
 	 *             If multiple objects with the given name exist in the design
 	 *             doc
 	 */
-	public boolean addInstanceMethod(long objId, String methodName,
+	public boolean addInstanceMethod(long objId, String methodName, String returnType,
 			String params, String... modifiers) throws Exception;
 
 	/**
@@ -108,7 +108,7 @@ public interface IDesignDoc extends Nameable {
 	 * @throws HBDuplicateMethodException
 	 * @throws HBMultipleObjectsFoundException
 	 */
-	public boolean addStaticMethod(long objId, String methodName,
+	public boolean addStaticMethod(long objId, String methodName, String returnType,
 			String params, String... modifiers) throws Exception;
 
 	/**

@@ -3,7 +3,7 @@ Stuff to Demo:
 		- add class instance field
 		- add relationship
 		- remove class/interface package
-		- remove class/interface
+		- remoce class/interface
 		- remove relationship
 		- list design
 		- list class/interface
@@ -62,6 +62,6 @@ Command orders:
 		add pkg -object default.Class1 -name edu.iastate
 		list class -object edu.iastate.Class1 -> Notice how we need to update the package
 
-		
+		add method -object edu.iastate.Class1 -name Method1 -modifiers public -return void -args int:a,int:b
 
 	Rob:

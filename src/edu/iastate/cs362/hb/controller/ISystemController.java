@@ -29,7 +29,7 @@ public interface ISystemController {
 	public boolean addInstanceMethod(long objId, String methodName, String returnType,
 			String params, String... modifiers) throws Exception;
 
-	public boolean addStaticMethod(long objId, String methodName,
+	public boolean addStaticMethod(long objId, String methodName, String returnType,
 			String params, String... modifiers) throws Exception;
 
 	public boolean removeMethod(long objId, String methodName)
