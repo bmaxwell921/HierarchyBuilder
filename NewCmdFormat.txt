@@ -65,6 +65,7 @@ remove <subCommand>
 		pkg 		[-COMMON_OPTIONS]
 		method 		[-COMMON_OPTIONS] [-METHOD_OPTIONS]
 		relation 	[-RELATION_OPTIONS]
+		field 		[-COMMON_OPTIONS] [-FIELD_OPTIONS]
 	COMMON_OPTIONS
 		object <obj>: The fully qualified name of the object you are removing from. Period delimited
 	OBJECT_OPTIONS
@@ -84,13 +85,20 @@ remove <subCommand>
 		-t <t>: Alias for -type		
 	ARGUMENTS
 		<MODIFIERS...>-type-name
+	FIELD_OPTIONS
+		-name <name>: The name of the field to remove
+		-n <name>: Alias for -name
 		
 list <subCommand>
 	Sub-Commands:
 		design
-		cache	[-CACHE_OPTIONS]
+		class	  [-OBJECT_OPTIONS]
+		interface [-OBJECT_OPTIONS]
+		cache	  [-CACHE_OPTIONS]
 	CACHE_OPTIONS
 		-id <id> ID of the cache option to list
+	OBJECT_OPTIONS
+		-object <objName>: The object to list.
 		
 import <subCommand>
 	Sub-Commands:
@@ -109,3 +117,35 @@ export <subCommand>
 	PORT-OPTIONS
 		-path <path>: path to output file to
 		-p <path>: alias to path
+		
+change <subCommand>
+	Sub-Commands:
+		class		[-COMMON_OPTIONS]
+		interface	[-COMMON_OPTIONS]
+		pkg		[-COMMON_OPTIONS]
+		method		[-COMMON_OPTIONS] [-MODIFIER_OPTIONS] [-METHOD_OPTIONS] 
+		field		[-COMMON_OPTIONS] [-MODIFIER_OPTIONS] [-FIELD_OPTIONS] 
+		modifier	[-OBJECT_OPTIONS] [-MODIFIER_OPTIONS]
+	OBJECT_OPTIONS
+		-object <obj>: The object to change.
+	COMMON_OPTIONS
+		-name <name>: the new name to use
+		-n <name>: Alias for -name
+		-object <obj>: The object to change.
+	FIELD_OPTIONS
+		-oldname <name>: the field's current name
+		-oldN <name>: Alias for -oldname
+		-type <type>: the type of the field
+		-t <type>: Alias for -type
+	METHOD_OPTIONS
+		-args <cstArgs>: the arguments, separated by commas
+		-a <cstArgs>: Alias for -args
+		-oldname <name>: the field's current name
+		-oldN <name>: Alias for -oldname
+		-return <returnType>: the return type of the method
+		-r <returnType>: Alias for -return
+	MODIFIER_OPTIONS
+		-modifiers <cstMods>: the modifiers to use, separated by a comma
+		-mod <cstMods>: Alias for -modifiers
+		
+		
