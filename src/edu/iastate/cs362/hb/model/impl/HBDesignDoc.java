@@ -242,7 +242,10 @@ public class HBDesignDoc implements IDesignDoc {
 
 	@Override
 	public boolean removeField(long id, String name) throws Exception {
-		HBClass clazz = (HBClass) tree.getObject(id);
-		return clazz.removeField(name);
+		IObject toUse = tree.getObject(id);
+		if(!(toUse instanceof HBClass)){
+			return false;
+		}
+		return ((HBClass) toUse).removeField(name);
 	}
 }
