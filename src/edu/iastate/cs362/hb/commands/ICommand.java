@@ -4,6 +4,7 @@ import edu.iastate.cs362.hb.model.attributes.Nameable;
 
 /**
  * Interface representing basic behavior for commands. Commands have this format:
+ * Part of the UI, will not show up in the design
  * 
  * 		<CommandName> <SubCommand> -flag1 value1 -flag2 value2 ...
  * @author Brandon

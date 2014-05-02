@@ -6,7 +6,8 @@ import java.util.Map;
 import edu.iastate.cs362.hb.commands.ICommand;
 
 /**
- * Created command with name and value
+ * Created command with name and value.
+ * Part of the UI, will not show up in the design
  * 
  * @author rclabough, Brandon
  * 

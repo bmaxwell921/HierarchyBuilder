@@ -2,6 +2,11 @@ package edu.iastate.cs362.hb.commands;
 
 import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
 
+/**
+ * Part of the UI, will not show up in the design
+ * @author Rob
+ *
+ */
 public interface ICommandParser {
 
 	/**

@@ -19,10 +19,8 @@ import edu.iastate.cs362.hb.exceptions.HBObjectNotFoundException;
 import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
 import edu.iastate.cs362.hb.model.impl.HBSystem;
 
-//import java.util.Random;
-
 /**
- * 
+ * Part of the UI, will not show up in the design
  * @author Alex, Brandon
  * 
  */
@@ -43,8 +41,7 @@ public class Cardinal {
 	}
 
 	public static void main(String[] args) {
-		// doSystemStart();
-		System.out.println("System ready.");
+		 doSystemStart();
 		new Cardinal().run();
 		System.out.println("System Exit.");
 	}
@@ -99,7 +96,7 @@ public class Cardinal {
 	}
 
 	private void doHelp() {
-		System.out.println(isc.showHelp());		
+		System.out.println(isc.showHelp());
 	}
 
 	// Calling of create methods
@@ -173,7 +170,7 @@ public class Cardinal {
 			long id = IdManager.getInstance().accessIdWithKey(cmd.getFlagValue(CmdConstants.Flags.OBJECT));
 			return isc.removeMethod(id, cmd.getFlagValue(CmdConstants.Flags.NAME));
 		}
-		if(cmd.getSubCommand().equals(CmdConstants.SubCmdNames.FIELD)) {
+		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.FIELD)) {
 			long id = IdManager.getInstance().accessIdWithKey(cmd.getFlagValue(CmdConstants.Flags.OBJECT));
 			return isc.removeField(id, cmd.getFlagValue(CmdConstants.Flags.NAME));
 		}
@@ -194,26 +191,26 @@ public class Cardinal {
 	private boolean doExport(ICommand cmd) {
 		if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.XML_REGEX)) {
 			return isc.exportDesignXML(cmd.getFlagValue(CmdConstants.Flags.PATH));
-		} 
+		}
 		if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.JSON_REGEX)) {
 			return isc.exportDesignJSON(cmd.getFlagValue(CmdConstants.Flags.PATH));
-		} 
+		}
 		if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.SOURCE_REGEX)) {
 			return isc.exportDesignSource(cmd.getFlagValue(CmdConstants.Flags.PATH));
-		} 
+		}
 		return false;
 	}
 
 	private boolean doImport(ICommand cmd) throws Exception {
 		if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.XML_REGEX)) {
 			return isc.importDesignXML(cmd.getFlagValue(CmdConstants.Flags.PATH));
-		} 
+		}
 		if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.JSON_REGEX)) {
 			return isc.importDesignJSON(cmd.getFlagValue(CmdConstants.Flags.PATH));
-		} 
+		}
 		if (cmd.getSubCommand().matches(CmdConstants.SubCmdNames.SOURCE_REGEX)) {
 			return isc.importDesignSource(cmd.getFlagValue(CmdConstants.Flags.PATH));
-		} 
+		}
 		return false;
 	}
 
@@ -238,7 +235,8 @@ public class Cardinal {
 			long oldId = IdManager.getInstance().accessIdWithKey(cmd.getFlagValue(CmdConstants.Flags.OLDNAME));
 			HashSet<String> mods = new HashSet<>(Arrays.asList(cmd.getFlagValue(CmdConstants.Flags.MODIFIER).split(",")));
 			List<String> args = Arrays.asList(cmd.getFlagValue(CmdConstants.Flags.ARGUMENTS).split(","));
-			return isc.changeClassMethod(id, oldId, cmd.getFlagValue(CmdConstants.Flags.NAME), cmd.getFlagValue(CmdConstants.Flags.RETURN), args, mods);
+			return isc.changeClassMethod(id, oldId, cmd.getFlagValue(CmdConstants.Flags.NAME), cmd.getFlagValue(CmdConstants.Flags.RETURN),
+					args, mods);
 		}
 		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.MODIFIER)) {
 			HashSet<String> mods = new HashSet<>(Arrays.asList(cmd.getFlagValue(CmdConstants.Flags.MODIFIER).split(",")));

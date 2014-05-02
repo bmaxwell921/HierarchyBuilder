@@ -7,8 +7,9 @@ import edu.iastate.cs362.hb.exceptions.MalformattedCommandException;
 
 /**
  * Class used to parse a given string into a command
+ * Part of the UI, will not show up in the design
  * 
- * @author Brandon, Raaaaahhhhb
+ * @author Brandon, Rob
  * 
  */
 public class CommandParser implements ICommandParser {
