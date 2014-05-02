@@ -202,6 +202,7 @@ public class HBMethod implements IMethod {
 		this.args = new ArrayList<>();
 		addArguments(args);
 		this.modifiers = modifiers;
+		// IdManager part of UI, will not show up in design
 		IdManager.getInstance().updateInfo(id, name);
 		return true;
 	}

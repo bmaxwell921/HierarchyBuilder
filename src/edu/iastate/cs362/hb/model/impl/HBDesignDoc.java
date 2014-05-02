@@ -60,6 +60,7 @@ public class HBDesignDoc implements IDesignDoc {
 	@Override
 	public boolean addPackage(long objId, String pkg) throws Exception {
 		IObject clazz = tree.getObject(objId);
+		// IdManager part of UI, will not show up in design
 		IdManager.getInstance().updateInfo(clazz.getId(), pkg, clazz.getName());
 		return clazz.addPackage(pkg);
 	}
@@ -99,6 +100,7 @@ public class HBDesignDoc implements IDesignDoc {
 	@Override
 	public boolean removePackage(long objId) throws Exception {
 		IObject toRem = tree.getObject(objId);
+		// IdManager part of UI, will not show up in design
 		IdManager.getInstance().updateInfo(toRem.getId(), toRem.getPackage(), toRem.getName());
 		return toRem.removePackage();
 	}
@@ -115,6 +117,7 @@ public class HBDesignDoc implements IDesignDoc {
 	public boolean removeObj(long remId) throws Exception,
 			HBMultipleObjectsFoundException {
 		IObject toRem = tree.getObject(remId);
+		// IdManager part of UI, will not show up in design
 		IdManager.getInstance().remove(toRem.getId());
 		return tree.removeObject(toRem);
 	}
@@ -122,6 +125,7 @@ public class HBDesignDoc implements IDesignDoc {
 	@Override
 	public boolean createClass(String name) throws Exception {
 		IClass clazz = new HBClass(name);
+		// IdManager part of UI, will not show up in design
 		IdManager.getInstance().registerObject(clazz, clazz.getPackage(), clazz.getName());
 		return tree.addObject(clazz);
 	}
@@ -129,6 +133,7 @@ public class HBDesignDoc implements IDesignDoc {
 	@Override
 	public boolean createInterface(String name) throws Exception {
 		IObject interf = new HBInterface(name);
+		// IdManager part of UI, will not show up in design
 		IdManager.getInstance().registerObject(interf, interf.getPackage(), interf.getName());
 		return tree.addObject(interf);
 	}
@@ -168,6 +173,7 @@ public class HBDesignDoc implements IDesignDoc {
 	@Override
 	public boolean changeName(long objId, String newName) throws Exception {
 		IObject obj = tree.getObject(objId);
+		// IdManager part of UI, will not show up in design
 		IdManager.getInstance().updateInfo(obj.getId(), obj.getPackage(), newName);
 		return obj.changeName(newName);
 	}
@@ -176,6 +182,7 @@ public class HBDesignDoc implements IDesignDoc {
 	public boolean changePackage(long objId, String pkgName)
 			throws Exception {
 		IObject obj = tree.getObject(objId);
+		// IdManager part of UI, will not show up in design
 		IdManager.getInstance().updateInfo(obj.getId(), pkgName, obj.getName());
 		return obj.changePackage(pkgName);
 	}
@@ -194,6 +201,7 @@ public class HBDesignDoc implements IDesignDoc {
 			if (interfaces != null) {
 				for (IObject interf : interfaces) {
 					tree.addObject(interf);
+					// IdManager part of UI, will not show up in design
 					IdManager.getInstance().loadInfo(interf.getId(), interf.getPackage(), interf.getName());
 					if (interf.getId() > biggestId) {
 						biggestId = interf.getId();
@@ -203,13 +211,14 @@ public class HBDesignDoc implements IDesignDoc {
 			if (classes != null) {
 				for (IObject clazz : classes) {
 					tree.addObject(clazz);
+					// IdManager part of UI, will not show up in design
 					IdManager.getInstance().loadInfo(clazz.getId(), clazz.getPackage(), clazz.getName());
 					if (clazz.getId() > biggestId) {
 						biggestId = clazz.getId();
 					}
 				}
 			}
-			
+			// IdManager part of UI, will not show up in design
 			IdManager.getInstance().setNextId(biggestId + 1);
 		
 		} catch (Exception e) {

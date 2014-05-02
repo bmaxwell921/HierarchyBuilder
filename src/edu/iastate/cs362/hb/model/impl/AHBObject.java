@@ -172,6 +172,7 @@ public abstract class AHBObject implements IObject {
 			throw new HBDuplicateMethodException(
 					ErrorMessages.DUPLICATE_METHOD, this.name, method.getName());
 		}
+		// IdManager part of UI, will not show up in design
 		IdManager.getInstance().registerObject(method, method.getName());
 		methods.add(method);
 		return true;

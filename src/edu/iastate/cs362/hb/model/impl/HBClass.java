@@ -28,6 +28,7 @@ public class HBClass extends AHBObject implements IClass{
 
 	@Override
 	public boolean addInstanceField(IVariable i) {
+		// IdManager part of UI, will not show up in design
 		IdManager.getInstance().registerObject(i, i.getName());
 		return fields.add(i);
 	}	
