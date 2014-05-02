@@ -127,6 +127,7 @@ public class HBVariable implements IVariable {
 		this.name = name;
 		this.type = type;
 		this.modifiers = modifiers;
+		// IdManager part of UI, will not show up in design
 		IdManager.getInstance().updateInfo(id, name);
 		return true;
 	}

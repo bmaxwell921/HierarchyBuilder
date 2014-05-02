@@ -42,7 +42,6 @@ public class HBSystem implements ISystem {
 
 	@Override
 	public boolean createDesign(String name) {
-		// TODO save the old one?
 		doc = new HBDesignDoc(name);
 		return true;
 	}
