@@ -58,4 +58,9 @@ public class HBInterface extends AHBObject{
 	public boolean changeClassField(long fieldId, String name, String type, Set<String> modifiers) {
 		return false;
 	}
+
+	@Override
+	public boolean removeField(String name) {
+		return false;//In our design, interfaces can't have fields.
+	}
 }

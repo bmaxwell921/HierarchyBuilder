@@ -90,4 +90,6 @@ public interface IObject extends Nameable, Identifiable, Modifiable {
 
 	public boolean changeClassField(long fieldId, String fieldName,
 			String type, Set<String> modifiers);
+
+	boolean removeField(String name);
 }

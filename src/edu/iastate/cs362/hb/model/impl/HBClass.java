@@ -88,6 +88,7 @@ public class HBClass extends AHBObject implements IClass{
 		return false;
 	}
 
+	@Override
 	public boolean removeField(String name) {
 		for(int i = 0; i < fields.size(); i++){
 			if(fields.get(i).getName().equals(name)){
