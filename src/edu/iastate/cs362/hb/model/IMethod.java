@@ -1,6 +1,7 @@
 package edu.iastate.cs362.hb.model;
 
 import java.util.List;
+import java.util.Set;
 
 import edu.iastate.cs362.hb.model.attributes.Identifiable;
 import edu.iastate.cs362.hb.model.attributes.Modifiable;
@@ -37,7 +38,8 @@ public interface IMethod extends Nameable, Identifiable, Modifiable {
 	
 	public String list();
 
-	public boolean update(IMethod m, List<String> args);
-
 	String getReturnType();
+
+	boolean update(String methodName, String returnType, List<String> args,
+			Set<String> modifiers);
 }

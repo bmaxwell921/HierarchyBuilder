@@ -234,7 +234,7 @@ public class Cardinal {
 			long oldId = IdManager.getInstance().accessIdWithKey(cmd.getFlagValue(CmdConstants.Flags.OLDNAME));
 			HashSet<String> mods = new HashSet<>(Arrays.asList(cmd.getFlagValue(CmdConstants.Flags.MODIFIER).split(",")));
 			List<String> args = Arrays.asList(cmd.getFlagValue(CmdConstants.Flags.ARGUMENTS).split(","));
-			return isc.changeClassMethod(id, oldId, cmd.getFlagValue(CmdConstants.Flags.NAME), args, mods);
+			return isc.changeClassMethod(id, oldId, cmd.getFlagValue(CmdConstants.Flags.NAME), cmd.getFlagValue(CmdConstants.Flags.RETURN), args, mods);
 		}
 		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.MODIFIER)) {
 			HashSet<String> mods = new HashSet<>(Arrays.asList(cmd.getFlagValue(CmdConstants.Flags.MODIFIER).split(",")));

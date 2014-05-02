@@ -259,13 +259,12 @@ public abstract class AHBObject implements IObject {
 	}
 	
 	@Override
-	public boolean changeClassMethod(long methodId, IMethod m, List<String> args){
+	public boolean changeClassMethod(long methodId, String methodName, String returnType,
+			List<String> args, Set<String> modifiers){
 		for(int i = 0; i < methods.size(); i++){
 			IMethod toCheck = methods.get(i);
 			if(toCheck.getId() == methodId){
-				/*toCheck = m;
-				return true;*/
-				return toCheck.update(m, args);
+				return toCheck.update(methodName, returnType, args, modifiers);
 			}
 		}
 		return true;

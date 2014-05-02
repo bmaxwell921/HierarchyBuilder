@@ -255,10 +255,11 @@ public interface IDesignDoc extends Nameable {
 	 * @param objId
 	 * @param methodId
 	 * @param methodName
+	 * @param returnType 
 	 * @param methodArgs
 	 * @param modifiers
 	 * @return
 	 * @throws Exception 
 	 */
-	public boolean changeClassMethod(long objId, long methodId, String methodName, List<String> methodArgs, Set<String> modifiers) throws Exception;
+	public boolean changeClassMethod(long objId, long methodId, String methodName, String returnType, List<String> methodArgs, Set<String> modifiers) throws Exception;
 }

@@ -186,9 +186,9 @@ public class SystemController implements ISystemController {
 
 	@Override
 	public boolean changeClassMethod(long objId, long methodId,
-			String methodName, List<String> methodArgs, Set<String> modifiers)
+			String methodName, String returnType, List<String> methodArgs, Set<String> modifiers)
 			throws Exception {
-		return system.changeClassMethod(objId, methodId, methodName,
+		return system.changeClassMethod(objId, methodId, methodName, returnType, 
 				methodArgs, modifiers);
 	}
 

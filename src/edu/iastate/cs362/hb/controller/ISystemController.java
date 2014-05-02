@@ -76,7 +76,7 @@ public interface ISystemController {
 			String type, Set<String> modifiers) throws Exception;
 
 	public boolean changeClassMethod(long objId, long methodId,
-			String methodName, List<String> methodArgs, Set<String> modifiers)
+			String methodName, String returnType, List<String> methodArgs, Set<String> modifiers)
 			throws Exception;
 
 	public String listCachedMethod(long id);

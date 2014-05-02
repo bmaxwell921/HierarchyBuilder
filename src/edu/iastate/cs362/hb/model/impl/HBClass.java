@@ -78,14 +78,13 @@ public class HBClass extends AHBObject implements IClass{
 	}
 	
 	@Override
-	public boolean changeClassField(long fieldId, IVariable i){
+	public boolean changeClassField(long fieldId, String fieldName, String type, Set<String> modifiers){
 		for(int j = 0; j < fields.size(); j++){
 			IVariable toCheck = fields.get(j);
 			if(toCheck.getId() == fieldId){
-				return toCheck.update(i);
+				return toCheck.update(fieldName, type, modifiers);
 			}
 		}
 		return false;
-
 	}
 }

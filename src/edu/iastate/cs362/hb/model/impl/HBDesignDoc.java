@@ -230,18 +230,13 @@ public class HBDesignDoc implements IDesignDoc {
 		if(!(toUse instanceof HBClass)){
 			return false;
 		}
-		IVariable newVar = new HBVariable(fieldName, type);
-		newVar.addModifiers(modifiers);
-		return toUse.changeClassField(fieldId, newVar);
+		return toUse.changeClassField(fieldId, fieldName, type, modifiers);
 	}
 
 	@Override
 	public boolean changeClassMethod(long objId, long methodId,
-			String methodName, List<String> methodArgs, Set<String> modifiers) throws Exception {
+			String methodName, String returnType, List<String> methodArgs, Set<String> modifiers) throws Exception {
 		IObject toUse = tree.getObject(objId);
-		IMethod newMethod = new HBMethod(methodName);
-		newMethod.addArguments(methodArgs);
-		newMethod.addModifiers(modifiers);
-		return toUse.changeClassMethod(methodId, newMethod, methodArgs);
+		return toUse.changeClassMethod(methodId, methodName, returnType, methodArgs, modifiers);
 	}
 }

@@ -210,9 +210,9 @@ public class HBSystem implements ISystem {
 
 	@Override
 	public boolean changeClassMethod(long objId, long methodId,
-			String methodName, List<String> methodArgs, Set<String> modifiers)
+			String methodName, String returnType, List<String> methodArgs, Set<String> modifiers)
 			throws Exception {
-		return doc.changeClassMethod(objId, methodId, methodName, methodArgs,
+		return doc.changeClassMethod(objId, methodId, methodName, returnType, methodArgs,
 				modifiers);
 	}
 

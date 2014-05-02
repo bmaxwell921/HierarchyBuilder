@@ -56,7 +56,7 @@ public class HBInterface extends AHBObject{
 	}
 
 	@Override
-	public boolean changeClassField(long fieldId, IVariable i) {
+	public boolean changeClassField(long fieldId, String name, String type, Set<String> modifiers) {
 		return false;
 	}
 }

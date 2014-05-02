@@ -196,13 +196,13 @@ public class HBMethod implements IMethod {
 	}
 
 	@Override
-	public boolean update(IMethod m, List<String> args) {
-		this.name = m.getName();
-		this.returnType = "void"; //m.getReturnType() but it wasn't working right.
+	public boolean update(String methodName, String returnType, List<String> args, Set<String> modifiers) {
+		this.name = methodName;
+		this.returnType = returnType;
 		this.args = new ArrayList<>();
 		addArguments(args);
-		this.modifiers = m.getModifiers();
+		this.modifiers = modifiers;
 		IdManager.getInstance().updateInfo(id, name);
-		return false;
+		return true;
 	}
 }

@@ -123,10 +123,10 @@ public class HBVariable implements IVariable {
 	}
 
 	@Override
-	public boolean update(IVariable i) {
-		this.name = i.getName();
-		this.type = i.getType();
-		this.modifiers = i.getModifiers();
+	public boolean update(String name, String type, Set<String> modifiers) {
+		this.name = name;
+		this.type = type;
+		this.modifiers = modifiers;
 		IdManager.getInstance().updateInfo(id, name);
 		return true;
 	}
