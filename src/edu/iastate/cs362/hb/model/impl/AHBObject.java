@@ -255,7 +255,7 @@ public abstract class AHBObject implements IObject {
 	
 	@Override
 	public boolean changeModifiers(Set<String> modifiers){
-		this.modifiers.removeAll(modifiers);
+		this.modifiers = new HashSet<String>();
 		return this.modifiers.addAll(modifiers);
 	}
 	

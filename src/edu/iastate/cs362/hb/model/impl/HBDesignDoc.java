@@ -125,6 +125,7 @@ public class HBDesignDoc implements IDesignDoc {
 	@Override
 	public boolean createClass(String name) throws Exception {
 		IClass clazz = new HBClass(name);
+		clazz.addModifiers("public");
 		// IdManager part of UI, will not show up in design
 		IdManager.getInstance().registerObject(clazz, clazz.getPackage(), clazz.getName());
 		return tree.addObject(clazz);
@@ -133,6 +134,7 @@ public class HBDesignDoc implements IDesignDoc {
 	@Override
 	public boolean createInterface(String name) throws Exception {
 		IObject interf = new HBInterface(name);
+		interf.addModifiers("public");
 		// IdManager part of UI, will not show up in design
 		IdManager.getInstance().registerObject(interf, interf.getPackage(), interf.getName());
 		return tree.addObject(interf);
