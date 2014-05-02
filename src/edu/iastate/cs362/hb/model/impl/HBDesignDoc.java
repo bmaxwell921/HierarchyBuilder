@@ -239,4 +239,10 @@ public class HBDesignDoc implements IDesignDoc {
 		IObject toUse = tree.getObject(objId);
 		return toUse.changeClassMethod(methodId, methodName, returnType, methodArgs, modifiers);
 	}
+
+	@Override
+	public boolean removeField(long id, String name) throws Exception {
+		HBClass clazz = (HBClass) tree.getObject(id);
+		return clazz.removeField(name);
+	}
 }

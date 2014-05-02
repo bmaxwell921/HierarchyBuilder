@@ -232,4 +232,9 @@ public class SystemController implements ISystemController {
 	public boolean addObject(String type, Object obj) throws Exception {
 		return system.addObject(type, obj);
 	}
+
+	@Override
+	public boolean removeField(long id, String name) throws Exception {
+		return system.removeField(id, name);
+	}
 }

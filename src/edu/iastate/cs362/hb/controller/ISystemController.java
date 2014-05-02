@@ -93,4 +93,6 @@ public interface ISystemController {
 	public long cacheModifierSet(Set<String> modifiers);
 
 	public String showHelp();
+
+	public boolean removeField(long id, String name) throws Exception;
 }

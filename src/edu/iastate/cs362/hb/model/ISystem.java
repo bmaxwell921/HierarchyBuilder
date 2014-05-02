@@ -115,4 +115,6 @@ public interface ISystem {
 	public String showHelp();
 	
 	public boolean addObject(String type, Object obj) throws Exception;
+
+	public boolean removeField(long id, String name) throws Exception;
 }

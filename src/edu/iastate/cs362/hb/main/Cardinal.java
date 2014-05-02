@@ -173,6 +173,10 @@ public class Cardinal {
 			long id = IdManager.getInstance().accessIdWithKey(cmd.getFlagValue(CmdConstants.Flags.OBJECT));
 			return isc.removeMethod(id, cmd.getFlagValue(CmdConstants.Flags.NAME));
 		}
+		if(cmd.getSubCommand().equals(CmdConstants.SubCmdNames.FIELD)) {
+			long id = IdManager.getInstance().accessIdWithKey(cmd.getFlagValue(CmdConstants.Flags.OBJECT));
+			return isc.removeField(id, cmd.getFlagValue(CmdConstants.Flags.NAME));
+		}
 		if (cmd.getSubCommand().equals(CmdConstants.SubCmdNames.RELATIONSHIP)) {
 			long superId = IdManager.getInstance().accessIdWithKey(cmd.getFlagValue(CmdConstants.Flags.SUPERTYPE));
 			long subId = IdManager.getInstance().accessIdWithKey(cmd.getFlagValue(CmdConstants.Flags.SUBTYPE));

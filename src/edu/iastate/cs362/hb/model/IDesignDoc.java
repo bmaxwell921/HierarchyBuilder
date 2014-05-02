@@ -262,4 +262,6 @@ public interface IDesignDoc extends Nameable {
 	 * @throws Exception 
 	 */
 	public boolean changeClassMethod(long objId, long methodId, String methodName, String returnType, List<String> methodArgs, Set<String> modifiers) throws Exception;
+
+	public boolean removeField(long id, String name) throws Exception;
 }

@@ -7,7 +7,6 @@ import java.util.Set;
 
 import edu.iastate.cs362.hb.model.IObject;
 import edu.iastate.cs362.hb.model.IRelationship;
-import edu.iastate.cs362.hb.model.IVariable;
 import edu.iastate.cs362.hb.model.tree.Pair;
 
 

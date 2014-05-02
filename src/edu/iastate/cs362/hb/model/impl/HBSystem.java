@@ -303,4 +303,9 @@ public class HBSystem implements ISystem {
 		return false;
 	}
 
+	@Override
+	public boolean removeField(long id, String name) throws Exception {
+		return doc.removeField(id, name);
+	}
+
 }
