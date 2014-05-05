@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<design>
+<interface><id>6</id>
+<name>Interf1</name>
+<package>default</package>
+</interface>
+
+<class><id>5</id>
+<name>Class1</name>
+<package>edu.iastate</package>
+</class>
+
+</design>

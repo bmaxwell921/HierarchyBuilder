@@ -1,0 +1,24 @@
+{
+  "name": "Design",
+  "interfaces": [
+    {
+      "id": 1,
+      "pkg": "default",
+      "name": "Interf1",
+      "modifiers": [],
+      "methods": [],
+      "relationships": []
+    }
+  ],
+  "classes": [
+    {
+      "fields": [],
+      "id": 0,
+      "pkg": "edu.iastate",
+      "name": "Class1",
+      "modifiers": [],
+      "methods": [],
+      "relationships": []
+    }
+  ]
+}

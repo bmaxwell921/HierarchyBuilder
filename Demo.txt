@@ -20,8 +20,7 @@ Stuff to Demo:
 		X - add class/interface static method
 		X - export as JSON
 		X - import as JSON
-		- import as Source -> Doesn't work
-		- show help
+		X - show help
 	
 	Rob:
 		- All the command parsing stuff
@@ -123,8 +122,9 @@ Command orders:
 		export xml -path out.xml
 		import xml -path out.xml
 		list design
+		create design -name SecondDesign
+		create class -name Class1
 		add pkg -object default.Class1 -name edu.iastate
-		create class -name MyFirstClass
 		create interface -name Interf1
 		add method -object edu.iastate.Class1 -name Method1 -modifiers public -return void -args int:a,int:b
 		export xml -path out2.xml
